@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="/peminjaman_alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
+                        <form action="<?=base_url()?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
 
                             <?= csrf_field(); ?>
                             <input type="hidden" value="" name="numberSession" id="getCountNumber">

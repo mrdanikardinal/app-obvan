@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\PeminjamanAlatModel;
 use App\Models\ParentMerkModel;
-use CodeIgniter\Entity\Cast\DatetimeCast;
 
 class PeminjamanAlat extends BaseController
 {
@@ -21,51 +20,13 @@ class PeminjamanAlat extends BaseController
     }
     public function index()
     {
-        // dd($this->parentMerkModel->getCheckDone('PJM-0002'));
-        // $tomorrow  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
-        // $lastmonth = mktime(0, 0, 0, date("m")-1, date("d"),   date("Y"));
-        // $nextyear  = mktime(0, 0, 0, date("m"),   date("d"),   date("Y")+1);
-        // $today = date("Y-m-d");  
-        // $tes =$this->pinjamAlatModel->getPeminjamanAlat();
-        // foreach($tes as $j){
-        //     // echo($j['tanggal'].'</br>');
-        //     $tanggalPengembalian= $j['tanggal'];
-        //     if($tanggalPengembalian==$today){
-        //         echo $tanggalPengembalian.'hari pengembalian';
-
-
-        //     }else if($tanggalPengembalian< $today){
-
-        //         echo $tanggalPengembalian.'pengembalian expired';
-
-        //     }elseif($tanggalPengembalian> $today){
-        //         echo $tanggalPengembalian.'sedang dipinjam';
-        //     }
-        //   echo '</br>';  
-        // }
-        // dd($today);
-        //testing status boolean
-        //  dd($this->parentMerkModel->getCheckDone());
-        // $test=$this->parentMerkModel->getCheckDone();
-        // $s = array();
-        // foreach($test as $t){
-        //     $s=$t['hasil']; 
-        // }
-        // dd($s);
-
         $data = [
             'checkStatus' => $this->parentMerkModel->getCheckDone(),
             'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
             'parentMerk' => $this->parentMerkModel->getParentMerk()
         ];
-        return view('peminjaman_alat', $data);
+        return view('peminjaman-alat/display', $data);
     }
-    public function delete($id)
-    {
-        $this->pinjamAlatModel->delete($id);
-        return redirect()->to('/peminjaman_alat');
-    }
-
     public function create()
     {
 
@@ -74,59 +35,10 @@ class PeminjamanAlat extends BaseController
 
         ];
 
-        return view('create', $data);
-    }
-    public function test()
-    {
-
-        $data = [
-            'title' => 'Form Tambah Data Peminjaman Test',
-
-        ];
-
-        return view('test', $data);
+        return view('peminjaman-alat/create', $data);
     }
     public function save()
     {
-
-        $validate = $this->validate([
-            'tanggal' => [
-                'rules' => 'required|valid_date[d/m/Y]',
-                'errors' => [
-                    'required' => '{field} harus di isi !',
-                    'valid_date' => 'format {field} tidak benar!'
-                ]
-            ],
-            'acara' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus di isi !'
-                ]
-            ],
-            'tempat' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus di isi !'
-                ]
-            ],
-            'nama_peminjam' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'nama peminjam harus di isi !'
-                ]
-            ],
-            'nama_pemberi' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'nama pemberi harus di isi !'
-                ]
-            ]
-
-        ]);
-        if (!$validate) {
-            // session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->back()->withInput();
-        }
         $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
         $converttgl = $this->request->getVar('tanggal');
         $convertSampaiDengan = $this->request->getVar('sampai_dengan');
@@ -166,9 +78,8 @@ class PeminjamanAlat extends BaseController
             ]);
         }
         session()->setFlashdata('pesan', $jumlahDataInput . ' Data ' . $idAutoPeminjamanAlat . ', Berhasil Ditambahkan.');
-        return redirect()->to('/peminjaman_alat');
+        return redirect()->to('peminjaman-alat/display');
     }
-
     public function edit($id_pinjam)
     {
 
@@ -178,11 +89,8 @@ class PeminjamanAlat extends BaseController
 
         ];
 
-        return view('edit', $data);
+        return view('peminjaman-alat/edit', $data);
     }
-
-
-
     public function update($id_pinjam)
     {
         // $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
@@ -275,28 +183,29 @@ class PeminjamanAlat extends BaseController
         }
 
         $jmlDataLama = count($namaBarang);
-        // $jmlDataBaru= count($namaBarangUpdate);
-        // $jmlSeluruh= $jmlDataLama+$jmlDataBaru;   
-
-
         if (!isset($namaBarangUpdate)) {
             session()->setFlashdata('pesan', $jmlDataLama . ' barang dari kode pinjam ' . $id_pinjam . ', Berhasil Diupdate.');
         } else if (isset($namaBarangUpdate)) {
-            // $jmlDataLama = count($namaBarang);
             $jmlDataBaru = count($namaBarangUpdate);
             $jmlSeluruh = $jmlDataLama + $jmlDataBaru;
-
-            // session()->setFlashdata('pesan', $jmlSeluruh . ' Data ' . $id_pinjam . ', Berhasil Diupdate.');
             session()->setFlashdata('pesan', 'Terdeteksi '.$jmlDataBaru.' barang baru ditambahakan, dan '.$jmlDataLama.' barang lama berhasil diupdate, total barang kode pinjam '.$id_pinjam.' adalah '.$jmlSeluruh.' ');
         }
 
 
-        return redirect()->to('/peminjaman_alat');
+        return redirect()->to('peminjaman-alat/display');
     }
+    public function delete($id)
+    {
+        $this->pinjamAlatModel->delete($id);
+        return redirect()->to('peminjaman-alat/display');
+    }
+
+
+   
 
     public function hapus($id)
     {
         return $this->parentMerkModel->delete($id);
-        // return redirect()->to('/peminjaman_alat');
+        
     }
 }

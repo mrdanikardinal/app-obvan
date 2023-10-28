@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="/peminjaman_alat/create" class="btn btn-primary my-2">Tambah</a>
+                <a href="<?=base_url()?>peminjaman-alat/create" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -137,15 +137,15 @@
 
                                         <?php endforeach; ?>
                                         </td>
-                                        <td><a href="/peminjaman_alat/edit/<?= $valuePeminjaman['id_pinjam']; ?>" class="btn btn-success btnEditPinjamAlat"><i class="fa-regular fa-pen-to-square"></i>Edit</a></td>
-
+                                        <td><a href="<?=base_url()?>peminjaman-alat/edit/<?= $valuePeminjaman['id_pinjam']; ?>" class="btn btn-success  "><i class="fa-regular fa-pen-to-square"></i>Edit</a></td>
                                         <td>
-                                            <form id="<?=$valuePeminjaman['id_pinjam']; ?>" action="<?=site_url('/peminjaman_alat/')?><?= $valuePeminjaman['id_pinjam']; ?>" method="post">
+                                            <form id="hapus" action="<?=base_url()?>peminjaman-alat/display/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger hapusPjm" ><i class="fa-solid fa-trash"></i>Hapus</button>
+                                                <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
                                             </form>
                                         </td>
+                                       
                                     </tr>
 
                                 <?php endforeach; ?>

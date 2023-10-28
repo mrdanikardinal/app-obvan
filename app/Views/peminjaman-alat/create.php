@@ -23,22 +23,22 @@
                     </div>
                     <div class="card-body">
 
-                        <form id="formAdd" method="post" action="/peminjaman_alat/save" class="needs-validation" novalidate>
+                        <form id="formAdd" method="post" action="<?=base_url()?>/peminjaman-alat/save" class="needs-validation" novalidate>
 
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Pinjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" >
-                                    <span class="text-danger"> <?= validation_show_error('tanggal'); ?></span>
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" >
+                                    
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="sampai_dengan" class="col-sm-2 col-form-label">Sampai Dengan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" >
-                                    <span class="text-danger"> <?= validation_show_error('tanggal'); ?></span>
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" >
+                                 
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -85,16 +85,13 @@
                                 <label for="acara" class="col-sm-2 col-form-label">Acara</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Acara" id="acara" name="acara" value="<?= old('acara') ?>">
-
-
-                                    <span class="text-danger"> <?= validation_show_error('acara'); ?></span>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="tempat" class="col-sm-2 col-form-label">Tempat</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Tempat" id="tempat" name="tempat" value="<?= old('tempat') ?>">
-                                    <span class="text-danger"> <?= validation_show_error('tempat'); ?></span>
+                                   
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -107,14 +104,14 @@
                                 <label for="nama_peminjam" class="col-sm-2 col-form-label">Nama Peminjam</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Peminjam" id="nama_peminjam" name="nama_peminjam" value="<?= old('nama_peminjam') ?>">
-                                    <span class="text-danger"> <?= validation_show_error('nama_peminjam'); ?></span>
+                                    
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi') ?>">
-                                    <span class="text-danger"> <?= validation_show_error('nama_pemberi'); ?></span>
+                                    
                                 </div>
                             </div>
 
