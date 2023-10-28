@@ -223,7 +223,7 @@ $(function()
         <?= $number2++; ?>
         </td>
         <td>
-            <input type="text" required class="form-control" name="naBarEditUpdate[]" placeholder="Nama Barang">
+            <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBarEditUpdate[]" placeholder="Nama Barang">
         </td>
         <td>
             <input type="text" required class="form-control" name="merkEditUpdate[]" placeholder="Merk">

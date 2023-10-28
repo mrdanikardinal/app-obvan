@@ -4,6 +4,11 @@
 <div id="layoutSidenav">
     <?= $this->include('layout/side_bar') ?>
     <div id="layoutSidenav_content">
+        <style>
+            .error {
+                color: var(--bs-danger);
+            }
+        </style>
         <main>
             <div class="container-fluid px-4">
                 <h1 class="mt-4"> Update Form Peminjaman Alat</h1>
@@ -15,7 +20,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="<?=base_url()?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
+                        <form id="formMerkUpdate" action="<?= base_url() ?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
 
                             <?= csrf_field(); ?>
                             <input type="hidden" value="" name="numberSession" id="getCountNumber">
@@ -32,11 +37,23 @@
                                     <input type="text" class="form-control" placeholder="Tanggal" id="tanggal" name="tanggal" value="<?= $tanggalconvert; ?>">
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="sampai_dengan" class="col-sm-2 col-form-label">Sampai Dengan</label>
+                                <?php $convertSampaiDengan = $dataPinjam['sampai_dengan'];
+                                $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
+                                $tanggalconvertSampaiDengan = date('d/m/Y', strtotime($dateSampaiDengan));
+                                ?>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= $tanggalconvertSampaiDengan; ?>" >
+                                 
+                                </div>
+                            </div>
                             <div class="row mb-3">
 
                                 <div class="col-sm-10 offset-sm-2">
                                     <table class="table formTambahEdit">
-                                        
+
                                         <tr>
 
                                             <th class="text-center">No</th>
@@ -158,6 +175,12 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">   
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>">
@@ -173,7 +196,75 @@
 
             </div>
         </main>
+        <script type="text/javascript">
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (() => {
+                'use strict'
 
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+
+            //validation ok javascript
+            $("#formMerkUpdate").validate({
+                errorPlacement: function($error, $element) {
+                    // $error.appendTo($element.closest("td").css({"color": "red"}));
+                    $error.appendTo($element.closest("td"));
+                },
+                rules: {
+                    'naBarEditUpdate[]': {
+                        required: true
+                    },
+                    'merkEditUpdate[]': {
+                        required: true
+                    },
+                    'sNEditUpdate[]': {
+                        required: true
+                    },
+                    'jumlahEditUpdate[]': {
+                        required: true,
+                        digits: true
+                    }
+                },
+                messages: {
+                    'naBarEditUpdate[]': {
+                        required: "nama baru harus di isi !"
+                    },
+                    'merkEditUpdate[]': {
+                        required: "merk baru harus di isi !"
+                    },
+                    'sNEditUpdate[]': {
+                        required: "serial baru number harus di isi !"
+                    },
+                    'jumlahEditUpdate[]': {
+                        required: "jumlah baru harus di isi !",
+                        digits: "isi dengan angka !"
+
+                    }
+
+                },
+                errorElement: "em",
+
+
+
+            });
+
+            // jQuery.validator.addMethod("validDate", function(value, element) {
+            //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
+            //     }, "Please enter a valid date in the format DD/MM/YYYY");
+        </script>
         <?= $this->include('layout/footer'); ?>
 
 

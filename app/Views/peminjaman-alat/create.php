@@ -108,6 +108,12 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= old('noHPPeminjam') ?>">   
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi') ?>">

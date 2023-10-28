@@ -46,7 +46,8 @@ class PeminjamanAlat extends BaseController
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
-
+        
+        
         $this->pinjamAlatModel->save([
             'id_pinjam' => $idAutoPeminjamanAlat,
             'tanggal' => $tanggalconvert,
@@ -55,6 +56,7 @@ class PeminjamanAlat extends BaseController
             'tempat' => $this->request->getVar('tempat'),
             'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
+            'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
             'nama_pemberi' => $this->request->getVar('nama_pemberi')
         ]);
 
@@ -95,18 +97,23 @@ class PeminjamanAlat extends BaseController
     {
         // $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
         $converttglEdit = $this->request->getVar('tanggal');
+        $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
         $dateEdit = str_replace('/', '-', $converttglEdit);
+        $dateSampaiDenganEdit = str_replace('/', '-', $convertSampaiDenganEdit);
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
+        $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
 
 
 
         $this->pinjamAlatModel->save([
             'id_pinjam' => $id_pinjam,
             'tanggal' => $tanggalconvertEdit,
+            'sampai_dengan' => $tanggalconvertSampaiDenganEdit,
             'acara' => $this->request->getVar('acara'),
             'tempat' => $this->request->getVar('tempat'),
             'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
+            'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
             'nama_pemberi' => $this->request->getVar('nama_pemberi')
         ]);
 
