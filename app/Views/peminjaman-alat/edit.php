@@ -45,8 +45,8 @@
                                 $tanggalconvertSampaiDengan = date('d/m/Y', strtotime($dateSampaiDengan));
                                 ?>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= $tanggalconvertSampaiDengan; ?>" >
-                                 
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= $tanggalconvertSampaiDengan; ?>">
+
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -177,7 +177,7 @@
                             <div class="row mb-3">
                                 <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">   
+                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -187,7 +187,39 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <div class="card mb-3">
+                                <h5 class="card-header text-center">Pengembalian</h5>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <label for="nama_peminjam" class="col-sm-2 col-form-label">Tanggal Kembali</label>
+                                        <div class="col-sm-10">
+
+                                            <?php $convertTanggalKembali = $dataPinjam['tanggal_kembali'];
+                                            $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                                            $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                            ?>
+                                            <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="<?= $tanggalKembaliconvert; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="noHPPeminjam" class="col-sm-2 col-form-label">Nama Penerima</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" required class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="<?= $dataPinjam['nama_penerima']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="nama_pemberi" class="col-sm-2 col-form-label">Catatan</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="<?= $dataPinjam['catatan']; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -195,6 +227,7 @@
 
 
             </div>
+
         </main>
         <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields

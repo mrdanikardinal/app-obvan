@@ -43,6 +43,14 @@ $(document).ready(function () {
         
                           
         });
+        $("#tanggal_kembali").datepicker({
+            dateFormat: 'dd/mm/yy',
+            timespicker: false
+            
+        
+                          
+        });
+      
 
     });
    

@@ -98,10 +98,15 @@ class PeminjamanAlat extends BaseController
         // $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
         $converttglEdit = $this->request->getVar('tanggal');
         $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
+        $convertTanggalKembali = $this->request->getVar('tanggal_kembali');
+        // dd($convertTanggalKembali);
         $dateEdit = str_replace('/', '-', $converttglEdit);
         $dateSampaiDenganEdit = str_replace('/', '-', $convertSampaiDenganEdit);
+        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
         $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
+        $tanggalconvertTanggalKembali = date('Y-m-d', strtotime($dateTanggalKembali));
+        // dd($tanggalconvertTanggalKembali);
 
 
 
@@ -114,7 +119,10 @@ class PeminjamanAlat extends BaseController
             'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
             'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
-            'nama_pemberi' => $this->request->getVar('nama_pemberi')
+            'nama_pemberi' => $this->request->getVar('nama_pemberi'),
+            'tanggal_kembali' => $tanggalconvertTanggalKembali,
+            'nama_penerima' => $this->request->getVar('nama_penerima'),
+            'catatan' => $this->request->getVar('catatan')
         ]);
 
         $idParent = $this->request->getVar('idParentMerk');

@@ -82,10 +82,12 @@
                                                             <td class="text-center">
                                                                 <?php if ($j['status'] == true) : ?>
                                                                     <button type="button" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i>
-                                                                    <span>
-                                                                    <?php $dateStatus = date('d/m/Y H:i:s'); echo"$dateStatus"?>
-
-                                                                    </span>
+                                                                       
+                                                                        <?php $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
+                                                                        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                                                                        $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                                                        ?>
+                                                                        <?= $tanggalKembaliconvert;?>
                                                                     </button>
                                                                 <?php elseif ($j['status'] == false) : ?>
                                                                     <button type="button" class="btn btn-danger"><i class="fa-solid fa-circle-exclamation"></i></button>

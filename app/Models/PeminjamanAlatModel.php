@@ -10,7 +10,7 @@ class PeminjamanAlatModel extends Model
     protected $primaryKey = 'id_pinjam';
     // protected $retunType='object';
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_pinjam','tanggal','sampai_dengan' ,'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam','nama_pemberi'];
+    protected $allowedFields = ['id_pinjam','tanggal','sampai_dengan' ,'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam','nama_pemberi','tanggal_kembali','nama_penerima','catatan'];
 
 
     public function autoNumberId()
