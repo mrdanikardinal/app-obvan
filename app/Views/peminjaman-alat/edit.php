@@ -124,7 +124,7 @@
                                                         <input type="text" class="form-control" name="jumlahEdit[]" placeholder="Jumlah" value="<?= $i['jumlah']; ?>">
                                                     </td>
                                                     <td>
-                                                        <select name="checkAlat[]" class="form-select form-select-sm" aria-label="Small select example">
+                                                        <select id="testing1" name="checkAlat[]" class="form-select form-select-sm" aria-label="Small select example">
 
                                                             <option value="1" <?= ($i['status'] == true) ? 'selected' : null ?>>
                                                                 <span>YES</span>
@@ -194,11 +194,18 @@
                                         <label for="nama_peminjam" class="col-sm-2 col-form-label">Tanggal Kembali</label>
                                         <div class="col-sm-10">
 
-                                            <?php $convertTanggalKembali = $dataPinjam['tanggal_kembali'];
-                                            $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-                                            $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                            <?php 
+                                            
+                                        
+                                                $convertTanggalKembali= $dataPinjam['tanggal_kembali'];
+                                                $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                                                $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                         
+
+
+                                           
                                             ?>
-                                            <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="<?= $tanggalKembaliconvert; ?>">
+                                            <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="<?= ($dataPinjam['tanggal_kembali'] === NULL) ? '' : $tanggalKembaliconvert ?>">
                                         </div>
                                     </div>
                                     <div class="row mb-3">

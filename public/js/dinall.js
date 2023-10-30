@@ -29,6 +29,11 @@ let endDate;
 let nowDate = new Date();
 $(document).ready(function () {
    
+    
+    let conceptName = $('#testing1').find(":selected").val();
+    console.log(conceptName);
+
+
     $(function () {
         $("#tanggal").datepicker({
             dateFormat: 'dd/mm/yy',
@@ -83,6 +88,7 @@ $(document).ready(function () {
        
     
     });
+
 
  	
 function countDays(){
