@@ -85,7 +85,10 @@
                                                         <input type="text" class="form-control" name="jumlahEdit[]" value="<?= $j['jumlah']; ?>">
                                                     </td>
                                                     <td>
-                                                        <select name="checkAlat[]" class="form-select form-select-sm" aria-label="Small select example">
+                                                        <select name="checkAlat[]" class="myselect
+                                                        
+                                                        
+                                                        form-select form-select-sm" aria-label="Small select example">
                                                             <option hidden>Pengembalian</option>
                                                             <option value="1" <?= ($j['status'] == true) ? 'selected' : null ?>>
                                                                 <span>YES</span>
@@ -124,7 +127,7 @@
                                                         <input type="text" class="form-control" name="jumlahEdit[]" placeholder="Jumlah" value="<?= $i['jumlah']; ?>">
                                                     </td>
                                                     <td>
-                                                        <select id="testing1" name="checkAlat[]" class="form-select form-select-sm" aria-label="Small select example">
+                                                        <select name="checkAlat[]" class="myselect form-select form-select-sm" aria-label="Small select example">
 
                                                             <option value="1" <?= ($i['status'] == true) ? 'selected' : null ?>>
                                                                 <span>YES</span>
@@ -180,48 +183,16 @@
                                     <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3" id="endInputPeminjaman">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>">
                                 </div>
                             </div>
+                            <!-- start pengembalian  -->
 
-                            <div class="card mb-3">
-                                <h5 class="card-header text-center">Pengembalian</h5>
-                                <div class="card-body">
-                                    <div class="row mb-3">
-                                        <label for="nama_peminjam" class="col-sm-2 col-form-label">Tanggal Kembali</label>
-                                        <div class="col-sm-10">
+                            <!-- end pengembalian -->
 
-                                            <?php 
-                                            
-                                        
-                                                $convertTanggalKembali= $dataPinjam['tanggal_kembali'];
-                                                $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-                                                $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
-                                         
-
-
-                                           
-                                            ?>
-                                            <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="<?= ($dataPinjam['tanggal_kembali'] === NULL) ? '' : $tanggalKembaliconvert ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="noHPPeminjam" class="col-sm-2 col-form-label">Nama Penerima</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" required class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="<?= $dataPinjam['nama_penerima']; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="nama_pemberi" class="col-sm-2 col-form-label">Catatan</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="<?= $dataPinjam['catatan']; ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="row mb-3">
                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -304,6 +275,153 @@
             // jQuery.validator.addMethod("validDate", function(value, element) {
             //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
+            //start function add pengembalian
+
+            function addPengembalian() {
+                let addHTML = `<div id="showAddPengembalian" class="card mb-3">
+    <h5 class="card-header text-center">Pengembalian</h5>
+    <div class="card-body">
+        <div class="row mb-3">
+            <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
+            <div class="col-sm-10">
+             
+                <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan">
+            </div>
+        </div>
+        </div>
+    </div>`;
+                $('#endInputPeminjaman').empty().append(addHTML);
+            }
+
+
+            $(function() {
+                let arr = [];
+                let arr2 = [];
+                // start check status default
+                $(".myselect").each(function() {
+                    let statusDefault = $(this).val();
+                    let angka = parseInt(statusDefault);
+                    arr.push(angka);
+                });
+                let sumStatus = 0;
+                for (let e of arr) {
+                    sumStatus += e;
+                }
+                if (sumStatus !== 0) {
+                    addPengembalian();
+                    $("#tanggal_kembali").datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        timespicker: false
+                    });
+
+                }
+                // end check status default
+                console.log(sumStatus);
+                // changed
+
+                $(".myselect").on("change", function() {
+                    let isiStatus = $(this).val();
+                    // console.log(i);
+                    // let newName=parseInt(isiStatus);
+                    let newName=0;
+
+
+                    let indexOfNameToReplace = arr.indexOf(newName);
+
+                    if (indexOfNameToReplace > -1) {
+                        arr[indexOfNameToReplace] = parseInt(isiStatus);
+                        console.log(`New array is YES: ${arr}`);
+                        // New array is: [X1,X2,X3,X4,X11,X6,X7,X8,X9,X10]
+                    } else {
+                        console.log(`No guest found by the given name: "${isiStatus}"`);
+
+                    }
+                    console.log(arr);
+
+                    if (sumStatus !== 0) {
+                        addPengembalian();
+                        $("#tanggal_kembali").datepicker({
+                            dateFormat: 'dd/mm/yy',
+                            timespicker: false
+                        });
+
+                    } else {
+                        $('#showAddPengembalian').remove();
+
+                    }
+
+                });
+
+
+
+                // inputs
+                // let currentNames = ["X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10"]
+
+                // this variable will have the result of the first prompt() call (new guest)
+                // let newName = "X11";
+
+                // this variable will have the result of the second prompt() call (guest to replace the new guest with)
+                // let nameToReplace = "X5";
+
+                // implementation
+                // let indexOfNameToReplace = currentNames.indexOf(nameToReplace);
+                // if (indexOfNameToReplace > -1) {
+                //     currentNames[indexOfNameToReplace] = newName;
+                //     console.log(`New array is: ${currentNames}`);
+                // New array is: [X1,X2,X3,X4,X11,X6,X7,X8,X9,X10]
+                // } else {
+                //     console.log(`No guest found by the given name: "${nameToReplace}"`)
+                // }
+
+
+
+
+                // if (sumStatus2 >= 1) {
+                //     addPengembalian();
+                //     $("#tanggal_kembali").datepicker({
+                //         dateFormat: 'dd/mm/yy',
+                //         timespicker: false
+                //     });
+                // } else {
+                //     $('#showAddPengembalian').remove();
+
+                // }
+
+
+                // $('.myselect').change(function() {
+                //     console.log($(this).val());
+                //     let isiStatus = $(this).val();
+
+                //     if (isiStatus === '1') {
+                //         addPengembalian();
+                //         $("#tanggal_kembali").datepicker({
+                //             dateFormat: 'dd/mm/yy',
+                //             timespicker: false
+                //         });
+                //     } else {
+                //         $('#showAddPengembalian').remove();
+
+                //     }
+                // });
+
+
+            });
+
+
+
+            //end function add pengembalian
         </script>
         <?= $this->include('layout/footer'); ?>
 

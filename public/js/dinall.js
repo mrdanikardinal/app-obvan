@@ -29,10 +29,6 @@ let endDate;
 let nowDate = new Date();
 $(document).ready(function () {
    
-    
-    let conceptName = $('#testing1').find(":selected").val();
-    console.log(conceptName);
-
 
     $(function () {
         $("#tanggal").datepicker({
@@ -48,13 +44,7 @@ $(document).ready(function () {
         
                           
         });
-        $("#tanggal_kembali").datepicker({
-            dateFormat: 'dd/mm/yy',
-            timespicker: false
-            
-        
-                          
-        });
+      
       
 
     });
