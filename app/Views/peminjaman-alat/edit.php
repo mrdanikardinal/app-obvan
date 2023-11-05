@@ -307,49 +307,19 @@
 
 
             $(function() {
+                
                 let arr = [];
-                let arr2 = [];
                 // start check status default
-                $(".myselect").each(function() {
-                    let statusDefault = $(this).val();
-                    let angka = parseInt(statusDefault);
-                    arr.push(angka);
-                });
-                let sumStatus = 0;
-                for (let e of arr) {
-                    sumStatus += e;
-                }
-                if (sumStatus !== 0) {
-                    addPengembalian();
-                    $("#tanggal_kembali").datepicker({
-                        dateFormat: 'dd/mm/yy',
-                        timespicker: false
+             
+                    $(".myselect").each(function() {
+                        let statusDefault = $(this).val();
+                        let angka = parseInt(statusDefault);
+                        arr.push(angka);
                     });
-
-                }
-                // end check status default
-                console.log(sumStatus);
-                // changed
-
-                $(".myselect").on("change", function() {
-                    let isiStatus = $(this).val();
-                    // console.log(i);
-                    // let newName=parseInt(isiStatus);
-                    let newName=0;
-
-
-                    let indexOfNameToReplace = arr.indexOf(newName);
-
-                    if (indexOfNameToReplace > -1) {
-                        arr[indexOfNameToReplace] = parseInt(isiStatus);
-                        console.log(`New array is YES: ${arr}`);
-                        // New array is: [X1,X2,X3,X4,X11,X6,X7,X8,X9,X10]
-                    } else {
-                        console.log(`No guest found by the given name: "${isiStatus}"`);
-
+                    let sumStatus = 0;
+                    for (let e of arr) {
+                        sumStatus += e;
                     }
-                    console.log(arr);
-
                     if (sumStatus !== 0) {
                         addPengembalian();
                         $("#tanggal_kembali").datepicker({
@@ -357,13 +327,58 @@
                             timespicker: false
                         });
 
+                    }
+                    console.log(sumStatus);
+              
+
+                // end check status default
+                // start changed
+
+                $(".myselect").on("change", function() {
+                    let isiStatus = $(this).val();
+                    let statusChanged = 0;
+                    if (isiStatus === '0') {
+                        let newName = 1;
+                        let indexOfNameToReplace = arr.indexOf(newName);
+                        if (indexOfNameToReplace > -1) {
+                            arr[indexOfNameToReplace] = parseInt(isiStatus);
+                            console.log(`New array is NO: ${arr}`);
+                            for (let e of arr) {
+                                statusChanged += e;
+                            }
+                            
+                        }
+
+
+                    } else if (isiStatus === '1') {
+                        let newName = 0;
+                        let indexOfNameToReplace = arr.indexOf(newName);
+                        if (indexOfNameToReplace > -1) {
+                            arr[indexOfNameToReplace] = parseInt(isiStatus);
+                            console.log(`New array is YES: ${arr}`);
+                            for (let e of arr) {
+                                statusChanged += e;
+                            }
+                            
+                        }
+                    }
+
+
+
+                    if (statusChanged >= 1) {
+                        addPengembalian();
+                        $("#tanggal_kembali").datepicker({
+                            dateFormat: 'dd/mm/yy',
+                            timespicker: false
+                        });
                     } else {
                         $('#showAddPengembalian').remove();
 
                     }
-
+                    console.log(statusChanged);
                 });
 
+                // end changed
 
 
                 // inputs

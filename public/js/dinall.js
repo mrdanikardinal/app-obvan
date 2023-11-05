@@ -197,12 +197,13 @@ $(function()
                                         'Berhasil!',
                                         'Data sudah dihapus.',
                                         'success'
-                                      )
-                                   
+                                      );
+                                     
                                 }
                             });
                             $(this).parent().parent().remove();
                             renumberRowsEdit();
+                            window.location.reload(true);
                         }
                       })
                 
