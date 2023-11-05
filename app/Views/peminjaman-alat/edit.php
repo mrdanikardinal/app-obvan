@@ -9,6 +9,7 @@
                 color: var(--bs-danger);
             }
         </style>
+        <?php $testConlose = "ini adalah test"; ?>
         <main>
             <div class="container-fluid px-4">
                 <h1 class="mt-4"> Update Form Peminjaman Alat</h1>
@@ -183,13 +184,21 @@
                                     <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">
                                 </div>
                             </div>
-                            <div class="row mb-3" id="endInputPeminjaman">
+                            <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>">
                                 </div>
                             </div>
+                            <div id="endInputPeminjaman"></div>
                             <!-- start pengembalian  -->
+                            <?php $convertTanggalKembali = $dataPinjam['tanggal_kembali'];
+                            $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                            $tanggalconvertKembali = date('d/m/Y', strtotime($dateTanggalKembali));
+
+                            $namaPenerima = $dataPinjam['nama_penerima'];
+                            $catatan = $dataPinjam['catatan'];
+                            ?>
 
                             <!-- end pengembalian -->
 
@@ -278,6 +287,10 @@
             //start function add pengembalian
 
             function addPengembalian() {
+                let tanggalPengembalian = "<?=($dataPinjam['tanggal_kembali']!=NULL) ? $tanggalconvertKembali : Null ?>";
+                let namaPenerimaJs= "<?=$namaPenerima; ?>";
+                let catatanJs= "<?= $catatan; ?>";
+                
                 let addHTML = `<div id="showAddPengembalian" class="card mb-3">
     <h5 class="card-header text-center">Pengembalian</h5>
     <div class="card-body">
@@ -285,51 +298,52 @@
             <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
             <div class="col-sm-10">
              
-                <input type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali">
+                <input required type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="${tanggalPengembalian}">
             </div>
         </div>
         <div class="row mb-3">
             <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima">
+                <input required type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="${namaPenerimaJs}">
             </div>
         </div>
         <div class="row mb-3">
             <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan">
+                <input required type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
             </div>
         </div>
         </div>
     </div>`;
+                // $('#endInputPeminjaman').empty().append(addHTML);
                 $('#endInputPeminjaman').empty().append(addHTML);
             }
 
 
             $(function() {
-                
+
                 let arr = [];
                 // start check status default
-             
-                    $(".myselect").each(function() {
-                        let statusDefault = $(this).val();
-                        let angka = parseInt(statusDefault);
-                        arr.push(angka);
-                    });
-                    let sumStatus = 0;
-                    for (let e of arr) {
-                        sumStatus += e;
-                    }
-                    if (sumStatus !== 0) {
-                        addPengembalian();
-                        $("#tanggal_kembali").datepicker({
-                            dateFormat: 'dd/mm/yy',
-                            timespicker: false
-                        });
 
-                    }
-                    console.log(sumStatus);
-              
+                $(".myselect").each(function() {
+                    let statusDefault = $(this).val();
+                    let angka = parseInt(statusDefault);
+                    arr.push(angka);
+                });
+                let sumStatus = 0;
+                for (let e of arr) {
+                    sumStatus += e;
+                }
+                if (sumStatus !== 0) {
+                    addPengembalian();
+                    $("#tanggal_kembali").datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        timespicker: false
+                    });
+
+                }
+                console.log(sumStatus);
+
 
                 // end check status default
                 // start changed
@@ -346,7 +360,7 @@
                             for (let e of arr) {
                                 statusChanged += e;
                             }
-                            
+
                         }
 
 
@@ -359,7 +373,7 @@
                             for (let e of arr) {
                                 statusChanged += e;
                             }
-                            
+
                         }
                     }
 
@@ -430,7 +444,6 @@
 
                 //     }
                 // });
-
 
             });
 

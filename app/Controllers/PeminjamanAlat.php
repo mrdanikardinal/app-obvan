@@ -46,12 +46,12 @@ class PeminjamanAlat extends BaseController
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
-        
-        
+
+
         $this->pinjamAlatModel->save([
             'id_pinjam' => $idAutoPeminjamanAlat,
             'tanggal' => $tanggalconvert,
-            'sampai_dengan'=>$tanggalconvertSampaiDengan,
+            'sampai_dengan' => $tanggalconvertSampaiDengan,
             'acara' => $this->request->getVar('acara'),
             'tempat' => $this->request->getVar('tempat'),
             'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
@@ -99,16 +99,19 @@ class PeminjamanAlat extends BaseController
         $converttglEdit = $this->request->getVar('tanggal');
         $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
         $convertTanggalKembali = $this->request->getVar('tanggal_kembali');
-        // dd($convertTanggalKembali);
+        $varTesting=null;
+        if ($convertTanggalKembali != NULL) {
+            $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+            $tanggalconvertTanggalKembali = date('Y-m-d', strtotime($dateTanggalKembali));
+            $varTesting=$tanggalconvertTanggalKembali;
+           
+        }
+  
         $dateEdit = str_replace('/', '-', $converttglEdit);
         $dateSampaiDenganEdit = str_replace('/', '-', $convertSampaiDenganEdit);
-        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
         $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
-        $tanggalconvertTanggalKembali = date('Y-m-d', strtotime($dateTanggalKembali));
-        // dd($tanggalconvertTanggalKembali);
-
-
 
         $this->pinjamAlatModel->save([
             'id_pinjam' => $id_pinjam,
@@ -120,7 +123,7 @@ class PeminjamanAlat extends BaseController
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
             'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
             'nama_pemberi' => $this->request->getVar('nama_pemberi'),
-            'tanggal_kembali' => $tanggalconvertTanggalKembali,
+            'tanggal_kembali' => $varTesting,
             'nama_penerima' => $this->request->getVar('nama_penerima'),
             'catatan' => $this->request->getVar('catatan')
         ]);
@@ -203,7 +206,7 @@ class PeminjamanAlat extends BaseController
         } else if (isset($namaBarangUpdate)) {
             $jmlDataBaru = count($namaBarangUpdate);
             $jmlSeluruh = $jmlDataLama + $jmlDataBaru;
-            session()->setFlashdata('pesan', 'Terdeteksi '.$jmlDataBaru.' barang baru ditambahakan, dan '.$jmlDataLama.' barang lama berhasil diupdate, total barang kode pinjam '.$id_pinjam.' adalah '.$jmlSeluruh.' ');
+            session()->setFlashdata('pesan', 'Terdeteksi ' . $jmlDataBaru . ' barang baru ditambahakan, dan ' . $jmlDataLama . ' barang lama berhasil diupdate, total barang kode pinjam ' . $id_pinjam . ' adalah ' . $jmlSeluruh . ' ');
         }
 
 
@@ -216,11 +219,10 @@ class PeminjamanAlat extends BaseController
     }
 
 
-   
+
 
     public function hapus($id)
     {
         return $this->parentMerkModel->delete($id);
-        
     }
 }
