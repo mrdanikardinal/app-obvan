@@ -35,7 +35,7 @@
                                     <th>Nama Peminjam</th>
                                     <th>NO.HP Peminjam</th>
                                     <th>Nama Pemberi</th>
-                                    <th>Catatan</th>
+                                    <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Edit</th>
                                     <th>Hapus</th>
@@ -82,12 +82,8 @@
                                                             <td class="text-center">
                                                                 <?php if ($j['status'] == true) : ?>
                                                                     <button type="button" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i>
-                                                                       
-                                                                        <?php $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
-                                                                        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-                                                                        $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
-                                                                        ?>
-                                                                        <?= $tanggalKembaliconvert;?>
+
+
                                                                     </button>
                                                                 <?php elseif ($j['status'] == false) : ?>
                                                                     <button type="button" class="btn btn-danger"><i class="fa-solid fa-circle-exclamation"></i></button>
@@ -111,11 +107,21 @@
                                         <td>
                                             <?php foreach ($checkStatus[$key] as $valueCheck) : ?>
                                                 <?php if ($valueCheck == true) : ?>
-                                                    <button type="button" class="btn btn-success"><?= 'Lengkap' ?></button>
+                                                    <button type="button" class="btn btn-success"><?= 'Lengkap' ?>
+                                                        <?php $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
+                                                        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                                                        $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                                        ?>
+                                                        <?= $tanggalKembaliconvert; ?>
+                                                    </button>
 
                                                 <?php elseif ($valueCheck == false) : ?>
                                                     <button type="button" class="btn btn-info"><?= 'Tertunda' ?></button>
+                                                    <div class="form-floating">
+                                                      <var class="text-danger"><?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?></var>  
+                                                    </div>
                                                 <?php endif; ?>
+
 
 
                                         </td>
@@ -127,7 +133,7 @@
                                             <!-- start if condition status -->
                                             <?php
                                                 $today = date("Y-m-d");
-                                                $tanggalPengembalian = $valuePeminjaman['tanggal'];
+                                                $tanggalPengembalian = $valuePeminjaman['sampai_dengan'];
                                             ?>
 
 
@@ -148,7 +154,7 @@
                                             <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
                                             </form>
 
                                         </td>

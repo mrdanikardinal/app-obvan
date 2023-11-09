@@ -310,7 +310,7 @@
         <div class="row mb-3">
             <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
             <div class="col-sm-10">
-                <input required type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
+                <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
             </div>
         </div>
         </div>
