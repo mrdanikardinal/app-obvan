@@ -12,12 +12,12 @@
         <?php $testConlose = "ini adalah test"; ?>
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4"> Update Form Peminjaman Alat</h1>
+                <h1 class="mt-4"> Form update peminjaman alat</h1>
 
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        Tabel Data Update
                     </div>
                     <div class="card-body">
 
@@ -182,6 +182,9 @@
                                 <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('noHPPeminjam') ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -256,6 +259,19 @@
                     'jumlahEditUpdate[]': {
                         required: true,
                         digits: true
+                    },
+                    'naBarEdit[]': {
+                        required: true
+                    },
+                    'merkEdit[]': {
+                        required: true
+                    },
+                    'sNEdit[]': {
+                        required: true
+                    },
+                    'jumlahEdit[]': {
+                        required: true,
+                        digits: true
                     }
                 },
                 messages: {
@@ -269,6 +285,20 @@
                         required: "serial baru number harus di isi !"
                     },
                     'jumlahEditUpdate[]': {
+                        required: "jumlah baru harus di isi !",
+                        digits: "isi dengan angka !"
+
+                    },
+                    'naBarEdit[]': {
+                        required: "nama baru harus di isi !"
+                    },
+                    'merkEdit[]': {
+                        required: "merk baru harus di isi !"
+                    },
+                    'sNEdit[]': {
+                        required: "serial baru number harus di isi !"
+                    },
+                    'jumlahEdit[]': {
                         required: "jumlah baru harus di isi !",
                         digits: "isi dengan angka !"
 
@@ -287,10 +317,10 @@
             //start function add pengembalian
 
             function addPengembalian() {
-                let tanggalPengembalian = "<?=($dataPinjam['tanggal_kembali']!=NULL) ? $tanggalconvertKembali : Null ?>";
-                let namaPenerimaJs= "<?=$namaPenerima; ?>";
-                let catatanJs= "<?= $catatan; ?>";
-                
+                let tanggalPengembalian = "<?= ($dataPinjam['tanggal_kembali'] != NULL) ? $tanggalconvertKembali : Null ?>";
+                let namaPenerimaJs = "<?= $namaPenerima; ?>";
+                let catatanJs = "<?= $catatan; ?>";
+
                 let addHTML = `<div id="showAddPengembalian" class="card mb-3">
     <h5 class="card-header text-center">Pengembalian</h5>
     <div class="card-body">

@@ -7,7 +7,7 @@ use App\Models\ParentMerkModel;
 
 class PeminjamanAlat extends BaseController
 {
-    protected $helpers = ['form'];
+    protected $helpers = (['form']);
     protected $pinjamAlatModel;
     protected $parentMerkModel;
 
@@ -23,15 +23,18 @@ class PeminjamanAlat extends BaseController
         $data = [
             'checkStatus' => $this->parentMerkModel->getCheckDone(),
             'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
-            'parentMerk' => $this->parentMerkModel->getParentMerk()
+            'parentMerk' => $this->parentMerkModel->getParentMerk(),
+
+
         ];
         return view('peminjaman-alat/display', $data);
     }
     public function create()
     {
-
+        session();
         $data = [
             'title' => 'Form Tambah Data Peminjaman Alat',
+            'validation' => \Config\Services::validation()
 
         ];
 
@@ -39,6 +42,18 @@ class PeminjamanAlat extends BaseController
     }
     public function save()
     {
+  
+        $rules = [
+            'noHPPeminjam' => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'no hp harus di isi.',
+                    'numeric' => 'isi harus angka'
+                ]
+            ],
+           
+        ];
+
         $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
         $converttgl = $this->request->getVar('tanggal');
         $convertSampaiDengan = $this->request->getVar('sampai_dengan');
@@ -47,7 +62,12 @@ class PeminjamanAlat extends BaseController
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
 
-
+        if (!$this->validate($rules)) {
+         
+            return redirect()->back()->withInput();
+           
+        }
+        // dd($this->validate($rules));
         $this->pinjamAlatModel->save([
             'id_pinjam' => $idAutoPeminjamanAlat,
             'tanggal' => $tanggalconvert,
@@ -84,10 +104,11 @@ class PeminjamanAlat extends BaseController
     }
     public function edit($id_pinjam)
     {
-
+        session();
         $data = [
             'dataPinjam' => $this->pinjamAlatModel->getPeminjamanAlat($id_pinjam),
-            'allDataParentMerk' => $this->parentMerkModel->getParentViews($id_pinjam)
+            'allDataParentMerk' => $this->parentMerkModel->getParentViews($id_pinjam),
+            'validation' => \Config\Services::validation()
 
         ];
 
@@ -96,23 +117,39 @@ class PeminjamanAlat extends BaseController
     public function update($id_pinjam)
     {
         // $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
+
+        $rules = [
+            'noHPPeminjam' => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'no hp harus di isi.',
+                    'numeric' => 'isi harus angka'
+                ]
+            ],
+           
+        ];
+        if (!$this->validate($rules)) {
+         
+            return redirect()->back()->withInput();
+           
+        }
+
         $converttglEdit = $this->request->getVar('tanggal');
         $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
         $convertTanggalKembali = $this->request->getVar('tanggal_kembali');
-        $varTesting=null;
+        $varTesting = null;
         if ($convertTanggalKembali != NULL) {
             $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
             $tanggalconvertTanggalKembali = date('Y-m-d', strtotime($dateTanggalKembali));
-            $varTesting=$tanggalconvertTanggalKembali;
-           
+            $varTesting = $tanggalconvertTanggalKembali;
         }
-  
+
         $dateEdit = str_replace('/', '-', $converttglEdit);
         $dateSampaiDenganEdit = str_replace('/', '-', $convertSampaiDenganEdit);
 
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
         $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
-
+        
         $this->pinjamAlatModel->save([
             'id_pinjam' => $id_pinjam,
             'tanggal' => $tanggalconvertEdit,

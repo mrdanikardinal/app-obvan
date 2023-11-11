@@ -18,7 +18,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        Tabel Data Peminjaman Alat
                     </div>
                     <div class="card-body">
                         <table id="dinallTable" class="table table-bordered table-hover text-center align-middle">
@@ -107,19 +107,20 @@
                                         <td>
                                             <?php foreach ($checkStatus[$key] as $valueCheck) : ?>
                                                 <?php if ($valueCheck == true) : ?>
-                                                    <button type="button" class="btn btn-success"><?= 'Lengkap' ?>
+                                                    <button type="button" class="btn btn-success"><?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?>
                                                         <?php $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
                                                         $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
                                                         $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
                                                         ?>
                                                         <?= $tanggalKembaliconvert; ?>
                                                     </button>
+                                                    </div>
 
                                                 <?php elseif ($valueCheck == false) : ?>
-                                                    <button type="button" class="btn btn-info"><?= 'Tertunda' ?></button>
-                                                    <div class="form-floating">
-                                                      <var class="text-danger"><?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?></var>  
-                                                    </div>
+                                                    <button type="button" class="btn btn-info"><?= 'Tertunda' ?> <?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?></button>
+                                                    
+                                 
+                                                    
                                                 <?php endif; ?>
 
 

@@ -30,14 +30,14 @@
                             <div class="row mb-3">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Pinjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" value="<?= old('tanggal') ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="sampai_dengan" class="col-sm-2 col-form-label">Sampai Dengan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= old('sampai_dengan') ?>">
 
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
 
                                             </td>
                                             <td>
-                                                <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+                                                <input type="text" required class="form-control" name="merk[]" placeholder="merk" value="<?= '-'; ?>">
                                             </td>
                                             <td>
                                                 <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number" value="<?= '-'; ?>">
@@ -86,6 +86,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Acara" id="acara" name="acara" value="<?= old('acara') ?>">
                                 </div>
+
                             </div>
                             <div class="row mb-3">
                                 <label for="tempat" class="col-sm-2 col-form-label">Tempat</label>
@@ -110,19 +111,23 @@
                             <div class="row mb-3">
                                 <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= old('noHPPeminjam') ?>">
+                                    <input type="text" required class="form-control " placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= old('noHPPeminjam') ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('noHPPeminjam') ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi') ?>">
-
+                                    
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -143,7 +148,7 @@
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
+                        //check validation green and red
                         form.classList.add('was-validated')
                     }, false)
                 })
@@ -169,22 +174,24 @@
                         required: true,
                         digits: true
                     }
+
                 },
                 messages: {
                     'naBar[]': {
                         required: "nama harus di isi !"
                     },
                     'merk[]': {
-                        required: "merk harus di isi !"
+                        required: "jika merk kosong beri tanda - !"
                     },
                     'sN[]': {
-                        required: "serial number harus di isi !"
+                        required: "jika serial number kosong beri tanda - !"
                     },
                     'jumlah[]': {
                         required: "jumlah harus di isi !",
                         digits: "isi dengan angka !"
 
                     }
+
 
                 },
                 errorElement: "em",
