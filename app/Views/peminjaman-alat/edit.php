@@ -1,8 +1,8 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<?= $this->include('layout/nav_bar') ?>
+<?= $this->include('layout/nav_bar'); ?>
 <div id="layoutSidenav">
-    <?= $this->include('layout/side_bar') ?>
+    <?= $this->include('layout/side_bar'); ?>
     <div id="layoutSidenav_content">
         <style>
             .error {
@@ -322,7 +322,7 @@
                 let catatanJs = "<?= $catatan; ?>";
 
                 let addHTML = `<div id="showAddPengembalian" class="card mb-3">
-    <h5 class="card-header text-center">Pengembalian</h5>
+    <h5 class="card-header text-center">Form Pengembalian</h5>
     <div class="card-body">
         <div class="row mb-3">
             <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
@@ -372,7 +372,7 @@
                     });
 
                 }
-                console.log(sumStatus);
+               
 
 
                 // end check status default
@@ -386,7 +386,7 @@
                         let indexOfNameToReplace = arr.indexOf(newName);
                         if (indexOfNameToReplace > -1) {
                             arr[indexOfNameToReplace] = parseInt(isiStatus);
-                            console.log(`New array is NO: ${arr}`);
+                            
                             for (let e of arr) {
                                 statusChanged += e;
                             }
@@ -399,7 +399,7 @@
                         let indexOfNameToReplace = arr.indexOf(newName);
                         if (indexOfNameToReplace > -1) {
                             arr[indexOfNameToReplace] = parseInt(isiStatus);
-                            console.log(`New array is YES: ${arr}`);
+                            
                             for (let e of arr) {
                                 statusChanged += e;
                             }
@@ -419,7 +419,7 @@
                         $('#showAddPengembalian').remove();
 
                     }
-                    console.log(statusChanged);
+                     
                 });
 
                 // end changed

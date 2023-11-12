@@ -1,8 +1,8 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<?= $this->include('layout/nav_bar') ?>
+<?= $this->include('layout/nav_bar'); ?>
 <div id="layoutSidenav">
-    <?= $this->include('layout/side_bar') ?>
+    <?= $this->include('layout/side_bar'); ?>
     <div id="layoutSidenav_content">
 
         <style>
@@ -23,21 +23,21 @@
                     </div>
                     <div class="card-body">
 
-                        <form id="formAdd" method="post" action="<?= base_url() ?>/peminjaman-alat/save" class="needs-validation" novalidate>
+                        <form id="formAdd" method="post" action="<?= base_url("/peminjaman-alat/save"); ?>" class="needs-validation" novalidate>
 
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Pinjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" value="<?= old('tanggal') ?>">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" value="<?= old('tanggal'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="sampai_dengan" class="col-sm-2 col-form-label">Sampai Dengan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= old('sampai_dengan') ?>">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= old('sampai_dengan'); ?>">
 
                                 </div>
                             </div>
@@ -84,43 +84,43 @@
                             <div class="row mb-3">
                                 <label for="acara" class="col-sm-2 col-form-label">Acara</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Acara" id="acara" name="acara" value="<?= old('acara') ?>">
+                                    <input type="text" required class="form-control" placeholder="Acara" id="acara" name="acara" value="<?= old('acara'); ?>">
                                 </div>
 
                             </div>
                             <div class="row mb-3">
                                 <label for="tempat" class="col-sm-2 col-form-label">Tempat</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Tempat" id="tempat" name="tempat" value="<?= old('tempat') ?>">
+                                    <input type="text" required class="form-control" placeholder="Tempat" id="tempat" name="tempat" value="<?= old('tempat'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="durasi_pinjam" class="col-sm-2 col-form-label">Durasi Pinjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Durasi Pinjam" id="durasi_pinjam" name="durasi_pinjam" value="<?= old('durasi_pinjam') ?>">
+                                    <input type="text" required class="form-control" placeholder="Durasi Pinjam" id="durasi_pinjam" name="durasi_pinjam" value="<?= old('durasi_pinjam'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nama_peminjam" class="col-sm-2 col-form-label">Nama Peminjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Peminjam" id="nama_peminjam" name="nama_peminjam" value="<?= old('nama_peminjam') ?>">
+                                    <input type="text" required class="form-control" placeholder="Nama Peminjam" id="nama_peminjam" name="nama_peminjam" value="<?= old('nama_peminjam'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= old('noHPPeminjam') ?>">
+                                    <input type="text" required class="form-control " placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= old('noHPPeminjam'); ?>">
                                     <div class="text-danger">
-                                        <?= validation_show_error('noHPPeminjam') ?>
+                                        <?= validation_show_error('noHPPeminjam'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi') ?>">
+                                    <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi'); ?>">
                                     
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
             //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
         </script>
-        <?= $this->include('layout/footer') ?>
+        <?= $this->include('layout/footer'); ?>
 
 
     </div>
