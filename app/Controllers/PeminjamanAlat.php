@@ -99,7 +99,7 @@ class PeminjamanAlat extends BaseController
 
             ]);
         }
-        session()->setFlashdata('pesan', $jumlahDataInput . ' Data ' . $idAutoPeminjamanAlat . ', Berhasil Ditambahkan.');
+        session()->setFlashdata('pesan','Berhasil,input peminjaman ID ' . $idAutoPeminjamanAlat);
         return redirect()->to('peminjaman-alat/display');
     }
     public function edit($id_pinjam)
@@ -236,17 +236,7 @@ class PeminjamanAlat extends BaseController
                 }
             }
         }
-
-        $jmlDataLama = count($namaBarang);
-        if (!isset($namaBarangUpdate)) {
-            session()->setFlashdata('pesan', $jmlDataLama . ' barang dari kode pinjam ' . $id_pinjam . ', Berhasil Diupdate.');
-        } else if (isset($namaBarangUpdate)) {
-            $jmlDataBaru = count($namaBarangUpdate);
-            $jmlSeluruh = $jmlDataLama + $jmlDataBaru;
-            session()->setFlashdata('pesan', 'Terdeteksi ' . $jmlDataBaru . ' barang baru ditambahakan, dan ' . $jmlDataLama . ' barang lama berhasil diupdate, total barang kode pinjam ' . $id_pinjam . ' adalah ' . $jmlSeluruh . ' ');
-        }
-
-
+        session()->setFlashdata('pesan','Berhasil,update peminjaman ID ' . $id_pinjam);
         return redirect()->to('peminjaman-alat/display');
     }
     public function delete($id)
