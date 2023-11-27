@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-
+// start peminjaman
 $routes->get('/inventaris_gudang', 'InventarisGudang::index');
 $routes->get('/inventaris_kamera', 'InventarisKamera::index');
 $routes->get('/inventaris_sng_van', 'InventarisSNGVAN::index');
@@ -18,3 +18,9 @@ $routes->get('peminjaman-alat/edit/(:segment)', 'PeminjamanAlat::edit/$1');
 $routes->post('peminjaman-alat/update/(:any)', 'PeminjamanAlat::update/$1');
 $routes->delete('peminjaman-alat/display/(:segment)', 'PeminjamanAlat::delete/$1');
 $routes->post('peminjaman-alat/edit/(:segment)/(:segment)', 'PeminjamanAlat::hapus/$2');
+//end peminjaman
+//start inventaris
+$routes->get('inventaris', 'Inventaris::index');
+$routes->post('inventaris/save', 'Inventaris::save');
+
+//end inventaris
