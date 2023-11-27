@@ -21,6 +21,7 @@ $routes->post('peminjaman-alat/edit/(:segment)/(:segment)', 'PeminjamanAlat::hap
 //end peminjaman
 //start inventaris
 $routes->get('inventaris', 'Inventaris::index');
+$routes->get('inventaris/create', 'Inventaris::create');
 $routes->post('inventaris/save', 'Inventaris::save');
 
 //end inventaris

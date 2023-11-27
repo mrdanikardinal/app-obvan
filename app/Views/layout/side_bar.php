@@ -15,7 +15,7 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="inventaris_gudang">
+                        <a class="nav-link" href="<?=base_url()?>inventaris">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Gudang
                         </a>

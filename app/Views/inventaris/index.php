@@ -6,60 +6,79 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
+                <!-- <h1 class="mt-4">Peminjaman Alat</h1> -->
                 <h5 class="mt-4">
-
+                    <?php if (session()->getFlashdata('pesan')) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= session()->getFlashdata('pesan'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
+                <a href="<?= base_url("/inventaris/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        <?= $title ?>
+                        Tabel Data Peminjaman Alat
                     </div>
                     <div class="card-body">
+                        <table id="tableInventaris" class="table table-bordered table-hover text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Barang</th>
+                                    <th>Barcode</th>
+                                    <th>Merk</th>
+                                    <th>Serial Number</th>
+                                    <th>Tahun Pengadaan</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $number = 1; ?>
+                                <?php foreach ($allInventaris as $key => $valueInventaris) : ?>
+                                    <tr>
+                                        <th><?= $number++; ?></th>
+                                        <td><?= $valueInventaris['nama_barang']; ?></td>
+                                        <td class="text-center">
+                                            <?php
 
-                        <form id="formAdd" method="post" action="<?= base_url("/inventaris/save"); ?>" class="needs-validation" novalidate>
+                              
 
-                            <?= csrf_field(); ?>
+                                            $redColor = [255, 0, 0];
 
-                            <div class="row mb-3">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Nama Barang</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= old('nama_barang'); ?>">
+                                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+                                            // file_put_contents('barcode.png', $generator->getBarcode('081231723897', $generator::TYPE_CODE_128, 3, 50, $redColor));
+                                         
+                                            echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['id_inv'], $generator::TYPE_CODE_128,3,50,$redColor)) . '">';
+                                            ?>
+                                        </td>
 
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="sampai_dengan" class="col-sm-2 col-form-label">Merk</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= old('merk'); ?>">
+                                        <td><?= $valueInventaris['merk']; ?></td>
+                                        <td><?= $valueInventaris['serial_number']; ?></td>
+                                        <td><?= $valueInventaris['thn_pengadaan']; ?></td>
+                                        <td><?= $valueInventaris['jumlah'] ?></td>
+                                        <td>
+                                            <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                                <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" value="PUT">
+                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                                            </form>
 
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="noHPPeminjam" class="col-sm-2 col-form-label">Serial Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="Serial Number" id="serial_number" name="serial_number" value="<?= old('serial_number'); ?>">
-                                    <div class="text-danger">
+                                        </td>
+                                        <td>
+                                            <form id="hapus" action="<?= base_url() ?>peminjaman-alat/display/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                                <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
+                                            </form>
+                                        </td>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="nama_pemberi" class="col-sm-2 col-form-label">Jumlah</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>">
+                                    </tr>
 
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="nama_pemberi" class="col-sm-2 col-form-label">Tahun Pengadaan</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Tahun Pengadaan" id="tahun_pengadaan" name="tahun_pengadaan" value="<?= old('tahun_pengadaan'); ?>">
+                                <?php endforeach; ?>
+                            </tbody>
 
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </form>
+                        </table>
 
                     </div>
                 </div>

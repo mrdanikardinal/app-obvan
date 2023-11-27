@@ -32,6 +32,13 @@ class InventarisModel extends Model
         }
         return 'INV-' . $code;
     }
+    public function getInventaris($id = false)
+    {
 
+        if ($id == false) {
+            return $this->findAll();
+        }
+        return $this->where(['id_inv' => $id])->first();
+    }
 
 }
