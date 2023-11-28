@@ -23,5 +23,7 @@ $routes->post('peminjaman-alat/edit/(:segment)/(:segment)', 'PeminjamanAlat::hap
 $routes->get('inventaris', 'Inventaris::index');
 $routes->get('inventaris/create', 'Inventaris::create');
 $routes->post('inventaris/save', 'Inventaris::save');
+$routes->delete('inventaris/(:segment)', 'Inventaris::delete/$1');
+
 
 //end inventaris

@@ -17,8 +17,13 @@ class Inventaris extends BaseController
     }
     public function index()
     {
+        $generator = new BarcodeGeneratorPNG();
+  
+
+
         $data = [
-            'allInventaris' => $this->inventarisModel->getInventaris()
+            'allInventaris' => $this->inventarisModel->getInventaris(),
+            'generator'=> $generator
         ];
         return view('inventaris/index', $data);
     }
@@ -50,24 +55,19 @@ class Inventaris extends BaseController
             ],
 
         ];
+    
 
         $idAutoInventaris = $this->inventarisModel->autoNumberId();
+        $timeForBarcode= time();
 
         if (!$this->validate($rules)) {
 
             return redirect()->back()->withInput();
         }
 
-
-        // dd($this->validate($rules));
-        $cetakBarcode = new BarcodeGeneratorPNG();
-        // $test = base64_encode($cetakBarcode->getBarcode('081231723897', $cetakBarcode::TYPE_CODE_128));
-        
-
-
-
         $this->inventarisModel->save([
             'id_inv' => $idAutoInventaris,
+            'kode_barcode'=>$timeForBarcode,
             'nama_barang' => $this->request->getVar('nama_barang'),
             'merk' => $this->request->getVar('merk'),
             'serial_number' => $this->request->getVar('serial_number'),
@@ -78,6 +78,13 @@ class Inventaris extends BaseController
 
 
         session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ' . $idAutoInventaris);
+        return redirect()->to('inventaris');
+    }
+
+
+    public function delete($id)
+    {
+        $this->inventarisModel->delete($id);
         return redirect()->to('inventaris');
     }
 }

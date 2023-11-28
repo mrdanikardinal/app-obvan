@@ -21,7 +21,7 @@
                         Tabel Data Peminjaman Alat
                     </div>
                     <div class="card-body">
-                        <table id="tableInventaris" class="table table-bordered table-hover text-center align-middle">
+                        <table id="inventarisTable" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -31,6 +31,8 @@
                                     <th>Serial Number</th>
                                     <th>Tahun Pengadaan</th>
                                     <th>Jumlah</th>
+                                    <th>Edit</th>
+                                    <th>Hapus</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,22 +41,30 @@
                                     <tr>
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueInventaris['nama_barang']; ?></td>
-                                        <td class="text-center">
-                                            <?php
-
-                              
-
-                                            $redColor = [255, 0, 0];
-
-                                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-                                            // file_put_contents('barcode.png', $generator->getBarcode('081231723897', $generator::TYPE_CODE_128, 3, 50, $redColor));
-                                         
-                                            echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['id_inv'], $generator::TYPE_CODE_128,3,50,$redColor)) . '">';
-                                            ?>
-                                        </td>
+                                        <?php if ($valueInventaris['serial_number'] != NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?=$valueInventaris['serial_number']; ?></span>
+                                            </td>
+                                        <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?= $valueInventaris['kode_barcode']; ?></span>
+                                            </td>
+                                        <?php endif; ?>
 
                                         <td><?= $valueInventaris['merk']; ?></td>
-                                        <td><?= $valueInventaris['serial_number']; ?></td>
+                                        <td>
+                                            <?php if ($valueInventaris['serial_number'] != NULL) : ?>
+                                            <?= $valueInventaris['serial_number']; ?>
+                                            <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
+                                            <h4><?= '-'; ?></h4>
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
                                         <td><?= $valueInventaris['jumlah'] ?></td>
                                         <td>
@@ -66,10 +76,10 @@
 
                                         </td>
                                         <td>
-                                            <form id="hapus" action="<?= base_url() ?>peminjaman-alat/display/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                            <form id="hapus" action="<?= base_url() ?>inventaris/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
+                                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i>Hapus</button>
                                             </form>
                                         </td>
 
