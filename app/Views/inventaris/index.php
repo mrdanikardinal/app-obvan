@@ -20,7 +20,7 @@
                         <i class="fas fa-table me-1"></i>
                         Tabel Data Peminjaman Alat
                     </div>
-                    <div class="card-body">
+                    <div id="card-body-inventarisTable" class="card-body">
                         <table id="inventarisTable" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>

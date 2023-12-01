@@ -1,5 +1,6 @@
 //Strat Peminjaman=================================================================================
 
+$('#card-body-inventarisTable').css("margin", "0 auto");
 
 $(document).ready(function () {
 
