@@ -18,19 +18,22 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Data Peminjaman Alat
+                        Tabel Inventaris Gudang
                     </div>
                     <div id="card-body-inventarisTable" class="card-body">
                         <table id="inventarisTable" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Jenis Barang</th>
                                     <th>Nama Barang</th>
                                     <th>Barcode</th>
                                     <th>Merk</th>
                                     <th>Serial Number</th>
+                                    <th>Lokasi</th>
+                                    <th>Kondisi</th>
+                                    <th>Status</th>
                                     <th>Tahun Pengadaan</th>
-                                    <th>Jumlah</th>
                                     <th>Edit</th>
                                     <th>Hapus</th>
                                 </tr>
@@ -40,13 +43,14 @@
                                 <?php foreach ($allInventaris as $key => $valueInventaris) : ?>
                                     <tr>
                                         <th><?= $number++; ?></th>
+                                        <td><?= $valueInventaris['jenis_barang']; ?></td>
                                         <td><?= $valueInventaris['nama_barang']; ?></td>
                                         <?php if ($valueInventaris['serial_number'] != NULL) : ?>
                                             <td class="text-center">
                                                 <div>
                                                     <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
                                                 </div>
-                                                <span><?=$valueInventaris['serial_number']; ?></span>
+                                                <span><?= $valueInventaris['serial_number']; ?></span>
                                             </td>
                                         <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
                                             <td class="text-center">
@@ -60,13 +64,16 @@
                                         <td><?= $valueInventaris['merk']; ?></td>
                                         <td>
                                             <?php if ($valueInventaris['serial_number'] != NULL) : ?>
-                                            <?= $valueInventaris['serial_number']; ?>
+                                                <?= $valueInventaris['serial_number']; ?>
                                             <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
-                                            <h4><?= '-'; ?></h4>
+                                                <h4><?= '-'; ?></h4>
                                             <?php endif; ?>
                                         </td>
+                                        <td><?= $valueInventaris['lokasi'] ?></td>
+                                        <td><?= $valueInventaris['kondisi'] ?></td>
+                                        <td><?= $valueInventaris['status'] ?></td>
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
-                                        <td><?= $valueInventaris['jumlah'] ?></td>
+                                    
                                         <td>
                                             <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>
@@ -95,6 +102,7 @@
             </div>
 
         </main>
+
 
         <?= $this->include('layout/footer'); ?>
 

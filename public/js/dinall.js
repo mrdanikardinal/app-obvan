@@ -1,6 +1,6 @@
 //Strat Peminjaman=================================================================================
 
-$('#card-body-inventarisTable').css("margin", "0 auto");
+
 
 $(document).ready(function () {
 
@@ -262,7 +262,6 @@ $('.hapusPjm').click(function () {
 });
 //End Peminjaman=================================================================================
 //Start Inventaris===============================================================================
-
 $(document).ready(function () {
 
     $('#inventarisTable').DataTable({

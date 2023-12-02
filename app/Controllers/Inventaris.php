@@ -18,14 +18,15 @@ class Inventaris extends BaseController
     public function index()
     {
         $generator = new BarcodeGeneratorPNG();
-  
+
 
 
         $data = [
             'allInventaris' => $this->inventarisModel->getInventaris(),
-            'generator'=> $generator
+            'generator' => $generator
         ];
         return view('inventaris/index', $data);
+        // return view('inventaris/test');
     }
 
     public function create()
@@ -55,10 +56,12 @@ class Inventaris extends BaseController
             ],
 
         ];
-    
+
 
         $idAutoInventaris = $this->inventarisModel->autoNumberId();
-        $timeForBarcode= time();
+        $namaBarang = $this->request->getVar('nama_barang');
+        $jenisBarang = $this->request->getVar('jenis_barang');
+        $timeForBarcode = time();
 
         if (!$this->validate($rules)) {
 
@@ -67,17 +70,20 @@ class Inventaris extends BaseController
 
         $this->inventarisModel->save([
             'id_inv' => $idAutoInventaris,
-            'kode_barcode'=>$timeForBarcode,
-            'nama_barang' => $this->request->getVar('nama_barang'),
+            'jenis_barang' => $jenisBarang,
+            'kode_barcode' => $timeForBarcode,
+            'nama_barang' => $namaBarang,
             'merk' => $this->request->getVar('merk'),
             'serial_number' => $this->request->getVar('serial_number'),
-            'jumlah' => $this->request->getVar('jumlah'),
+            'lokasi' => $this->request->getVar('lokasi'),
+            'kondisi' => $this->request->getVar('kondisi'),
+            'status' => $this->request->getVar('status'),
             'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
 
         ]);
 
 
-        session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ' . $idAutoInventaris);
+        session()->setFlashdata('pesan', 'Berhasil,input inventaris ' . $namaBarang);
         return redirect()->to('inventaris');
     }
 

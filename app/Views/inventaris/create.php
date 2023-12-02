@@ -21,21 +21,37 @@
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Nama Barang</label>
+                                <label for="jenis_barang" class="col-sm-2 col-form-label">Jenis Barang</label>
+                                <div class="col-sm-10">
+                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                                    <select name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
+                                        <option value="KEMARA EFP">KEMARA EFP</option>
+                                        <option value="KAMERA ENG">KAMERA ENG</option>
+                                        <option value="TRIPOD">TRIPOD</option>
+                                        <option value="DSLR">DSLR</option>
+                                        <option value="CONVERTER">CONVERTER</option>
+                                        <option value="MIXER VIDEO">MIXER VIDEO</option>
+                                        <option value="MIXER AUDIO">MIXER AUDIO</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="nama_barang" class="col-sm-2 col-form-label">Nama Barang</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= old('nama_barang'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="sampai_dengan" class="col-sm-2 col-form-label">Merk</label>
+                                <label for="merk" class="col-sm-2 col-form-label">Merk</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= old('merk'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="noHPPeminjam" class="col-sm-2 col-form-label">Serial Number</label>
+                                <label for="serial_number" class="col-sm-2 col-form-label">Serial Number</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control " placeholder="Serial Number" id="serial_number" name="serial_number" value="<?= old('serial_number'); ?>">
                                     <div class="text-danger">
@@ -44,10 +60,34 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="nama_pemberi" class="col-sm-2 col-form-label">Jumlah</label>
+                                <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>">
-
+                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                                    <select name="lokasi" class="form-select form-select-sm" aria-label="Small select example">
+                                        <option value="GUDANG">GUDANG</option>
+                                        <option value="SNG-VAN">SNG-VAN</option>
+                                        <option value="NEWS-VAN">NEWS-VAN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="kondisi" class="col-sm-2 col-form-label">Kondisi</label>
+                                <div class="col-sm-10">
+                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                                    <select name="kondisi" class="form-select form-select-sm" aria-label="Small select example">
+                                        <option value="BAIK">BAIK</option>
+                                        <option value="RUSAK">RUSAK</option>                                 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="status" class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10">
+                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                                    <select name="status" class="form-select form-select-sm" aria-label="Small select example">
+                                        <option value="TERSEDIA">TERSEDIA</option>
+                                        <option value="PERBAIKAN">PERBAIKAN</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
