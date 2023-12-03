@@ -25,13 +25,9 @@
                                 <div class="col-sm-10">
                                     <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
                                     <select name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value="KEMARA EFP">KEMARA EFP</option>
-                                        <option value="KAMERA ENG">KAMERA ENG</option>
-                                        <option value="TRIPOD">TRIPOD</option>
-                                        <option value="DSLR">DSLR</option>
-                                        <option value="CONVERTER">CONVERTER</option>
-                                        <option value="MIXER VIDEO">MIXER VIDEO</option>
-                                        <option value="MIXER AUDIO">MIXER AUDIO</option>
+                                        <?php foreach ($jenisBarang as $key => $valueJenisBarang) : ?>
+                                            <option value="<?= ($valueJenisBarang['id_jns_barang']==$valueJenisBarang['nama_jenis_barang']) ? $valueJenisBarang['id_jns_barang'] : '' ?>"><?= $valueJenisBarang['nama_jenis_barang'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -76,7 +72,7 @@
                                     <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
                                     <select name="kondisi" class="form-select form-select-sm" aria-label="Small select example">
                                         <option value="BAIK">BAIK</option>
-                                        <option value="RUSAK">RUSAK</option>                                 
+                                        <option value="RUSAK">RUSAK</option>
                                     </select>
                                 </div>
                             </div>

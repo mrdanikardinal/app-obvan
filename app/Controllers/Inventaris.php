@@ -3,17 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\InventarisModel;
+use App\Models\JenisBarangModel;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 
 class Inventaris extends BaseController
 {
     protected $inventarisModel;
+    protected $jnsBarang;
 
 
     public function __construct()
     {
         $this->inventarisModel = new InventarisModel();
+        $this->jnsBarang = new JenisBarangModel();
     }
     public function index()
     {
@@ -32,11 +35,11 @@ class Inventaris extends BaseController
     public function create()
     {
         session();
-
-
+        $dataJenisBarang= $this->jnsBarang->getJenisBarang();
         $data = [
             'title' => 'Form Tambah Data Inventaris',
             'validation' => \Config\Services::validation(),
+            'jenisBarang'=> $dataJenisBarang
         ];
 
         return view('inventaris/create', $data);
