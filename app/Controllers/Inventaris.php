@@ -20,13 +20,15 @@ class Inventaris extends BaseController
     }
     public function index()
     {
+        $dataJoins= $this->jnsBarang->getJoinsInventaris();
         $generator = new BarcodeGeneratorPNG();
 
 
 
         $data = [
             'allInventaris' => $this->inventarisModel->getInventaris(),
-            'generator' => $generator
+            'generator' => $generator,
+            'dataJoins'=> $dataJoins
         ];
         return view('inventaris/index', $data);
         // return view('inventaris/test');
@@ -73,7 +75,7 @@ class Inventaris extends BaseController
 
         $this->inventarisModel->save([
             'id_inv' => $idAutoInventaris,
-            'jenis_barang' => $jenisBarang,
+            'id_jns_barang' => $jenisBarang,
             'kode_barcode' => $timeForBarcode,
             'nama_barang' => $namaBarang,
             'merk' => $this->request->getVar('merk'),

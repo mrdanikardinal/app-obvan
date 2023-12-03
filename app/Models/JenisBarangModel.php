@@ -21,6 +21,22 @@ class JenisBarangModel extends Model
         }
         return $this->where(['id_jns_barang' => $id])->first();
     }
+    public function procedureGetCountBarang()
+    {
+        $query = $this->db->query("CALL getCountItemsBarang()");
+        return $query->getResultArray();
+        
+    }
+    public function getJoinsInventaris()
+    {
+        $builder=$this->db->table('jenis_barang');
+        $builder->join('inventaris','inventaris.id_jns_barang=jenis_barang.id_jns_barang');
+        $query=$builder->get();
+       
+        // return $query->getResult(); //return object
+        return $query->getResultArray(); //return array
+        
+    }
 
 
 }

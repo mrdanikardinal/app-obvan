@@ -40,10 +40,10 @@
                             </thead>
                             <tbody>
                                 <?php $number = 1; ?>
-                                <?php foreach ($allInventaris as $key => $valueInventaris) : ?>
+                                <?php foreach ($dataJoins as $key => $valueInventaris) : ?>
                                     <tr>
                                         <th><?= $number++; ?></th>
-                                        <td><?= $valueInventaris['jenis_barang']; ?></td>
+                                        <td><?= $valueInventaris['nama_jenis_barang']; ?></td>
                                         <td><?= $valueInventaris['nama_barang']; ?></td>
                                         <?php if ($valueInventaris['serial_number'] != NULL) : ?>
                                             <td class="text-center">

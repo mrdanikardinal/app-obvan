@@ -23,10 +23,11 @@
                             <div class="row mb-3">
                                 <label for="jenis_barang" class="col-sm-2 col-form-label">Jenis Barang</label>
                                 <div class="col-sm-10">
-                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
-                                    <select name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
+                          
+                                    <select id="jenisBarang" name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
+                                        <option value="" type="hidden"></option>
                                         <?php foreach ($jenisBarang as $key => $valueJenisBarang) : ?>
-                                            <option value="<?= ($valueJenisBarang['id_jns_barang']==$valueJenisBarang['nama_jenis_barang']) ? $valueJenisBarang['id_jns_barang'] : '' ?>"><?= $valueJenisBarang['nama_jenis_barang'] ?></option>
+                                            <option value="<?= $valueJenisBarang['id_jns_barang']?>"><?= $valueJenisBarang['nama_jenis_barang'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -58,7 +59,7 @@
                             <div class="row mb-3">
                                 <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                              
                                     <select name="lokasi" class="form-select form-select-sm" aria-label="Small select example">
                                         <option value="GUDANG">GUDANG</option>
                                         <option value="SNG-VAN">SNG-VAN</option>
@@ -69,7 +70,7 @@
                             <div class="row mb-3">
                                 <label for="kondisi" class="col-sm-2 col-form-label">Kondisi</label>
                                 <div class="col-sm-10">
-                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                           
                                     <select name="kondisi" class="form-select form-select-sm" aria-label="Small select example">
                                         <option value="BAIK">BAIK</option>
                                         <option value="RUSAK">RUSAK</option>
@@ -79,7 +80,7 @@
                             <div class="row mb-3">
                                 <label for="status" class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
-                                    <!-- <input type="text" required class="form-control" placeholder="Jumlah" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>"> -->
+                          
                                     <select name="status" class="form-select form-select-sm" aria-label="Small select example">
                                         <option value="TERSEDIA">TERSEDIA</option>
                                         <option value="PERBAIKAN">PERBAIKAN</option>
