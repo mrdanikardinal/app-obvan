@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Models;
-
 use CodeIgniter\Model;
-
 class PeminjamanAlatModel extends Model
 {
     protected $table = 'peminjaman_alat';
@@ -57,4 +55,12 @@ class PeminjamanAlatModel extends Model
         return $query->getResult();
         
     }
+    public function procedureGetItemsReady()
+    {
+        $query = $this->db->query("CALL getItemsReady()");
+        return $query->getResultArray();
+        
+    }
+
+    
 }

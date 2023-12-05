@@ -20,18 +20,36 @@ class Inventaris extends BaseController
     }
     public function index()
     {
+        
+        // $dataJoins2= $this->inventarisModel->getJoinsInvID('INV-000000002');
+        // dd($dataJoins2);
+
         $dataJoins= $this->jnsBarang->getJoinsInventaris();
         $generator = new BarcodeGeneratorPNG();
-
-
-
         $data = [
-            'allInventaris' => $this->inventarisModel->getInventaris(),
             'generator' => $generator,
-            'dataJoins'=> $dataJoins
+            'dataJoins'=> $dataJoins,
+            'title'=> ' Tambah Tabel Inventaris'
         ];
         return view('inventaris/index', $data);
-        // return view('inventaris/test');
+
+    }
+    public function edit($idInv)
+    {
+        // $dataJoins= $this->inventarisModel->getJoinsInvID($idInv);
+        // $jenisBarang=$this->jnsBarang->getJenisBarang();
+        // $data = [
+        //     'dataJoins'=> $dataJoins,
+        //     'jenisBarang'=>$jenisBarang,
+        //     'title'=> 'Tabel Update Inventaris'
+        // ];
+        // return view('inventaris/edit', $data);
+        $data['inventaris'] = $this->inventarisModel->getInventaris($idInv);
+        $data['jenisBarang'] = $this->jnsBarang->getJenisBarang();
+        $data['title'] = 'Tabel Update Inventaris';
+        // dd($data['title']);
+           
+        return view('inventaris/edit', $data);
     }
 
     public function create()
@@ -89,6 +107,47 @@ class Inventaris extends BaseController
 
 
         session()->setFlashdata('pesan', 'Berhasil,input inventaris ' . $namaBarang);
+        return redirect()->to('inventaris');
+    }
+    public function update($idInv)
+    {
+
+        $rules = [
+            'nama_barang' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama barang harus di isi.'
+
+                ]
+            ],
+
+        ];
+
+
+     
+        $namaBarang = $this->request->getVar('nama_barang');
+        $jenisBarang = $this->request->getVar('jenis_barang');
+
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
+
+        $this->inventarisModel->save([
+            'id_inv' => $idInv,
+            'id_jns_barang' => $jenisBarang,
+            'nama_barang' => $namaBarang,
+            'merk' => $this->request->getVar('merk'),
+            'serial_number' => $this->request->getVar('serial_number'),
+            'lokasi' => $this->request->getVar('lokasi'),
+            'kondisi' => $this->request->getVar('kondisi'),
+            'status' => $this->request->getVar('status'),
+            'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+
+        ]);
+
+
+        session()->setFlashdata('pesan', 'Berhasil,Update inventaris ' . $namaBarang);
         return redirect()->to('inventaris');
     }
 

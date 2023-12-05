@@ -59,7 +59,7 @@
                                                 1
                                             </td>
                                             <td>
-                                                <input type="text" required id="dinall-js-nabar-01052013" class="form-control" name="naBar[]" placeholder="Nama Barang" id="naBarang1">
+                                                <input type="text" required id="dinall-js-nabar-01052013" class="form-control" name="naBar[]" placeholder="Nama Barang">
 
                                             </td>
                                             <td>
@@ -121,7 +121,7 @@
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi'); ?>">
-                                    
+
                                 </div>
                             </div>
 
@@ -203,6 +203,9 @@
             // jQuery.validator.addMethod("validDate", function(value, element) {
             //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
+
+
+
         </script>
         <?= $this->include('layout/footer'); ?>
 

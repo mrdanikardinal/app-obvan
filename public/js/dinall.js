@@ -132,7 +132,7 @@ function addnewrow() {
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
         <td>
-            <input type="text" required id="dinall-js-jumlah-" class="form-control" name="jumlah[]" placeholder="Jumlah">
+            <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah">
         </td>
         <td>
             <button type="button" required class="btn btn-danger btnHapusForm"><i class="fa-solid fa-trash"></i></button>
@@ -260,6 +260,9 @@ $('.hapusPjm').click(function () {
 
     return true;
 });
+
+
+
 //End Peminjaman=================================================================================
 //Start Inventaris===============================================================================
 $(document).ready(function () {

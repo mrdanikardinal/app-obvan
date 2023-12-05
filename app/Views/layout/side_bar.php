@@ -63,7 +63,7 @@
                     </nav>
                 </div>
                 
-                <a class="nav-link" href="<?=base_url()?>peminjaman-alat/display">
+                <a class="nav-link" href="<?=base_url()?>peminjaman-alat">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Peminjaman Alat
                 </a>

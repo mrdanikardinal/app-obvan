@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\InventarisModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\ParentMerkModel;
 
@@ -10,6 +11,7 @@ class PeminjamanAlat extends BaseController
     protected $helpers = (['form']);
     protected $pinjamAlatModel;
     protected $parentMerkModel;
+    protected $inventarisModel;
 
 
 
@@ -17,24 +19,64 @@ class PeminjamanAlat extends BaseController
     {
         $this->pinjamAlatModel = new PeminjamanAlatModel();
         $this->parentMerkModel = new ParentMerkModel();
+        $this->inventarisModel = new InventarisModel();
+    }
+    // public function index()
+    // {
+    //     // $inv = '1701780318';
+    //     // Kolom yang ingin dicari
+    //     // $columns = ['kode_barcode','serial_number', 'nama_barang', 'merk'];
+
+    //     // Lakukan pencarian menggunakan model
+    //     // $data['products'] = $this->inventarisModel->getCariMulti($inv, $columns);
+
+    //     // dd($data);
+    //     $data = [
+    //         'checkStatus' => $this->parentMerkModel->getCheckDone(),
+    //         'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
+    //         'parentMerk' => $this->parentMerkModel->getParentMerk(),
+
+
+    //     ];
+    //     return view('peminjaman-alat/index', $data);
+    // }
+    public function search()
+    {
+
+
+        // Ambil kata kunci pencarian dari input form atau URL
+        $keyword = $this->request->getVar('keyword');
+
+        // Kolom yang ingin dicari
+        $columns = ['kode_barcode', 'serial_number', 'nama_barang', 'merk'];
+
+
+        // Lakukan pencarian menggunakan model
+        $data['products'] = $this->inventarisModel->getCariMulti($keyword, $columns);
+
+        // Mengembalikan hasil pencarian dalam format JSON
+        return $this->response->setJSON($data['products']);
     }
     public function index()
     {
-        $data = [
-            'checkStatus' => $this->parentMerkModel->getCheckDone(),
-            'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
-            'parentMerk' => $this->parentMerkModel->getParentMerk(),
-
-
-        ];
-        return view('peminjaman-alat/display', $data);
+        return view('product/search');
     }
+
+
     public function create()
     {
+
+        // $test =json_encode($pGetItemsReady);
+        // dd($test);
+        // foreach($pGetItemsReady as $key=>$val){
+        //     d($val);
+        // }
+
         session();
         $data = [
             'title' => 'Form Tambah Data Peminjaman Alat',
             'validation' => \Config\Services::validation()
+
 
         ];
 
@@ -42,7 +84,7 @@ class PeminjamanAlat extends BaseController
     }
     public function save()
     {
-  
+
         $rules = [
             'noHPPeminjam' => [
                 'rules'  => 'required|numeric',
@@ -51,7 +93,7 @@ class PeminjamanAlat extends BaseController
                     'numeric' => 'isi harus angka'
                 ]
             ],
-           
+
         ];
 
         $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();
@@ -63,9 +105,8 @@ class PeminjamanAlat extends BaseController
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
 
         if (!$this->validate($rules)) {
-         
+
             return redirect()->back()->withInput();
-           
         }
         // dd($this->validate($rules));
         $this->pinjamAlatModel->save([
@@ -99,8 +140,8 @@ class PeminjamanAlat extends BaseController
 
             ]);
         }
-        session()->setFlashdata('pesan','Berhasil,input peminjaman ID ' . $idAutoPeminjamanAlat);
-        return redirect()->to('peminjaman-alat/display');
+        session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ' . $idAutoPeminjamanAlat);
+        return redirect()->to('peminjaman-alat');
     }
     public function edit($id_pinjam)
     {
@@ -126,12 +167,11 @@ class PeminjamanAlat extends BaseController
                     'numeric' => 'isi harus angka'
                 ]
             ],
-           
+
         ];
         if (!$this->validate($rules)) {
-         
+
             return redirect()->back()->withInput();
-           
         }
 
         $converttglEdit = $this->request->getVar('tanggal');
@@ -149,7 +189,7 @@ class PeminjamanAlat extends BaseController
 
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
         $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
-        
+
         $this->pinjamAlatModel->save([
             'id_pinjam' => $id_pinjam,
             'tanggal' => $tanggalconvertEdit,
@@ -236,13 +276,13 @@ class PeminjamanAlat extends BaseController
                 }
             }
         }
-        session()->setFlashdata('pesan','Berhasil,update peminjaman ID ' . $id_pinjam);
-        return redirect()->to('peminjaman-alat/display');
+        session()->setFlashdata('pesan', 'Berhasil,update peminjaman ID ' . $id_pinjam);
+        return redirect()->to('peminjaman-alat');
     }
     public function delete($id)
     {
         $this->pinjamAlatModel->delete($id);
-        return redirect()->to('peminjaman-alat/display');
+        return redirect()->to('peminjaman-alat');
     }
 
 

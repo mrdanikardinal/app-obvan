@@ -160,7 +160,7 @@
 
                                         </td>
                                         <td>
-                                            <form id="hapus" action="<?= base_url() ?>peminjaman-alat/display/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
+                                            <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>

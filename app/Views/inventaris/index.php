@@ -18,7 +18,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Inventaris Gudang
+                        <?= $title ?>
                     </div>
                     <div id="card-body-inventarisTable" class="card-body">
                         <table id="inventarisTable" class="table table-bordered table-hover text-center align-middle">
@@ -43,7 +43,7 @@
                                 <?php foreach ($dataJoins as $key => $valueInventaris) : ?>
                                     <tr>
                                         <th><?= $number++; ?></th>
-                                        <td><?= $valueInventaris['nama_jenis_barang']; ?></td>
+                                        <td><?= $valueInventaris['nama_jns_barang']; ?></td>
                                         <td><?= $valueInventaris['nama_barang']; ?></td>
                                         <?php if ($valueInventaris['serial_number'] != NULL) : ?>
                                             <td class="text-center">
@@ -75,7 +75,7 @@
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
                                     
                                         <td>
-                                            <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                            <form action="<?= base_url() ?>inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
