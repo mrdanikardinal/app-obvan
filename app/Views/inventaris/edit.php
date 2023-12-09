@@ -15,7 +15,12 @@
                         <?= $title ?>
                     </div>
                     <div class="card-body">
-
+                    <?php 
+                    $nomor=1;
+                    $nomor1=1;
+                    $nomor2=1;
+                    $nomor3=1;
+                    ?>
                         <form method="post" action="<?= base_url() ?>inventaris/update/<?= $inventaris['id_inv']; ?>">
 
                             <?= csrf_field(); ?>
@@ -23,11 +28,11 @@
                             <div class="row mb-3">
                                 <label for="jenis_barang" class="col-sm-2 col-form-label">Jenis Barang</label>
                                 <div class="col-sm-10">
-
+                                    
                                     <select id="jenis_barang" name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($jenisBarang as $key => $value) : ?>
                                             <option value="<?= $value['id_jns_barang'] ?>" <?= $inventaris['id_jns_barang'] == $value['id_jns_barang'] ? 'selected' : null ?>>
-                                                <?= $value['nama_jns_barang'] ?>
+                                             <?= $nomor++.'. '. $value['nama_jns_barang'] ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -60,16 +65,23 @@
                                 <div class="col-sm-10">
 
                                     <select name="lokasi" id="lokasi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value=""><?= $inventaris['lokasi']; ?></option>
+                                        <?php foreach ($allLokasi as $key => $valueLokasi) : ?>
+                                            <option value="<?= $valueLokasi['id_lokasi'] ?>" <?= $inventaris['id_lokasi'] == $valueLokasi['id_lokasi'] ? 'selected' : null ?>>
+                                                <?=$nomor1++.'. '. $valueLokasi['nama_lokasi'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="kondisi" class="col-sm-2 col-form-label">Kondisi</label>
                                 <div class="col-sm-10">
-
                                     <select name="kondisi" id="kondisi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value=""><?= $inventaris['kondisi']; ?></option>
+                                        <?php foreach ($allKondisi as $key => $valueKondisi) : ?>
+                                            <option value="<?= $valueKondisi['id_kondisi'] ?>" <?= $inventaris['id_kondisi'] == $valueKondisi['id_kondisi'] ? 'selected' : null ?>>
+                                                <?=$nomor2++.'. '.  $valueKondisi['nama_kondisi'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -78,7 +90,11 @@
                                 <div class="col-sm-10">
 
                                     <select name="status" id="status" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value=""><?= $inventaris['status']; ?></option>
+                                        <?php foreach ($allStatus as $key => $valueStatus) : ?>
+                                            <option value="<?= $valueStatus['id_status'] ?>" <?= $inventaris['id_status'] == $valueStatus['id_status'] ? 'selected' : null ?>>
+                                                <?=$nomor3++.'. '.  $valueStatus['nama_status'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>

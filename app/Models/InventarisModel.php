@@ -10,7 +10,7 @@ class InventarisModel extends Model
     protected $primaryKey = 'id_inv';
     // protected $retunType='object';
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_inv', 'id_jns_barang', 'kode_barcode', 'nama_barang', 'merk', 'serial_number', 'lokasi', 'kondisi', 'status', 'thn_pengadaan'];
+    protected $allowedFields = ['id_inv', 'id_jns_barang', 'kode_barcode', 'nama_barang', 'merk', 'serial_number', 'id_lokasi', 'id_kondisi', 'id_status', 'thn_pengadaan'];
 
 
     public function autoNumberId()
@@ -78,4 +78,22 @@ class InventarisModel extends Model
 
         return $builder->findAll();
     }
+
+
+    public function getInventarisJoins()
+    {
+        $builder=$this->db->table('inventaris');
+        $builder->join('jenis_barang','inventaris.id_jns_barang=jenis_barang.id_jns_barang');
+        $builder->join('lokasi','inventaris.id_lokasi=lokasi.id_lokasi');
+        $builder->join('kondisi','inventaris.id_kondisi=kondisi.id_kondisi');
+        $builder->join('status','inventaris.id_status=status.id_status');
+        $query=$builder->get();
+       
+        // return $query->getResult(); //return object
+        return $query->getResultArray(); //return array
+        
+    }
+
+
+
 }

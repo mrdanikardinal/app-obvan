@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\InventarisModel;
 use App\Models\JenisBarangModel;
+use App\Models\KondisiModel;
+use App\Models\LokasiModel;
+use App\Models\StatusModel;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 
@@ -11,12 +14,19 @@ class Inventaris extends BaseController
 {
     protected $inventarisModel;
     protected $jnsBarang;
+    protected $status;
+    protected $kondisi;
+    protected $lokasi;
 
 
     public function __construct()
     {
         $this->inventarisModel = new InventarisModel();
         $this->jnsBarang = new JenisBarangModel();
+        $this->status = new StatusModel();
+        $this->kondisi = new KondisiModel();
+        $this->lokasi = new LokasiModel();
+
     }
     public function index()
     {
@@ -24,12 +34,14 @@ class Inventaris extends BaseController
         // $dataJoins2= $this->inventarisModel->getJoinsInvID('INV-000000002');
         // dd($dataJoins2);
 
-        $dataJoins= $this->jnsBarang->getJoinsInventaris();
+        $dataJoins= $this->inventarisModel->getInventarisJoins();
         $generator = new BarcodeGeneratorPNG();
+
         $data = [
             'generator' => $generator,
             'dataJoins'=> $dataJoins,
             'title'=> ' Tambah Tabel Inventaris'
+      
         ];
         return view('inventaris/index', $data);
 
@@ -46,6 +58,9 @@ class Inventaris extends BaseController
         // return view('inventaris/edit', $data);
         $data['inventaris'] = $this->inventarisModel->getInventaris($idInv);
         $data['jenisBarang'] = $this->jnsBarang->getJenisBarang();
+        $data['allLokasi'] = $this->lokasi->getLokasi();
+        $data['allKondisi'] = $this->kondisi->getKondisi();
+        $data['allStatus'] = $this->status->getStatus();
         $data['title'] = 'Tabel Update Inventaris';
         // dd($data['title']);
            
@@ -56,10 +71,16 @@ class Inventaris extends BaseController
     {
         session();
         $dataJenisBarang= $this->jnsBarang->getJenisBarang();
+        $allStatus = $this->status->getStatus();
+        $allKondisi = $this->kondisi->getKondisi();
+        $allLokasi = $this->lokasi->getLokasi();
         $data = [
             'title' => 'Form Tambah Data Inventaris',
             'validation' => \Config\Services::validation(),
-            'jenisBarang'=> $dataJenisBarang
+            'jenisBarang'=> $dataJenisBarang,
+            'allStatus'=> $allStatus,
+            'allKondisi'=> $allKondisi,
+            'allLokasi'=> $allLokasi
         ];
 
         return view('inventaris/create', $data);
@@ -98,9 +119,9 @@ class Inventaris extends BaseController
             'nama_barang' => $namaBarang,
             'merk' => $this->request->getVar('merk'),
             'serial_number' => $this->request->getVar('serial_number'),
-            'lokasi' => $this->request->getVar('lokasi'),
-            'kondisi' => $this->request->getVar('kondisi'),
-            'status' => $this->request->getVar('status'),
+            'id_lokasi' => $this->request->getVar('lokasi'),
+            'id_kondisi' => $this->request->getVar('kondisi'),
+            'id_status' => $this->request->getVar('status'),
             'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
 
         ]);
@@ -127,6 +148,7 @@ class Inventaris extends BaseController
      
         $namaBarang = $this->request->getVar('nama_barang');
         $jenisBarang = $this->request->getVar('jenis_barang');
+      
 
         if (!$this->validate($rules)) {
 
@@ -139,9 +161,9 @@ class Inventaris extends BaseController
             'nama_barang' => $namaBarang,
             'merk' => $this->request->getVar('merk'),
             'serial_number' => $this->request->getVar('serial_number'),
-            'lokasi' => $this->request->getVar('lokasi'),
-            'kondisi' => $this->request->getVar('kondisi'),
-            'status' => $this->request->getVar('status'),
+            'id_lokasi' => $this->request->getVar('lokasi'),
+            'id_kondisi' => $this->request->getVar('kondisi'),
+            'id_status' => $this->request->getVar('status'),
             'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
 
         ]);

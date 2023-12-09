@@ -21,46 +21,26 @@ class PeminjamanAlat extends BaseController
         $this->parentMerkModel = new ParentMerkModel();
         $this->inventarisModel = new InventarisModel();
     }
-    // public function index()
-    // {
-    //     // $inv = '1701780318';
-    //     // Kolom yang ingin dicari
-    //     // $columns = ['kode_barcode','serial_number', 'nama_barang', 'merk'];
-
-    //     // Lakukan pencarian menggunakan model
-    //     // $data['products'] = $this->inventarisModel->getCariMulti($inv, $columns);
-
-    //     // dd($data);
-    //     $data = [
-    //         'checkStatus' => $this->parentMerkModel->getCheckDone(),
-    //         'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
-    //         'parentMerk' => $this->parentMerkModel->getParentMerk(),
-
-
-    //     ];
-    //     return view('peminjaman-alat/index', $data);
-    // }
-    public function search()
-    {
-
-
-        // Ambil kata kunci pencarian dari input form atau URL
-        $keyword = $this->request->getVar('keyword');
-
-        // Kolom yang ingin dicari
-        $columns = ['kode_barcode', 'serial_number', 'nama_barang', 'merk'];
-
-
-        // Lakukan pencarian menggunakan model
-        $data['products'] = $this->inventarisModel->getCariMulti($keyword, $columns);
-
-        // Mengembalikan hasil pencarian dalam format JSON
-        return $this->response->setJSON($data['products']);
-    }
     public function index()
     {
-        return view('product/search');
+        // $inv = '1701780318';
+        // Kolom yang ingin dicari
+        // $columns = ['kode_barcode','serial_number', 'nama_barang', 'merk'];
+
+        // Lakukan pencarian menggunakan model
+        // $data['products'] = $this->inventarisModel->getCariMulti($inv, $columns);
+
+        // dd($data);
+        $data = [
+            'checkStatus' => $this->parentMerkModel->getCheckDone(),
+            'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
+            'parentMerk' => $this->parentMerkModel->getParentMerk(),
+
+
+        ];
+        return view('peminjaman-alat/index', $data);
     }
+   
 
 
     public function create()

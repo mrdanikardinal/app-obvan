@@ -51,6 +51,9 @@
                                                     <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
                                                 </div>
                                                 <span><?= $valueInventaris['serial_number']; ?></span>
+                                                <div>
+                                                    <button type="button" class="btn btn-success btn-sm">Download</button>
+                                                </div>
                                             </td>
                                         <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
                                             <td class="text-center">
@@ -58,6 +61,10 @@
                                                     <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
                                                 </div>
                                                 <span><?= $valueInventaris['kode_barcode']; ?></span>
+                                                <div>
+                                                    <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                                                </div>
+
                                             </td>
                                         <?php endif; ?>
 
@@ -69,11 +76,11 @@
                                                 <h4><?= '-'; ?></h4>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?= $valueInventaris['lokasi'] ?></td>
-                                        <td><?= $valueInventaris['kondisi'] ?></td>
-                                        <td><?= $valueInventaris['status'] ?></td>
+                                        <td><?= $valueInventaris['nama_lokasi'] ?></td>
+                                        <td><?= $valueInventaris['nama_kondisi'] ?></td>
+                                        <td><?= $valueInventaris['nama_status'] ?></td>
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
-                                    
+
                                         <td>
                                             <form action="<?= base_url() ?>inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>

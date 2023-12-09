@@ -15,7 +15,12 @@
                         <?= $title ?>
                     </div>
                     <div class="card-body">
-
+                        <?php
+                        $nomor = 1;
+                        $nomor1 = 1;
+                        $nomor2 = 1;
+                        $nomor3 = 1;
+                        ?>
                         <form method="post" action="<?= base_url("/inventaris/save"); ?>">
 
                             <?= csrf_field(); ?>
@@ -23,10 +28,10 @@
                             <div class="row mb-3">
                                 <label for="jenis_barang" class="col-sm-2 col-form-label">Jenis Barang</label>
                                 <div class="col-sm-10">
-                          
+
                                     <select id="jenis_barang" name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
-                                    <?php foreach ($jenisBarang as $key => $valueJenisBarang) : ?>
-                                            <option value="<?= $valueJenisBarang['id_jns_barang']?>"><?= $valueJenisBarang['nama_jns_barang'] ?></option>
+                                        <?php foreach ($jenisBarang as $key => $valueJenisBarang) : ?>
+                                            <option value="<?= $valueJenisBarang['id_jns_barang'] ?>"><?=$nomor++.'. '. $valueJenisBarang['nama_jns_barang'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -58,31 +63,33 @@
                             <div class="row mb-3">
                                 <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                              
+
                                     <select name="lokasi" id="lokasi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value="GUDANG">GUDANG</option>
-                                        <option value="SNG-VAN">SNG-VAN</option>
-                                        <option value="NEWS-VAN">NEWS-VAN</option>
+                                        <?php foreach ($allLokasi as $key => $valueLokasi) : ?>
+                                            <option value="<?= $valueLokasi['id_lokasi'] ?>"><?=$nomor1++.'. '. $valueLokasi['nama_lokasi'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="kondisi" class="col-sm-2 col-form-label">Kondisi</label>
                                 <div class="col-sm-10">
-                           
+
                                     <select name="kondisi" id="kondisi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value="BAIK">BAIK</option>
-                                        <option value="RUSAK">RUSAK</option>
+                                        <?php foreach ($allKondisi as $key => $valueKondisi) : ?>
+                                            <option value="<?= $valueKondisi['id_kondisi'] ?>"><?=$nomor2++.'. '. $valueKondisi['nama_kondisi'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="status" class="col-sm-2 col-form-label">Status</label>
                                 <div class="col-sm-10">
-                          
+
                                     <select name="status" id="status" class="form-select form-select-sm" aria-label="Small select example">
-                                        <option value="TERSEDIA">TERSEDIA</option>
-                                        <option value="PERBAIKAN">PERBAIKAN</option>
+                                        <?php foreach ($allStatus as $key => $valueStatus) : ?>
+                                            <option value="<?= $valueStatus['id_status'] ?>"><?=$nomor3++.'. '. $valueStatus['nama_status'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +110,7 @@
 
         </main>
 
-    <?= $this->include('layout/footer'); ?>
+        <?= $this->include('layout/footer'); ?>
     </div>
 </div>
 <?= $this->endSection('content'); ?>
