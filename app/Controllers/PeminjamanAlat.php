@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\InventarisModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\ParentMerkModel;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class PeminjamanAlat extends BaseController
 {
@@ -15,6 +16,7 @@ class PeminjamanAlat extends BaseController
     protected $pinjamAlatModel;
     protected $parentMerkModel;
     protected $inventarisModel;
+    protected $getCariBarangInventaris;
 
 
 
@@ -26,14 +28,6 @@ class PeminjamanAlat extends BaseController
     }
     public function index()
     {
-        // $inv = '1701780318';
-        // Kolom yang ingin dicari
-        // $columns = ['kode_barcode','serial_number', 'nama_barang', 'merk'];
-
-        // Lakukan pencarian menggunakan model
-        // $data['products'] = $this->inventarisModel->getCariMulti($inv, $columns);
-
-        // dd($data);
         $data = [
             'checkStatus' => $this->parentMerkModel->getCheckDone(),
             'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
@@ -43,22 +37,21 @@ class PeminjamanAlat extends BaseController
         ];
         return view('peminjaman-alat/index', $data);
     }
-   
 
-
+ 
     public function create()
     {
 
-        // $test =json_encode($pGetItemsReady);
-        // dd($test);
-        // foreach($pGetItemsReady as $key=>$val){
-        //     d($val);
-        // }
-
+        $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
+        $generator = new BarcodeGeneratorPNG();
+        // dd($dataInv);
         session();
         $data = [
             'title' => 'Form Tambah Data Peminjaman Alat',
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'allDataInv'=> $dataInv,
+            'generator'=> $generator
+
 
 
         ];

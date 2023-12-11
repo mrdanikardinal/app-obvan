@@ -31,7 +31,7 @@ let endDate;
 let nowDate = new Date();
 $(document).ready(function () {
 
-
+  
     $(function () {
         $("#tanggal").datepicker({
             dateFormat: 'dd/mm/yy',
@@ -261,6 +261,28 @@ $('.hapusPjm').click(function () {
     return true;
 });
 
+$(document).ready(function () {
+    $(document).on('click','#select',function(){
+        let idInv= $(this).data('id');
+        let barcode= $(this).data('barcode');
+        let barang= $(this).data('barang');
+        let merk= $(this).data('merk');
+        let sn= $(this).data('sn');
+
+        // $('#dinall-js-nabar-01052013').val(barang);
+        // $('#merkFirst').val(merk);
+        // $('#snFirst').val(sn);
+        // $('#dinall-js-jumlah-01052013').val(barcode);
+        // $('#exampleModal').modal('toggle');
+        // addnewrow();
+        // renumberRows();
+        $('#autocomplete').children().siblings().children().val(barang);
+
+      
+
+    });
+});
+
 
 
 //End Peminjaman=================================================================================
@@ -276,12 +298,17 @@ $(document).ready(function () {
 
 
     },
-
-
-
     );
 
 });
+
+$(document).ready(function () {
+    $('#tableInvShow').DataTable({
+       
+    });
+});
+
+
 
 //End Inventaris=================================================================================
 

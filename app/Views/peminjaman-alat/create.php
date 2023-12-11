@@ -54,7 +54,7 @@
                                             <th class="text-center">Aksi</th>
                                         </tr>
 
-                                        <tr>
+                                        <tr id="autocomplete">
                                             <td class="rownumber">
                                                 1
                                             </td>
@@ -63,16 +63,17 @@
 
                                             </td>
                                             <td>
-                                                <input type="text" required class="form-control" name="merk[]" placeholder="merk" value="<?= '-'; ?>">
+                                                <input type="text" required id="merkFirst" class="form-control" name="merk[]" placeholder="merk">
                                             </td>
                                             <td>
-                                                <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number" value="<?= '-'; ?>">
+                                                <input type="text" required id="snFirst" class="form-control" name="sN[]" placeholder="Serial Number">
                                             </td>
                                             <td>
                                                 <input type="text" required id="dinall-js-jumlah-01052013" class="form-control" name="jumlah[]" placeholder="Jumlah">
                                             </td>
                                             <td>
-                                                <button type="button" required class="btn btn-primary btnAddForm"><i class="fa-solid fa-plus"></i></button>
+                                                <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
+                                                <!-- <button type="button" required class="btn btn-primary btnAddForm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
                                             </td>
                                         </tr>
                                     </table>
@@ -133,6 +134,88 @@
             </div>
 
         </main>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Data Barang Inventaris</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--  -->
+
+                        <table id="tableInvShow" class="table table-bordered table-hover text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Jenis barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Merk</th>
+                                    <th>Serial Number</th>
+                                    <th>Lokasi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($allDataInv as $key => $valueInv) : ?>
+                                    <tr>
+                                            <?php if ($valueInv['serial_number'] != NULL) : ?>
+                                        <td class="text-center">
+                                            <div>
+                                                <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                            </div>
+                                            <span><?= $valueInv['serial_number']; ?></span>
+                                        </td>
+                                    <?php elseif ($valueInv['serial_number'] == NULL) : ?>
+                                        <td class="text-center">
+                                            <div>
+                                                <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                            </div>
+                                            <span><?= $valueInv['kode_barcode']; ?></span>
+
+                                        </td>
+                                    <?php endif; ?>
+
+                                    <td><?= $valueInv['nama_jns_barang']; ?></td>
+                                    <td><?= $valueInv['nama_barang']; ?></td>
+                                    <td><?= $valueInv['merk']; ?></td>
+                                    <td>
+                                    <?php if ($valueInv['serial_number'] != NULL) : ?>
+                                                <?= $valueInv['serial_number']; ?>
+                                            <?php elseif ($valueInv['serial_number'] == NULL) : ?>
+                                                <h4><?= '-'; ?></h4>
+                                            <?php endif; ?>
+                                    </td>
+                                    <td><?= $valueInv['nama_lokasi']; ?></td>
+                                    <td>
+                                        <button id="select" type="button" required class="btn btn-primary"
+                                        data-id="<?= $valueInv['id_inv']; ?>"
+                                        data-barcode="<?= ($valueInv['serial_number']!=NULL)? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>"
+                                        data-barang="<?= $valueInv['nama_barang']; ?>"
+                                        data-merk="<?= $valueInv['merk']; ?>"
+                                        data-sn="<?= ($valueInv['serial_number']!=NULL)? $valueInv['serial_number'] :'-'; ?>"
+                                        >
+                                        <i class="fa-solid fa-check"></i></button>
+                                    </td>
+
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            </tbody>
+
+                        </table>
+
+                        <!--  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {
@@ -198,14 +281,12 @@
 
 
 
+
             });
 
             // jQuery.validator.addMethod("validDate", function(value, element) {
             //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
-
-
-
         </script>
         <?= $this->include('layout/footer'); ?>
 

@@ -61,6 +61,11 @@ class PeminjamanAlatModel extends Model
         return $query->getResultArray();
         
     }
+    //script for procedure mysql call barcode
+//     SELECT inventaris.id_inv,inventaris.kode_barcode,jenis_barang.nama_jns_barang,inventaris.nama_barang,inventaris.merk,inventaris.serial_number,lokasi.nama_lokasi
+// FROM ((inventaris
+// INNER JOIN jenis_barang ON jenis_barang.id_jns_barang = inventaris.id_jns_barang)
+// INNER JOIN lokasi ON lokasi.id_lokasi = inventaris.id_lokasi)  WHERE id_status=1 && id_kondisi=1
 
     
 }
