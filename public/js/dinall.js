@@ -1,5 +1,8 @@
 //Strat Peminjaman=================================================================================
-
+let angka4= 4;
+let angka5= 5;
+let angka6= 6;
+let angka7= 7;
 
 
 $(document).ready(function () {
@@ -122,16 +125,16 @@ function addnewrow() {
         <td class="rownumber">
         
         </td>
-        <td>
+        <td class="asem">
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
         </td>
-        <td>
+        <td class="asem">
             <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
         </td>
-        <td>
+        <td class="asem">
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
-        <td>
+        <td class="asem">
             <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah">
         </td>
         <td>
@@ -260,7 +263,10 @@ $('.hapusPjm').click(function () {
 
     return true;
 });
+//testing
 
+
+//end
 $(document).ready(function () {
     $(document).on('click','#select',function(){
         let idInv= $(this).data('id');
@@ -276,7 +282,43 @@ $(document).ready(function () {
         // $('#exampleModal').modal('toggle');
         // addnewrow();
         // renumberRows();
-        $('#autocomplete').children().siblings().children().val(barang);
+        let conveniancecount = $("td[class*='asem']").length;
+        
+        angka+=1; 
+        if(conveniancecount===4){
+            $('.asem').children().first().val(barang);
+            $('.asem').next().children().val(merk);
+            $('.asem').next().next().children().val(sn);
+            $('.asem').next().next().next().children().val(barcode);
+        }
+
+        console.log(angka);
+        // conveniancecount+=1;
+        // console.log(conveniancecount);
+        // $('.asem').children().first().val(barang);
+        // $('.asem').next().children().val(merk);
+        // $('.asem').next().next().children().val(sn);
+        // $('.asem').next().next().next().children().val(barcode);
+   
+        // $('.asem').children().first().val(barang);
+        // $('.asem').children().first().val(barang);
+        // $('#2').val(merk);
+        // $('#3').val(sn);
+        // $('#4').val(barcode);
+        $('#exampleModal').modal('toggle');
+        addnewrow();
+        renumberRows();
+        // var conveniancecount = $("div[class*='conveniancecount']").length;
+        // let conveniancecount = $("td[class*='asem']").length;
+        // console.log(jQuery("div[id='yourWrapper_1']").length);
+        // console.log(conveniancecount);
+        // $('#merkFirst').val(merk);
+        // $('#snFirst').val(sn);
+        // $('#dinall-js-jumlah-01052013').val(barcode);
+        // $('#exampleModal').modal('toggle');
+        // addnewrow();
+        // renumberRows();
+        // $('#autocomplete').children().siblings().children().val(barang);
 
       
 

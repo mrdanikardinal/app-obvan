@@ -53,23 +53,22 @@
                                             <th class="text-center">Jumlah</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
-
-                                        <tr id="autocomplete">
+                                        <tr class="cari">
                                             <td class="rownumber">
                                                 1
                                             </td>
-                                            <td>
-                                                <input type="text" required id="dinall-js-nabar-01052013" class="form-control" name="naBar[]" placeholder="Nama Barang">
+                                            <td class="asem">
+                                                <input type="text" required id="1" class="form-control" name="naBar[]" placeholder="Nama Barang">
 
                                             </td>
-                                            <td>
-                                                <input type="text" required id="merkFirst" class="form-control" name="merk[]" placeholder="merk">
+                                            <td class="asem">
+                                                <input type="text" required id="2" class="form-control" name="merk[]" placeholder="merk">
                                             </td>
-                                            <td>
-                                                <input type="text" required id="snFirst" class="form-control" name="sN[]" placeholder="Serial Number">
+                                            <td class="asem">
+                                                <input type="text" required id="3" class="form-control" name="sN[]" placeholder="Serial Number">
                                             </td>
-                                            <td>
-                                                <input type="text" required id="dinall-js-jumlah-01052013" class="form-control" name="jumlah[]" placeholder="Jumlah">
+                                            <td class="asem">
+                                                <input type="text" required id="4" class="form-control" name="jumlah[]" placeholder="Jumlah">
                                             </td>
                                             <td>
                                                 <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button>
