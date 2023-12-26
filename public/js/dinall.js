@@ -125,16 +125,20 @@ function addnewrow() {
         <td class="rownumber">
         
         </td>
-        <td class="asem">
+        <td class="search">
+        <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button>
+        
+        </td>
+        <td>
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
         </td>
-        <td class="asem">
+        <td>
             <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
         </td>
-        <td class="asem">
+        <td>
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
-        <td class="asem">
+        <td>
             <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah">
         </td>
         <td>
@@ -160,7 +164,6 @@ function renumberRows() {
 //start add number dinamis & add element table row
 $(function () {
     // Add Row
-
 
     $(".btnAddFormEdit").click(function () {
         addnewrowEdit();
@@ -267,62 +270,59 @@ $('.hapusPjm').click(function () {
 
 
 //end
-$(document).ready(function () {
-    $(document).on('click','#select',function(){
-        let idInv= $(this).data('id');
-        let barcode= $(this).data('barcode');
-        let barang= $(this).data('barang');
-        let merk= $(this).data('merk');
-        let sn= $(this).data('sn');
+// $(document).ready(function () {
+//     $(document).on('click','#select',function(){
+ 
+//         let idInv= $(this).data('id');
+//         let barcode= $(this).data('barcode');
+//         let barang= $(this).data('barang');
+//         let merk= $(this).data('merk');
+//         let sn= $(this).data('sn');
+//         // console.log(barang);
+//         // $('#1').val(barang);
+//         let a=$(this).$('#idsearch');
+//         console.log(a);
 
-        // $('#dinall-js-nabar-01052013').val(barang);
-        // $('#merkFirst').val(merk);
-        // $('#snFirst').val(sn);
-        // $('#dinall-js-jumlah-01052013').val(barcode);
-        // $('#exampleModal').modal('toggle');
-        // addnewrow();
-        // renumberRows();
-        let conveniancecount = $("td[class*='asem']").length;
+//         // $(this).$('#1').val('1');
+//         // $('[type=button]').
         
-        angka+=1; 
-        if(conveniancecount===4){
-            $('.asem').children().first().val(barang);
-            $('.asem').next().children().val(merk);
-            $('.asem').next().next().children().val(sn);
-            $('.asem').next().next().next().children().val(barcode);
-        }
+//         // $('body').find('[name="naBar[]"]').val($(this).barang);
+//         // $(this).children().next().val(barang);
+//     //    let a= $(obj).closest('tr').nextAll(':has(.class):first').find('.class');
+//     //    console.log(a);
+     
+//         $('#exampleModal').modal('toggle');
+//         addnewrow();
+//         renumberRows();
 
-        console.log(angka);
-        // conveniancecount+=1;
-        // console.log(conveniancecount);
-        // $('.asem').children().first().val(barang);
-        // $('.asem').next().children().val(merk);
-        // $('.asem').next().next().children().val(sn);
-        // $('.asem').next().next().next().children().val(barcode);
-   
-        // $('.asem').children().first().val(barang);
-        // $('.asem').children().first().val(barang);
-        // $('#2').val(merk);
-        // $('#3').val(sn);
-        // $('#4').val(barcode);
+
+//     });
+// });
+
+$(document).ready(function () {
+  
+
+        $(document).on('click','#select',function(){
+
+            let idInv= $(this).data('id');
+            let barcode= $(this).data('barcode');
+            let barang= $(this).data('barang');
+            let merk= $(this).data('merk');
+            let sn= $(this).data('sn');
+    
+        
+        // $('body').find('[name="naBar[]"]').val($(this).barang);
+        // $('body').find('[name="naBar[]"]').val(barang);
         $('#exampleModal').modal('toggle');
         addnewrow();
         renumberRows();
-        // var conveniancecount = $("div[class*='conveniancecount']").length;
-        // let conveniancecount = $("td[class*='asem']").length;
-        // console.log(jQuery("div[id='yourWrapper_1']").length);
-        // console.log(conveniancecount);
-        // $('#merkFirst').val(merk);
-        // $('#snFirst').val(sn);
-        // $('#dinall-js-jumlah-01052013').val(barcode);
-        // $('#exampleModal').modal('toggle');
-        // addnewrow();
-        // renumberRows();
-        // $('#autocomplete').children().siblings().children().val(barang);
+    
+        });
 
-      
 
-    });
+
+
+ 
 });
 
 
