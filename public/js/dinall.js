@@ -1,8 +1,8 @@
 //Strat Peminjaman=================================================================================
-let angka4= 4;
-let angka5= 5;
-let angka6= 6;
-let angka7= 7;
+let angka4 = 4;
+let angka5 = 5;
+let angka6 = 6;
+let angka7 = 7;
 
 
 $(document).ready(function () {
@@ -34,7 +34,7 @@ let endDate;
 let nowDate = new Date();
 $(document).ready(function () {
 
-  
+
     $(function () {
         $("#tanggal").datepicker({
             dateFormat: 'dd/mm/yy',
@@ -120,14 +120,39 @@ $(function () {
 
 
 });
+// function addnewrow() {
+//     let tr = `<tr>
+//         <td class="rownumber">
+
+//         </td>
+//         <td class="search">
+//         <button type="button" required class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button>
+
+//         </td>
+//         <td>
+//             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
+//         </td>
+//         <td>
+//             <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+//         </td>
+//         <td>
+//             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+//         </td>
+//         <td>
+//             <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah">
+//         </td>
+//         <td>
+//             <button type="button" required class="btn btn-danger btnHapusForm"><i class="fa-solid fa-trash"></i></button>
+//         </td>
+//     </tr>`;
+//     $('.formTambah').append(tr);
+// };
 function addnewrow() {
     let tr = `<tr>
         <td class="rownumber">
-        
         </td>
-        <td class="search">
-        <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button>
-        
+        <td>
+        <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#dinallModal"><i class="fa-solid fa-search"></i></button>
         </td>
         <td>
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
@@ -266,65 +291,104 @@ $('.hapusPjm').click(function () {
 
     return true;
 });
-//testing
 
 
-//end
+
+// Fungsi untuk menginisialisasi DataTable setelah modal dimuat
+
+//==============skrip berhasil untuk cari product
 // $(document).ready(function () {
-//     $(document).on('click','#select',function(){
- 
-//         let idInv= $(this).data('id');
-//         let barcode= $(this).data('barcode');
-//         let barang= $(this).data('barang');
-//         let merk= $(this).data('merk');
-//         let sn= $(this).data('sn');
-//         // console.log(barang);
-//         // $('#1').val(barang);
-//         let a=$(this).$('#idsearch');
-//         console.log(a);
+//     let previousEventTarget;
+//      $(document).on('click', '.searchBarang', function (event) {
 
-//         // $(this).$('#1').val('1');
-//         // $('[type=button]').
-        
-//         // $('body').find('[name="naBar[]"]').val($(this).barang);
-//         // $(this).children().next().val(barang);
-//     //    let a= $(obj).closest('tr').nextAll(':has(.class):first').find('.class');
-//     //    console.log(a);
-     
-//         $('#exampleModal').modal('toggle');
-//         addnewrow();
-//         renumberRows();
-
+//         let previousEvent;
+//         previousEventTarget = $(event.target);
+//         previousEvent = $(event);
+//         kirimCari(previousEventTarget);
 
 //     });
+
+
+//     function kirimCari($this) {
+//         let table = $('#tableInvShow').DataTable();
+//         $('#tableInvShow tbody').on('click', 'tr', function () {
+//             rowData = table.row(this).data();
+//             console.log(rowData[1]);
+//             $this.parent().next().children().val(rowData[1]);
+//             $this.parent().next().next().children().val(rowData[2]);
+//             $this.parent().next().next().next().children().val(rowData[3]);
+//             $this = $($this.target);
+//             $('#dinallModal').modal('hide');
+
+//         });
+//     }
+
+
 // });
+//============== end skrip berhasil untuk cari product
+
+
+
 
 $(document).ready(function () {
-  
+    $('#dinallModal').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.searchBarang', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.searchBarang');
 
-        $(document).on('click','#select',function(){
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.select').on('click', '.select', function () {
+            let idInv = $(this).data('id');
+            let barcode = $(this).data('barcode');
+            let barang = $(this).data('barang');
+            let merk = $(this).data('merk');
+            let sn = $(this).data('sn');
 
-            let idInv= $(this).data('id');
-            let barcode= $(this).data('barcode');
-            let barang= $(this).data('barang');
-            let merk= $(this).data('merk');
-            let sn= $(this).data('sn');
-    
-        
-        // $('body').find('[name="naBar[]"]').val($(this).barang);
-        // $('body').find('[name="naBar[]"]').val(barang);
-        $('#exampleModal').modal('toggle');
-        addnewrow();
-        renumberRows();
-    
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(barang);
+            $currentSearchBarang.parent().next().next().children().val(merk);
+            $currentSearchBarang.parent().next().next().next().children().val(sn);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                addnewrow();
+                renumberRows();
+            }
+            $('#dinallModal').modal('hide');
+           
         });
-
-
-
-
- 
+    });
 });
 
+
+//event cari barang yang digunakan
+// $(document).on('click', '.searchBarang', function (event) {
+//     // Menyimpan elemen yang diklik untuk digunakan nanti
+//     let $currentSearchBarang = $(event.currentTarget);
+
+//     // Mengatur event handler untuk elemen .select menggunakan event delegation
+//     $(document).off('click', '.select').on('click', '.select', function () {
+//         let idInv = $(this).data('id');
+//         let barcode = $(this).data('barcode');
+//         let barang = $(this).data('barang');
+//         let merk = $(this).data('merk');
+//         let sn = $(this).data('sn');
+
+//         // Mengisi nilai input pada elemen .searchBarang
+//         $currentSearchBarang.parent().next().children().val(barang);
+//         $currentSearchBarang.parent().next().next().children().val(merk);
+//         $currentSearchBarang.parent().next().next().next().children().val(sn);
+
+//         // Menutup modal atau melakukan tindakan lain sesuai kebutuhan
+//         $('#dinallModal').modal('hide');
+//     });
+// });
+// end event cari barang yang digunakan
 
 
 //End Peminjaman=================================================================================
@@ -346,7 +410,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#tableInvShow').DataTable({
-       
+
     });
 });
 

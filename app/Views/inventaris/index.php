@@ -62,7 +62,7 @@
                                                 </div>
                                                 <span><?= $valueInventaris['kode_barcode']; ?></span>
                                                 <div>
-                                                    <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                                                    <button type="button" class="btn btn-primary btn-sm">Download</button>
                                                 </div>
 
                                             </td>

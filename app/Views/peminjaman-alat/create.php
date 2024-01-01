@@ -58,21 +58,23 @@
                                             <td class="rownumber">
                                                 1
                                             </td>
-                                            <td class="search">
-                                            <button type="button" id="idsearch" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button>  
-                                            </td>
                                             <td>
-                                                <input type="text" required id="1" class="form-control" name="naBar[]" placeholder="Nama Barang">
+                                                <!-- data-bs-toggle="modal" data-bs-target="#dinallModal" -->
+                                                <!-- <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button> -->
+                                                <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#dinallModal"><i class="fa-solid fa-search"></i></button>
 
                                             </td>
                                             <td>
-                                                <input type="text" required id="2" class="form-control" name="merk[]" placeholder="merk">
+                                                <input type="text" required class="form-control" name="naBar[]" placeholder="Nama Barang">
                                             </td>
                                             <td>
-                                                <input type="text" required id="3" class="form-control" name="sN[]" placeholder="Serial Number">
+                                                <input type="text" required class="form-control" name="merk[]" placeholder="merk">
                                             </td>
                                             <td>
-                                                <input type="text" required id="4" class="form-control" name="jumlah[]" placeholder="Jumlah">
+                                                <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+                                            </td>
+                                            <td>
+                                                <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah">
                                             </td>
                                             <td>
                                                 <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
@@ -139,7 +141,7 @@
         </main>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="dinallModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -148,7 +150,6 @@
                     </div>
                     <div class="modal-body">
                         <!--  -->
-
                         <table id="tableInvShow" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
@@ -158,50 +159,44 @@
                                     <th>Merk</th>
                                     <th>Serial Number</th>
                                     <th>Lokasi</th>
-                                    <th>Aksi</th>
+                                    <th>Pilih</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($allDataInv as $key => $valueInv) : ?>
                                     <tr>
+                                        <?php if ($valueInv['serial_number'] != NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?= $valueInv['serial_number']; ?></span>
+                                            </td>
+                                        <?php elseif ($valueInv['serial_number'] == NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?= $valueInv['kode_barcode']; ?></span>
+
+                                            </td>
+                                        <?php endif; ?>
+
+                                        <td><?= $valueInv['nama_jns_barang']; ?></td>
+                                        <td><?= $valueInv['nama_barang']; ?></td>
+                                        <td><?= $valueInv['merk']; ?></td>
+                                        <td>
                                             <?php if ($valueInv['serial_number'] != NULL) : ?>
-                                        <td class="text-center">
-                                            <div>
-                                                <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
-                                            </div>
-                                            <span><?= $valueInv['serial_number']; ?></span>
-                                        </td>
-                                    <?php elseif ($valueInv['serial_number'] == NULL) : ?>
-                                        <td class="text-center">
-                                            <div>
-                                                <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
-                                            </div>
-                                            <span><?= $valueInv['kode_barcode']; ?></span>
-
-                                        </td>
-                                    <?php endif; ?>
-
-                                    <td><?= $valueInv['nama_jns_barang']; ?></td>
-                                    <td><?= $valueInv['nama_barang']; ?></td>
-                                    <td><?= $valueInv['merk']; ?></td>
-                                    <td>
-                                    <?php if ($valueInv['serial_number'] != NULL) : ?>
                                                 <?= $valueInv['serial_number']; ?>
                                             <?php elseif ($valueInv['serial_number'] == NULL) : ?>
                                                 <h4><?= '-'; ?></h4>
                                             <?php endif; ?>
-                                    </td>
-                                    <td><?= $valueInv['nama_lokasi']; ?></td>
-                                    <td>
-                                        <button id="select" type="button" required class="btn btn-primary"
-                                        data-id="<?= $valueInv['id_inv']; ?>"
-                                        data-barcode="<?= ($valueInv['serial_number']!=NULL)? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>"
-                                        data-barang="<?= $valueInv['nama_barang']; ?>"
-                                        data-merk="<?= $valueInv['merk']; ?>"
-                                        data-sn="<?= ($valueInv['serial_number']!=NULL)? $valueInv['serial_number'] :'-'; ?>"
-                                        >
-                                        <i class="fa-solid fa-check"></i></button>
-                                    </td>
+                                        </td>
+                                        <td><?= $valueInv['nama_lokasi']; ?></td>
+                                        <td>
+                                            <button type="button" required class="btn btn-success select" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
+                                                <i class="fa-solid fa-check"></i></button>
+                                        </td>
 
                                     </tr>
 
