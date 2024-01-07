@@ -21,7 +21,7 @@
                         $nomor2 = 1;
                         $nomor3 = 1;
                         ?>
-                        <form method="post" action="<?= base_url("/inventaris/save"); ?>">
+                        <form method="post" action="<?= base_url("admin/inventaris/save"); ?>">
 
                             <?= csrf_field(); ?>
 

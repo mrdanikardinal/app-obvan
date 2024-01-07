@@ -21,7 +21,7 @@
                     $nomor2=1;
                     $nomor3=1;
                     ?>
-                        <form method="post" action="<?= base_url() ?>inventaris/update/<?= $inventaris['id_inv']; ?>">
+                        <form method="post" action="<?= base_url() ?>admin/inventaris/update/<?= $inventaris['id_inv']; ?>">
 
                             <?= csrf_field(); ?>
 

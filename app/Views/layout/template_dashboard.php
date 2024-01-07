@@ -15,15 +15,35 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <?= $this->renderSection('content');?>
-    <script src="<?=base_url("/js/bootstrap.bundle.min.js");?>"></script>
-    <script src="<?=base_url("/js/scripts.js");?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="<?=base_url("/assets/demo/chart-area-demo.js");?>"></script>
-    <script src="<?=base_url("/assets/demo/chart-bar-demo.js");?>"></script>
-    <script src="<?=base_url("/assets/demo/chart-pie-demo.js");?>"></script>
+    <?= $this->renderSection('content'); ?>
 
-    <script src="<?=base_url("/js/datatables-simple-demo.js");?>"></script>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-danger">Logout</button> -->
+                    <a class="btn btn-danger" href="<?= base_url('logout'); ?>">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="<?= base_url("/js/bootstrap.bundle.min.js"); ?>"></script>
+    <script src="<?= base_url("/js/scripts.js"); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url("/assets/demo/chart-area-demo.js"); ?>"></script>
+    <script src="<?= base_url("/assets/demo/chart-bar-demo.js"); ?>"></script>
+    <script src="<?= base_url("/assets/demo/chart-pie-demo.js"); ?>"></script>
+
+    <script src="<?= base_url("/js/datatables-simple-demo.js"); ?>"></script>
 </body>
 
 </html>

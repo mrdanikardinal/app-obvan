@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="<?= base_url("/inventaris/create") ?>" class="btn btn-primary my-2">Tambah</a>
+                <a href="<?= base_url("admin/inventaris/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -82,7 +82,7 @@
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
 
                                         <td>
-                                            <form action="<?= base_url() ?>inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                            <form action="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
@@ -90,10 +90,10 @@
 
                                         </td>
                                         <td>
-                                            <form id="hapus" action="<?= base_url() ?>inventaris/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                            <form id="hapus" action="<?= base_url() ?>admin/inventaris/<?= $valueInventaris['id_inv']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i>Hapus</button>
+                                                <button type="submit" class="btn btn-danger hapusInv"><i class="fa-solid fa-trash"></i>Hapus</button>
                                             </form>
                                         </td>
 

@@ -284,7 +284,7 @@ function renumberRowsEdit() {
 //confirm ok
 $('.hapusPjm').click(function () {
     // escape here if the confirm is false;
-    if (!confirm('Are you sure?')) return false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
 
     let btn = this;
     setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
@@ -414,6 +414,16 @@ $(document).ready(function () {
     });
 });
 
+
+$('.hapusInv').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
 
 
 //End Inventaris=================================================================================

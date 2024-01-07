@@ -43,7 +43,7 @@ class Inventaris extends BaseController
             'title'=> ' Tambah Tabel Inventaris'
       
         ];
-        return view('inventaris/index', $data);
+        return view('admin/inventaris/index', $data);
 
     }
     public function edit($idInv)
@@ -64,7 +64,7 @@ class Inventaris extends BaseController
         $data['title'] = 'Tabel Update Inventaris';
         // dd($data['title']);
            
-        return view('inventaris/edit', $data);
+        return view('admin/inventaris/edit', $data);
     }
 
     public function create()
@@ -83,7 +83,7 @@ class Inventaris extends BaseController
             'allLokasi'=> $allLokasi
         ];
 
-        return view('inventaris/create', $data);
+        return view('admin/inventaris/create', $data);
     }
 
 
@@ -128,7 +128,7 @@ class Inventaris extends BaseController
 
 
         session()->setFlashdata('pesan', 'Berhasil,input inventaris ' . $namaBarang);
-        return redirect()->to('inventaris');
+        return redirect()->to('admin/inventaris');
     }
     public function update($idInv)
     {
@@ -170,13 +170,13 @@ class Inventaris extends BaseController
 
 
         session()->setFlashdata('pesan', 'Berhasil,Update inventaris ' . $namaBarang);
-        return redirect()->to('inventaris');
+        return redirect()->to('admin/inventaris');
     }
 
 
     public function delete($id)
     {
         $this->inventarisModel->delete($id);
-        return redirect()->to('inventaris');
+        return redirect()->to('admin/inventaris');
     }
 }

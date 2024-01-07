@@ -7,9 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 // start peminjaman
-$routes->get('/inventaris_gudang', 'InventarisGudang::index');
-$routes->get('/inventaris_kamera', 'InventarisKamera::index');
-$routes->get('/inventaris_sng_van', 'InventarisSNGVAN::index');
 $routes->get('peminjaman-alat', 'PeminjamanAlat::index');
 $routes->get('peminjaman-alat/create', 'PeminjamanAlat::create');
 $routes->post('peminjaman-alat/save', 'PeminjamanAlat::save');
@@ -20,17 +17,22 @@ $routes->delete('peminjaman-alat/(:segment)', 'PeminjamanAlat::delete/$1');
 $routes->post('peminjaman-alat/edit/(:segment)/(:segment)', 'PeminjamanAlat::hapus/$2');
 //end peminjaman
 //start inventaris
-$routes->get('inventaris', 'Inventaris::index');
-$routes->get('inventaris/create', 'Inventaris::create');
-$routes->post('inventaris/save', 'Inventaris::save');
-$routes->PUT('inventaris/edit/(:segment)', 'Inventaris::edit/$1');
-$routes->delete('inventaris/(:segment)', 'Inventaris::delete/$1');
-$routes->post('inventaris/update/(:any)', 'Inventaris::update/$1');
-
-
+$routes->get('admin/inventaris', 'Inventaris::index',['filter'=>'role:admin']);
+$routes->get('admin/inventaris/index', 'Inventaris::index',['filter'=>'role:admin']);
+$routes->get('admin/inventaris/create', 'Inventaris::create',['filter'=>'role:admin']);
+$routes->post('admin/inventaris/save', 'Inventaris::save',['filter'=>'role:admin']);
+$routes->PUT('admin/inventaris/edit/(:segment)', 'Inventaris::edit/$1',['filter'=>'role:admin']);
+$routes->delete('admin/inventaris/(:segment)', 'Inventaris::delete/$1',['filter'=>'role:admin']);
+$routes->post('admin/inventaris/update/(:any)', 'Inventaris::update/$1',['filter'=>'role:admin']);
 //end inventaris
-//testing
-// app/Config/Routes.php
-$routes->get('product', 'PeminjamanAlat::index');
-$routes->get('product/search', 'PeminjamanAlat::search');
 
+
+
+// multiuser
+
+// $routes->get('/', 'User::index');
+// $routes->get('/user', 'User::index');
+// $routes->get('/admin', 'Admin::index',['filter'=>'role:admin']);
+// $routes->get('/admin/index', 'Admin::index',['filter'=>'role:admin']);
+// $routes->get('/admin/(:num)', 'Admin::detail/$1',['filter'=>'role:admin']);
+// end multiuser
