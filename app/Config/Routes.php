@@ -5,7 +5,9 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
+$routes->get('/', 'PdfController::index');
+
 // start peminjaman
 $routes->get('peminjaman-alat', 'PeminjamanAlat::index');
 $routes->get('peminjaman-alat/create', 'PeminjamanAlat::create');
