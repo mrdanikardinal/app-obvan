@@ -7,6 +7,9 @@ use CodeIgniter\Model;
 class UsersModel extends Model
 {
     protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+    protected $allowedFields = ['fullname'];
     public function getUsers($id = false)
     {
         if ($id == false) {
@@ -14,5 +17,4 @@ class UsersModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
-
 }

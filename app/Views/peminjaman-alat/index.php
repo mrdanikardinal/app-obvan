@@ -103,7 +103,13 @@
                                         <td><?= $valuePeminjaman['durasi_pinjam']; ?></td>
                                         <td><?= $valuePeminjaman['nama_peminjam']; ?></td>
                                         <td><?= $valuePeminjaman['no_hp_peminjam']; ?></td>
-                                        <td><?= $valuePeminjaman['nama_pemberi']; ?></td>
+                                        <!-- <td><?= $valuePeminjaman['nama_pemberi']; ?></td> -->
+                                        <td>
+                                            <?php foreach ($allNama_pemberi as $k) : ?>
+                                                <?= ($valuePeminjaman['nama_pemberi'] == $k['id']) ? $k['fullname'] : Null; ?>
+                                            <?php endforeach; ?>
+                                        </td>
+
                                         <td>
                                             <?php foreach ($checkStatus[$key] as $valueCheck) : ?>
                                                 <?php if ($valueCheck == true) : ?>
@@ -114,74 +120,74 @@
                                                         ?>
                                                         <?= $tanggalKembaliconvert; ?>
                                                     </button>
-                                                    </div>
+                    </div>
 
-                                                <?php elseif ($valueCheck == false) : ?>
-                                                    <button type="button" class="btn btn-info"><?= 'Tertunda' ?> <?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?></button>
-                                                    
-                                 
-                                                    
-                                                <?php endif; ?>
+                <?php elseif ($valueCheck == false) : ?>
+                    <button type="button" class="btn btn-info"><?= 'Tertunda' ?> <?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?></button>
 
 
 
-                                        </td>
-                                        <td>
+                <?php endif; ?>
+
+
+
+                </td>
+                <td>
 
 
 
 
-                                            <!-- start if condition status -->
-                                            <?php
+                    <!-- start if condition status -->
+                    <?php
                                                 $today = date("Y-m-d");
                                                 $tanggalPengembalian = $valuePeminjaman['sampai_dengan'];
-                                            ?>
+                    ?>
 
 
-                                            <?php if ($tanggalPengembalian == $today && $valueCheck == false) : ?>
-                                                <button type="button" class="btn btn-warning"><?= 'Hari Pengembalian' ?></button>
-                                            <?php elseif ($tanggalPengembalian < $today && $valueCheck == false) : ?>
-                                                <button type="button" class="btn btn-danger"><?= 'Pengembalian Expired' ?></button>
-                                            <?php elseif ($tanggalPengembalian > $today && $valueCheck == false) : ?>
-                                                <button type="button" class="btn btn-primary"><?= 'Sedang Dipinjam' ?></button>
-                                            <?php elseif ($valueCheck == true) : ?>
-                                                <button type="button" class="btn btn-success"><?= 'Selesai' ?></button>
-                                            <?php endif; ?>
-                                            <!-- endIfcondition status -->
+                    <?php if ($tanggalPengembalian == $today && $valueCheck == false) : ?>
+                        <button type="button" class="btn btn-warning"><?= 'Hari Pengembalian' ?></button>
+                    <?php elseif ($tanggalPengembalian < $today && $valueCheck == false) : ?>
+                        <button type="button" class="btn btn-danger"><?= 'Pengembalian Expired' ?></button>
+                    <?php elseif ($tanggalPengembalian > $today && $valueCheck == false) : ?>
+                        <button type="button" class="btn btn-primary"><?= 'Sedang Dipinjam' ?></button>
+                    <?php elseif ($valueCheck == true) : ?>
+                        <button type="button" class="btn btn-success"><?= 'Selesai' ?></button>
+                    <?php endif; ?>
+                    <!-- endIfcondition status -->
 
-                                        <?php endforeach; ?>
-                                        </td>
-                                        <td>
-                                            <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                            </form>
+                <?php endforeach; ?>
+                </td>
+                <td>
+                    <form action="<?= base_url() ?>peminjaman-alat/edit/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+                    </form>
 
-                                        </td>
-                                        <td>
-                                            <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
-                                            </form>
-                                        </td>
+                </td>
+                <td>
+                    <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
+                    </form>
+                </td>
 
-                                    </tr>
+                </tr>
 
-                                <?php endforeach; ?>
-                            </tbody>
+            <?php endforeach; ?>
+            </tbody>
 
-                        </table>
+            </table>
 
-                    </div>
                 </div>
             </div>
-        </main>
-
-        <?= $this->include('layout/footer'); ?>
-
-
     </div>
+    </main>
+
+    <?= $this->include('layout/footer'); ?>
+
+
+</div>
 </div>
 <?= $this->endSection('content'); ?>

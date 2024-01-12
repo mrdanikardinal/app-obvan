@@ -126,7 +126,14 @@
                             <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi'); ?>">
+                                    <!-- <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi'); ?>"> -->
+
+                                    <?php $nomor1=1;?>
+                                    <select name="nama_pemberi" id="nama_pemberi" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allNama_pemberi as $key => $valueNama_pemberi) : ?>
+                                            <option value="<?= $valueNama_pemberi['id'] ?>"><?=$nomor1++.'. '. $valueNama_pemberi['fullname'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
 
                                 </div>
                             </div>
