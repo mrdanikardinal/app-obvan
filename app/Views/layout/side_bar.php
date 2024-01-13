@@ -42,7 +42,7 @@
                     </div>
                 <?php endif; ?>
                 <!-- end only keuangan -->
-                <!-- end only user and admin -->
+                <!-- end only user and admin and keuangan -->
                 <?php if (in_groups('user')||in_groups('admin')||in_groups('keuangan')) : ?>
                 <div class="sb-sidenav-menu-heading">SERVICES</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesPeralatanKeluar" aria-expanded="false" aria-controls="collapsePages">
