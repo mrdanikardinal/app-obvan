@@ -190,7 +190,15 @@
                             <div class="row mb-3">
                                 <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>">
+                                    <!-- <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>"> -->
+                                    <?php $nomor1 = 1; ?>
+                                    <select name="nama_pemberi" id="nama_pemberi" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allNama_pemberi as $key => $valueNama_pemberi) : ?>
+                                            <option value="<?= $valueNama_pemberi['id'] ?>" <?= $dataPinjam['nama_pemberi'] == $valueNama_pemberi['id'] ? 'selected' : null ?>>
+                                                <?= $nomor1++ . '. ' . $valueNama_pemberi['fullname'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                             <div id="endInputPeminjaman"></div>
@@ -201,6 +209,9 @@
 
                             $namaPenerima = $dataPinjam['nama_penerima'];
                             $catatan = $dataPinjam['catatan'];
+
+
+
                             ?>
 
                             <!-- end pengembalian -->
@@ -321,6 +332,30 @@
                 let namaPenerimaJs = "<?= $namaPenerima; ?>";
                 let catatanJs = "<?= $catatan; ?>";
 
+                //             let addHTML = `<div id="showAddPengembalian" class="card mb-3">
+                // <h5 class="card-header text-center">Form Pengembalian</h5>
+                // <div class="card-body">
+                //     <div class="row mb-3">
+                //         <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
+                //         <div class="col-sm-10">
+
+                //             <input required type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="${tanggalPengembalian}">
+                //         </div>
+                //     </div>
+                //     <div class="row mb-3">
+                //         <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
+                //         <div class="col-sm-10">
+                //             <input required type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="${namaPenerimaJs}">
+                //         </div>
+                //     </div>
+                //     <div class="row mb-3">
+                //         <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
+                //         <div class="col-sm-10">
+                //             <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
+                //         </div>
+                //     </div>
+                //     </div>
+                // </div>`;
                 let addHTML = `<div id="showAddPengembalian" class="card mb-3">
     <h5 class="card-header text-center">Form Pengembalian</h5>
     <div class="card-body">
@@ -334,7 +369,22 @@
         <div class="row mb-3">
             <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
             <div class="col-sm-10">
-                <input required type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="${namaPenerimaJs}">
+            
+            <?php $nomor1 = 1; ?>
+                                    <select name="nama_penerima" id="nama_penerima" class="form-select form-select-sm" aria-label="Small select example">
+                                    <?= $dataPinjam['nama_penerima'] === NULL ? '<option value="NULL">--Klik Disini---</option>' : null ?>
+                                    
+                                        <?php foreach ($allNama_pemberi as $key => $valueNama_penerima) : ?>
+                                            <?php if ($dataPinjam['nama_penerima'] === NULL) : ?>
+                                            <option value="<?= $valueNama_penerima['id'] ?>"><?= $nomor1++ . '. ' . $valueNama_penerima['fullname'] ?></option>
+                                            <?php elseif ($dataPinjam['nama_penerima'] !== NULL) : ?>
+                                                <option value="<?= $valueNama_penerima['id'] ?>" <?= $dataPinjam['nama_penerima'] == $valueNama_penerima['id'] ? 'selected' : null ?>>
+                                                <?= $nomor1++ . '. ' . $valueNama_penerima['fullname'] ?>
+                                            </option>
+                                            <?php endif; ?>
+
+                                        <?php endforeach; ?>
+                                    </select>
             </div>
         </div>
         <div class="row mb-3">
@@ -372,7 +422,7 @@
                     });
 
                 }
-               
+
 
 
                 // end check status default
@@ -386,7 +436,7 @@
                         let indexOfNameToReplace = arr.indexOf(newName);
                         if (indexOfNameToReplace > -1) {
                             arr[indexOfNameToReplace] = parseInt(isiStatus);
-                            
+
                             for (let e of arr) {
                                 statusChanged += e;
                             }
@@ -399,7 +449,7 @@
                         let indexOfNameToReplace = arr.indexOf(newName);
                         if (indexOfNameToReplace > -1) {
                             arr[indexOfNameToReplace] = parseInt(isiStatus);
-                            
+
                             for (let e of arr) {
                                 statusChanged += e;
                             }
@@ -419,7 +469,7 @@
                         $('#showAddPengembalian').remove();
 
                     }
-                     
+
                 });
 
                 // end changed

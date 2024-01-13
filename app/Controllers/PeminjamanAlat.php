@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\UsersModel;
 use App\Models\InventarisModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\ParentMerkModel;
@@ -17,6 +17,7 @@ class PeminjamanAlat extends BaseController
     protected $parentMerkModel;
     protected $inventarisModel;
     protected $getCariBarangInventaris;
+    protected $userModel;
 
 
 
@@ -25,6 +26,7 @@ class PeminjamanAlat extends BaseController
         $this->pinjamAlatModel = new PeminjamanAlatModel();
         $this->parentMerkModel = new ParentMerkModel();
         $this->inventarisModel = new InventarisModel();
+        $this->userModel = new UsersModel();
     }
     public function index()
     {
@@ -32,7 +34,7 @@ class PeminjamanAlat extends BaseController
             'checkStatus' => $this->parentMerkModel->getCheckDone(),
             'peminjaman' => $this->pinjamAlatModel->getPeminjamanAlat(),
             'parentMerk' => $this->parentMerkModel->getParentMerk(),
-
+            'allNama_pemberi' => $this->userModel->getUsers()
 
         ];
         return view('peminjaman-alat/index', $data);
@@ -50,7 +52,8 @@ class PeminjamanAlat extends BaseController
             'title' => 'Form Tambah Data Peminjaman Alat',
             'validation' => \Config\Services::validation(),
             'allDataInv'=> $dataInv,
-            'generator'=> $generator
+            'generator'=> $generator,
+            'allNama_penerima' => $this->userModel->getUsers()
 
 
 
@@ -125,7 +128,8 @@ class PeminjamanAlat extends BaseController
         $data = [
             'dataPinjam' => $this->pinjamAlatModel->getPeminjamanAlat($id_pinjam),
             'allDataParentMerk' => $this->parentMerkModel->getParentViews($id_pinjam),
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'allNama_pemberi' => $this->userModel->getUsers()
 
         ];
 
