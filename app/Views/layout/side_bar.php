@@ -7,8 +7,8 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     DASHBOARD
                 </a>
-                <!-- only keuangan -->
-                <?php if (in_groups('keuangan')) : ?>
+                <!-- only keuangan and admin -->
+                <?php if (in_groups('keuangan')||in_groups('admin')) : ?>
                     <div class="sb-sidenav-menu-heading">Keuangan</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesKasObvan" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -42,6 +42,8 @@
                     </div>
                 <?php endif; ?>
                 <!-- end only keuangan -->
+                <!-- end only user and admin -->
+                <?php if (in_groups('user')||in_groups('admin')||in_groups('keuangan')) : ?>
                 <div class="sb-sidenav-menu-heading">SERVICES</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesPeralatanKeluar" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -58,6 +60,9 @@
                         </a>
                     </nav>
                 </div>
+                <?php endif; ?>
+                <!-- end only user -->
+
                 <!-- only admin -->
                 <?php if (in_groups('admin')) : ?>
                     <div class="sb-sidenav-menu-heading">MASTER DATA</div>
