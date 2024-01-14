@@ -113,13 +113,25 @@
                                         <td>
                                             <?php foreach ($checkStatus[$key] as $valueCheck) : ?>
                                                 <?php if ($valueCheck == true) : ?>
-                                                    <button type="button" class="btn btn-success"><?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?>
-                                                        <?php $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
-                                                        $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-                                                        $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
-                                                        ?>
-                                                        <?= $tanggalKembaliconvert; ?>
-                                                    </button>
+                                                    <?php
+                                                    echo "Dikembalikan Lengkap Tanggal,";
+                                                    $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
+                                                    $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
+                                                    $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
+                                                    ?>
+                                                    <?= $tanggalKembaliconvert; ?>
+                                                    <?php if ($valuePeminjaman['catatan'] !== NULL) : ?>
+                                                        <div class="badge bg-danger text-wrap" style="width: 6rem;">
+                                                            <?= ($valuePeminjaman['catatan'] == NULL) ? NULL : $valuePeminjaman['catatan']; ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <?= "Penerima" ?>
+                                                    <?php foreach ($allNama_pemberi as $k) : ?>
+  
+                                                        
+                                                        <?= ($valuePeminjaman['nama_penerima'] == $k['id']) ? $k['fullname'] : Null; ?>
+                                                        
+                                                    <?php endforeach; ?>
                     </div>
 
                 <?php elseif ($valueCheck == false) : ?>
@@ -142,8 +154,6 @@
                                                 $today = date("Y-m-d");
                                                 $tanggalPengembalian = $valuePeminjaman['sampai_dengan'];
                     ?>
-
-
                     <?php if ($tanggalPengembalian == $today && $valueCheck == false) : ?>
                         <button type="button" class="btn btn-warning"><?= 'Hari Pengembalian' ?></button>
                     <?php elseif ($tanggalPengembalian < $today && $valueCheck == false) : ?>
