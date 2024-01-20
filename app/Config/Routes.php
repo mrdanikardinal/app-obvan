@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-// $routes->get('/print', 'PdfController::print');
+$routes->get('/print', 'PdfController::print');
 // $routes->get('user', 'PdfController::index');
 
 // start peminjaman

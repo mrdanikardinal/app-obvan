@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\UsersModel;
 use CodeIgniter\Controller;
 
@@ -14,7 +15,7 @@ class PdfController extends Controller
 
     public function __construct()
     {
-        $this->users= new UsersModel();
+        $this->users = new UsersModel();
     }
     public function index()
     {
@@ -421,16 +422,19 @@ class PdfController extends Controller
     public function print()
     {
         // dd($this->users->getUsers());
-        $data = [
-            'testing' => $this->users->getUsers()
-        ];
-     
-        
-        $test = view('user/index',$data);
+        // $data = [
+        //     'testing' => $this->users->getUsers()
+        // ];
+
+
+        // $test = view('user/credit_note_sample', $data);
+        $test = view('user/credit_note_sample');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
         $pdf->AddPage();
         $pdf->writeHTML($test);
+        // $pdf->writeHTML($test, true, false, false, false, '');
+        // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
-       return $pdf->Output('sample.pdf', 'I');
+        return $pdf->Output('sample.pdf', 'I');
     }
 }
