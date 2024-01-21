@@ -419,16 +419,16 @@ class PdfController extends Controller
     //     }
 
 
-    public function print()
+    public function print($idUser)
     {
-        // dd($this->users->getUsers());
-        // $data = [
-        //     'testing' => $this->users->getUsers()
-        // ];
+        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
+        $data = [
+            'testing' => $this->users->procedureGetNamaPemberiORPenerima($idUser)
+        ];
 
 
-        // $test = view('user/credit_note_sample', $data);
-        $test = view('user/credit_note_sample');
+        $test = view('user/index', $data);
+        // $test = view('user/index');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
         $pdf->AddPage();
         $pdf->writeHTML($test);
@@ -437,4 +437,10 @@ class PdfController extends Controller
         $this->response->setContentType('application/pdf');
         return $pdf->Output('sample.pdf', 'I');
     }
+
+
+    // public function print()
+    // {
+    //     return view('user/credit_note_sample');
+    // }
 }

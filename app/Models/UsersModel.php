@@ -17,4 +17,10 @@ class UsersModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
+    public function procedureGetNamaPemberiORPenerima($idUser)
+    {
+        $query = $this->db->query("CALL getNamaPemberiAtauNamaPemberi"."($idUser)");
+        return $query->getResultArray();
+        
+    }
 }
