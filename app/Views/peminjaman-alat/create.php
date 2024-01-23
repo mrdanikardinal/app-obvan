@@ -128,10 +128,13 @@
                                 <div class="col-sm-10">
                                     <!-- <input type="text" required class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= old('nama_pemberi'); ?>"> -->
 
-                                    <?php $nomor1=1;?>
+                                    <?php $nomor1 = 1; ?>
                                     <select name="nama_pemberi" id="nama_pemberi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <?php foreach ($allNama_pemberi as $key => $valueNama_pemberi) : ?>
-                                            <option value="<?= $valueNama_pemberi['id'] ?>"><?=$nomor1++.'. '. $valueNama_pemberi['fullname'] ?></option>
+                                        <option value="<?= user()->id; ?>" selected><?= $nomor1++ . '. ' . user()->fullname; ?></option>
+                                        <?php foreach ($allNama_penerima as $key => $valueNama_pemberi) : ?>
+                                            <?php if($valueNama_pemberi['fullname']!=user()->fullname): ?>
+                                            <option value="<?= $valueNama_pemberi['id'] ?>"><?= $nomor1++ . '. ' . $valueNama_pemberi['fullname'] ?></option>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
 

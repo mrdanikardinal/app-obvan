@@ -61,6 +61,16 @@ class PeminjamanAlatModel extends Model
         return $query->getResultArray();
         
     }
+  
+
+    // public function procedureGetDataPrintToIDPJMNamaPenerima($id_pinjam)
+    // {
+    //     $query = $this->db->query("CALL getDataPrintToIDPJMNamaPenerima"."($id_pinjam)");
+       
+    //     return $query->getResultArray();
+        
+        
+    // }
     //script for procedure mysql call barcode
 //     SELECT inventaris.id_inv,inventaris.kode_barcode,jenis_barang.nama_jns_barang,inventaris.nama_barang,inventaris.merk,inventaris.serial_number,lokasi.nama_lokasi
 // FROM ((inventaris

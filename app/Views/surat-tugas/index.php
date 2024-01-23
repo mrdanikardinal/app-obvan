@@ -21,6 +21,7 @@
                             <th>Tanggal Kembali</th>
                             <th>Nama Penerima</th>
                             <th>Catatan</th>
+                            <th>Print</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,15 +37,25 @@
                                 <td><?= $valuePDF['nama_peminjam']; ?></td>
                                 <td><?= $valuePDF['no_hp_peminjam']; ?></td>
                                 <td>
-                                    
-                                <?= $valuePDF['nama_pemberi']; ?>
+
+                                    <?= $valuePDF['nama_pemberi']; ?>
                                 </td>
                                 <td><?= $valuePDF['tanggal_kembali']; ?></td>
                                 <td>
-                                  
-                                <?= $valuePDF['nama_penerima']; ?>
+
+                                    <?= $valuePDF['nama_penerima']; ?>
                                 </td>
                                 <td><?= $valuePDF['catatan']; ?></td>
+                                <td>
+                                    <!-- <form action="<?= base_url() ?>user/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Print</button>
+                                    </form> -->
+                                    <a  href="<?= base_url() ?>user/print/<?= $valuePDF['id_pinjam']; ?>">
+                                        print
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

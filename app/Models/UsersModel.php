@@ -29,4 +29,29 @@ class UsersModel extends Model
         return $query->getResultArray();
         
     }
+    
+   public function proceduregetPrintIdPJMNamaPenerima($id_pinjam)
+    {
+        // $query = $this->db->query("CALL getPrintIdPJMNamaPenerima"."($id_pinjam)");
+        $query=$this->db->query("CALL getPrintIdPJMNamaPenerima(" . $id_pinjam . ")");
+        return $query->getResultArray();
+        // select * from peminjaman_alat INNER join users on peminjaman_alat.nama_penerima = users.id WHERE peminjaman_alat.id_pinjam=id
+        
+    }
+   public function proceduregetParentMerkFromIdPjm($id_pinjam)
+    {
+        $query = $this->db->query("CALL getParentMerkFromIdPjm"."($id_pinjam)");
+        // $query=$this->db->query("CALL getParentMerkFromIdPjm(" . $id_pinjam . ")");
+        return $query->getResultArray();
+        // SELECT * FROM parent_merk WHERE parent_merk.id_pinjaman_alat=idPjm
+        
+    }
+
+    public function getTest($id)
+    {
+        $query = $this->db->query("select * from users INNER join peminjaman_alat on users.id = peminjaman_alat.nama_penerima WHERE peminjaman_alat.id_pinjam="."$id");
+        return $query->getResultArray();
+        
+    }
+   
 }

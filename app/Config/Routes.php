@@ -7,8 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 // $routes->get('/print', 'PdfController::print');
-$routes->get('/print/(:segment)', 'PdfController::print/$1');
+// $routes->get('/user/index', 'PdfController::print');
+// $routes->get('/print/(:segment)', 'PdfController::print/$1');
+// $routes->get('/print/(:segment)', 'PdfController::print/$1');
 // $routes->get('user', 'PdfController::index');
+// $routes->put('user/(:segment)','PdfController::print/$1');
+$routes->get('user/print/(:segment)','PdfController::print/$1');
 
 // start peminjaman
 $routes->get('peminjaman-alat', 'PeminjamanAlat::index');
@@ -32,6 +36,7 @@ $routes->post('admin/inventaris/update/(:any)', 'Inventaris::update/$1',['filter
 //start user
 $routes->get('surat-tugas', 'User::index');
 $routes->get('surat-tugas/index', 'User::index');
+// $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
 
 

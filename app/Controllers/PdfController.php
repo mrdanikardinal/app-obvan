@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\PeminjamanAlatModel;
 use CodeIgniter\Controller;
 
 use TCPDF;
@@ -10,11 +11,12 @@ use TCPDF;
 class PdfController extends Controller
 {
 
-    protected $inventarisModel;
+    protected $peminjamanAlatModel;
     protected $users;
 
     public function __construct()
     {
+        $this->peminjamanAlatModel = new PeminjamanAlatModel();
         $this->users = new UsersModel();
     }
     public function index()
@@ -419,13 +421,13 @@ class PdfController extends Controller
     //     }
 
 
-    public function print($idUser)
+    public function print($idPjm)
     {
-        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
+        // dd($this->users->proceduregetParentMerkFromIdPjm(200));
         $data = [
-            'testing' => $this->users->procedureGetNamaPemberiORPenerima($idUser)
+            'testing' => $this->users->proceduregetPrintIdPJMNamaPenerima($idPjm),
+            'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
         ];
-
 
         $test = view('user/index', $data);
         // $test = view('user/index');
@@ -439,8 +441,12 @@ class PdfController extends Controller
     }
 
 
-    // public function print()
+    // public function print($idPjm)
     // {
-    //     return view('user/credit_note_sample');
+    //     // $test='PJM-0001';
+    //     // return view('user/credit_note_sample');
+    //     // dd($idPjm);
+    //     dd($this->users->proceduregetPrintIdPJM($idPjm));
+
     // }
 }
