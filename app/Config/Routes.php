@@ -29,6 +29,12 @@ $routes->PUT('admin/inventaris/edit/(:segment)', 'Inventaris::edit/$1',['filter'
 $routes->delete('admin/inventaris/(:segment)', 'Inventaris::delete/$1',['filter'=>'role:admin']);
 $routes->post('admin/inventaris/update/(:any)', 'Inventaris::update/$1',['filter'=>'role:admin']);
 //end inventaris
+//start user
+$routes->get('surat-tugas', 'User::index');
+$routes->get('surat-tugas/index', 'User::index');
+//end user
+
+
 
 
 

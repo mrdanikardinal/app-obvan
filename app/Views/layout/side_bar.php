@@ -42,8 +42,26 @@
                     </div>
                 <?php endif; ?>
                 <!-- end only keuangan -->
-                <!-- end only user and admin and keuangan -->
+                <!-- only user and admin and keuangan -->
                 <?php if (in_groups('user')||in_groups('admin')||in_groups('keuangan')) : ?>
+                <!-- show surat tugas -->
+                <div class="sb-sidenav-menu-heading">User</div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesUser" aria-expanded="false" aria-controls="collapsePages">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Settings User
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapsePagesUser" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link" href="<?= base_url() ?>surat-tugas">
+                            Surat Tugas
+                        </a>
+                        <a class="nav-link" href="<?= base_url() ?>surat-tugas">
+                            Password
+                        </a>
+                    </nav>
+                </div>
+                <!-- end surat tugas -->
                 <div class="sb-sidenav-menu-heading">SERVICES</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesPeralatanKeluar" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -61,7 +79,7 @@
                     </nav>
                 </div>
                 <?php endif; ?>
-                <!-- end only user -->
+                <!-- end only user and admin and keuangan-->
 
                 <!-- only admin -->
                 <?php if (in_groups('admin')) : ?>

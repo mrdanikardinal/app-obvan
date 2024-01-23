@@ -23,4 +23,10 @@ class UsersModel extends Model
         return $query->getResultArray();
         
     }
+    public function procedureGetFullNameFromId($idUser)
+    {
+        $query = $this->db->query("CALL getFullNameFromId"."($idUser)");
+        return $query->getResultArray();
+        
+    }
 }
