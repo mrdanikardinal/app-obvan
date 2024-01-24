@@ -11,6 +11,7 @@ class PeminjamanAlatModel extends Model
     protected $allowedFields = ['id_pinjam','tanggal','sampai_dengan' ,'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam','nama_pemberi','tanggal_kembali','nama_penerima','catatan'];
 
 
+
     public function autoNumberId()
     {
         $builder = $this->table('peminjaman_alat');

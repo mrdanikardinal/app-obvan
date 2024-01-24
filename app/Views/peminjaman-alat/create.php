@@ -74,7 +74,7 @@
                                                 <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
                                             </td>
                                             <td>
-                                                <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah">
+                                                <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
                                             </td>
                                             <td>
                                                 <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->

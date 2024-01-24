@@ -164,7 +164,7 @@ function addnewrow() {
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
         <td>
-            <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah">
+            <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
         </td>
         <td>
             <button type="button" required class="btn btn-danger btnHapusForm"><i class="fa-solid fa-trash"></i></button>
@@ -262,7 +262,7 @@ function addnewrowEdit() {
             <input type="text" required class="form-control" name="sNEditUpdate[]" placeholder="Serial Number">
         </td>
         <td>
-            <input type="text" required class="form-control" name="jumlahEditUpdate[]" placeholder="Jumlah">
+            <input type="text" required class="form-control" name="jumlahEditUpdate[]" placeholder="Jumlah" value="1">
         </td>
         <td>
         <p class="text-success">baru..</p>
@@ -356,7 +356,7 @@ $(document).ready(function () {
 
             if (isLastElement) {
                 // Jika iya, tambahkan baris baru dan nomori ulang
-                addnewrow();
+                // addnewrow();
                 renumberRows();
             }
             $('#dinallModal').modal('hide');

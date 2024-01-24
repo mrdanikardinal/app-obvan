@@ -24,7 +24,7 @@
 
 <body>
 
-    <h2>HTML Table</h2>
+    <h2>Surat Tugas</h2>
 
     <table>
         <tr>
@@ -35,7 +35,7 @@
             <th>Jabatan Fungsional</th>
             <th>NPWP</th>
         </tr>
-        <?php $number = 1;$number2=1; ?>
+        <?php $number = 1;$number2=1;?>
         <?php foreach ($testing as $key => $valuePDF) : ?>
             <tr>
                 <th><?= $number++; ?></th>

@@ -11,8 +11,9 @@ $routes->get('/', 'Home::index');
 // $routes->get('/print/(:segment)', 'PdfController::print/$1');
 // $routes->get('/print/(:segment)', 'PdfController::print/$1');
 // $routes->get('user', 'PdfController::index');
-// $routes->put('user/(:segment)','PdfController::print/$1');
-$routes->get('user/print/(:segment)','PdfController::print/$1');
+
+$routes->get('user/print/(:any)','PdfController::print/$1');
+// $routes->get('user/print/(:num)','PdfController::print/$1');
 
 // start peminjaman
 $routes->get('peminjaman-alat', 'PeminjamanAlat::index');

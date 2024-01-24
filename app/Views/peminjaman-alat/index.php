@@ -38,7 +38,9 @@
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Edit</th>
+                                    <?php if(in_groups('admin'))  :?>
                                     <th>Hapus</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
 
@@ -114,7 +116,7 @@
                                             <?php foreach ($checkStatus[$key] as $valueCheck) : ?>
                                                 <?php if ($valueCheck == true) : ?>
                                                     <?php
-                                                    echo "Dikembalikan Lengkap Tanggal,";
+                                                    echo "Dikembalikan Tanggal,";
                                                     $convertTanggalKembali = $valuePeminjaman['tanggal_kembali'];
                                                     $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
                                                     $tanggalKembaliconvert = date('d/m/Y', strtotime($dateTanggalKembali));
@@ -175,6 +177,7 @@
                     </form>
 
                 </td>
+                <?php if(in_groups('admin'))  :?>
                 <td>
                     <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
                         <?= csrf_field(); ?>
@@ -182,7 +185,7 @@
                         <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
                     </form>
                 </td>
-
+                <?php endif;  ?>
                 </tr>
 
             <?php endforeach; ?>
