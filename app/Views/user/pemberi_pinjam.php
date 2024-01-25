@@ -35,7 +35,8 @@
             <th>Jabatan Fungsional</th>
             <th>NPWP</th>
         </tr>
-        <?php $number = 1;$number2=1;?>
+        <?php $number = 1;
+        $number2 = 1; ?>
         <?php foreach ($testing as $key => $valuePDF) : ?>
             <tr>
                 <th><?= $number++; ?></th>
@@ -57,7 +58,6 @@
                         <td class="text-center">
                             <?php if ($j['status'] == true) : ?>
                                 <button type="button" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i>
-
 
                                 </button>
                             <?php elseif ($j['status'] == false) : ?>

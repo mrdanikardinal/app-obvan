@@ -17,7 +17,7 @@ class UsersModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
-    public function procedureGetNamaPemberi($idUser)
+    public function procedureGetNamaPemberi($idUser=null)
     {
         $query = $this->db->query("CALL getNamaPemberiPinjaman"."($idUser)");
         return $query->getResultArray();

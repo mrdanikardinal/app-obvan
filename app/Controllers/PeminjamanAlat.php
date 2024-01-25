@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\UsersModel;
 use App\Models\InventarisModel;
 use App\Models\PeminjamanAlatModel;
@@ -40,7 +41,7 @@ class PeminjamanAlat extends BaseController
         return view('peminjaman-alat/index', $data);
     }
 
- 
+
     public function create()
     {
 
@@ -51,8 +52,8 @@ class PeminjamanAlat extends BaseController
         $data = [
             'title' => 'Form Tambah Data Peminjaman Alat',
             'validation' => \Config\Services::validation(),
-            'allDataInv'=> $dataInv,
-            'generator'=> $generator,
+            'allDataInv' => $dataInv,
+            'generator' => $generator,
             'allNama_penerima' => $this->userModel->getUsers()
 
 
@@ -125,11 +126,15 @@ class PeminjamanAlat extends BaseController
     public function edit($id_pinjam)
     {
         session();
+        $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
+        $generator = new BarcodeGeneratorPNG();
         $data = [
             'dataPinjam' => $this->pinjamAlatModel->getPeminjamanAlat($id_pinjam),
             'allDataParentMerk' => $this->parentMerkModel->getParentViews($id_pinjam),
             'validation' => \Config\Services::validation(),
-            'allNama_pemberi' => $this->userModel->getUsers()
+            'allNama_pemberi' => $this->userModel->getUsers(),
+            'allDataInv' => $dataInv,
+            'generator' => $generator
 
         ];
 
@@ -225,8 +230,6 @@ class PeminjamanAlat extends BaseController
             for ($j = 0; $j < $jumlahDataUpdate; $j++) {
 
                 $this->parentMerkModel->save([
-
-
                     'id_pinjaman_alat' => $id_pinjam,
                     'nama_barang' => $namaBarangUpdate[$j],
                     'merk' => $merkUpdate[$j],

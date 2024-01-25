@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Pinjam</th>
                             <th>Tanggal</th>
                             <th>Sampai Dengan</th>
                             <th>Acara</th>
@@ -41,6 +42,7 @@
                         <?php foreach ($AllShowNamaPenerima as $key => $valuePDF) : ?>
                             <tr>
                                 <th><?= $number++; ?></th>
+                                <td><?= $valuePDF['id_pinjam']; ?></td>
                                 <td><?= $valuePDF['tanggal']; ?></td>
                                 <td><?= $valuePDF['sampai_dengan']; ?></td>
                                 <td><?= $valuePDF['acara']; ?></td>
@@ -49,13 +51,23 @@
                                 <td><?= $valuePDF['nama_peminjam']; ?></td>
                                 <td><?= $valuePDF['no_hp_peminjam']; ?></td>
                                 <td>
-                                    <?= $valuePDF['nama_pemberi']; ?>
+                                    
+                                    <?= ($valuePDF['nama_pemberi'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['nama_pemberi']; ?>
+
                                 </td>
-                                <td><?= $valuePDF['tanggal_kembali']; ?></td>
+                                <td>
+                                   
+                                    <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
+
+                                </td>
                                 <td>
                                     <?= $valuePDF['fullname']; ?>
                                 </td>
-                                <td><?= $valuePDF['catatan']; ?></td>
+                                <td>
+                                    
+                                    <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
+
+                                </td>
                                 <td>
                                     <!-- <form action="<?= base_url() ?>user/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                         <?= csrf_field(); ?>

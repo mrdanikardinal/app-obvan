@@ -32,8 +32,6 @@
                                 $date = str_replace('/', '-', $convert);
                                 $tanggalconvert = date('d/m/Y', strtotime($date));
                                 ?>
-
-
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="Tanggal" id="tanggal" name="tanggal" value="<?= $tanggalconvert; ?>">
                                 </div>
@@ -58,6 +56,7 @@
                                         <tr>
 
                                             <th class="text-center">No</th>
+                                            <th class="text-center">Search</th>
                                             <th class="text-center">Nama Barang</th>
                                             <th class="text-center">Merk</th>
                                             <th class="text-center">S.N</th>
@@ -74,7 +73,13 @@
                                                         <?= $number2++; ?>
                                                     </td>
                                                     <td>
+                                                        <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
+
+                                                    </td>
+                                                    <td>
+                                                       
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
+
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="merkEdit[]" value="<?= $j['merk']; ?>">
@@ -116,7 +121,11 @@
                                                         <?= $number2++; ?>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="naBarEdit[]" placeholder="Nama Barang" value="<?= $i['nama_barang']; ?>">
+                                                        <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="naBarEdit[]" value="<?= $i['nama_barang']; ?>">
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="merkEdit[]" placeholder="Merk" value="<?= $i['merk']; ?>">
@@ -230,6 +239,79 @@
             </div>
 
         </main>
+        <!-- Modal -->
+        <div class="modal fade" id="dinallModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Data Barang Inventaris</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--  -->
+                        <table id="tableInvShow" class="table table-bordered table-hover text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Jenis barang</th>
+                                    <th>Nama Barang</th>
+                                    <th>Merk</th>
+                                    <th>Serial Number</th>
+                                    <th>Lokasi</th>
+                                    <th>Pilih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($allDataInv as $key => $valueInv) : ?>
+                                    <tr>
+                                        <?php if ($valueInv['serial_number'] != NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?= $valueInv['serial_number']; ?></span>
+                                            </td>
+                                        <?php elseif ($valueInv['serial_number'] == NULL) : ?>
+                                            <td class="text-center">
+                                                <div>
+                                                    <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInv['kode_barcode'], $generator::TYPE_CODE_128)) . '">'; ?>
+                                                </div>
+                                                <span><?= $valueInv['kode_barcode']; ?></span>
+
+                                            </td>
+                                        <?php endif; ?>
+
+                                        <td><?= $valueInv['nama_jns_barang']; ?></td>
+                                        <td><?= $valueInv['nama_barang']; ?></td>
+                                        <td><?= $valueInv['merk']; ?></td>
+                                        <td>
+                                            <?php if ($valueInv['serial_number'] != NULL) : ?>
+                                                <?= $valueInv['serial_number']; ?>
+                                            <?php elseif ($valueInv['serial_number'] == NULL) : ?>
+                                                <h4><?= '-'; ?></h4>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= $valueInv['nama_lokasi']; ?></td>
+                                        <td>
+                                            <button type="button" required class="btn btn-success selectEdit" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
+                                                <i class="fa-solid fa-check"></i></button>
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            </tbody>
+
+                        </table>
+
+                        <!--  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {

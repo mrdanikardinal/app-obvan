@@ -253,6 +253,9 @@ function addnewrowEdit() {
         <?= $number2++; ?>
         </td>
         <td>
+        <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td>
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBarEditUpdate[]" placeholder="Nama Barang">
         </td>
         <td>
@@ -360,6 +363,41 @@ $(document).ready(function () {
                 renumberRows();
             }
             $('#dinallModal').modal('hide');
+           
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#dinallModalEdit').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.searchBarangEdit', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.searchBarangEdit');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectEdit').on('click', '.selectEdit', function () {
+            let idInv = $(this).data('id');
+            let barcode = $(this).data('barcode');
+            let barang = $(this).data('barang');
+            let merk = $(this).data('merk');
+            let sn = $(this).data('sn');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(barang);
+            $currentSearchBarang.parent().next().next().children().val(merk);
+            $currentSearchBarang.parent().next().next().next().children().val(sn);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalEdit').modal('hide');
            
         });
     });

@@ -26,6 +26,7 @@ class User extends BaseController
 
         $data = [
             'AllShowNamaPemberi' => $this->users->procedureGetNamaPenerima($getInLogin),
+            
 
 
         ];
@@ -51,6 +52,7 @@ class User extends BaseController
 
         $data = [
             'AllShowNamaPemberi' => $this->users->procedureGetNamaPemberi($getInLogin),
+            // 'getNamaPemberi'=> $this->users->procedureGetNamaPemberi(null)
         ];
         return view('surat-tugas/pemberi_pinjam', $data);
     }

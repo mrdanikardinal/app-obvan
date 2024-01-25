@@ -6,14 +6,14 @@
     <div id="layoutSidenav_content">
         <main>
             <ul class="nav nav-tabs">
-            <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?=base_url()?>surat-tugas">Out Broadcast</a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<?= base_url() ?>surat-tugas">Out Broadcast</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url()?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
+                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url()?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
+                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
                 </li>
             </ul>
 
@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Pinjam</th>
                             <th>Tanggal</th>
                             <th>Sampai Dengan</th>
                             <th>Acara</th>
@@ -42,6 +43,7 @@
                         <?php foreach ($AllShowNamaPemberi as $key => $valuePDF) : ?>
                             <tr>
                                 <th><?= $number++; ?></th>
+                                <td><?= $valuePDF['id_pinjam']; ?></td>
                                 <td><?= $valuePDF['tanggal']; ?></td>
                                 <td><?= $valuePDF['sampai_dengan']; ?></td>
                                 <td><?= $valuePDF['acara']; ?></td>
@@ -52,18 +54,26 @@
                                 <td>
                                     <?= $valuePDF['fullname']; ?>
                                 </td>
-                                <td><?= $valuePDF['tanggal_kembali']; ?></td>
                                 <td>
-                                    <?= $valuePDF['nama_penerima']; ?>
+
+                                    <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
+
                                 </td>
-                                <td><?= $valuePDF['catatan']; ?></td>
+                                <td>
+
+                                    <?= ($valuePDF['nama_penerima'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['nama_penerima']; ?>
+                                </td>
+                                <td>
+                                    <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
+
+                                </td>
                                 <td>
                                     <!-- <form action="<?= base_url() ?>user/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="PUT">
                                         <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Print</button>
                                     </form> -->
-                                    <a  href="<?= base_url() ?>user/print_pemberi_pinjam/<?= $valuePDF['id_pinjam']; ?>">
+                                    <a href="<?= base_url() ?>user/print_pemberi_pinjam/<?= $valuePDF['id_pinjam']; ?>">
                                         print
                                     </a>
                                 </td>
