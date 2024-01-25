@@ -1,6 +1,5 @@
 <?php
 /**
- * 1.Fitur Edit Peminjaman Alat read data inventaris by barcode
  * 2.Fitur Crew OB CRUD
  * 3.Fitur Print Surat Tugas
  * 4.Fitur Kas OBVAN

@@ -19,55 +19,28 @@ class User extends BaseController
     public function index()
 
     {
-        //surat tugas outbroadcast
-        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
-        // dd(user_id());
-        $getInLogin = user_id();
-
-        $data = [
-            'AllShowNamaPemberi' => $this->users->procedureGetNamaPenerima($getInLogin),
-            
-
-
-        ];
-        return view('surat-tugas/index', $data);
-    }
-
-    public function penerima_pinjam()
-    {
-        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
-        // dd(user_id());
-        $getInLogin = user_id();
-
-        $data = [
-            'AllShowNamaPenerima' => $this->users->procedureGetNamaPenerima($getInLogin),
-        ];
-        return view('surat-tugas/penerima_pinjam', $data);
+        
+        return view('surat-tugas/index');
+      
     }
     public function pemberi_pinjam()
     {
-        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
-        // dd(user_id());
         $getInLogin = user_id();
-
         $data = [
             'AllShowNamaPemberi' => $this->users->procedureGetNamaPemberi($getInLogin),
-            // 'getNamaPemberi'=> $this->users->procedureGetNamaPemberi(null)
+            'getNamaPenerimaPinjam'=>$this->users->getUsers()
         ];
         return view('surat-tugas/pemberi_pinjam', $data);
     }
 
-    // public function print($idTest)
-    // {
-    //     // dd($idPjm);
-    //     // $test=$idPjm;
-    //     // $test='PJM-0001';
-    //     // $parameter = $_GET['primary_key'];
-    //     // echo $parameter;
-    //     // return view('user/credit_note_sample');
-    //     // dd($idPjm);
-    //     // dd($this->users->proceduregetPrintIdPJM($test));
-    //     dd($this->users->getTest($idTest));
-    //     // getPrintIDPinjam
-    // }
+    public function penerima_pinjam()
+    {
+        $getInLogin = user_id();
+        $data = [
+            'AllShowNamaPenerima' => $this->users->procedureGetNamaPenerima($getInLogin),
+            'getNamaPemberiPinjam'=>$this->users->getUsers()
+        ];
+        return view('surat-tugas/penerima_pinjam', $data);
+    }
+
 }

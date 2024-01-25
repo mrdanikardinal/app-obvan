@@ -7,14 +7,15 @@
         <main>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?=base_url()?>surat-tugas">Out Broadcast</a>
+                    <a class="nav-link active" aria-current="page" href="<?= base_url() ?>surat-tugas">Out Broadcast</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url()?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
+                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url()?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
+                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
                 </li>
+
             </ul>
 
             <div class="container-fluid px-4">
@@ -51,20 +52,32 @@
                                 <td><?= $valuePDF['nama_peminjam']; ?></td>
                                 <td><?= $valuePDF['no_hp_peminjam']; ?></td>
                                 <td>
-                                    
-                                    <?= ($valuePDF['nama_pemberi'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['nama_pemberi']; ?>
+                                    <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
+                                        <span>Kosong!</span>
+                                    <?php endif; ?>
+
+                                    <?php foreach ($getNamaPemberiPinjam as $key => $valueNamaPemberi) : ?>
+                                        <?php if ($valueNamaPemberi['id'] == $valuePDF['nama_pemberi']) : ?>
+                                            <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                                <?= $valueNamaPemberi['fullname']; ?>
+                                            </div>
+
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
 
                                 </td>
                                 <td>
-                                   
+
                                     <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
 
                                 </td>
                                 <td>
+                                    <div class="badge bg-primary text-wrap" style="width: 6rem;">
                                     <?= $valuePDF['fullname']; ?>
+                                    </div>
                                 </td>
                                 <td>
-                                    
+
                                     <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
 
                                 </td>
@@ -74,7 +87,7 @@
                                         <input type="hidden" name="_method" value="PUT">
                                         <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Print</button>
                                     </form> -->
-                                    <a  href="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>">
+                                    <a href="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>">
                                         print
                                     </a>
                                 </td>

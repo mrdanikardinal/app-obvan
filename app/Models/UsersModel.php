@@ -10,6 +10,7 @@ class UsersModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = ['fullname'];
+    
     public function getUsers($id = false)
     {
         if ($id == false) {
@@ -38,10 +39,21 @@ class UsersModel extends Model
     
    public function proceduregetPrintIdPJMNamaPenerima($id_pinjam)
     {
+        // dd('test');
+        
+        // $test=$id_pinjam;
         // $query = $this->db->query("CALL getPrintIdPJMNamaPenerima"."($id_pinjam)");
-        $query=$this->db->query("CALL getPrintIdPJMNamaPenerima(" . $id_pinjam . ")");
-        return $query->getResultArray();
+       
+        
+        // $query=$this->db->query("CALL getPrintIdPJMNamaPenerima(" . $test . ")");
+        // return $query->getResultArray();
         // select * from peminjaman_alat INNER join users on peminjaman_alat.nama_penerima = users.id WHERE peminjaman_alat.id_pinjam=id
+
+            $sql = "CALL `getPrintIdPJMNamaPenerima`(?)";
+            $result = $this->db->query($sql,$id_pinjam); // $data included 3 param and binding & query to db
+         
+            return $result->getResultArray();
+            // $this->db->close();
         
     }
   

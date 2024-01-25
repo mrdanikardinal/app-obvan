@@ -441,7 +441,8 @@ class PdfController extends Controller
     }
     public function print_pemberi_pinjam($idPjm)
     {
-        // dd($this->users->proceduregetParentMerkFromIdPjm(200));
+        // $test=0001;
+        // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
         $data = [
             'testing' => $this->users->proceduregetPrintIdPJMNamaPemberi($idPjm),
             'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)

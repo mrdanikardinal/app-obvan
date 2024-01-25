@@ -10,11 +10,12 @@
                     <a class="nav-link active" aria-current="page" href="<?= base_url() ?>surat-tugas">Out Broadcast</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<?= base_url() ?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url() ?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
+                </li>
+
             </ul>
 
 
@@ -52,7 +53,9 @@
                                 <td><?= $valuePDF['nama_peminjam']; ?></td>
                                 <td><?= $valuePDF['no_hp_peminjam']; ?></td>
                                 <td>
+                                    <div class="badge bg-primary text-wrap" style="width: 6rem;">
                                     <?= $valuePDF['fullname']; ?>
+                                    </div>
                                 </td>
                                 <td>
 
@@ -60,11 +63,21 @@
 
                                 </td>
                                 <td>
+                                    <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
+                                        <span>Belum Dikembalikan</span>
+                                    <?php endif; ?>
 
-                                    <?= ($valuePDF['nama_penerima'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['nama_penerima']; ?>
+                                    <?php foreach ($getNamaPenerimaPinjam as $key => $valueNamaPenerima) : ?>
+                                        <?php if ($valueNamaPenerima['id'] == $valuePDF['nama_penerima']) : ?>
+                                            <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                                <?= $valueNamaPenerima['fullname']; ?>
+                                            </div>
+
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </td>
                                 <td>
-                                    <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
+                                    <?= ($valuePDF['catatan'] !== NULL) ? $valuePDF['catatan'] : '-' ; ?>
 
                                 </td>
                                 <td>

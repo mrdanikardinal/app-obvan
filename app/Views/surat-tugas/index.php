@@ -10,11 +10,12 @@
                     <a class="nav-link active" aria-current="page" href="<?=base_url()?>surat-tugas">Out Broadcast</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url()?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<?=base_url()?>surat-tugas/pemberi_pinjam">Pemberi Pinjam</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url()?>surat-tugas/penerima_pinjam">Penerima Pinjam</a>
+                </li>
+              
             </ul>
 
         </main>

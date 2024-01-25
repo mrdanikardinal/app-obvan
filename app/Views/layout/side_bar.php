@@ -48,7 +48,7 @@
                 <div class="sb-sidenav-menu-heading">User</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesUser" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Settings User
+                    Personal
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsePagesUser" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -71,7 +71,7 @@
                 <div class="collapse" id="collapsePagesPeralatanKeluar" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                         <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
-                            Crew-OB
+                            Crew Out Broadcast(OB)
                         </a>
                         <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
                             Peminjaman-Alat
