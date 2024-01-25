@@ -429,7 +429,7 @@ class PdfController extends Controller
             'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
         ];
 
-        $test = view('user/print_penerima_pinjam', $data);
+        $test = view('user/penerima_pinjam', $data);
         // $test = view('user/index');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
         $pdf->AddPage();
@@ -447,7 +447,7 @@ class PdfController extends Controller
             'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
         ];
 
-        $test = view('user/print_pemberi_pinjam', $data);
+        $test = view('user/pemberi_pinjam', $data);
         // $test = view('user/index');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
         $pdf->AddPage();

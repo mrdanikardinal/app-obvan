@@ -62,7 +62,7 @@
                                         <input type="hidden" name="_method" value="PUT">
                                         <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Print</button>
                                     </form> -->
-                                    <a  href="<?= base_url() ?>user/print/<?= $valuePDF['id_pinjam']; ?>">
+                                    <a  href="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>">
                                         print
                                     </a>
                                 </td>
