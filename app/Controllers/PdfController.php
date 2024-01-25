@@ -421,7 +421,7 @@ class PdfController extends Controller
     //     }
 
 
-    public function print($idPjm)
+    public function print_penerima_pinjam($idPjm)
     {
         // dd($this->users->proceduregetParentMerkFromIdPjm(200));
         $data = [
@@ -429,7 +429,25 @@ class PdfController extends Controller
             'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
         ];
 
-        $test = view('user/index', $data);
+        $test = view('user/print_penerima_pinjam', $data);
+        // $test = view('user/index');
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
+        $pdf->AddPage();
+        $pdf->writeHTML($test);
+        // $pdf->writeHTML($test, true, false, false, false, '');
+        // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('sample.pdf', 'I');
+    }
+    public function print_pemberi_pinjam($idPjm)
+    {
+        // dd($this->users->proceduregetParentMerkFromIdPjm(200));
+        $data = [
+            'testing' => $this->users->proceduregetPrintIdPJMNamaPemberi($idPjm),
+            'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
+        ];
+
+        $test = view('user/print_pemberi_pinjam', $data);
         // $test = view('user/index');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
         $pdf->AddPage();

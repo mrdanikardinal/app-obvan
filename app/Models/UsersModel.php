@@ -17,9 +17,15 @@ class UsersModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
-    public function procedureGetNamaPemberiORPenerima($idUser)
+    public function procedureGetNamaPemberi($idUser)
     {
-        $query = $this->db->query("CALL getNamaPemberiAtauNamaPemberi"."($idUser)");
+        $query = $this->db->query("CALL getNamaPemberiPinjaman"."($idUser)");
+        return $query->getResultArray();
+        
+    }
+    public function procedureGetNamaPenerima($idUser)
+    {
+        $query = $this->db->query("CALL getNamaPenerimaPinjaman"."($idUser)");
         return $query->getResultArray();
         
     }
@@ -38,6 +44,16 @@ class UsersModel extends Model
         // select * from peminjaman_alat INNER join users on peminjaman_alat.nama_penerima = users.id WHERE peminjaman_alat.id_pinjam=id
         
     }
+  
+   public function proceduregetPrintIdPJMNamaPemberi($id_pinjam)
+    {
+        // $query = $this->db->query("CALL getPrintIdPJMNamaPenerima"."($id_pinjam)");
+        $query=$this->db->query("CALL getPrintIdPJMNamaPemberi(" . $id_pinjam . ")");
+        return $query->getResultArray();
+        // select * from peminjaman_alat INNER join users on peminjaman_alat.nama_penerima = users.id WHERE peminjaman_alat.id_pinjam=id
+        
+    }
+  
    public function proceduregetParentMerkFromIdPjm($id_pinjam)
     {
         $query = $this->db->query("CALL getParentMerkFromIdPjm"."($id_pinjam)");

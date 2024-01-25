@@ -19,16 +19,40 @@ class User extends BaseController
     public function index()
 
     {
+        //surat tugas outbroadcast
         // dd($this->users->procedureGetNamaPemberiORPenerima(3));
         // dd(user_id());
         $getInLogin = user_id();
 
         $data = [
-            'testing' => $this->users->procedureGetNamaPemberiORPenerima($getInLogin),
+            'AllShowNamaPemberi' => $this->users->procedureGetNamaPenerima($getInLogin),
 
 
         ];
         return view('surat-tugas/index', $data);
+    }
+
+    public function penerima_pinjam()
+    {
+        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
+        // dd(user_id());
+        $getInLogin = user_id();
+
+        $data = [
+            'AllShowNamaPenerima' => $this->users->procedureGetNamaPenerima($getInLogin),
+        ];
+        return view('surat-tugas/penerima_pinjam', $data);
+    }
+    public function pemberi_pinjam()
+    {
+        // dd($this->users->procedureGetNamaPemberiORPenerima(3));
+        // dd(user_id());
+        $getInLogin = user_id();
+
+        $data = [
+            'AllShowNamaPemberi' => $this->users->procedureGetNamaPemberi($getInLogin),
+        ];
+        return view('surat-tugas/pemberi_pinjam', $data);
     }
 
     // public function print($idTest)
