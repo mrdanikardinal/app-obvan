@@ -440,7 +440,6 @@ $(document).ready(function () {
         scrollCollapse: true,
         scrollY: '70vh'
 
-
     },
     );
 
@@ -463,10 +462,36 @@ $('.hapusInv').click(function () {
     return true;
 });
 
-
 //End Inventaris=================================================================================
 
 
+//Start OutBroadcast=============================================================================
+
+$(document).ready(function () {
+
+    $('#dinallTableOB').DataTable({
+
+        scrollX: true,
+
+        scrollCollapse: true,
+        scrollY: '70vh'
+
+    },
+    );
+
+});
+
+$('.hapusOB').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+//End OutBroadcast===============================================================================
 
 
 

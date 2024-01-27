@@ -70,7 +70,7 @@
                 </a>
                 <div class="collapse" id="collapsePagesPeralatanKeluar" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
+                        <a class="nav-link" href="<?= base_url() ?>out-broadcast">
                             Crew Out Broadcast(OB)
                         </a>
                         <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
