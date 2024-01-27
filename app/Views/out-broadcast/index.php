@@ -14,7 +14,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="<?= base_url("/out-broadcast/create") ?>" class="btn btn-primary my-2">Input</a>
+                <a href="<?= base_url("/out-broadcast/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>

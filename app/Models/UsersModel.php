@@ -81,5 +81,9 @@ class UsersModel extends Model
         return $query->getResultArray();
         
     }
+    public function proceduregetAllShowUser(){
+        $query = $this->db->query("CALL getAllShowUser()");
+        return $query->getResultArray();
+    }
    
 }

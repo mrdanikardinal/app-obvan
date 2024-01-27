@@ -28,25 +28,25 @@
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
-                                <label for="tanggalOutBroadcast" class="col-sm-2 col-form-label">Kategori</label>
+                                <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggalOutBroadcast" name="tanggalOutBroadcast" value="<?= old('tanggalOutBroadcast'); ?>">
+                                    <input type="text" required class="form-control" placeholder="Kategori" id="kategori" name="kategori" value="<?= old('kategori'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                                <label for="tanggalOB" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggal" name="tanggal" value="<?= old('tanggal'); ?>">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggalOB" name="tanggalOB" value="<?= old('tanggalOB'); ?>">
 
                                 </div>
                             </div>
 
 
                             <div class="row mb-3">
-                                <label for="sampai_dengan_ob" class="col-sm-2 col-form-label">Sampai Dengan</label>
+                                <label for="sampai_denganOB" class="col-sm-2 col-form-label">Sampai Dengan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan_ob" name="sampai_dengan_ob" value="<?= old('sampai_dengan_ob'); ?>">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_denganOB" name="sampai_denganOB" value="<?= old('sampai_denganOB'); ?>">
                                 </div>
 
                             </div>
@@ -64,18 +64,24 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="tp_ob" class="col-sm-2 col-form-label">Technical Producer(TP)</label>
+                                <label for="durasi_ob" class="col-sm-2 col-form-label">Durasi OB(Hari)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Durasi OB(Hari)" id="durasi_ob" name="durasi_ob" value="<?= old('durasi_ob'); ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="tp_ob" class="col-sm-2 col-form-label">Technical Producer</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Technical Producer(TP)" id="tp_ob" name="tp_ob" value="<?= old('tp_ob'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="td_ob" class="col-sm-2 col-form-label">Technical Director (TD)</label>
+                                <label for="td_ob" class="col-sm-2 col-form-label">Technical Director</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="Technical Director (TD)" id="td_ob" name="td_ob" value="<?= old('td_ob'); ?>">
+                                    <input type="text" required class="form-control " placeholder="Technical Director(TD)" id="td_ob" name="td_ob" value="<?= old('td_ob'); ?>">
                                     <div class="text-danger">
-                                        <?= validation_show_error('noHPPeminjam'); ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +90,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control " placeholder="Assistant.TD" id="asst_td" name="asst_td" value="<?= old('asst_td'); ?>">
                                     <div class="text-danger">
-                                        <?= validation_show_error('noHPPeminjam'); ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +99,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control " placeholder="Unit Manager" id="um_ob" name="um_ob" value="<?= old('um_ob'); ?>">
                                     <div class="text-danger">
-                                        <?= validation_show_error('noHPPeminjam'); ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +110,7 @@
                             <div class="row mb-3">
 
                                 <div class="col-sm-10 offset-sm-2">
-                                    <table class="table formTambah">
+                                    <table class="table formTambahOB">
                                         <tr>
                                             <th class="text-center">No</th>
                                             <th>Search</th>
@@ -116,8 +122,8 @@
                                                 1
                                             </td>
                                             <td>
-                                               
-                                                <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#dinallModal"><i class="fa-solid fa-search"></i></button>
+
+                                                <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
 
                                             </td>
                                             <td>
@@ -127,7 +133,6 @@
                                                 <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
                                             </td>
                                             <td>
-                                               
                                                 <button type="button" required class="btn btn-primary btnAddFormOB"><i class="fa-solid fa-plus"></i></button>
                                             </td>
                                         </tr>
@@ -135,6 +140,57 @@
                                 </div>
 
 
+
+
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header text-center">
+                                    Pengunaan Barang Out Broadcast(OB)
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <table class="table formTambahBarangOB">
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th>Search</th>
+                                                <th class="text-center">Nama Barang</th>
+                                                <th class="text-center">Merk</th>
+                                                <th class="text-center">S.N</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Aksi</th>
+                                            </tr>
+                                            <tr>
+                                                <td class="rownumberBarangForOB">
+                                                    1
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="naBar[]" placeholder="Nama Barang">
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="merk[]" placeholder="merk">
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
+                                                </td>
+                                                <td>
+                                                    <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
+                                                    <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -146,9 +202,9 @@
 
         </main>
 
-        <!-- Modal -->
+        <!-- Start Modal show all user-->
         <div class="modal fade" id="dinallModalOB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Data Pegawai OBVAN</h1>
@@ -159,6 +215,59 @@
                         <table id="tableOBShow" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
+                                    <th>No</th>
+                                    <th>Nama Crew</th>
+                                    <th>Golongan</th>
+                                    <th>Jabatan Fungsional</th>
+                                    <th>NPWP</th>
+                                    <th>Pilih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $number = 1; ?>
+                                <?php foreach ($allDataUsers as $key => $valueDataUsers) : ?>
+                                    <tr>
+                                        <td><?= $number++; ?></td>
+                                        <td><?= $valueDataUsers['fullname']; ?></td>
+                                        <td><?= $valueDataUsers['golongan']; ?></td>
+                                        <td><?= $valueDataUsers['jab_fung']; ?></td>
+                                        <td><?= $valueDataUsers['npwp']; ?></td>
+                                        <td>
+                                            <button type="button" required class="btn btn-success selectCrewOB" data-id="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                                <i class="fa-solid fa-check"></i></button>
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            </tbody>
+
+                        </table>
+
+                        <!--  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal show all user-->
+
+        <!-- Start Modal show all Barang Inventaris-->
+        <div class="modal fade" id="dinallModalBarangInv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Data Barang Inventaris</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--  -->
+                        <table id="tableInvShowForOB" class="table table-bordered table-hover text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
                                     <th>Barcode</th>
                                     <th>Jenis barang</th>
                                     <th>Nama Barang</th>
@@ -169,8 +278,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $numberBarang=1; ?>
                                 <?php foreach ($allDataInv as $key => $valueInv) : ?>
                                     <tr>
+                                        <td><?= $numberBarang++;?></td>
                                         <?php if ($valueInv['serial_number'] != NULL) : ?>
                                             <td class="text-center">
                                                 <div>
@@ -200,7 +311,7 @@
                                         </td>
                                         <td><?= $valueInv['nama_lokasi']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success select" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
+                                            <button type="button" required class="btn btn-success selectBarangForOB" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 
@@ -219,7 +330,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- End Modal show all Barang Inventaris -->
         <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {

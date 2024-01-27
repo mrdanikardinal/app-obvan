@@ -31,7 +31,6 @@ $(document).ready(function () {
 });
 let startDate;
 let endDate;
-let nowDate = new Date();
 $(document).ready(function () {
 
 
@@ -490,6 +489,270 @@ $('.hapusOB').click(function () {
 
     return true;
 });
+
+
+let startDateOB;
+let endDateOB;
+$(document).ready(function () {
+
+
+    $(function () {
+        $("#tanggalOB").datepicker({
+            dateFormat: 'dd/mm/yy',
+            timespicker: false
+
+        });
+
+
+        $("#sampai_denganOB").datepicker({
+            dateFormat: 'dd/mm/yy',
+            timespicker: false
+
+
+        });
+
+
+
+    });
+
+});
+
+
+
+$('#tanggalOB').change(function () {
+
+    startDateOB = $(this).datepicker('getDate');
+    $('#sampai_denganOB').datepicker('option', 'minDate', startDateOB);
+    let checkNulltanggal = $('#tanggalOB').val();
+    let checkNullsampai_dengan = $('#sampai_denganOB').val();
+    if (checkNulltanggal != '' && checkNullsampai_dengan != '') {
+        countDays();
+    }
+
+});
+
+
+$('#sampai_denganOB').change(function () {
+
+    endDateOB = $(this).datepicker('getDate');
+    $('#tanggalOB').datepicker('option', 'maxDate', endDateOB);
+    let checkNulltanggal = $('#tanggalOB').val();
+    let checkNullsampai_dengan = $('#sampai_denganOB').val();
+    if (checkNulltanggal != '' && checkNullsampai_dengan != '') {
+        countDays();
+    }
+
+
+});
+
+
+
+function countDays() {
+
+    let start = $("#tanggalOB").datepicker("getDate");
+    let end = $("#sampai_denganOB").datepicker("getDate");
+    days = (end - start) / (1000 * 60 * 60 * 24);
+    let plusSatu = days + 1;
+    // console.log(Math.round(plusSatu));
+
+    $("#durasi_ob").addClass('bg-warning-subtle');
+    $('#durasi_ob').prop('readonly', true);
+    // $("#durasi_ob").val(Math.round(plusSatu) + ' Hari');
+    $("#durasi_ob").val(Math.round(plusSatu));
+}
+
+
+//Start tabel Input Crew
+
+$(document).ready(function () {
+    $('#dinallModalOB').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowAllCrew', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowAllCrew');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectCrewOB').on('click', '.selectCrewOB', function () {
+            let idOb = $(this).data('id_ob');
+            let fullname = $(this).data('fullname');
+            let jabfung = $(this).data('jab_fung');
+            let npwp = $(this).data('npwp');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(fullname);
+            $currentSearchBarang.parent().next().next().children().val(npwp);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalOB').modal('hide');
+           
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#tableOBShow').DataTable({
+
+    });
+});
+
+
+$(function () {
+    // Add Row
+
+
+    $(".btnAddFormOB").click(function () {
+        addnewrowOB();
+        renumberRowsOB();
+    });
+
+    // Remove Row
+    $("body").delegate('.btnHapusFormOB', 'click', function () {
+        $(this).parent().parent().remove();
+        renumberRowsOB();
+        // $(this).parents('tr').remove();
+    });
+
+
+});
+
+function addnewrowOB() {
+    let tr = `<tr>
+        <td class="rownumberob">
+        </td>
+        <td>
+        <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td>
+        <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+        </td>
+        <td>
+        <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+        </td>
+        <td>
+            <button type="button" required class="btn btn-danger btnHapusFormOB"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.formTambahOB').append(tr);
+};
+
+function renumberRowsOB() {
+    $(".formTambahOB").children().children().each(function (i, v) {
+
+        $(this).find(".rownumberob").text(i);
+        //   $(this).find(".rownumber").val(i + 1); index i dimulai dari 0
+        // console.log(i);
+    });
+}
+//Start tabel Input Crew
+//Start tabel Input Alat OB
+$(document).ready(function () {
+    $('#dinallModalBarangInv').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowBarangInv', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowBarangInv');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectBarangForOB').on('click', '.selectBarangForOB', function () {
+            let idInv = $(this).data('id');
+            let barcode = $(this).data('barcode');
+            let barang = $(this).data('barang');
+            let merk = $(this).data('merk');
+            let sn = $(this).data('sn');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(barang);
+            $currentSearchBarang.parent().next().next().children().val(merk);
+            $currentSearchBarang.parent().next().next().next().children().val(sn);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalBarangInv').modal('hide');
+           
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#tableInvShowForOB').DataTable({
+
+    });
+});
+
+
+$(function () {
+    // Add Row
+    $(".btnAddFormForBarangOB").click(function () {
+        addnewrowBarangForOB();
+        renumberRowsBarangForOB();
+    });
+
+    // Remove Row
+    $("body").delegate('.btnHapusFormBarangForOB', 'click', function () {
+        $(this).parent().parent().remove();
+        renumberRowsBarangForOB();
+        // $(this).parents('tr').remove();
+    });
+
+
+});
+
+function addnewrowBarangForOB() {
+    let tr = `<tr>
+        <td class="rownumberBarangForOB">
+        </td>
+        <td>
+        <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td>
+            <input type="text" required id="dinall-js-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
+        </td>
+        <td>
+            <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+        </td>
+        <td>
+            <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+        </td>
+        <td>
+            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
+        </td>
+        <td>
+            <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.formTambahBarangOB').append(tr);
+    // console.log('testing');
+
+};
+
+function renumberRowsBarangForOB() {
+    $(".formTambahBarangOB").children().children().each(function (i, v) {
+
+        $(this).find(".rownumberBarangForOB").text(i);
+        //   $(this).find(".rownumber").val(i + 1); index i dimulai dari 0
+        // console.log(i);
+    });
+}
+
+
+
+
+//End tabel Input Alat OB
 
 //End OutBroadcast===============================================================================
 

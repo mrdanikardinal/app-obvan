@@ -11,14 +11,20 @@
  */
 namespace App\Controllers;
 use App\Models\OutBroadcastModel;
-
+use App\Models\PeminjamanAlatModel;
+use App\Models\UsersModel;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class OutBroadcast extends BaseController
 {
     protected $outBroadcast;
+    protected $allUser;
+    protected $pinjamAlatModel;
 
     public function __construct(){
         $this->outBroadcast= new OutBroadcastModel();
+        $this->allUser= new UsersModel();
+        $this->pinjamAlatModel=new PeminjamanAlatModel();
     }
     public function index()
     {
@@ -30,6 +36,17 @@ class OutBroadcast extends BaseController
     }
     public function create()
     {
+        $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
+        $generator = new BarcodeGeneratorPNG();
+        $data= [
+            'title'=> 'Input Out Broadcast',
+            'allDataUsers'=> $this->allUser->proceduregetAllShowUser(),
+            'allDataInv' => $dataInv,
+            'generator' => $generator,
+
+        ];
+
+        return view('out-broadcast/create',$data);
         
     }
     public function save()

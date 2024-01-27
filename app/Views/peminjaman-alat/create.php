@@ -132,8 +132,8 @@
                                     <select name="nama_pemberi" id="nama_pemberi" class="form-select form-select-sm" aria-label="Small select example">
                                         <option value="<?= user()->id; ?>" selected><?= $nomor1++ . '. ' . user()->fullname; ?></option>
                                         <?php foreach ($allNama_penerima as $key => $valueNama_pemberi) : ?>
-                                            <?php if($valueNama_pemberi['fullname']!=user()->fullname): ?>
-                                            <option value="<?= $valueNama_pemberi['id'] ?>"><?= $nomor1++ . '. ' . $valueNama_pemberi['fullname'] ?></option>
+                                            <?php if ($valueNama_pemberi['fullname'] != user()->fullname) : ?>
+                                                <option value="<?= $valueNama_pemberi['id'] ?>"><?= $nomor1++ . '. ' . $valueNama_pemberi['fullname'] ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
@@ -152,7 +152,7 @@
 
         <!-- Modal -->
         <div class="modal fade" id="dinallModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Data Barang Inventaris</h1>
@@ -163,6 +163,7 @@
                         <table id="tableInvShow" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Barcode</th>
                                     <th>Jenis barang</th>
                                     <th>Nama Barang</th>
@@ -173,8 +174,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $numberBarang=1; ?>
                                 <?php foreach ($allDataInv as $key => $valueInv) : ?>
                                     <tr>
+                                        <td><?= $numberBarang++;?></td>
                                         <?php if ($valueInv['serial_number'] != NULL) : ?>
                                             <td class="text-center">
                                                 <div>

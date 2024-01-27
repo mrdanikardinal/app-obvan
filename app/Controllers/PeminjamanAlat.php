@@ -267,10 +267,6 @@ class PeminjamanAlat extends BaseController
         $this->pinjamAlatModel->delete($id);
         return redirect()->to('peminjaman-alat');
     }
-
-
-
-
     public function hapus($id)
     {
         return $this->parentMerkModel->delete($id);
