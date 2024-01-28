@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form id="formAddOutBroadcast" method="post" action="<?= base_url("/out-broadcast/save"); ?>" class="needs-validation" novalidate>
+                        <form id="formAddOutBroadcast" method="post" action="<?= base_url("/out-broadcast/save"); ?>">
 
                             <?= csrf_field(); ?>
 

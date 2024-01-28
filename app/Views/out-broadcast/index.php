@@ -48,10 +48,14 @@
                                     $date = str_replace('/', '-', $convert);
                                     $tanggalconvert = date('d/m/Y', strtotime($date));
                                     ?>
+                                    <?php if($valueShowBroadcast['sampai_dengan']!==null):?>
                                     <?php $convert2 = $valueShowBroadcast['sampai_dengan'];
                                     $date = str_replace('/', '-', $convert2);
                                     $convert_sampai_dengan = date('d/m/Y', strtotime($date));
                                     ?>
+                                    <?php elseif($valueShowBroadcast['sampai_dengan']==null): ?>
+                                    <?php $convert_sampai_dengan= '-' ?>
+                                    <?php endif; ?>
                                     <tr>
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueShowBroadcast['id_ob']; ?></td>
