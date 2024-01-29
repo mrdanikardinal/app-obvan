@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 2.Fitur Crew OB CRUD
  * 3.Fitur Print Surat Tugas
@@ -9,9 +10,11 @@
  *
  * For security be sure to declare any new methods as protected or private.
  */
+
 namespace App\Controllers;
 
 use App\Models\CrewObModel;
+use App\Models\KategoriObModel;
 use App\Models\OutBroadcastModel;
 use App\Models\ParentAlatObModel;
 use App\Models\PeminjamanAlatModel;
@@ -25,51 +28,56 @@ class OutBroadcast extends BaseController
     protected $pinjamAlatModel;
     protected $crewOb;
     protected $parentAlatOb;
+    protected $kategoriOb;
 
-    public function __construct(){
-        $this->outBroadcast= new OutBroadcastModel();
-        $this->allUser= new UsersModel();
-        $this->pinjamAlatModel=new PeminjamanAlatModel();
-        $this->crewOb= new CrewObModel();
-        $this->parentAlatOb= new ParentAlatObModel();
+    public function __construct()
+    {
+        $this->outBroadcast = new OutBroadcastModel();
+        $this->allUser = new UsersModel();
+        $this->pinjamAlatModel = new PeminjamanAlatModel();
+        $this->crewOb = new CrewObModel();
+        $this->parentAlatOb = new ParentAlatObModel();
+        $this->kategoriOb = new KategoriObModel();
     }
     public function index()
     {
-        // dd()
-        $data=[
-            'allShowOutBroadcast'=> $this->outBroadcast->procedureGetAllShowOutBroadcast()
+        // dd($this->outBroadcast->getOBJointKategori());
+        $data = [
+            // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
+            'showAllJoinsOBKategori'=> $this->outBroadcast->getOBJointKategori()
         ];
-        return view('out-broadcast/index',$data);
+        return view('out-broadcast/index', $data);
     }
     public function create()
     {
+        $allKategori = $this->kategoriOb->getKategori();
         $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
         $generator = new BarcodeGeneratorPNG();
-        $data= [
-            'title'=> 'Input Out Broadcast',
-            'allDataUsers'=> $this->allUser->proceduregetAllShowUser(),
+        $data = [
+            'title' => 'Input Out Broadcast',
+            'allDataUsers' => $this->allUser->proceduregetAllShowUser(),
             'allDataInv' => $dataInv,
             'generator' => $generator,
+            'allKategori' => $allKategori
 
         ];
 
-        return view('out-broadcast/create',$data);
-        
+        return view('out-broadcast/create', $data);
     }
     public function save()
     {
 
+
+        $idAutoOutBroadcast = $this->outBroadcast->autoNumberIdOb();
         $converttgl = $this->request->getVar('tanggalOB');
         $convertSampaiDengan = $this->request->getVar('sampai_denganOB');
         $date = str_replace('/', '-', $converttgl);
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
-
-        
-        // dd($this->validate($rules));
-        $this->pinjamAlatModel->save([
-            'kategori'=>$this->request->getVar('kategori'),
+        $this->outBroadcast->save([
+            'id_ob' => $idAutoOutBroadcast,
+            'id_kategori' => $this->request->getVar('kategori'),
             'tanggal' => $tanggalconvert,
             'sampai_dengan' => $tanggalconvertSampaiDengan,
             'acara' => $this->request->getVar('acara_ob'),
@@ -81,32 +89,41 @@ class OutBroadcast extends BaseController
             'um' => $this->request->getVar('um_ob')
         ]);
         //start crew ob
-        $nama = $this->request->getVar('nama');
-        $nip = $this->request->getVar('nip');
-        $jumlahDataInput = count($nama);
+        $idUser = $this->request->getVar('id_user');
+        $jumlahDataInput = count($idUser);
         for ($i = 0; $i < $jumlahDataInput; $i++) {
+
             $this->crewOb->save([
-                'id_ob' => $nama[$i],
-                'id_users' => $nip[$i]
+                'id_ob' => $idAutoOutBroadcast,
+                'id_users' => $idUser[$i]
             ]);
         }
         //end crew ob
-        session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ');
-        return redirect()->to('peminjaman-alat');
+        //start peralatan ob
+        $idPeralatan = $this->request->getVar('id_peralatan');
+        $jumlahDataInputPeralatan = count($idPeralatan);
+        for ($j = 0; $j < $jumlahDataInputPeralatan; $j++) {
+            $this->parentAlatOb->save([
+                'id_ob' => $idAutoOutBroadcast,
+                'id_inv' => $idPeralatan[$j]
+            ]);
+        }
+        //end peralatan ob
+
+
+        session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ' . $idAutoOutBroadcast);
+        return redirect()->to('out-broadcast');
     }
- 
+
     public function edit()
     {
-        
     }
     public function update()
     {
-        
     }
     public function delete($id)
     {
         $this->outBroadcast->delete($id);
         return redirect()->to('out-broadcast');
-        
     }
 }

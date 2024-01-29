@@ -38,8 +38,8 @@
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Edit</th>
-                                    <?php if(in_groups('admin'))  :?>
-                                    <th>Hapus</th>
+                                    <?php if (in_groups('admin')) : ?>
+                                        <th>Hapus</th>
                                     <?php endif; ?>
                                 </tr>
                             </thead>
@@ -129,10 +129,10 @@
                                                     <?php endif; ?>
                                                     <?= "Penerima" ?>
                                                     <?php foreach ($allNama_pemberi as $k) : ?>
-  
-                                                        
+
+
                                                         <?= ($valuePeminjaman['nama_penerima'] == $k['id']) ? $k['fullname'] : Null; ?>
-                                                        
+
                                                     <?php endforeach; ?>
                     </div>
 
@@ -177,14 +177,14 @@
                     </form>
 
                 </td>
-                <?php if(in_groups('admin'))  :?>
-                <td>
-                    <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
-                        <?= csrf_field(); ?>
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
-                    </form>
-                </td>
+                <?php if (in_groups('admin')) : ?>
+                    <td>
+                        <form id="hapus" action="<?= base_url() ?>peminjaman-alat/<?= $valuePeminjaman['id_pinjam']; ?>" method="post">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger hapusPjm"><i class="fa-solid fa-trash"></i>Hapus</button>
+                        </form>
+                    </td>
                 <?php endif;  ?>
                 </tr>
 
@@ -195,12 +195,8 @@
 
                 </div>
             </div>
+        </main>
+        <?= $this->include('layout/footer'); ?>
     </div>
-    </main>
-
-    <?= $this->include('layout/footer'); ?>
-
-
-</div>
 </div>
 <?= $this->endSection('content'); ?>

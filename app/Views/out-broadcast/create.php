@@ -22,7 +22,9 @@
                         <?= $title ?>
                     </div>
                     <div class="card-body">
-
+                        <?php
+                        $nomor = 1;
+                        ?>
                         <form id="formAddOutBroadcast" method="post" action="<?= base_url("/out-broadcast/save"); ?>">
 
                             <?= csrf_field(); ?>
@@ -30,8 +32,12 @@
                             <div class="row mb-3">
                                 <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Kategori" id="kategori" name="kategori" value="<?= old('kategori'); ?>">
-
+                                    <!-- <input type="text" required class="form-control" placeholder="Kategori" id="kategori" name="kategori" value="<?= old('kategori'); ?>"> -->
+                                    <select name="kategori" id="kategori" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allKategori as $key => $valueKategori) : ?>
+                                            <option value="<?= $valueKategori['id'] ?>"><?= $nomor++ . '. ' . $valueKategori['nama_kategori'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -124,17 +130,19 @@
                                             <td>
 
                                                 <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
-
                                             </td>
                                             <td>
                                                 <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+
                                             </td>
                                             <td>
                                                 <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
                                             </td>
+                                            <td><input type="hidden" name="id_user[]"></td>
                                             <td>
                                                 <button type="button" required class="btn btn-primary btnAddFormOB"><i class="fa-solid fa-plus"></i></button>
                                             </td>
+
                                         </tr>
                                     </table>
                                 </div>
@@ -180,6 +188,7 @@
                                                 <td>
                                                     <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
                                                 </td>
+                                                <td><input type="hidden" name="id_peralatan[]"></td>
                                                 <td>
                                                     <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
                                                     <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
@@ -201,7 +210,6 @@
             </div>
 
         </main>
-
         <!-- Start Modal show all user-->
         <div class="modal fade" id="dinallModalOB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -233,7 +241,7 @@
                                         <td><?= $valueDataUsers['jab_fung']; ?></td>
                                         <td><?= $valueDataUsers['npwp']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectCrewOB" data-id="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                            <button type="button" required class="btn btn-success selectCrewOB" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 
@@ -278,10 +286,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $numberBarang=1; ?>
+                                <?php $numberBarang = 1; ?>
                                 <?php foreach ($allDataInv as $key => $valueInv) : ?>
                                     <tr>
-                                        <td><?= $numberBarang++;?></td>
+                                        <td><?= $numberBarang++; ?></td>
                                         <?php if ($valueInv['serial_number'] != NULL) : ?>
                                             <td class="text-center">
                                                 <div>
@@ -311,7 +319,7 @@
                                         </td>
                                         <td><?= $valueInv['nama_lokasi']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectBarangForOB" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
+                                            <button type="button" required class="btn btn-success selectBarangForOB" data-id_alat="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 
@@ -404,10 +412,6 @@
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
         </script>
         <?= $this->include('layout/footer'); ?>
-
-
     </div>
 </div>
-
-
 <?= $this->endSection('content'); ?>

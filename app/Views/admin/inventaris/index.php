@@ -109,11 +109,7 @@
             </div>
 
         </main>
-
-
         <?= $this->include('layout/footer'); ?>
-
-
     </div>
 </div>
 <?= $this->endSection('content'); ?>

@@ -43,23 +43,23 @@
                             </thead>
                             <tbody>
                                 <?php $number = 1; ?>
-                                <?php foreach ($allShowOutBroadcast as $key => $valueShowBroadcast) : ?>
+                                <?php foreach ($showAllJoinsOBKategori as $key => $valueShowBroadcast) : ?>
                                     <?php $convert = $valueShowBroadcast['tanggal'];
                                     $date = str_replace('/', '-', $convert);
                                     $tanggalconvert = date('d/m/Y', strtotime($date));
                                     ?>
-                                    <?php if($valueShowBroadcast['sampai_dengan']!==null):?>
-                                    <?php $convert2 = $valueShowBroadcast['sampai_dengan'];
-                                    $date = str_replace('/', '-', $convert2);
-                                    $convert_sampai_dengan = date('d/m/Y', strtotime($date));
-                                    ?>
-                                    <?php elseif($valueShowBroadcast['sampai_dengan']==null): ?>
-                                    <?php $convert_sampai_dengan= '-' ?>
+                                    <?php if ($valueShowBroadcast['sampai_dengan'] !== null) : ?>
+                                        <?php $convert2 = $valueShowBroadcast['sampai_dengan'];
+                                        $date = str_replace('/', '-', $convert2);
+                                        $convert_sampai_dengan = date('d/m/Y', strtotime($date));
+                                        ?>
+                                    <?php elseif ($valueShowBroadcast['sampai_dengan'] == null) : ?>
+                                        <?php $convert_sampai_dengan = '-' ?>
                                     <?php endif; ?>
                                     <tr>
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueShowBroadcast['id_ob']; ?></td>
-                                        <td><?= $valueShowBroadcast['kategori']; ?></td>
+                                        <td><?= $valueShowBroadcast['nama_kategori']; ?></td>
                                         <td><?= $tanggalconvert; ?></td>
                                         <td><?= $convert_sampai_dengan; ?></td>
                                         <td><?= $valueShowBroadcast['acara']; ?></td>
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </main>
+        <?= $this->include('layout/footer'); ?>
     </div>
-    <?= $this->include('layout/footer'); ?>
 </div>
 <?= $this->endSection('content'); ?>

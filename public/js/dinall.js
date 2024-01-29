@@ -575,7 +575,7 @@ $(document).ready(function () {
 
         // Mengatur event handler untuk elemen .select menggunakan event delegation
         $(document).off('click', '.selectCrewOB').on('click', '.selectCrewOB', function () {
-            let idOb = $(this).data('id_ob');
+            let idCrew = $(this).data('id_crew');
             let fullname = $(this).data('fullname');
             let jabfung = $(this).data('jab_fung');
             let npwp = $(this).data('npwp');
@@ -583,6 +583,7 @@ $(document).ready(function () {
             // Mengisi nilai input pada elemen .searchBarang
             $currentSearchBarang.parent().next().children().val(fullname);
             $currentSearchBarang.parent().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().children().val(idCrew);
             let currentIndex = allSearchBarang.index($currentSearchBarang);
             let isLastElement = currentIndex === allSearchBarang.length - 1;
 
@@ -636,6 +637,7 @@ function addnewrowOB() {
         <td>
         <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
         </td>
+        <td><input type="hidden" name="id_user[]"></td>
         <td>
             <button type="button" required class="btn btn-danger btnHapusFormOB"><i class="fa-solid fa-trash"></i></button>
         </td>
@@ -664,7 +666,7 @@ $(document).ready(function () {
 
         // Mengatur event handler untuk elemen .select menggunakan event delegation
         $(document).off('click', '.selectBarangForOB').on('click', '.selectBarangForOB', function () {
-            let idInv = $(this).data('id');
+            let idInv = $(this).data('id_alat');
             let barcode = $(this).data('barcode');
             let barang = $(this).data('barang');
             let merk = $(this).data('merk');
@@ -674,6 +676,7 @@ $(document).ready(function () {
             $currentSearchBarang.parent().next().children().val(barang);
             $currentSearchBarang.parent().next().next().children().val(merk);
             $currentSearchBarang.parent().next().next().next().children().val(sn);
+            $currentSearchBarang.parent().next().next().next().next().next().children().val(idInv);
             let currentIndex = allSearchBarang.index($currentSearchBarang);
             let isLastElement = currentIndex === allSearchBarang.length - 1;
 
@@ -731,6 +734,7 @@ function addnewrowBarangForOB() {
         <td>
             <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
         </td>
+        <td><input type="hidden" name="id_peralatan[]"></td>
         <td>
             <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
         </td>
