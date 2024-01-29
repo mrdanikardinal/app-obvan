@@ -63,8 +63,7 @@ class PeminjamanAlat extends BaseController
         return view('peminjaman-alat/create', $data);
     }
     public function save()
-    {
-
+    { 
         $rules = [
             'noHPPeminjam' => [
                 'rules'  => 'required|numeric',
@@ -123,6 +122,7 @@ class PeminjamanAlat extends BaseController
         session()->setFlashdata('pesan', 'Berhasil,input peminjaman ID ' . $idAutoPeminjamanAlat);
         return redirect()->to('peminjaman-alat');
     }
+
     public function edit($id_pinjam)
     {
         session();
@@ -140,6 +140,7 @@ class PeminjamanAlat extends BaseController
 
         return view('peminjaman-alat/edit', $data);
     }
+
     public function update($id_pinjam)
     {
         // $idAutoPeminjamanAlat = $this->pinjamAlatModel->autoNumberId();

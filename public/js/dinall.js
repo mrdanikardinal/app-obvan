@@ -526,7 +526,7 @@ $('#tanggalOB').change(function () {
     let checkNulltanggal = $('#tanggalOB').val();
     let checkNullsampai_dengan = $('#sampai_denganOB').val();
     if (checkNulltanggal != '' && checkNullsampai_dengan != '') {
-        countDays();
+        countDaysOB();
     }
 
 });
@@ -539,7 +539,7 @@ $('#sampai_denganOB').change(function () {
     let checkNulltanggal = $('#tanggalOB').val();
     let checkNullsampai_dengan = $('#sampai_denganOB').val();
     if (checkNulltanggal != '' && checkNullsampai_dengan != '') {
-        countDays();
+        countDaysOB();
     }
 
 
@@ -547,11 +547,11 @@ $('#sampai_denganOB').change(function () {
 
 
 
-function countDays() {
+function countDaysOB() {
 
-    let start = $("#tanggalOB").datepicker("getDate");
-    let end = $("#sampai_denganOB").datepicker("getDate");
-    days = (end - start) / (1000 * 60 * 60 * 24);
+    let startCount = $("#tanggalOB").datepicker("getDate");
+    let endCount = $("#sampai_denganOB").datepicker("getDate");
+    days = (endCount - startCount) / (1000 * 60 * 60 * 24);
     let plusSatu = days + 1;
     // console.log(Math.round(plusSatu));
 
