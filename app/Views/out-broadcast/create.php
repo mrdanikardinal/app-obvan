@@ -186,7 +186,7 @@
                                                     <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
                                                 </td>
                                                 <td>
-                                                    <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
+                                                    <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
                                                 </td>
                                                 <td><input type="hidden" name="id_peralatan[]"></td>
                                                 <td>

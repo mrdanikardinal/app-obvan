@@ -9,16 +9,16 @@ class KategoriObModel extends Model
 {
 
     protected $table = 'kategori_ob';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_kategori';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['kategori'];
+    protected $allowedFields = ['nama_kategori'];
 
     public function getKategori($id = false)
     {
         if ($id == false) {
             return $this->findAll();
         }
-        return $this->where(['id_status' => $id])->first();
+        return $this->where(['id_kategori' => $id])->first();
     }
 
 

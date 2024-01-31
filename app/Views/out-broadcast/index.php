@@ -27,6 +27,7 @@
                                     <th>No</th>
                                     <th>ID</th>
                                     <th>Kategori</th>
+                                    <th>Crew Dinas</th>
                                     <th>Tanggal</th>
                                     <th>Sampai Dengan</th>
                                     <th>Acara</th>
@@ -60,6 +61,31 @@
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueShowBroadcast['id_ob']; ?></td>
                                         <td><?= $valueShowBroadcast['nama_kategori']; ?></td>
+                                        <td>
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Nama Crew</th>
+                                                </tr>
+                                                <?php $number2 = 1; ?>
+                                                <?php foreach ($allDataOutBroadcast as $j) : ?>
+                                                    <?php if ($valueShowBroadcast['id_ob'] == $j['id_ob']) : ?>
+                                                        <tr>
+                                                            <th><?= $number2++; ?></th>
+                                                            <td class="text-center">
+                                                                <?php foreach ($allUsers as $k) : ?>
+                                                                    <?php if ($j['id_users'] == $k['id']) : ?>
+                                                                        <?= $k['fullname']; ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </table>
+                                            <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-eye"></i>View Peralatan</button>
+
+                                        </td>
                                         <td><?= $tanggalconvert; ?></td>
                                         <td><?= $convert_sampai_dengan; ?></td>
                                         <td><?= $valueShowBroadcast['acara']; ?></td>
@@ -94,6 +120,57 @@
                 </div>
             </div>
         </main>
+
+
+        <!-- start modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Peralatan Digunakan OB</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama Barang</th>
+                                <th class="text-center">Merk</th>
+                                <th class="text-center">Serial Number</th>
+                                <th class="text-center">Jumlah</th>
+                            </tr>
+                            <?php $number2 = 1; ?>
+                 
+                            <?php foreach ($allAlatOB as $l) : ?>
+
+                                <?php if (20 == $l['id_ob']) : ?>
+                                    <?php foreach ($allInventaris as $m) : ?>
+                                        <?php if ($l['id_inv'] == $m['id_inv']) : ?>
+                                            <tr>
+                                                <th><?= $number2++; ?></th>
+                                                <td><?= $m['nama_barang']; ?></td>
+                                                <td><?= $m['merk']; ?></td>
+                                                <td><?= $m['serial_number']; ?></td>
+                                                <td><?= $l['jumlah']; ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                         
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal modal -->
         <?= $this->include('layout/footer'); ?>
     </div>
 </div>

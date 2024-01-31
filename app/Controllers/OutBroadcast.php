@@ -19,6 +19,7 @@ use App\Models\OutBroadcastModel;
 use App\Models\ParentAlatObModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\UsersModel;
+use App\Models\InventarisModel;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class OutBroadcast extends BaseController
@@ -29,6 +30,7 @@ class OutBroadcast extends BaseController
     protected $crewOb;
     protected $parentAlatOb;
     protected $kategoriOb;
+    protected $inventaris;
 
     public function __construct()
     {
@@ -38,13 +40,19 @@ class OutBroadcast extends BaseController
         $this->crewOb = new CrewObModel();
         $this->parentAlatOb = new ParentAlatObModel();
         $this->kategoriOb = new KategoriObModel();
+        $this->inventaris = new InventarisModel();
     }
     public function index()
     {
         // dd($this->outBroadcast->getOBJointKategori());
+        
         $data = [
             // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
-            'showAllJoinsOBKategori'=> $this->outBroadcast->getOBJointKategori()
+            'showAllJoinsOBKategori'=> $this->outBroadcast->getOBJointKategori(),
+            'allDataOutBroadcast'=> $this->crewOb->getIdOutBroadcast(),
+            'allUsers'=>$this->allUser->getUsers(),
+            "allAlatOB"=>$this->parentAlatOb->getIdParentAlatOB(),
+            'allInventaris'=>$this->inventaris->getInventaris()
         ];
         return view('out-broadcast/index', $data);
     }
@@ -88,7 +96,6 @@ class OutBroadcast extends BaseController
             'ass_td' => $this->request->getVar('asst_td'),
             'um' => $this->request->getVar('um_ob')
         ]);
-        //start crew ob
         $idUser = $this->request->getVar('id_user');
         $jumlahDataInput = count($idUser);
         for ($i = 0; $i < $jumlahDataInput; $i++) {
@@ -101,11 +108,13 @@ class OutBroadcast extends BaseController
         //end crew ob
         //start peralatan ob
         $idPeralatan = $this->request->getVar('id_peralatan');
+        $jumlahAlat = $this->request->getVar('jumlahAlatOB');
         $jumlahDataInputPeralatan = count($idPeralatan);
         for ($j = 0; $j < $jumlahDataInputPeralatan; $j++) {
             $this->parentAlatOb->save([
                 'id_ob' => $idAutoOutBroadcast,
-                'id_inv' => $idPeralatan[$j]
+                'id_inv' => $idPeralatan[$j],
+                'jumlah'=> $jumlahAlat[$j]
             ]);
         }
         //end peralatan ob

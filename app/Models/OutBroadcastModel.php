@@ -38,8 +38,7 @@ class OutBroadcastModel extends Model
         $builder->join('kategori_ob','out_broadcast.id_kategori=kategori_ob.id');
         $query=$builder->get();
         return $query->getResultArray(); //return array
-        
     }
-
+    
 
 }
