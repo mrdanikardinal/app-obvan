@@ -758,6 +758,27 @@ function renumberRowsBarangForOB() {
 
 //End tabel Input Alat OB
 
+// start menampilkan alat ob diindex ob
+$(document).ready(function(){
+    $('.tombol_alat').click(function(){
+        let id = $(this).data('idob');
+        console.log(id);
+
+        $.ajax({
+            url: 'out-broadcast', // Lokasi controller Anda
+            type: 'POST',
+            dataType: 'json',
+            data: {id: id},
+            success: function(response){
+                // Tampilkan data dalam modal
+            }
+        });
+    });
+});
+
+
+// end menampilkan alat ob diindex ob
+
 //End OutBroadcast===============================================================================
 
 

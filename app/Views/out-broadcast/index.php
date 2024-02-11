@@ -83,8 +83,13 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </table>
-                                            <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-eye"></i>View Peralatan</button>
-
+                                            <!-- <button type="submit" data-idob="<?= $valueShowBroadcast['id_ob']; ?>" class="btn btn-success tombol_alat" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-eye"></i>View Peralatan</button> -->
+                                            <form action="<?= base_url() ?>out-broadcast/peralatan-crew-ob/<?= $valueShowBroadcast['id_ob']; ?>" method="post">
+                                                <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" value="PUT">
+                                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>View Alat</button>
+                                            </form>
+                                            
                                         </td>
                                         <td><?= $tanggalconvert; ?></td>
                                         <td><?= $convert_sampai_dengan; ?></td>
