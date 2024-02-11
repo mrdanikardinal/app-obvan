@@ -42,6 +42,7 @@ class OutBroadcast extends BaseController
         $this->kategoriOb = new KategoriObModel();
         $this->inventaris = new InventarisModel();
     }
+
     public function index()
     {
         // dd($this->outBroadcast->getOBJointKategori());
@@ -134,5 +135,12 @@ class OutBroadcast extends BaseController
     {
         $this->outBroadcast->delete($id);
         return redirect()->to('out-broadcast');
+    }
+
+    public function peralatancrewob($idOB){
+        $data =$this->outBroadcast->getData($idOB);
+        // dd($data);
+        return view('peralatan-crew-ob/index');
+
     }
 }

@@ -45,6 +45,7 @@ $routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
 
 //out-broadcast
 $routes->get('out-broadcast', 'OutBroadcast::index');
+$routes->PUT('out-broadcast/peralatan-crew-ob/(:segment)', 'OutBroadcast::peralatancrewob/$1');
 $routes->delete('out-broadcast/(:segment)', 'OutBroadcast::delete/$1');
 $routes->PUT('out-broadcast/edit/(:segment)', 'OutBroadcast::edit/$1');
 $routes->get('out-broadcast/create', 'OutBroadcast::create');

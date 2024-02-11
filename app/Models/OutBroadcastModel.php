@@ -39,6 +39,15 @@ class OutBroadcastModel extends Model
         $query=$builder->get();
         return $query->getResultArray(); //return array
     }
+//mengambil data peralatan ob
+    public function getData($id)
+    {
+        // Query untuk mengambil data dari database berdasarkan ID
+        return $this->db->table($this->table)
+                        ->where('id_ob', $id)
+                        ->get()
+                        ->getRow();
+    }
     
 
 }
