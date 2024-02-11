@@ -77,7 +77,7 @@
 
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
 
                                                     </td>
