@@ -754,7 +754,11 @@ function renumberRowsBarangForOB() {
 }
 
 
-
+$(document).on('click', '.clickModalSearchIDOB', function (event) {
+    let varId= $(this).data('ob');
+    console.log(varId);
+   
+});
 
 //End tabel Input Alat OB
 

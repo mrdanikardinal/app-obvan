@@ -83,7 +83,7 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </table>
-                                            <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-eye"></i>View Peralatan</button>
+                                            <button type="submit" class="btn btn-success clickModalSearchIDOB" data-ob="<?= $valueShowBroadcast['id_ob']; ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-eye"></i>View Peralatan</button>
 
                                         </td>
                                         <td><?= $tanggalconvert; ?></td>
@@ -132,8 +132,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <table class="table table-bordered">
-                            
+                        <!-- <table class="table table-bordered">
+
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Barang</th>
@@ -141,8 +141,13 @@
                                 <th class="text-center">Serial Number</th>
                                 <th class="text-center">Jumlah</th>
                             </tr>
-                            <?php $number2 = 1; ?>
-                 
+                            <?php 
+                            $number2 = 1;
+                            $IdOB=21;
+                            
+
+                             ?>
+                            <input type="hidden" class="test" value="">
                             <?php foreach ($allAlatOB as $l) : ?>
 
                                 <?php if (20 == $l['id_ob']) : ?>
@@ -159,13 +164,13 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                         
 
-                        </table>
+
+                        </table> -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                     
+
                     </div>
                 </div>
             </div>
