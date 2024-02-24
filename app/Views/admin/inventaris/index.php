@@ -6,7 +6,6 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <!-- <h1 class="mt-4">Peminjaman Alat</h1> -->
                 <h5 class="mt-4">
                     <?php if (session()->getFlashdata('pesan')) : ?>
                         <div class="alert alert-success" role="alert">
@@ -107,7 +106,6 @@
                     </div>
                 </div>
             </div>
-
         </main>
         <?= $this->include('layout/footer'); ?>
     </div>

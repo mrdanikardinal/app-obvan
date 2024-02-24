@@ -17,8 +17,6 @@ $(document).ready(function () {
 
     },
 
-
-
     );
 
 });
@@ -444,6 +442,7 @@ $(document).ready(function () {
 
 });
 
+
 $(document).ready(function () {
     $('#tableInvShow').DataTable({
 
@@ -785,9 +784,18 @@ $(document).ready(function(){
 
 //End OutBroadcast===============================================================================
 
+$(document).ready(function () {
 
+    $('#AlatOBTable').DataTable({
+        scrollX: true,
+        scrollCollapse: true,
+        scrollY: '70vh',
+        "lengthMenu": [[25, 50,100, -1], [25, 50,100, "All"]]
 
+    },
+    );
 
+});
 
 
 
