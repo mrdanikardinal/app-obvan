@@ -1,0 +1,139 @@
+[33mcommit f8bb6bb1efb14263e33dfd06409937de7f8f3199[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Mon Feb 12 00:07:38 2024 +0700
+
+    marge dikantor
+
+[33mcommit 9c37d8c744161cc31450d5de073d404665845816[m
+Merge: f4e337f dfe8d60
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Mon Feb 12 00:06:59 2024 +0700
+
+    Merge branch 'master' of https://github.com/mrdanikardinal/app-obvan
+
+[33mcommit f4e337f9b3eb755c5d314cb7b6d8955fe9573cf0[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Mon Feb 12 00:05:02 2024 +0700
+
+    tambah
+
+[33mcommit dfe8d6036aa806baae23f90db0b963ffcb1bfb0f[m[33m ([m[1;31mmrhome/master[m[33m)[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Feb 11 12:18:14 2024 +0700
+
+    perbaiki fitur tampil alat di ob
+
+[33mcommit 6a8944ce0cc6cae47548a158f07f523927c811f7[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Feb 11 10:01:45 2024 +0700
+
+    edit outbroadcast menu di rumah
+
+[33mcommit 619deed1944aa2cee69825e42275d0532b0b1382[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Wed Jan 31 18:03:47 2024 +0700
+
+    pebaikan fitur show outbroadcast dikantor
+
+[33mcommit 50060a6505c0632a5d357423024a437ac0001c14[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Mon Jan 29 15:23:03 2024 +0700
+
+    out broadcast insert delete view ok
+
+[33mcommit 9baebdab4a2a3a9d1090967934fae194733e5e79[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Mon Jan 29 12:10:31 2024 +0700
+
+    membuat fitur save out broadcast
+
+[33mcommit ba2b73bd24151a76d060e0ca88b1ae00282ec002[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 28 19:38:09 2024 +0700
+
+    perbaika di view ob tampil jika sampai degan null
+
+[33mcommit 1f21beb471318f9ac54ca07daf2f533894f2774e[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 28 03:52:40 2024 +0700
+
+    perbaikan view di outbroadcast dari kantor dinihari
+
+[33mcommit 0c4f1c3dac74cd0d14679c2af022494e03cf0f6f[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 28 00:15:48 2024 +0700
+
+    mengerjakan fitur outbroadcast dikantor
+
+[33mcommit f20440a23238a4602d1f8f361b1cd8cd3d462fd2[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Fri Jan 26 01:24:00 2024 +0700
+
+    perbaikan dari rumah fitur show print
+
+[33mcommit b7239f593eb5d200842c13d42fad6fd1d0e25e0d[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Thu Jan 25 15:43:38 2024 +0700
+
+    PR membaca id pemberi atau id penerima menjadi name
+
+[33mcommit f86ff762bee20a9d5684bf2fb1f6ec5aa457cdca[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Thu Jan 25 14:28:12 2024 +0700
+
+    perbaikan file print
+
+[33mcommit 75e4bcdfc69376175200f8d0df75a48af561c6de[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Thu Jan 25 13:28:41 2024 +0700
+
+    modify surat tugas print auto
+
+[33mcommit 52bd2ab96406e3a8351148f38f8c113bf9ec3968[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Wed Jan 24 16:13:16 2024 +0700
+
+    hidden hapus show only admins
+
+[33mcommit c6a643755adf9e533d2c6caba08cd74bc1a620d7[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Wed Jan 24 02:15:54 2024 +0700
+
+    perbaiki getprint single penerima dan pemberi
+
+[33mcommit 7143a7921e4585e21920aa8947de112554c1ba84[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Tue Jan 23 07:34:04 2024 +0700
+
+    buat file show print surat tugas
+
+[33mcommit f3ab6db4bb167426df8c03f8533ef1e0da34fd20[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 21 16:12:29 2024 +0700
+
+    update basisdata print
+
+[33mcommit f3e0f8a5a63a9af327bcf7b65d90e6826765bd63[m
+Merge: c9100cb 350535d
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sat Jan 20 18:38:17 2024 +0700
+
+    Merge branch 'master' of https://github.com/mrdanikardinal/app-obvan
+
+[33mcommit c9100cb3202dbb7bff2b69ead38da8c1a857c3e6[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sat Jan 20 18:33:24 2024 +0700
+
+    test function print surat tugas
+
+[33mcommit 350535d558851727def5e6ff9db55f10d8dcda19[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 14 18:24:27 2024 +0700
+
+    perbaian keterangan di file index peminjaman alat
+
+[33mcommit 1cc78ee3ae668e9fc3f04bd6144a186f78f345ab[m
+Author: mrdanikardinal <danikardinal75@gmail.com>
+Date:   Sun Jan 14 00:31:21 2024 +0700
+
+    perbaiki komentar masuk in user

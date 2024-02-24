@@ -138,9 +138,15 @@ class OutBroadcast extends BaseController
     }
 
     public function peralatancrewob($idOB){
-        $data =$this->outBroadcast->getData($idOB);
+        // $data =$this->parentAlatOb->getJoinOBAndAlatINV($idOB);
+        // $data =$this->parentAlatOb->getCountAlatOB($idOB);
         // dd($data);
-        return view('peralatan-crew-ob/index');
+
+        $data = [
+            'allDataCrewOB'=> $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
+            'countDataCrewOB'=> $this->parentAlatOb->getCountAlatOB($idOB)
+        ];
+        return view('peralatan-crew-ob/index',$data);
 
     }
 }
