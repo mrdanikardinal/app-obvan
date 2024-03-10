@@ -36,6 +36,18 @@ class UsersModel extends Model
         return $query->getResultArray();
         
     }
+    public function procedureGetCrewDinasByIDUser($idUser)
+    {
+        $query = $this->db->query("CALL getCrewDinasByIDUser"."($idUser)");
+        return $query->getResultArray();
+        
+    }
+    public function proceduregetAcaraOBFromIDUser($idUser)
+    {
+        $query = $this->db->query("CALL getAcaraOBFromIDUser"."($idUser)");
+        return $query->getResultArray();
+        
+    }
     
    public function proceduregetPrintIdPJMNamaPenerima($id_pinjam)
     {

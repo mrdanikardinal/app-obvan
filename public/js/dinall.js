@@ -783,6 +783,7 @@ $(document).ready(function(){
 // end menampilkan alat ob diindex ob
 
 //End OutBroadcast===============================================================================
+//Start View Alat================================================================================
 
 $(document).ready(function () {
 
@@ -790,13 +791,29 @@ $(document).ready(function () {
         scrollX: true,
         scrollCollapse: true,
         scrollY: '70vh',
-        "lengthMenu": [[25, 50,100, -1], [25, 50,100, "All"]]
+        "lengthMenu": [[25, 50,100, -1], [25,50,100, "All"]]
 
     },
     );
 
 });
+//End View Alat==================================================================================
 
+//Start Crew Dinas By ID User ===================================================================
+
+$(document).ready(function () {
+
+    $('#dinallTableCrewDinasByID').DataTable({
+        scrollX: true,
+        scrollCollapse: true,
+        scrollY: '70vh',
+        "lengthMenu": [[25, 50,100, -1], [25,50,100, "All"]]
+
+    },
+    );
+
+});
+//End Crew Dinas By ID User ====================================================================
 
 
 

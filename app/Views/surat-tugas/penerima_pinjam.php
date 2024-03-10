@@ -17,7 +17,6 @@
                 </li>
 
             </ul>
-
             <div class="container-fluid px-4">
                 <table class="table">
                     <thead>
@@ -73,7 +72,7 @@
                                 </td>
                                 <td>
                                     <div class="badge bg-primary text-wrap" style="width: 6rem;">
-                                    <?= $valuePDF['fullname']; ?>
+                                        <?= $valuePDF['fullname']; ?>
                                     </div>
                                 </td>
                                 <td>
@@ -96,8 +95,6 @@
                     </tbody>
                 </table>
             </div>
-
-
         </main>
         <?= $this->include('layout/footer'); ?>
     </div>
