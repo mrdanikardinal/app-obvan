@@ -1,10 +1,4 @@
 //Strat Peminjaman=================================================================================
-let angka4 = 4;
-let angka5 = 5;
-let angka6 = 6;
-let angka7 = 7;
-
-
 $(document).ready(function () {
 
     $('#dinallTable').DataTable({
@@ -360,7 +354,7 @@ $(document).ready(function () {
                 renumberRows();
             }
             $('#dinallModal').modal('hide');
-           
+
         });
     });
 });
@@ -395,7 +389,7 @@ $(document).ready(function () {
                 renumberRows();
             }
             $('#dinallModalEdit').modal('hide');
-           
+
         });
     });
 });
@@ -592,7 +586,7 @@ $(document).ready(function () {
                 renumberRows();
             }
             $('#dinallModalOB').modal('hide');
-           
+
         });
     });
 });
@@ -685,7 +679,7 @@ $(document).ready(function () {
                 renumberRows();
             }
             $('#dinallModalBarangInv').modal('hide');
-           
+
         });
     });
 });
@@ -754,16 +748,16 @@ function renumberRowsBarangForOB() {
 
 
 $(document).on('click', '.clickModalSearchIDOB', function (event) {
-    let varId= $(this).data('ob');
+    let varId = $(this).data('ob');
     console.log(varId);
-   
+
 });
 
 //End tabel Input Alat OB
 
 // start menampilkan alat ob diindex ob
-$(document).ready(function(){
-    $('.tombol_alat').click(function(){
+$(document).ready(function () {
+    $('.tombol_alat').click(function () {
         let id = $(this).data('idob');
         console.log(id);
 
@@ -771,8 +765,8 @@ $(document).ready(function(){
             url: 'out-broadcast', // Lokasi controller Anda
             type: 'POST',
             dataType: 'json',
-            data: {id: id},
-            success: function(response){
+            data: { id: id },
+            success: function (response) {
                 // Tampilkan data dalam modal
             }
         });
@@ -791,7 +785,7 @@ $(document).ready(function () {
         scrollX: true,
         scrollCollapse: true,
         scrollY: '70vh',
-        "lengthMenu": [[25, 50,100, -1], [25,50,100, "All"]]
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100,200]]
 
     },
     );
@@ -799,21 +793,42 @@ $(document).ready(function () {
 });
 //End View Alat==================================================================================
 
-//Start Crew Dinas By ID User ===================================================================
+//Start table surat tugas ===================================================================
 
 $(document).ready(function () {
 
+   
+    $('#dinallTableCrewDinasByID thead th').eq(3).attr('width', '30%');
     $('#dinallTableCrewDinasByID').DataTable({
         scrollX: true,
+        scrollY: '200px',
         scrollCollapse: true,
-        scrollY: '70vh',
-        "lengthMenu": [[25, 50,100, -1], [25,50,100, "All"]]
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
+
+    },
+    );
+    $('#dinallTablePemberiPinjam thead th').eq(3).attr('width', '30%');
+    $('#dinallTablePemberiPinjam').DataTable({
+        scrollX: true,
+        scrollY: '200px',
+        scrollCollapse: true,
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
+
+    },
+    );
+    $('#dinallTablePenerimaPinjam thead th').eq(3).attr('width', '30%');
+    $('#dinallTablePenerimaPinjam').DataTable({
+        scrollX: true,
+        scrollY: '200px',
+        scrollCollapse: true,
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
 
     },
     );
 
 });
-//End Crew Dinas By ID User ====================================================================
+
+//End table surat tugas ====================================================================
 
 
 
