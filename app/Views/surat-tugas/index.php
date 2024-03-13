@@ -17,18 +17,21 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#outBroadcast">Out Broadcast</a>
+                                <button class="nav-link active" id="ob-tab" data-bs-toggle="tab" data-bs-target="#outBroadcast" type="button" role="tab" aria-controls="ob" aria-selected="true">Out Broadcast</button>
+
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#pemberiPinjam">Pemberi Pinjam</a>
+                                <button class="nav-link" id="pemberi-tab" data-bs-toggle="tab" data-bs-target="#pemberiPinjam" type="button" role="tab" aria-controls="pemberi-pinjam" aria-selected="true">Pemberi Pinjam</button>
+
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#penerimaPinjam">Penerima Pinjam</a>
+                                <button class="nav-link" id="penerima-tab" data-bs-toggle="tab" data-bs-target="#penerimaPinjam" type="button" role="tab" aria-controls="penerima-pinjam" aria-selected="true">Pemberi Pinjam</button>
                             </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="outBroadcast" class="tab-pane active">
+
+                            <div class="tab-pane show active" id="outBroadcast">
                                 <h3>OutBroadcast</h3>
                                 <table id="dinallTableCrewDinasByID" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
                                     <thead>
@@ -115,9 +118,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="pemberiPinjam" class="tab-pane fade active">
+                            <div class="tab-pane fade" id="pemberiPinjam">
                                 <h3>Pemberi Pinjam</h3>
-                                <table id="dinallTablePemberiPinjam" class="table table-bordered table-hover text-center align-middle">
+                                <table id="dinallTablePemberiPinjam" class="table table-bordered table-striped table-bordered" cellspacing="0" width="100%"">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -162,134 +165,133 @@
                                                 <td><?= $valuePDF['nama_peminjam']; ?></td>
                                                 <td><?= $valuePDF['no_hp_peminjam']; ?></td>
                                                 <td>
-                                                    <div class="badge bg-primary text-wrap" style="width: 6rem;">
-                                                        <?= $valuePDF['fullname']; ?>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
-
-                                                </td>
-                                                <td>
-                                                    <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
-                                                        <span>Belum Dikembalikan</span>
-                                                    <?php endif; ?>
-
-                                                    <?php foreach ($getNamaPenerimaPinjam as $key => $valueNamaPenerima) : ?>
-                                                        <?php if ($valueNamaPenerima['id'] == $valuePDF['nama_penerima']) : ?>
-                                                            <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                                                <?= $valueNamaPenerima['fullname']; ?>
-                                                            </div>
-
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </td>
-                                                <td>
-                                                    <?= ($valuePDF['catatan'] !== NULL) ? $valuePDF['catatan'] : '-'; ?>
-
-                                                </td>
-                                                <td>
-                                                    <form action="<?= base_url() ?>user/print_pemberi_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                                    <div class=" badge bg-primary text-wrap" style="width: 6rem;">
+                                    <?= $valuePDF['fullname']; ?>
                             </div>
-                            <div id="penerimaPinjam" class="tab-pane fade active">
-                                <h3>Penerima Pinjam</h3>
-                                <table id="dinallTablePenerimaPinjam" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>ID Pinjam</th>
-                                            <th>Tanggal</th>
-                                            <th>Sampai Dengan</th>
-                                            <th>Acara</th>
-                                            <th>Tempat</th>
-                                            <th>Durasi Pinjam</th>
-                                            <th>Nama Peminjam</th>
-                                            <th>No HP Peminjam</th>
-                                            <th>Nama Pemberi Pinjam</th>
-                                            <th>Tanggal Kembali</th>
-                                            <th>Nama Penerima Pinjam</th>
-                                            <th>Catatan</th>
-                                            <th>Print</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $number = 1; ?>
-                                        <?php foreach ($AllShowNamaPenerima as $key => $valuePDF) : ?>
-                                            <?php $convert = $valuePDF['tanggal'];
-                                            $date = str_replace('/', '-', $convert);
-                                            $tanggalconvert = date('d/m/Y', strtotime($date));
+                            </td>
+                            <td>
+
+                                <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
+
+                            </td>
+                            <td>
+                                <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
+                                    <span>Belum Dikembalikan</span>
+                                <?php endif; ?>
+
+                                <?php foreach ($getNamaPenerimaPinjam as $key => $valueNamaPenerima) : ?>
+                                    <?php if ($valueNamaPenerima['id'] == $valuePDF['nama_penerima']) : ?>
+                                        <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                            <?= $valueNamaPenerima['fullname']; ?>
+                                        </div>
+
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                            <td>
+                                <?= ($valuePDF['catatan'] !== NULL) ? $valuePDF['catatan'] : '-'; ?>
+
+                            </td>
+                            <td>
+                                <form action="<?= base_url() ?>user/print_pemberi_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                    <?= csrf_field(); ?>
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button>
+                                </form>
+                            </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                        </table>
+                        </div>
+                        <div class="tab-pane fade" id="penerimaPinjam">
+                            <h3>Penerima Pinjam</h3>
+                            <table id="dinallTablePenerimaPinjam" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>ID Pinjam</th>
+                                        <th>Tanggal</th>
+                                        <th>Sampai Dengan</th>
+                                        <th>Acara</th>
+                                        <th>Tempat</th>
+                                        <th>Durasi Pinjam</th>
+                                        <th>Nama Peminjam</th>
+                                        <th>No HP Peminjam</th>
+                                        <th>Nama Pemberi Pinjam</th>
+                                        <th>Tanggal Kembali</th>
+                                        <th>Nama Penerima Pinjam</th>
+                                        <th>Catatan</th>
+                                        <th>Print</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $number = 1; ?>
+                                    <?php foreach ($AllShowNamaPenerima as $key => $valuePDF) : ?>
+                                        <?php $convert = $valuePDF['tanggal'];
+                                        $date = str_replace('/', '-', $convert);
+                                        $tanggalconvert = date('d/m/Y', strtotime($date));
+                                        ?>
+                                        <?php if ($valuePDF['sampai_dengan'] !== null) : ?>
+                                            <?php $convert2 = $valuePDF['sampai_dengan'];
+                                            $date = str_replace('/', '-', $convert2);
+                                            $convert_sampai_dengan = date('d/m/Y', strtotime($date));
                                             ?>
-                                            <?php if ($valuePDF['sampai_dengan'] !== null) : ?>
-                                                <?php $convert2 = $valuePDF['sampai_dengan'];
-                                                $date = str_replace('/', '-', $convert2);
-                                                $convert_sampai_dengan = date('d/m/Y', strtotime($date));
-                                                ?>
-                                            <?php elseif ($valuePDF['sampai_dengan'] == null) : ?>
-                                                <?php $convert_sampai_dengan = '-' ?>
-                                            <?php endif; ?>
-                                            <tr>
-                                                <th><?= $number++; ?></th>
-                                                <td><?= $valuePDF['id_pinjam']; ?></td>
-                                                <td><?= $tanggalconvert; ?></td>
-                                                <td><?= $convert_sampai_dengan; ?></td>
-                                                <td><?= $valuePDF['acara']; ?></td>
-                                                <td><?= $valuePDF['tempat']; ?></td>
-                                                <td><?= $valuePDF['durasi_pinjam']; ?></td>
-                                                <td><?= $valuePDF['nama_peminjam']; ?></td>
-                                                <td><?= $valuePDF['no_hp_peminjam']; ?></td>
-                                                <td>
-                                                    <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
-                                                        <span>Kosong!</span>
+                                        <?php elseif ($valuePDF['sampai_dengan'] == null) : ?>
+                                            <?php $convert_sampai_dengan = '-' ?>
+                                        <?php endif; ?>
+                                        <tr>
+                                            <th><?= $number++; ?></th>
+                                            <td><?= $valuePDF['id_pinjam']; ?></td>
+                                            <td><?= $tanggalconvert; ?></td>
+                                            <td><?= $convert_sampai_dengan; ?></td>
+                                            <td><?= $valuePDF['acara']; ?></td>
+                                            <td><?= $valuePDF['tempat']; ?></td>
+                                            <td><?= $valuePDF['durasi_pinjam']; ?></td>
+                                            <td><?= $valuePDF['nama_peminjam']; ?></td>
+                                            <td><?= $valuePDF['no_hp_peminjam']; ?></td>
+                                            <td>
+                                                <?php if ($valuePDF['nama_penerima'] === NULL) : ?>
+                                                    <span>Kosong!</span>
+                                                <?php endif; ?>
+
+                                                <?php foreach ($getNamaPemberiPinjam as $key => $valueNamaPemberi) : ?>
+                                                    <?php if ($valueNamaPemberi['id'] == $valuePDF['nama_pemberi']) : ?>
+                                                        <div class="badge bg-primary text-wrap" style="width: 6rem;">
+                                                            <?= $valueNamaPemberi['fullname']; ?>
+                                                        </div>
+
                                                     <?php endif; ?>
+                                                <?php endforeach; ?>
 
-                                                    <?php foreach ($getNamaPemberiPinjam as $key => $valueNamaPemberi) : ?>
-                                                        <?php if ($valueNamaPemberi['id'] == $valuePDF['nama_pemberi']) : ?>
-                                                            <div class="badge bg-primary text-wrap" style="width: 6rem;">
-                                                                <?= $valueNamaPemberi['fullname']; ?>
-                                                            </div>
+                                            </td>
+                                            <td>
 
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
+                                                <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
 
-                                                </td>
-                                                <td>
+                                            </td>
+                                            <td>
+                                                <div class="badge bg-warning text-wrap" style="width: 6rem;">
+                                                    <?= $valuePDF['fullname']; ?>
+                                                </div>
+                                            </td>
+                                            <td>
 
-                                                    <?= ($valuePDF['tanggal_kembali'] === NULL) ? 'Belum Dikembalikan' : $valuePDF['tanggal_kembali']; ?>
+                                                <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
 
-                                                </td>
-                                                <td>
-                                                    <div class="badge bg-warning text-wrap" style="width: 6rem;">
-                                                        <?= $valuePDF['fullname']; ?>
-                                                    </div>
-                                                </td>
-                                                <td>
+                                            </td>
+                                            <td>
+                                                <form action="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                                    <?= csrf_field(); ?>
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
+                                                </form>
 
-                                                    <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
-
-                                                </td>
-                                                <td>
-                                                    <form action="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
-                                                    </form>
-
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

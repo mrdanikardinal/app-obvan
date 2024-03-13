@@ -785,7 +785,7 @@ $(document).ready(function () {
         scrollX: true,
         scrollCollapse: true,
         scrollY: '70vh',
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100,200]]
+        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, 200]]
 
     },
     );
@@ -795,38 +795,44 @@ $(document).ready(function () {
 
 //Start table surat tugas ===================================================================
 
+
 $(document).ready(function () {
 
-   
-    $('#dinallTableCrewDinasByID thead th').eq(3).attr('width', '30%');
-    $('#dinallTableCrewDinasByID').DataTable({
+    let ob = $('#dinallTableCrewDinasByID').DataTable({
+        responsive: true,
         scrollX: true,
         scrollY: '200px',
-        scrollCollapse: true,
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
+        scrollCollapse: true
+    });
 
-    },
-    );
-    $('#dinallTablePemberiPinjam thead th').eq(3).attr('width', '30%');
-    $('#dinallTablePemberiPinjam').DataTable({
+    let pemberiPinjam = $('#dinallTablePemberiPinjam').DataTable({
+        responsive: true,
         scrollX: true,
         scrollY: '200px',
-        scrollCollapse: true,
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
-
-    },
-    );
-    $('#dinallTablePenerimaPinjam thead th').eq(3).attr('width', '30%');
-    $('#dinallTablePenerimaPinjam').DataTable({
+        scrollCollapse: true
+    });
+    let penerimaPinjam = $('#dinallTablePenerimaPinjam').DataTable({
+        responsive: true,
         scrollX: true,
         scrollY: '200px',
-        scrollCollapse: true,
-        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
+        scrollCollapse: true
+    });
 
-    },
-    );
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
+        let tabID = $(event.target).attr('data-bs-target');
+        if (tabID === '#pemberiPinjam') {
+            pemberiPinjam.columns.adjust();
+        }else if(tabID === '#penerimaPinjam'){
+            penerimaPinjam.columns.adjust();
+        }else if(tabID === '#outBroadcast'){
+            ob.columns.adjust();
+
+        }
+    });
 
 });
+
+
 
 //End table surat tugas ====================================================================
 
