@@ -53,6 +53,8 @@ $routes->delete('out-broadcast/(:segment)', 'OutBroadcast::delete/$1');
 $routes->PUT('out-broadcast/edit/(:segment)', 'OutBroadcast::edit/$1');
 $routes->get('out-broadcast/create', 'OutBroadcast::create');
 $routes->post('out-broadcast/save', 'OutBroadcast::save');
+$routes->post('out-broadcast/update/(:any)', 'OutBroadcast::update/$1');
+
 //end-outbroadcast
 
 

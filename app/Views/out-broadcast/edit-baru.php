@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form id="formMerkUpdate" action="<?= base_url(); ?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
+                        <form id="formMerkUpdate" action="<?= base_url() ?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
 
                             <?= csrf_field(); ?>
                             <input type="hidden" value="" name="numberSession" id="getCountNumber">
@@ -77,7 +77,7 @@
 
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
 
                                                     </td>

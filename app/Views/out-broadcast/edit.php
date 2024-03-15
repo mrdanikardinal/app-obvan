@@ -4,244 +4,283 @@
 <div id="layoutSidenav">
     <?= $this->include('layout/side_bar'); ?>
     <div id="layoutSidenav_content">
+
         <style>
             .error {
                 color: var(--bs-danger);
             }
         </style>
-        <?php $testConlose = "ini adalah test"; ?>
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4"> Form update peminjaman alat</h1>
+                <h5 class="mt-4">
+
+                </h5>
 
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Data Update
+                        <?= $title ?>
                     </div>
                     <div class="card-body">
-
-                        <form id="formMerkUpdate" action="<?= base_url() ?>peminjaman-alat/update/<?= $dataPinjam['id_pinjam']; ?>" method="post">
+                        <?php
+                        $nomor = 1;
+                        ?>
+                        <form id="formUpdateOutBroadcast" method="post" action="<?= base_url(); ?>out-broadcast/update/<?= $showObByid['id_ob']; ?>">
 
                             <?= csrf_field(); ?>
-                            <input type="hidden" value="" name="numberSession" id="getCountNumber">
-                            <input type="hidden" class="form-control" id="idGetForJs" placeholder="Nama Barang" value="<?= $dataPinjam['id_pinjam']; ?>">
+
                             <div class="row mb-3">
-                                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                                <?php $convert = $dataPinjam['tanggal'];
-                                $date = str_replace('/', '-', $convert);
-                                $tanggalconvert = date('d/m/Y', strtotime($date));
-                                ?>
+                                <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Tanggal" id="tanggal" name="tanggal" value="<?= $tanggalconvert; ?>">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="sampai_dengan" class="col-sm-2 col-form-label">Sampai Dengan</label>
-                                <?php $convertSampaiDengan = $dataPinjam['sampai_dengan'];
-                                $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
-                                $tanggalconvertSampaiDengan = date('d/m/Y', strtotime($dateSampaiDengan));
-                                ?>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_dengan" name="sampai_dengan" value="<?= $tanggalconvertSampaiDengan; ?>">
-
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-
-                                <div class="col-sm-10 offset-sm-2">
-                                    <table class="table formTambahEdit">
-
-                                        <tr>
-
-                                            <th class="text-center">No</th>
-                                            <th class="text-center">Search</th>
-                                            <th class="text-center">Nama Barang</th>
-                                            <th class="text-center">Merk</th>
-                                            <th class="text-center">S.N</th>
-                                            <th class="text-center">Jumlah</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Aksi</th>
-                                        </tr>
-                                        <?php $number2 = 1; ?>
-                                        <?php foreach ($allDataParentMerk as $key => $j) : ?>
-                                            <?php if ($key == 0) : ?>
-                                                <tr>
-                                                    <input type="hidden" class="form-control" name="idParentMerk[]" value="<?= $j['id']; ?>">
-                                                    <td class="rownumber">
-                                                        <?= $number2++; ?>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
-
-                                                    </td>
-                                                    <td>
-
-                                                        <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
-
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="merkEdit[]" value="<?= $j['merk']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="sNEdit[]" value="<?= $j['serial_number']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="jumlahEdit[]" value="<?= $j['jumlah']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <select name="checkAlat[]" class="myselect
-                                                        
-                                                        
-                                                        form-select form-select-sm" aria-label="Small select example">
-                                                            <option hidden>Pengembalian</option>
-                                                            <option value="1" <?= ($j['status'] == true) ? 'selected' : null ?>>
-                                                                <span>YES</span>
-                                                            </option>
-                                                            <option value="0" <?= ($j['status'] == false) ? 'selected' : null ?>>
-                                                                <span>NO</span>
-
-                                                            </option>
-
-                                                        </select>
-
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary btnAddFormEdit"><i class="fa-solid fa-plus"></i></button>
-                                                    </td>
-                                                </tr>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <?php foreach (array_slice($allDataParentMerk, 1) as $i) : ?>
-                                            <?php if ($i != null) : ?>
-                                                <tr>
-                                                    <input type="hidden" class="form-control" name="idParentMerk[]" placeholder="Nama Barang" value="<?= $i['id']; ?>">
-                                                    <td class="rownumber">
-                                                        <?= $number2++; ?>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
-
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="naBarEdit[]" value="<?= $i['nama_barang']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="merkEdit[]" placeholder="Merk" value="<?= $i['merk']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="sNEdit[]" placeholder="Serial Number" value="<?= $i['serial_number']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="jumlahEdit[]" placeholder="Jumlah" value="<?= $i['jumlah']; ?>">
-                                                    </td>
-                                                    <td>
-                                                        <select name="checkAlat[]" class="myselect form-select form-select-sm" aria-label="Small select example">
-
-                                                            <option value="1" <?= ($i['status'] == true) ? 'selected' : null ?>>
-                                                                <span>YES</span>
-                                                            </option>
-                                                            <option value="0" <?= ($i['status'] == false) ? 'selected' : null ?>>
-                                                                <span>NO</span>
-
-                                                            </option>
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-danger btnHapusFormEdit" value="<?= $i['id']; ?>"><i class="fa-solid fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-
-
-                                    </table>
-                                </div>
-
-
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="acara" class="col-sm-2 col-form-label">Acara</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Acara" id="acara" name="acara" value="<?= $dataPinjam['acara']; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="tempat" class="col-sm-2 col-form-label">Tempat</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Tempat" id="tempat" name="tempat" value="<?= $dataPinjam['tempat']; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="durasi_pinjam" class="col-sm-2 col-form-label">Durasi Pinjam</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Durasi Pinjam" id="durasi_pinjam" name="durasi_pinjam" value="<?= $dataPinjam['durasi_pinjam']; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="nama_peminjam" class="col-sm-2 col-form-label">Nama Peminjam</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Nama Peminjam" id="nama_peminjam" name="nama_peminjam" value="<?= $dataPinjam['nama_peminjam']; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="noHPPeminjam" class="col-sm-2 col-form-label">NO.HP Peminjam</label>
-                                <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="NO.HP Peminjam" id="noHPPeminjam" name="noHPPeminjam" value="<?= $dataPinjam['no_hp_peminjam']; ?>">
-                                    <div class="text-danger">
-                                        <?= validation_show_error('noHPPeminjam') ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="nama_pemberi" class="col-sm-2 col-form-label">Nama Pemberi</label>
-                                <div class="col-sm-10">
-                                    <!-- <input type="text" class="form-control" placeholder="Nama Pemberi" id="nama_pemberi" name="nama_pemberi" value="<?= $dataPinjam['nama_pemberi']; ?>"> -->
-                                    <?php $nomor1 = 1; ?>
-                                    <select name="nama_pemberi" id="nama_pemberi" class="form-select form-select-sm" aria-label="Small select example">
-                                        <?php foreach ($allNama_pemberi as $key => $valueNama_pemberi) : ?>
-                                            <option value="<?= $valueNama_pemberi['id'] ?>" <?= $dataPinjam['nama_pemberi'] == $valueNama_pemberi['id'] ? 'selected' : null ?>>
-                                                <?= $nomor1++ . '. ' . $valueNama_pemberi['fullname'] ?>
+                                    <select name="kategori" id="kategori" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allKategori as $key => $valueKategori) : ?>
+                                            <option value="<?= $valueKategori['id'] ?>" <?= $showObByid['id_kategori'] == $valueKategori['id'] ? 'selected' : null ?>>
+                                                <?= $nomor++ . '. ' . $valueKategori['nama_kategori'] ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                            <div id="endInputPeminjaman"></div>
-                            <!-- start pengembalian  -->
-                            <?php $convertTanggalKembali = $dataPinjam['tanggal_kembali'];
-                            $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-                            $tanggalconvertKembali = date('d/m/Y', strtotime($dateTanggalKembali));
+                            <div class="row mb-3">
+                                <label for="tanggalOB" class="col-sm-2 col-form-label">Tanggal</label>
+                                <?php $convert = $showObByid['tanggal'];
+                                $date = str_replace('/', '-', $convert);
+                                $tanggalconvert = date('d/m/Y', strtotime($date));
+                                ?>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="tanggalOB" name="tanggalOB" value="<?= $tanggalconvert ?>">
 
-                            $namaPenerima = $dataPinjam['nama_penerima'];
-                            $catatan = $dataPinjam['catatan'];
-
-
-
-                            ?>
-
-                            <!-- end pengembalian -->
+                                </div>
+                            </div>
 
 
                             <div class="row mb-3">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <label for="sampai_denganOB" class="col-sm-2 col-form-label">Sampai Dengan</label>
+                                <?php $convert2 = $showObByid['sampai_dengan'];
+                                $dateSampaiDengan = str_replace('/', '-', $convert2);
+                                $sampaiDengan = date('d/m/Y', strtotime($dateSampaiDengan));
+
+                                ?>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Klik disini" id="sampai_denganOB" name="sampai_denganOB" value="<?= $sampaiDengan; ?>">
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <label for="acara_ob" class="col-sm-2 col-form-label">Acara</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Acara" id="acara_ob" name="acara_ob" value="<?= $showObByid['acara']; ?>">
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="lokasi_ob" class="col-sm-2 col-form-label">Lokasi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Lokasi" id="lokasi_ob" name="lokasi_ob" value="<?= $showObByid['lokasi']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="durasi_ob" class="col-sm-2 col-form-label">Durasi OB(ADM Hari)</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Durasi OB(Hari)" readonly="1" id="durasi_ob" name="durasi_ob" value="<?= $showObByid['durasi']; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="tp_ob" class="col-sm-2 col-form-label">Technical Producer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control" placeholder="Technical Producer(TP)" id="tp_ob" name="tp_ob" value="<?= $showObByid['tp']; ?>">
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="td_ob" class="col-sm-2 col-form-label">Technical Director</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control " placeholder="Technical Director(TD)" id="td_ob" name="td_ob" value="<?= $showObByid['td']; ?>">
+                                    <div class="text-danger">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="asst_td" class="col-sm-2 col-form-label">Assistant.TD</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control " placeholder="Assistant.TD" id="asst_td" name="asst_td" value="<?= $showObByid['ass_td']; ?>">
+                                    <div class="text-danger">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="um_ob" class="col-sm-2 col-form-label">Um</label>
+                                <div class="col-sm-10">
+                                    <input type="text" required class="form-control " placeholder="Unit Manager" id="um_ob" name="um_ob" value="<?= $showObByid['um']; ?>">
+                                    <div class="text-danger">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Crew OB</label>
                             </div>
 
+                            <div class="row mb-3">
+                                <div class="col-sm-10 offset-sm-2">
+                                    <table class="table formTambahOB">
+                                        <tr>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Search</th>
+                                            <th class="text-center">Nama</th>
+                                            <th class="text-center">NIP</th>
+                                            <th class="text-center">Aksi</th>
+                                        </tr>
+                                        <?php $number = 1; ?>
+                                        <?php foreach ($showDataCrewJoinUsers as $key => $valueJoinUser) : ?>
+                                            <tr>
+                                                <input type="hidden" class="form-control" name="id_user[]">
+
+                                                <td class="rownumberob">
+                                                    <?= $number++; ?>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="nama[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" required class="form-control" name="nip[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                </td>
+                                                <td>
+                                                    <button type="button" required class="btn btn-primary btnUpdateFormOB"><i class="fa-solid fa-plus"></i></button>
+                                                </td>
+
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-header text-center">
+                                    Pengunaan Barang Out Broadcast(OB)
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <table class="table formTambahBarangOB">
+                                            <tr>
+                                                <th class="text-center">No</th>
+                                                <th class="text-center">Search</th>
+                                                <th class="text-center">Nama Barang</th>
+                                                <th class="text-center">Merk</th>
+                                                <th class="text-center">S.N</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Aksi</th>
+                                            </tr>
+                                            <?php $number2 = 1; ?>
+                                            <?php foreach ($showDataAlatJoinInv as $key => $valueJoinInv) : ?>
+
+
+                                                <tr>
+                                                    <input type="hidden" class="form-control" name="id_peralatan[]">
+
+                                                    <td class="rownumberBarangForOB">
+                                                        <?= $number2++; ?>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
+                                                    </td>
+
+                                                    <td>
+                                                        <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
+                                                        <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </form>
+
                     </div>
                 </div>
-
-
-
             </div>
 
         </main>
-        <!-- Modal -->
-        <div class="modal fade" id="dinallModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+        <!-- Start Modal show all user-->
+        <div class="modal fade" id="dinallModalOB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Data Pegawai OBVAN</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--  -->
+                        <table id="tableOBShow" class="table table-bordered table-hover text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Crew</th>
+                                    <th>Golongan</th>
+                                    <th>Jabatan Fungsional</th>
+                                    <th>NPWP</th>
+                                    <th>Pilih</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $number = 1; ?>
+                                <?php foreach ($allDataUsers as $key => $valueDataUsers) : ?>
+                                    <tr>
+                                        <td><?= $number++; ?></td>
+                                        <td><?= $valueDataUsers['fullname']; ?></td>
+                                        <td><?= $valueDataUsers['golongan']; ?></td>
+                                        <td><?= $valueDataUsers['jab_fung']; ?></td>
+                                        <td><?= $valueDataUsers['npwp']; ?></td>
+                                        <td>
+                                            <button type="button" required class="btn btn-success selectCrewOB" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                                <i class="fa-solid fa-check"></i></button>
+                                        </td>
+
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            </tbody>
+
+                        </table>
+
+                        <!--  -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal show all user-->
+
+        <!-- Start Modal show all Barang Inventaris-->
+        <div class="modal fade" id="dinallModalBarangInv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Data Barang Inventaris</h1>
@@ -249,9 +288,10 @@
                     </div>
                     <div class="modal-body">
                         <!--  -->
-                        <table id="tableInvShow" class="table table-bordered table-hover text-center align-middle">
+                        <table id="tableInvShowForOB" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Barcode</th>
                                     <th>Jenis barang</th>
                                     <th>Nama Barang</th>
@@ -262,8 +302,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $numberBarang = 1; ?>
                                 <?php foreach ($allDataInv as $key => $valueInv) : ?>
                                     <tr>
+                                        <td><?= $numberBarang++; ?></td>
                                         <?php if ($valueInv['serial_number'] != NULL) : ?>
                                             <td class="text-center">
                                                 <div>
@@ -293,7 +335,7 @@
                                         </td>
                                         <td><?= $valueInv['nama_lokasi']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectEdit" data-id="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
+                                            <button type="button" required class="btn btn-success selectBarangForOB" data-id_alat="<?= $valueInv['id_inv']; ?>" data-barcode="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : $valueInv['kode_barcode']; ?>" data-barang="<?= $valueInv['nama_barang']; ?>" data-merk="<?= $valueInv['merk']; ?>" data-sn="<?= ($valueInv['serial_number'] != NULL) ? $valueInv['serial_number'] : '-'; ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 
@@ -312,6 +354,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Modal show all Barang Inventaris -->
         <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {
@@ -327,78 +370,54 @@
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
+                        //check validation green and red
                         form.classList.add('was-validated')
                     }, false)
                 })
             })()
 
             //validation ok javascript
-            $("#formMerkUpdate").validate({
+            $("#formAdd").validate({
                 errorPlacement: function($error, $element) {
                     // $error.appendTo($element.closest("td").css({"color": "red"}));
                     $error.appendTo($element.closest("td"));
                 },
                 rules: {
-                    'naBarEditUpdate[]': {
+                    'naBar[]': {
                         required: true
                     },
-                    'merkEditUpdate[]': {
+                    'merk[]': {
                         required: true
                     },
-                    'sNEditUpdate[]': {
+                    'sN[]': {
                         required: true
                     },
-                    'jumlahEditUpdate[]': {
-                        required: true,
-                        digits: true
-                    },
-                    'naBarEdit[]': {
-                        required: true
-                    },
-                    'merkEdit[]': {
-                        required: true
-                    },
-                    'sNEdit[]': {
-                        required: true
-                    },
-                    'jumlahEdit[]': {
+                    'jumlah[]': {
                         required: true,
                         digits: true
                     }
+
                 },
                 messages: {
-                    'naBarEditUpdate[]': {
-                        required: "nama baru harus di isi !"
+                    'naBar[]': {
+                        required: "nama harus di isi !"
                     },
-                    'merkEditUpdate[]': {
-                        required: "merk baru harus di isi !"
+                    'merk[]': {
+                        required: "jika merk kosong beri tanda - !"
                     },
-                    'sNEditUpdate[]': {
-                        required: "serial baru number harus di isi !"
+                    'sN[]': {
+                        required: "jika serial number kosong beri tanda - !"
                     },
-                    'jumlahEditUpdate[]': {
-                        required: "jumlah baru harus di isi !",
-                        digits: "isi dengan angka !"
-
-                    },
-                    'naBarEdit[]': {
-                        required: "nama baru harus di isi !"
-                    },
-                    'merkEdit[]': {
-                        required: "merk baru harus di isi !"
-                    },
-                    'sNEdit[]': {
-                        required: "serial baru number harus di isi !"
-                    },
-                    'jumlahEdit[]': {
-                        required: "jumlah baru harus di isi !",
+                    'jumlah[]': {
+                        required: "jumlah harus di isi !",
                         digits: "isi dengan angka !"
 
                     }
+
 
                 },
                 errorElement: "em",
+
 
 
 
@@ -407,215 +426,8 @@
             // jQuery.validator.addMethod("validDate", function(value, element) {
             //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
             //     }, "Please enter a valid date in the format DD/MM/YYYY");
-            //start function add pengembalian
-
-            function addPengembalian() {
-                let tanggalPengembalian = "<?= ($dataPinjam['tanggal_kembali'] != NULL) ? $tanggalconvertKembali : Null ?>";
-                let namaPenerimaJs = "<?= $namaPenerima; ?>";
-                let catatanJs = "<?= $catatan; ?>";
-
-                //             let addHTML = `<div id="showAddPengembalian" class="card mb-3">
-                // <h5 class="card-header text-center">Form Pengembalian</h5>
-                // <div class="card-body">
-                //     <div class="row mb-3">
-                //         <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
-                //         <div class="col-sm-10">
-
-                //             <input required type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="${tanggalPengembalian}">
-                //         </div>
-                //     </div>
-                //     <div class="row mb-3">
-                //         <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
-                //         <div class="col-sm-10">
-                //             <input required type="text" class="form-control" placeholder="Nama Penerima" id="nama_penerima" name="nama_penerima" value="${namaPenerimaJs}">
-                //         </div>
-                //     </div>
-                //     <div class="row mb-3">
-                //         <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
-                //         <div class="col-sm-10">
-                //             <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
-                //         </div>
-                //     </div>
-                //     </div>
-                // </div>`;
-                let addHTML = `<div id="showAddPengembalian" class="card mb-3">
-    <h5 class="card-header text-center">Form Pengembalian</h5>
-    <div class="card-body">
-        <div class="row mb-3">
-            <label for="tanggal_kembali" class="col-sm-2 col-form-label">Tanggal Kembali</label>
-            <div class="col-sm-10">
-             
-                <input required type="text" class="form-control" placeholder="Klik disini" id="tanggal_kembali" name="tanggal_kembali" value="${tanggalPengembalian}">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="nama_penerima" class="col-sm-2 col-form-label">Nama Penerima</label>
-            <div class="col-sm-10">
-            
-            <?php $nomor1 = 1; ?>
-                                    <select name="nama_penerima" id="nama_penerima" class="form-select form-select-sm" aria-label="Small select example">
-                                    <?= $dataPinjam['nama_penerima'] === NULL ? '<option value="NULL">--Klik Disini---</option>' : null ?>
-                                    
-                                        <?php foreach ($allNama_pemberi as $key => $valueNama_penerima) : ?>
-                                            <?php if ($dataPinjam['nama_penerima'] === NULL) : ?>
-                                            <option value="<?= $valueNama_penerima['id'] ?>"><?= $nomor1++ . '. ' . $valueNama_penerima['fullname'] ?></option>
-                                            <?php elseif ($dataPinjam['nama_penerima'] !== NULL) : ?>
-                                                <option value="<?= $valueNama_penerima['id'] ?>" <?= $dataPinjam['nama_penerima'] == $valueNama_penerima['id'] ? 'selected' : null ?>>
-                                                <?= $nomor1++ . '. ' . $valueNama_penerima['fullname'] ?>
-                                            </option>
-                                            <?php endif; ?>
-
-                                        <?php endforeach; ?>
-                                    </select>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="catatan" class="col-sm-2 col-form-label">Catatan</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Catatan" id="catatan" name="catatan" value="${catatanJs}">
-            </div>
-        </div>
-        </div>
-    </div>`;
-                // $('#endInputPeminjaman').empty().append(addHTML);
-                $('#endInputPeminjaman').empty().append(addHTML);
-            }
-
-
-            $(function() {
-
-                let arr = [];
-                // start check status default
-
-                $(".myselect").each(function() {
-                    let statusDefault = $(this).val();
-                    let angka = parseInt(statusDefault);
-                    arr.push(angka);
-                });
-                let sumStatus = 0;
-                for (let e of arr) {
-                    sumStatus += e;
-                }
-                if (sumStatus !== 0) {
-                    addPengembalian();
-                    $("#tanggal_kembali").datepicker({
-                        dateFormat: 'dd/mm/yy',
-                        timespicker: false
-                    });
-
-                }
-
-
-
-                // end check status default
-                // start changed
-
-                $(".myselect").on("change", function() {
-                    let isiStatus = $(this).val();
-                    let statusChanged = 0;
-                    if (isiStatus === '0') {
-                        let newName = 1;
-                        let indexOfNameToReplace = arr.indexOf(newName);
-                        if (indexOfNameToReplace > -1) {
-                            arr[indexOfNameToReplace] = parseInt(isiStatus);
-
-                            for (let e of arr) {
-                                statusChanged += e;
-                            }
-
-                        }
-
-
-                    } else if (isiStatus === '1') {
-                        let newName = 0;
-                        let indexOfNameToReplace = arr.indexOf(newName);
-                        if (indexOfNameToReplace > -1) {
-                            arr[indexOfNameToReplace] = parseInt(isiStatus);
-
-                            for (let e of arr) {
-                                statusChanged += e;
-                            }
-
-                        }
-                    }
-
-
-
-                    if (statusChanged >= 1) {
-                        addPengembalian();
-                        $("#tanggal_kembali").datepicker({
-                            dateFormat: 'dd/mm/yy',
-                            timespicker: false
-                        });
-                    } else {
-                        $('#showAddPengembalian').remove();
-
-                    }
-
-                });
-
-                // end changed
-
-
-                // inputs
-                // let currentNames = ["X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10"]
-
-                // this variable will have the result of the first prompt() call (new guest)
-                // let newName = "X11";
-
-                // this variable will have the result of the second prompt() call (guest to replace the new guest with)
-                // let nameToReplace = "X5";
-
-                // implementation
-                // let indexOfNameToReplace = currentNames.indexOf(nameToReplace);
-                // if (indexOfNameToReplace > -1) {
-                //     currentNames[indexOfNameToReplace] = newName;
-                //     console.log(`New array is: ${currentNames}`);
-                // New array is: [X1,X2,X3,X4,X11,X6,X7,X8,X9,X10]
-                // } else {
-                //     console.log(`No guest found by the given name: "${nameToReplace}"`)
-                // }
-
-
-
-
-                // if (sumStatus2 >= 1) {
-                //     addPengembalian();
-                //     $("#tanggal_kembali").datepicker({
-                //         dateFormat: 'dd/mm/yy',
-                //         timespicker: false
-                //     });
-                // } else {
-                //     $('#showAddPengembalian').remove();
-
-                // }
-
-
-                // $('.myselect').change(function() {
-                //     console.log($(this).val());
-                //     let isiStatus = $(this).val();
-
-                //     if (isiStatus === '1') {
-                //         addPengembalian();
-                //         $("#tanggal_kembali").datepicker({
-                //             dateFormat: 'dd/mm/yy',
-                //             timespicker: false
-                //         });
-                //     } else {
-                //         $('#showAddPengembalian').remove();
-
-                //     }
-                // });
-
-            });
-
-
-
-            //end function add pengembalian
         </script>
         <?= $this->include('layout/footer'); ?>
-
-
     </div>
 </div>
 <?= $this->endSection('content'); ?>

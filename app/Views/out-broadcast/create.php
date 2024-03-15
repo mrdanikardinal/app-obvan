@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="durasi_ob" class="col-sm-2 col-form-label">Durasi OB(Hari)</label>
+                                <label for="durasi_ob" class="col-sm-2 col-form-label">Durasi OB(ADM Hari)</label>
                                 <div class="col-sm-10">
                                     <input type="text" required class="form-control" placeholder="Durasi OB(Hari)" id="durasi_ob" name="durasi_ob" value="<?= old('durasi_ob'); ?>">
                                 </div>
@@ -108,6 +108,9 @@
 
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Crew OB</label>
                             </div>
 
 

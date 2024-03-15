@@ -25,7 +25,7 @@
 
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="penerima-tab" data-bs-toggle="tab" data-bs-target="#penerimaPinjam" type="button" role="tab" aria-controls="penerima-pinjam" aria-selected="true">Pemberi Pinjam</button>
+                                <button class="nav-link" id="penerima-tab" data-bs-toggle="tab" data-bs-target="#penerimaPinjam" type="button" role="tab" aria-controls="penerima-pinjam" aria-selected="true">Penerima Pinjam</button>
                             </li>
                         </ul>
                         <!-- Tab panes -->

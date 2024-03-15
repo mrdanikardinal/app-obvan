@@ -18,6 +18,26 @@ class OutBroadcastModel extends Model
         $query = $this->db->query("CALL getAllShowOutBroadcast()");
         return $query->getResultArray();
     }
+    public function procedureGetShowCrewObJoinUser($idOb)
+    {
+        $query = $this->db->query("CALL getShowCrewObJoinUsers"."($idOb)");
+
+        return $query->getResultArray();
+    }
+    public function procedureGetShowAlatJoinInv($idOb)
+    {
+        $query = $this->db->query("CALL getShowAlatObJoinInv"."($idOb)");
+
+        return $query->getResultArray();
+    }
+
+    public function getShowOutBroadcast($id = false)
+    {
+        if ($id == false) {
+            return $this->findAll();
+        }
+        return $this->where(['id_ob' => $id])->first();
+    }
     public function autoNumberIdOb()
     {
         $builder = $this->db->table($this->table);
