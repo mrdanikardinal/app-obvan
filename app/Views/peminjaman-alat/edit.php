@@ -49,12 +49,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-
                                 <div class="col-sm-10 offset-sm-2">
                                     <table class="table formTambahEdit">
-
                                         <tr>
-
                                             <th class="text-center">No</th>
                                             <th class="text-center">Search</th>
                                             <th class="text-center">Nama Barang</th>
@@ -69,10 +66,10 @@
                                             <?php if ($key == 0) : ?>
                                                 <tr>
                                                     <input type="hidden" class="form-control" name="idParentMerk[]" value="<?= $j['id']; ?>">
-                                                    <td class="rownumber">
+                                                    <td class="rownumber text-center">
                                                         <?= $number2++; ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
 
                                                     </td>
@@ -80,16 +77,16 @@
                                                        
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
 
-                                                    </td>
+                                                    </td class="text-center">
                                                     <td>
                                                         <input type="text" class="form-control" name="merkEdit[]" value="<?= $j['merk']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" class="form-control" name="sNEdit[]" value="<?= $j['serial_number']; ?>">
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="jumlahEdit[]" value="<?= $j['jumlah']; ?>">
-                                                    </td>
+                                                    </td class="text-center">
                                                     <td>
                                                         <select name="checkAlat[]" class="myselect
                                                         
@@ -107,7 +104,7 @@
                                                         </select>
 
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" class="btn btn-primary btnAddFormEdit"><i class="fa-solid fa-plus"></i></button>
                                                     </td>
                                                 </tr>
@@ -117,26 +114,26 @@
                                             <?php if ($i != null) : ?>
                                                 <tr>
                                                     <input type="hidden" class="form-control" name="idParentMerk[]" placeholder="Nama Barang" value="<?= $i['id']; ?>">
-                                                    <td class="rownumber">
+                                                    <td class="rownumber text-center">
                                                         <?= $number2++; ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
 
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $i['nama_barang']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" class="form-control" name="merkEdit[]" placeholder="Merk" value="<?= $i['merk']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" class="form-control" name="sNEdit[]" placeholder="Serial Number" value="<?= $i['serial_number']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" class="form-control" name="jumlahEdit[]" placeholder="Jumlah" value="<?= $i['jumlah']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <select name="checkAlat[]" class="myselect form-select form-select-sm" aria-label="Small select example">
 
                                                             <option value="1" <?= ($i['status'] == true) ? 'selected' : null ?>>
@@ -149,7 +146,7 @@
 
                                                         </select>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" class="btn btn-danger btnHapusFormEdit" value="<?= $i['id']; ?>"><i class="fa-solid fa-trash"></i></button>
                                                     </td>
                                                 </tr>
@@ -159,8 +156,6 @@
 
                                     </table>
                                 </div>
-
-
                             </div>
 
                             <div class="row mb-3">

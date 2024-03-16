@@ -4,7 +4,6 @@
 <div id="layoutSidenav">
     <?= $this->include('layout/side_bar'); ?>
     <div id="layoutSidenav_content">
-
         <style>
             .error {
                 color: var(--bs-danger);
@@ -109,20 +108,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Crew OB</label>
-                            </div>
-
-
-
-
+           
                             <div class="row mb-3">
 
                                 <div class="col-sm-10 offset-sm-2">
                                     <table class="table formTambahOB">
                                         <tr>
                                             <th class="text-center">No</th>
-                                            <th>Search</th>
+                                            <th class="text-center">Search</th>
                                             <th class="text-center">Nama</th>
                                             <th class="text-center">NIP</th>
                                         </tr>
@@ -131,7 +124,6 @@
                                                 1
                                             </td>
                                             <td>
-
                                                 <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
                                             </td>
                                             <td>

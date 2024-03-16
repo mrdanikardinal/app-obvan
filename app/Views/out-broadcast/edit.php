@@ -137,20 +137,19 @@
                                         <?php foreach ($showDataCrewJoinUsers as $key => $valueJoinUser) : ?>
                                             <tr>
                                                 <input type="hidden" class="form-control" name="id_user[]">
-
-                                                <td class="rownumberob">
+                                                <td class="rownumberobEdit text-center">
                                                     <?= $number++; ?>
-                                                </td>
-                                                <td>
+                                                </td> 
+                                                <td class="text-center">
                                                     <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="nama[]" value="<?= $valueJoinUser['fullname']; ?>">
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="nip[]" value="<?= $valueJoinUser['npwp']; ?>">
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <button type="button" required class="btn btn-primary btnUpdateFormOB"><i class="fa-solid fa-plus"></i></button>
                                                 </td>
 
@@ -175,36 +174,36 @@
                                                 <th class="text-center">S.N</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Aksi</th>
+            
                                             </tr>
                                             <?php $number2 = 1; ?>
                                             <?php foreach ($showDataAlatJoinInv as $key => $valueJoinInv) : ?>
 
 
                                                 <tr>
-                                                    <input type="hidden" class="form-control" name="id_peralatan[]">
-
-                                                    <td class="rownumberBarangForOB">
+                                                <input type="hidden" class="form-control" name="id_peralatan[]">
+                                                    <td class="rownumberBarangForOBEdit text-center">
                                                         <?= $number2++; ?>
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
 
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
                                                     </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
                                                     </td>
 
-                                                    <td>
-                                                        <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
+                                                    <td class="text-center">
+                                                        
                                                         <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
                                                     </td>
                                                 </tr>

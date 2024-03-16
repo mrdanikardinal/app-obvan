@@ -140,24 +140,24 @@ $(function () {
 // };
 function addnewrow() {
     let tr = `<tr>
-        <td class="rownumber">
+        <td class="rownumber text-center">
         </td>
-        <td>
+        <td class="text-center">
         <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#dinallModal"><i class="fa-solid fa-search"></i></button>
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required id="dinall-js-jumlah-${$('.rownumber').last().text()}" class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
         </td>
-        <td>
+        <td class="text-center">
             <button type="button" required class="btn btn-danger btnHapusForm"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
@@ -173,8 +173,6 @@ function renumberRows() {
     });
 }
 // end add number dinamis & add element table row
-
-
 
 
 //start add number dinamis & add element table row
@@ -240,28 +238,28 @@ $(function () {
 
 function addnewrowEdit() {
     let tr = `<tr>
-        <td class="rownumber">
+        <td class="rownumber text-center">
         <?= $number2++; ?>
         </td>
-        <td>
+        <td class="text-center">
         <button type="button" class="btn btn-primary searchBarangEdit" data-bs-toggle="modal" data-bs-target="#dinallModalEdit"><i class="fa-solid fa-search"></i></button>
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required id="dinall-js-${$('.rownumber').last().text()}" class="form-control" name="naBarEditUpdate[]" placeholder="Nama Barang">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="merkEditUpdate[]" placeholder="Merk">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="sNEditUpdate[]" placeholder="Serial Number">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="jumlahEditUpdate[]" placeholder="Jumlah" value="1">
         </td>
-        <td>
+        <td class="text-center">
         <p class="text-success">baru..</p>
         </td>
-        <td>
+        <td class="text-center">
             <button type="button" required class="btn btn-danger btnHapusFormEdit"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;

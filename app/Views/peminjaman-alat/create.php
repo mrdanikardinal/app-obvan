@@ -47,7 +47,7 @@
                                     <table class="table formTambah">
                                         <tr>
                                             <th class="text-center">No</th>
-                                            <th>Search</th>
+                                            <th class="text-center">Search</th>
                                             <th class="text-center">Nama Barang</th>
                                             <th class="text-center">Merk</th>
                                             <th class="text-center">S.N</th>
@@ -55,28 +55,28 @@
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         <tr>
-                                            <td class="rownumber">
+                                            <td class="rownumber text-center">
                                                 1
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <!-- data-bs-toggle="modal" data-bs-target="#dinallModal" -->
                                                 <!-- <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-search"></i></button> -->
                                                 <button type="button" class="btn btn-primary searchBarang" data-bs-toggle="modal" data-bs-target="#dinallModal"><i class="fa-solid fa-search"></i></button>
 
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="naBar[]" placeholder="Nama Barang">
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="merk[]" placeholder="merk">
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="jumlah[]" placeholder="Jumlah" value="1">
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
                                                 <button type="button" required class="btn btn-primary btnAddForm"><i class="fa-solid fa-plus"></i></button>
                                             </td>
