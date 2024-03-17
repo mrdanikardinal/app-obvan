@@ -813,7 +813,7 @@ $(function () {
                         });
                         $(this).parent().parent().remove();
                         renumberRowsEditCrewOb();
-                        window.location.reload(true);
+                        // window.location.reload(true);
                     }
                 })
     
@@ -906,6 +906,11 @@ $(document).ready(function () {
 
 //star menu edit alat ob
 $(document).ready(function () {
+    $('#tableInvShowForOBUpdate').DataTable({
+
+    });
+})
+$(document).ready(function () {
     $('#dinallModalBarangInvEditUpdate').on('shown.bs.modal', function () {
         $('.dataTables_filter input').focus();
     });
@@ -926,7 +931,7 @@ $(document).ready(function () {
             $currentSearchBarang.parent().next().children().val(barang);
             $currentSearchBarang.parent().next().next().children().val(merk);
             $currentSearchBarang.parent().next().next().next().children().val(sn);
-            $currentSearchBarang.parent().next().next().next().next().next().children().val(idInv);
+            $currentSearchBarang.parent().next().next().next().next().children().val(idInv);
             let currentIndex = allSearchBarang.index($currentSearchBarang);
             let isLastElement = currentIndex === allSearchBarang.length - 1;
 
@@ -935,7 +940,7 @@ $(document).ready(function () {
                 // addnewrow();
                 renumberRows();
             }
-            $('#dinallModalBarangInvEdit').modal('hide');
+            $('#dinallModalBarangInvEditUpdate').modal('hide');
 
         });
     });
@@ -951,40 +956,132 @@ $(function () {
     });
 
     // Remove Row
-    $("body").delegate('.btnHapusFormBarangForOBUpdate', 'click', function () {
-        $(this).parent().parent().remove();
-        renumberRowsBarangForOBUpdate();
-        // $(this).parents('tr').remove();
+    // $("body").delegate('.btnHapusFormBarangForOBUpdate', 'click', function () {
+    //     $(this).parent().parent().remove();
+    //     renumberRowsBarangForOBUpdate();
+    //     // $(this).parents('tr').remove();
+    // });
+
+    $("body").delegate('.btnHapusFormBarangForOBUpdate', 'click', function (e) {
+        e.preventDefault();
+        let idOb = $("#idObGerForJs").val();
+        let idBarangINV = $(this).val();
+        // console.log(idOb);
+        // console.log(idBarangINV);
+      
+        if (idBarangINV !== '') {
+            Swal.fire({
+                title: 'Yakin Hapus Data Ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `/out-broadcast/edit/${idOb}/${idBarangINV}`,
+                        type: "PUT",
+                        success: function (response) {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Data sudah dihapus.',
+                                'success'
+                            );
+
+                        }
+                    });
+                    $(this).parent().parent().remove();
+                    renumberRowsBarangForOBUpdate();
+                    // window.location.reload(true);
+                }
+            })
+
+        }
+        else {
+            $(this).parent().parent().remove();
+            renumberRowsBarangForOBUpdate();
+
+        }
+
     });
+
 
 
 });
 
+
+   $("body").delegate('.btnEditHpusCrewDinasOb', 'click', function (e) {
+            e.preventDefault();
+            let idOb = $("#idObGerForJs").val();
+            let idCrewDinas = $(this).val();
+            if (idCrewDinas !== '') {
+                Swal.fire({
+                    title: 'Yakin Hapus Data Ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            // url: "/peminjaman_alat/edit/22/"+id,
+                               // url: `${idOb}/${idCrewDinas}`,
+                            url: `/out-broadcast/edit/${idOb}/${idCrewDinas}`,
+                            type: "POST",
+                            success: function (response) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Data sudah dihapus.',
+                                    'success'
+                                );
+    
+                            }
+                        });
+                        $(this).parent().parent().remove();
+                        renumberRowsEditCrewOb();
+                        window.location.reload(true);
+                    }
+                })
+    
+            }
+            else {
+                $(this).parent().parent().remove();
+                renumberRowsEditCrewOb();
+    
+            }
+    
+        });
+
+
 function addnewrowBarangForOBUpdate() {
     let tr = `<tr>
-        <input type="hidden" class="form-control" name="id_peralatan[]">
+        <input type="hidden" class="form-control" name="id_ob_from_alat[]" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>">
         <td class="rownumberBarangForOBUpdate text-center">
         </td>
         <td class="text-center">
-        <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+        <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInvEditUpdate"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
+            <input type="text" required id="dinall-js-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="naBarUpdate[]" placeholder="Nama Barang">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+            <input type="text" required class="form-control" name="merkUpdate[]" placeholder="Merk">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+            <input type="text" required class="form-control" name="sNUpdate[]" placeholder="Serial Number">
         </td>
         <td class="text_center"> 
-            <input type="hidden" class="form-control" name="id_inv_new[]" value="<?= $valueJoinInv['id_inv']; ?>">
+            <input type="hidden" class="form-control" name="idBarangFromSelectModalUpdate[]" value="<?= $valueJoinInv['id_inv']; ?>">
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
+            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="jumlahAlatOBUpdate[]" placeholder="Jumlah" value="1">
         </td>
         <td class="text-center">
-            <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
+            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
     $('.formTambahBarangOBUpdate').append(tr);
@@ -1000,6 +1097,22 @@ function renumberRowsBarangForOBUpdate() {
         // console.log(i);
     });
 }
+
+$(document).ready(function () {
+
+    $('#dinallTable').DataTable({
+
+        scrollX: true,
+
+        scrollCollapse: true,
+        scrollY: '70vh'
+
+
+    },
+
+    );
+
+});
 
 
 

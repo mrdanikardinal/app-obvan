@@ -7,7 +7,9 @@ use CodeIgniter\Model;
 class ParentAlatObModel extends Model
 {
     protected $table = 'parent_alat_ob ';
-    protected $allowedFields = ['id_ob', 'id_inv','jumlah'];
+    protected $allowedFields = ['id_parent_alat_ob','id_ob', 'id_inv','jumlah'];
+    protected $primaryKey = 'id_parent_alat_ob';
+    protected $useAutoIncrement = true;
 
    
     public function getIdParentAlatOB($id = false)

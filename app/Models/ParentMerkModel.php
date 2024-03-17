@@ -8,9 +8,9 @@ use CodeIgniter\Database\RawSql;
 class ParentMerkModel extends Model
 {
     protected $table = 'parent_merk';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_parent_alat_ob';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['id', 'id_pinjaman_alat', 'nama_barang', 'merk', 'serial_number', 'jumlah','status'];
+    protected $allowedFields = ['id_parent_alat_ob', 'id_ob', 'id_inv', 'serial_number', 'jumlah','status'];
 
     public function getParentMerk($id = false)
     {

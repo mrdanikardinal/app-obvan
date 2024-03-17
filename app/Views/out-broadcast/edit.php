@@ -204,13 +204,13 @@
                                                 <th class="text-center">Aksi</th>
 
                                             </tr>
-                                            <?php $number2 = 1; ?>
+                                            <?php $number5 = 1; ?>
                                             <?php foreach ($showDataAlatJoinInv as $key => $valueJoinInv) : ?>
                                                 <?php if ($key == 0) : ?>
                                                     <tr>
-                                                        <input type="hidden" class="form-control" name="id_parent_alat_ob[]" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>">
+                                                        <input type="hidden" class="form-control" name="id_ob_from_alat[]" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>">
                                                         <td class="rownumberBarangForOBUpdate text-center">
-                                                            <?= $number2++; ?>
+                                                            <?= $number5++; ?>
                                                         </td>
                                                         <td class="text-center">
                                                             <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInvEditUpdate"><i class="fa-solid fa-search"></i></button>
@@ -225,12 +225,11 @@
                                                             <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
                                                         </td>
                                                         <td class="text_center">
-                                                            <input type="hidden" class="form-control" name="id_inv_old[]" value="<?= $valueJoinInv['id_inv']; ?>">
+                                                            <input type="hidden" class="form-control" name="idBarangFromSelectModal[]" value="<?= $valueJoinInv['id_inv']; ?>">
                                                         </td>
                                                         <td class="text-center">
                                                             <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
                                                         </td>
-
                                                         <td class="text-center">
 
                                                             <button type="button" required class="btn btn-primary btnAddFormForBarangOBUpdate"><i class="fa-solid fa-plus"></i></button>
@@ -244,9 +243,9 @@
                                                 <?php if ($valueJoinInv != null) : ?>
 
                                                     <tr>
-                                                        <input type="hidden" class="form-control" name="id_parent_alat_ob[]" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>">
+                                                        <input type="hidden" class="form-control" name="id_ob_from_alat[]" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>">
                                                         <td class="rownumberBarangForOBUpdate text-center">
-                                                            <?= $number2++; ?>
+                                                            <?= $number5++; ?>
                                                         </td>
                                                         <td class="text-center">
                                                             <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInvEditUpdate"><i class="fa-solid fa-search"></i></button>
@@ -262,7 +261,7 @@
                                                             <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
                                                         </td>
                                                         <td class="text_center">
-                                                            <input type="hidden" class="form-control" name="id_inv_old[]" value="<?= $valueJoinInv['id_inv']; ?>">
+                                                            <input type="hidden" class="form-control" name="idBarangFromSelectModal[]" value="<?= $valueJoinInv['id_inv']; ?>">
                                                         </td>
                                                         <td class="text-center">
                                                             <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
@@ -270,7 +269,7 @@
 
                                                         <td class="text-center">
 
-                                                            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate"><i class="fa-solid fa-trash"></i></button>
+                                                            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>" ><i class="fa-solid fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>

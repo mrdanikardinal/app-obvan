@@ -13,23 +13,36 @@ class InventarisModel extends Model
     protected $allowedFields = ['id_inv', 'id_jns_barang', 'kode_barcode', 'nama_barang', 'merk', 'serial_number', 'id_lokasi', 'id_kondisi', 'id_status', 'thn_pengadaan'];
 
 
+    // public function autoNumberId()
+    // {
+    //     $builder = $this->table('inventaris');
+    //     $builder->selectMax('id_inv', 'idMax');
+    //     $query = $builder->get();
+    //     if ($query->getNumRows() > 0) {
+
+    //         foreach ($query->getResult() as $key) {
+    //             $code = '';
+    //             $getData = substr($key->idMax, -9);
+    //             $increment = intval($getData) + 1;
+    //             $code = sprintf('%09s', $increment);
+    //         }
+    //     } else {
+    //         $code = '000000001';
+    //     }
+    //     return 'INV-' . $code;
+    // }
     public function autoNumberId()
     {
-        $builder = $this->table('inventaris');
-        $builder->selectMax('id_inv', 'idMax');
-        $query = $builder->get();
-        if ($query->getNumRows() > 0) {
+        $builder = $this->db->table($this->table);
+        $builder->selectMax($this->primaryKey);
+        $result = $builder->get()->getRow();
 
-            foreach ($query->getResult() as $key) {
-                $code = '';
-                $getData = substr($key->idMax, -9);
-                $increment = intval($getData) + 1;
-                $code = sprintf('%09s', $increment);
-            }
-        } else {
-            $code = '000000001';
-        }
-        return 'INV-' . $code;
+        $maxId = $result->{$this->primaryKey};
+
+        // Menetapkan nilai awal jika data kosong
+        $nextAutoIncrementValue = ($maxId === null) ? 30 : $maxId + 1;
+
+        return $nextAutoIncrementValue;
     }
     public function getInventaris($id = false)
     {

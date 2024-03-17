@@ -211,12 +211,51 @@ class OutBroadcast extends BaseController
         //end edit crew ob
 
         //update Alat OB
-        $namaBarangUpdate = $this->request->getVar('naBarEditUpdate');
-        $merkUpdate = $this->request->getVar('merkEditUpdate');
-        $serialNumberUpdate = $this->request->getVar('sNEditUpdate');
-        $jumlahUpdate = $this->request->getVar('jumlahEditUpdate');
-        //End update Alat OB
+        $idBarangInvOld = $this->request->getVar('id_ob_from_alat');
+        $idBarangSelectModal = $this->request->getVar('idBarangFromSelectModal');
+        $idBarangSelectModalUpdate = $this->request->getVar('idBarangFromSelectModalUpdate');
+        $namaBarangEdit = $this->request->getVar('naBar');
+        $namaBarangUpdate = $this->request->getVar('naBarUpdate');
+        $jumlahBarangEdit = $this->request->getVar('jumlahAlatOB');
+        $jumlahBarangEditUpdate = $this->request->getVar('jumlahAlatOBUpdate');
 
+        if (!isset($namaBarangUpdate)) {
+            $jumlahDataInvUpdate = count($namaBarangEdit);
+            for ($i = 0; $i < $jumlahDataInvUpdate; $i++) {
+                $this->parentAlatOb->save([
+                    'id_parent_alat_ob' => $idBarangInvOld[$i],
+                    'id_inv' => $idBarangSelectModal[$i],
+                    'jumlah' => $jumlahBarangEdit[$i]
+                ]);
+            }
+        }
+        //update data baru barang inv
+        else if (isset($namaBarangUpdate)) {
+            $jumlahDataUpdate = count($namaBarangUpdate);
+            for ($j = 0; $j < $jumlahDataUpdate; $j++) {
+                $this->parentAlatOb->save([
+                    'id_ob' => $idOb,
+                    'id_inv' => $idBarangSelectModalUpdate[$j],
+                    'jumlah' => $jumlahBarangEditUpdate[$j]
+
+                ]);
+            }
+
+              //fungsi untuk update data yang sudah ada
+              if (isset($namaBarangEdit)) {
+                $jumlahData = count($namaBarangEdit);
+                for ($k = 0; $k < $jumlahData; $k++) {
+
+                    $this->parentAlatOb->save([
+                        'id_parent_alat_ob' => $idBarangInvOld[$k],
+                        'id_inv' => $idBarangSelectModal[$k],
+                        'jumlah' => $jumlahBarangEdit[$k]
+                    ]);
+                }
+            }
+        }
+
+        //End update Alat OB
 
 
 
@@ -362,5 +401,9 @@ class OutBroadcast extends BaseController
     public function hapus($idCrewDinas)
     {
         return $this->crewOb->delete($idCrewDinas);
+    }
+    public function hapusinv($idBarangInv)
+    {
+        return $this->parentAlatOb->delete($idBarangInv);
     }
 }
