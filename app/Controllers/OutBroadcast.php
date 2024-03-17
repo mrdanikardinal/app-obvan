@@ -196,34 +196,17 @@ class OutBroadcast extends BaseController
                 ]);
             }
             //fungsi untuk update data yang sudah ada
-            // if (isset($namaBarang)) {
-            //     $jumlahData = count($namaBarang);
-            //     for ($i = 0; $i < $jumlahData; $i++) {
+            if (isset($namaEdit)) {
+                $jumlahData = count($namaEdit);
+                for ($k = 0; $k < $jumlahData; $k++) {
 
-
-            //         $this->parentMerkModel->save([
-            //             'id' => $idParent[$i],
-            //             // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
-            //             'nama_barang' => $namaBarang[$i],
-            //             'merk' => $merk[$i],
-            //             'serial_number' => $serialNumber[$i],
-            //             'jumlah' => $jumlah[$i],
-            //             'status' => $checkAlat[$i]
-
-
-
-            //         ]);
-            //     }
-            // }
+                    $this->crewOb->save([
+                        'id_crew_ob' => $idDinasCrewObOld[$k],
+                        'id_users' => $idUserSelectModal[$k]
+                    ]);
+                }
+            }
         }
-
-
-
-
-
-
-
-
 
         //end edit crew ob
 
@@ -232,10 +215,22 @@ class OutBroadcast extends BaseController
         $merkUpdate = $this->request->getVar('merkEditUpdate');
         $serialNumberUpdate = $this->request->getVar('sNEditUpdate');
         $jumlahUpdate = $this->request->getVar('jumlahEditUpdate');
-        //End update Alat OBs
+        //End update Alat OB
+
+
+
+
+
 
         session()->setFlashdata('pesan', 'Berhasil,Update out broadcast ID ' . $idOb);
         return redirect()->to('out-broadcast');
+
+
+
+
+
+
+
 
 
 

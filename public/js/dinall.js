@@ -774,17 +774,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //menu edit crew dinas out broadcast
 $(function () {
     // Add Row
@@ -839,13 +828,6 @@ $(function () {
 
 
 });
-
-
-
-
-
-
-
 
 
 function addnewrowCrewOBEdit() {
@@ -920,9 +902,108 @@ $(document).ready(function () {
     });
 });
 
-
 //end menu edit crew dinas out broadcast
 
+//star menu edit alat ob
+$(document).ready(function () {
+    $('#dinallModalBarangInvEditUpdate').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowBarangInvEditUpdate', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowBarangInvEditUpdate');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectBarangForOBUpdate').on('click', '.selectBarangForOBUpdate', function () {
+            let idInv = $(this).data('id_alat');
+            let barcode = $(this).data('barcode');
+            let barang = $(this).data('barang');
+            let merk = $(this).data('merk');
+            let sn = $(this).data('sn');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(barang);
+            $currentSearchBarang.parent().next().next().children().val(merk);
+            $currentSearchBarang.parent().next().next().next().children().val(sn);
+            $currentSearchBarang.parent().next().next().next().next().next().children().val(idInv);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalBarangInvEdit').modal('hide');
+
+        });
+    });
+});
+
+
+
+$(function () {
+    // Add Row
+    $(".btnAddFormForBarangOBUpdate").click(function () {
+        addnewrowBarangForOBUpdate();
+        renumberRowsBarangForOBUpdate();
+    });
+
+    // Remove Row
+    $("body").delegate('.btnHapusFormBarangForOBUpdate', 'click', function () {
+        $(this).parent().parent().remove();
+        renumberRowsBarangForOBUpdate();
+        // $(this).parents('tr').remove();
+    });
+
+
+});
+
+function addnewrowBarangForOBUpdate() {
+    let tr = `<tr>
+        <input type="hidden" class="form-control" name="id_peralatan[]">
+        <td class="rownumberBarangForOBUpdate text-center">
+        </td>
+        <td class="text-center">
+        <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td class="text-center">
+            <input type="text" required id="dinall-js-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
+        </td>
+        <td class="text-center">
+            <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+        </td>
+        <td class="text-center">
+            <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+        </td>
+        <td class="text_center"> 
+            <input type="hidden" class="form-control" name="id_inv_new[]" value="<?= $valueJoinInv['id_inv']; ?>">
+        </td>
+        <td class="text-center">
+            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
+        </td>
+        <td class="text-center">
+            <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.formTambahBarangOBUpdate').append(tr);
+    // console.log('testing');
+
+};
+
+function renumberRowsBarangForOBUpdate() {
+    $(".formTambahBarangOBUpdate").children().children().each(function (i, v) {
+
+        $(this).find(".rownumberBarangForOBUpdate").text(i);
+        //   $(this).find(".rownumber").val(i + 1); index i dimulai dari 0
+        // console.log(i);
+    });
+}
+
+
+
+//end menu edit alat ob
 
 
 
