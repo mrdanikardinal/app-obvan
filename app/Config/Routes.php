@@ -54,6 +54,8 @@ $routes->PUT('out-broadcast/edit/(:segment)', 'OutBroadcast::edit/$1');
 $routes->get('out-broadcast/create', 'OutBroadcast::create');
 $routes->post('out-broadcast/save', 'OutBroadcast::save');
 $routes->post('out-broadcast/update/(:any)', 'OutBroadcast::update/$1');
+$routes->post('out-broadcast/edit/(:segment)/(:segment)', 'OutBroadcast::hapus/$2');
+
 
 //end-outbroadcast
 

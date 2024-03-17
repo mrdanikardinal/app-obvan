@@ -770,9 +770,162 @@ $(document).ready(function () {
         });
     });
 });
-
-
 // end menampilkan alat ob diindex ob
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//menu edit crew dinas out broadcast
+$(function () {
+    // Add Row
+    $(".btnAddEditCrewDinasOb").click(function () {
+        addnewrowCrewOBEdit();
+        renumberRowsEditCrewOb();
+    });
+        // Remove Row Crew Dinas Edit Out Broadcast
+        $("body").delegate('.btnEditHpusCrewDinasOb', 'click', function (e) {
+            e.preventDefault();
+            let idOb = $("#idObGerForJs").val();
+            let idCrewDinas = $(this).val();
+            if (idCrewDinas !== '') {
+                Swal.fire({
+                    title: 'Yakin Hapus Data Ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            // url: "/peminjaman_alat/edit/22/"+id,
+                               // url: `${idOb}/${idCrewDinas}`,
+                            url: `/out-broadcast/edit/${idOb}/${idCrewDinas}`,
+                            type: "POST",
+                            success: function (response) {
+                                Swal.fire(
+                                    'Berhasil!',
+                                    'Data sudah dihapus.',
+                                    'success'
+                                );
+    
+                            }
+                        });
+                        $(this).parent().parent().remove();
+                        renumberRowsEditCrewOb();
+                        window.location.reload(true);
+                    }
+                })
+    
+            }
+            else {
+                $(this).parent().parent().remove();
+                renumberRowsEditCrewOb();
+    
+            }
+    
+        });
+
+
+});
+
+
+
+
+
+
+
+
+
+function addnewrowCrewOBEdit() {
+    let tr = `<tr>
+        <input type="hidden" class="form-control" name="id_dinas_crew_ob[]" value="<?= $valueJoinUser['id_crew_ob']; ?>">
+        <td class="rownumberobEdit text-center">
+        </td>
+        <td class="text-center">
+        <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="namaEditUpdate[]" placeholder="Nama">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="nipEditUpdate[]" placeholder="NIP">
+        </td>
+        <td><input type="hidden" name="idUserFromSelectModalUpdate[]"></td>
+        <td class="text-center">
+            <button type="button" required class="btn btn-danger btnEditHpusCrewDinasOb"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.tableCrewDinasOb').append(tr);
+};
+
+function renumberRowsEditCrewOb() {
+    $(".tableCrewDinasOb").children().children().each(function (i, v) {
+        $(this).find(".rownumberobEdit").text(i);
+    });
+}
+
+
+
+
+
+$(document).ready(function () {
+    $('#dinallModalOBEdit').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowAllCrewEdit', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowAllCrewEdit');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectCrewOBEdit').on('click', '.selectCrewOBEdit', function () {
+            let idCrew = $(this).data('id_crew');
+            let fullname = $(this).data('fullname');
+            let jabfung = $(this).data('jab_fung');
+            let npwp = $(this).data('npwp');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(fullname);
+            $currentSearchBarang.parent().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().children().val(idCrew);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalOBEdit').modal('hide');
+
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#tableOBShowEdit').DataTable({
+
+    });
+});
+
+
+//end menu edit crew dinas out broadcast
+
+
+
+
 
 //End OutBroadcast===============================================================================
 //Start View Alat================================================================================

@@ -8,7 +8,8 @@ class CrewObModel extends Model
 {
     protected $table = 'crew_ob ';
     protected $allowedFields = ['id_ob', 'id_users'];
-
+    protected $primaryKey = 'id_crew_ob';
+    protected $useAutoIncrement = true;
 
     public function getIdOutBroadcast($id = false)
     {

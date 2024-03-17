@@ -28,7 +28,7 @@
                         <form id="formUpdateOutBroadcast" method="post" action="<?= base_url(); ?>out-broadcast/update/<?= $showObByid['id_ob']; ?>">
 
                             <?= csrf_field(); ?>
-
+                            <input type="hidden" class="form-control" id="idObGerForJs" placeholder="Nama Barang" value="<?= $showObByid['id_ob']; ?>">
                             <div class="row mb-3">
                                 <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
@@ -125,35 +125,62 @@
 
                             <div class="row mb-3">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <table class="table formTambahOB">
+                                    <table class="table tableCrewDinasOb">
                                         <tr>
                                             <th class="text-center">No</th>
                                             <th class="text-center">Search</th>
                                             <th class="text-center">Nama</th>
                                             <th class="text-center">NIP</th>
+                                            <th class="text-center"></th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                         <?php $number = 1; ?>
                                         <?php foreach ($showDataCrewJoinUsers as $key => $valueJoinUser) : ?>
-                                            <tr>
-                                                <input type="hidden" class="form-control" name="id_user[]">
-                                                <td class="rownumberobEdit text-center">
-                                                    <?= $number++; ?>
-                                                </td> 
-                                                <td class="text-center">
-                                                    <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
-                                                </td>
-                                                <td class="text-center">
-                                                    <input type="text" required class="form-control" name="nama[]" value="<?= $valueJoinUser['fullname']; ?>">
-                                                </td>
-                                                <td class="text-center">
-                                                    <input type="text" required class="form-control" name="nip[]" value="<?= $valueJoinUser['npwp']; ?>">
-                                                </td>
-                                                <td class="text-center">
-                                                    <button type="button" required class="btn btn-primary btnUpdateFormOB"><i class="fa-solid fa-plus"></i></button>
-                                                </td>
+                                            <?php if ($key == 0) : ?>
+                                                <tr>
+                                                    <input type="hidden" class="form-control" name="id_dinas_crew_ob[]" value="<?= $valueJoinUser['id_crew_ob']; ?>">
+                                                    <td class="rownumberobEdit text-center">
+                                                        <?= $number++; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                    </td>
+                                                    <td><input type="hidden" name="idUserFromSelectModal[]"></td>
+                                                    <td class="text-center">
+                                                        <button type="button" required class="btn btn-primary btnAddEditCrewDinasOb"><i class="fa-solid fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <?php foreach (array_slice($showDataCrewJoinUsers, 1) as $valueJoinUser) : ?>
+                                            <?php if ($valueJoinUser != null) : ?>
+                                                <tr>
+                                                    <input type="hidden" class="form-control" name="id_dinas_crew_ob[]" value="<?= $valueJoinUser['id_crew_ob']; ?>">
+                                                    <td class="rownumberobEdit text-center">
+                                                        <?= $number++; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                    </td>
+                                                    <td><input type="hidden" name="idUserFromSelectModal[]"></td>
+                                                    <td class="text-center">
+                                                        <button type="button" required class="btn btn-danger btnEditHpusCrewDinasOb" value="<?= $valueJoinUser['id_crew_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
+                                                    </td>
 
-                                            </tr>
+                                                </tr>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </table>
                                 </div>
@@ -174,45 +201,75 @@
                                                 <th class="text-center">S.N</th>
                                                 <th class="text-center">Jumlah</th>
                                                 <th class="text-center">Aksi</th>
-            
+
                                             </tr>
                                             <?php $number2 = 1; ?>
                                             <?php foreach ($showDataAlatJoinInv as $key => $valueJoinInv) : ?>
+                                                <?php if ($key == 0) : ?>
+                                                    <tr>
+                                                        <input type="hidden" class="form-control" name="id_peralatan[]">
+                                                        <td class="rownumberBarangForOBEdit text-center">
+                                                            <?= $number2++; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
 
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
+                                                        </td>
 
-                                                <tr>
-                                                <input type="hidden" class="form-control" name="id_peralatan[]">
-                                                    <td class="rownumberBarangForOBEdit text-center">
-                                                        <?= $number2++; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+                                                        <td class="text-center">
 
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
-                                                    </td>
+                                                            <button type="button" required class="btn btn-primary btnEditAlatOb"><i class="fa-solid fa-plus"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
 
-                                                    <td class="text-center">
-                                                        
-                                                        <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
-                                                    </td>
-                                                </tr>
                                             <?php endforeach; ?>
 
+                                            <?php foreach (array_slice($showDataAlatJoinInv,1) as $valueJoinInv) : ?>
+                                                <?php if ($valueJoinInv != null) : ?>
+
+                                                    <tr>
+                                                        <input type="hidden" class="form-control" name="id_peralatan[]">
+                                                        <td class="rownumberBarangForOBEdit text-center">
+                                                            <?= $number2++; ?>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
+
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
+                                                        </td>
+
+                                                        <td class="text-center">
+
+                                                            <button type="button" required class="btn btn-danger btnHpusEditAlatOb"><i class="fa-solid fa-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </table>
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +283,7 @@
 
         </main>
         <!-- Start Modal show all user-->
-        <div class="modal fade" id="dinallModalOB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="dinallModalOBEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -235,7 +292,7 @@
                     </div>
                     <div class="modal-body">
                         <!--  -->
-                        <table id="tableOBShow" class="table table-bordered table-hover text-center align-middle">
+                        <table id="tableOBShowEdit" class="table table-bordered table-hover text-center align-middle">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -256,7 +313,7 @@
                                         <td><?= $valueDataUsers['jab_fung']; ?></td>
                                         <td><?= $valueDataUsers['npwp']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectCrewOB" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                            <button type="button" required class="btn btn-success selectCrewOBEdit" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 

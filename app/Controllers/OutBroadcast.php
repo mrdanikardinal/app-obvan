@@ -46,14 +46,14 @@ class OutBroadcast extends BaseController
     public function index()
     {
         // dd($this->outBroadcast->getOBJointKategori());
-        
+
         $data = [
             // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
-            'showAllJoinsOBKategori'=> $this->outBroadcast->getOBJointKategori(),
-            'allDataOutBroadcast'=> $this->crewOb->getIdOutBroadcast(),
-            'allUsers'=>$this->allUser->getUsers(),
-            "allAlatOB"=>$this->parentAlatOb->getIdParentAlatOB(),
-            'allInventaris'=>$this->inventaris->getInventaris()
+            'showAllJoinsOBKategori' => $this->outBroadcast->getOBJointKategori(),
+            'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
+            'allUsers' => $this->allUser->getUsers(),
+            "allAlatOB" => $this->parentAlatOb->getIdParentAlatOB(),
+            'allInventaris' => $this->inventaris->getInventaris()
         ];
         return view('out-broadcast/index', $data);
     }
@@ -115,7 +115,7 @@ class OutBroadcast extends BaseController
             $this->parentAlatOb->save([
                 'id_ob' => $idAutoOutBroadcast,
                 'id_inv' => $idPeralatan[$j],
-                'jumlah'=> $jumlahAlat[$j]
+                'jumlah' => $jumlahAlat[$j]
             ]);
         }
         //end peralatan ob
@@ -128,7 +128,7 @@ class OutBroadcast extends BaseController
     public function edit($idOb)
     {
         // $allKategori = $this->kategoriOb->getKategori();
-// dd($allKategori);
+        // dd($allKategori);
 
         // $allKategori = $this->kategoriOb->getKategori();
         // $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
@@ -136,22 +136,21 @@ class OutBroadcast extends BaseController
 
         // $data['showObByid'] = $this->outBroadcast->procedureGetShowOutBroadcastByID($idOb);
         $data['showObByid'] = $this->outBroadcast->getShowOutBroadcast($idOb);
-        $data['showDataCrewJoinUsers']= $this->outBroadcast->procedureGetShowCrewObJoinUser($idOb);
-        $data['showDataAlatJoinInv']= $this->outBroadcast->procedureGetShowAlatJoinInv($idOb);
+        $data['showDataCrewJoinUsers'] = $this->outBroadcast->procedureGetShowCrewObJoinUser($idOb);
+        $data['showDataAlatJoinInv'] = $this->outBroadcast->procedureGetShowAlatJoinInv($idOb);
         $data['allKategori'] = $this->kategoriOb->getKategori();
         $data['generator'] = new BarcodeGeneratorPNG();
         $data['title'] = 'Update Out Broadcast';
-        $data['allDataUsers']=$this->allUser->proceduregetAllShowUser();
-        $data['allDataInv']=$this->pinjamAlatModel->procedureGetItemsReady();
-     
-      
-        return view('out-broadcast/edit',$data);
+        $data['allDataUsers'] = $this->allUser->proceduregetAllShowUser();
+        $data['allDataInv'] = $this->pinjamAlatModel->procedureGetItemsReady();
 
+
+        return view('out-broadcast/edit', $data);
     }
     public function update($idOb)
     {
 
-     
+
         $converttgl = $this->request->getVar('tanggalOB');
         $convertSampaiDengan = $this->request->getVar('sampai_denganOB');
         $date = str_replace('/', '-', $converttgl);
@@ -171,35 +170,75 @@ class OutBroadcast extends BaseController
             'ass_td' => $this->request->getVar('asst_td'),
             'um' => $this->request->getVar('um_ob')
         ]);
-        // $idUser = $this->request->getVar('id_user');
-        // $jumlahDataInput = count($idUser);
-        // for ($i = 0; $i < $jumlahDataInput; $i++) {
+        //start edit crew ob
+        $idDinasCrewObOld = $this->request->getVar('id_dinas_crew_ob');
+        $idUserSelectModal = $this->request->getVar('idUserFromSelectModal');
+        $idUserSelectModalUpdate = $this->request->getVar('idUserFromSelectModalUpdate');
+        $namaEdit = $this->request->getVar('namaEdit');
+        $namaEditUpdate = $this->request->getVar('namaEditUpdate');
+        //update data lama crew dinas ob
+        if (!isset($namaEditUpdate)) {
+            $jumlahData = count($namaEdit);
+            for ($i = 0; $i < $jumlahData; $i++) {
+                $this->crewOb->save([
+                    'id_crew_ob' => $idDinasCrewObOld[$i],
+                    'id_users' => $idUserSelectModal[$i]
+                ]);
+            }
+        }
+        //update data baru crew dinas ob
+        else if (isset($namaEditUpdate)) {
+            $jumlahDataUpdate = count($namaEditUpdate);
+            for ($j = 0; $j < $jumlahDataUpdate; $j++) {
+                $this->crewOb->save([
+                    'id_ob' => $idOb,
+                    'id_users' => $idUserSelectModalUpdate[$j]
+                ]);
+            }
+            //fungsi untuk update data yang sudah ada
+            // if (isset($namaBarang)) {
+            //     $jumlahData = count($namaBarang);
+            //     for ($i = 0; $i < $jumlahData; $i++) {
 
-        //     $this->crewOb->save([
-        //         'id_ob' => $idAutoOutBroadcast,
-        //         'id_users' => $idUser[$i]
-        //     ]);
-        // }
-        // //end crew ob
-        // //start peralatan ob
-        // $idPeralatan = $this->request->getVar('id_peralatan');
-        // $jumlahAlat = $this->request->getVar('jumlahAlatOB');
-        // $jumlahDataInputPeralatan = count($idPeralatan);
-        // for ($j = 0; $j < $jumlahDataInputPeralatan; $j++) {
-        //     $this->parentAlatOb->save([
-        //         'id_ob' => $idAutoOutBroadcast,
-        //         'id_inv' => $idPeralatan[$j],
-        //         'jumlah'=> $jumlahAlat[$j]
-        //     ]);
-        // }
-        //end peralatan ob
 
+            //         $this->parentMerkModel->save([
+            //             'id' => $idParent[$i],
+            //             // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
+            //             'nama_barang' => $namaBarang[$i],
+            //             'merk' => $merk[$i],
+            //             'serial_number' => $serialNumber[$i],
+            //             'jumlah' => $jumlah[$i],
+            //             'status' => $checkAlat[$i]
+
+
+
+            //         ]);
+            //     }
+            // }
+        }
+
+
+
+
+
+
+
+
+
+        //end edit crew ob
+
+        //update Alat OB
+        $namaBarangUpdate = $this->request->getVar('naBarEditUpdate');
+        $merkUpdate = $this->request->getVar('merkEditUpdate');
+        $serialNumberUpdate = $this->request->getVar('sNEditUpdate');
+        $jumlahUpdate = $this->request->getVar('jumlahEditUpdate');
+        //End update Alat OBs
 
         session()->setFlashdata('pesan', 'Berhasil,Update out broadcast ID ' . $idOb);
         return redirect()->to('out-broadcast');
 
-     
-       
+
+
         // $converttglEdit = $this->request->getVar('tanggal');
         // $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
         // $convertTanggalKembali = $this->request->getVar('tanggal_kembali');
@@ -311,16 +350,22 @@ class OutBroadcast extends BaseController
         return redirect()->to('out-broadcast');
     }
 
-    public function peralatancrewob($idOB){
+    public function peralatancrewob($idOB)
+    {
         // $data =$this->parentAlatOb->getJoinOBAndAlatINV($idOB);
         // $data =$this->parentAlatOb->getCountAlatOB($idOB);
         // dd($data);
 
         $data = [
-            'allDataCrewOB'=> $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
-            'countDataCrewOB'=> $this->parentAlatOb->getCountAlatOB($idOB)
+            'allDataCrewOB' => $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
+            'countDataCrewOB' => $this->parentAlatOb->getCountAlatOB($idOB)
         ];
-        return view('peralatan-crew-ob/index',$data);
+        return view('peralatan-crew-ob/index', $data);
+    }
 
+
+    public function hapus($idCrewDinas)
+    {
+        return $this->crewOb->delete($idCrewDinas);
     }
 }
