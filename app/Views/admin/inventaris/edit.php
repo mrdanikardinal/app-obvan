@@ -9,6 +9,7 @@
                 <h5 class="mt-4">
 
                 </h5>
+                <a href="<?= base_url("admin/inventaris") ?>" class="btn btn-warning my-2">Kembali</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>

@@ -13,6 +13,11 @@
         <main>
             <div class="container-fluid px-4">
                 <h5 class="mt-4">
+                <?php if (session()->getFlashdata('pesanHapusBarang')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapusBarang'); ?>
+                        </div>
+                    <?php endif; ?>
 
                 </h5>
                 <a href="<?= base_url("peminjaman-alat") ?>" class="btn btn-warning my-2">Kembali</a>

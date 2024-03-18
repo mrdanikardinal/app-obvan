@@ -263,11 +263,15 @@ class PeminjamanAlat extends BaseController
     }
     public function delete($id)
     {
+        session();
         $this->pinjamAlatModel->delete($id);
+        session()->setFlashdata('pesanHapus', 'Berhasil hapus peminjaman ID ' . $id);
         return redirect()->to('peminjaman-alat');
     }
     public function hapus($id)
     {
+        session();
+        session()->setFlashdata('pesanHapusBarang', 'Berhasil hapus barang dipinjam ');
         return $this->parentMerkModel->delete($id);
     }
 }

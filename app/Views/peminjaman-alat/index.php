@@ -13,6 +13,11 @@
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('pesanHapus')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapus'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
                 <a href="<?= base_url("/peminjaman-alat/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">

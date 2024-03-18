@@ -13,6 +13,11 @@
         <main>
             <div class="container-fluid px-4">
                 <h5 class="mt-4">
+                    <?php if (session()->getFlashdata('pesanHapus')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapus'); ?>
+                        </div>
+                    <?php endif; ?>
 
                 </h5>
                 <a href="<?= base_url("out-broadcast") ?>" class="btn btn-warning my-2">Kembali</a>
@@ -276,7 +281,7 @@
 
                                                         <td class="text-center">
 
-                                                            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>" ><i class="fa-solid fa-trash"></i></button>
+                                                            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>
@@ -327,7 +332,7 @@
                                         <td><?= $valueDataUsers['nip']; ?></td>
                                         <td><?= $valueDataUsers['npwp']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectCrewOBEdit" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-nip="<?=$valueDataUsers["nip"]?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                            <button type="button" required class="btn btn-success selectCrewOBEdit" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-nip="<?= $valueDataUsers["nip"] ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 

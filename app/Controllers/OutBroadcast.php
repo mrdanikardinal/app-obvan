@@ -380,6 +380,9 @@ class OutBroadcast extends BaseController
     }
     public function delete($id)
     {
+        session();
+        $this->pinjamAlatModel->delete($id);
+        session()->setFlashdata('pesanHapus', 'Berhasil hapus out broadcast ID ' . $id);
         $this->outBroadcast->delete($id);
         return redirect()->to('out-broadcast');
     }
@@ -400,10 +403,14 @@ class OutBroadcast extends BaseController
 
     public function hapus($idCrewDinas)
     {
+        session();
+        session()->setFlashdata('pesanHapus', 'Berhasil hapus crew out broadcast');
         return $this->crewOb->delete($idCrewDinas);
     }
     public function hapusinv($idBarangInv)
     {
+        session();
+        session()->setFlashdata('pesanHapus', 'Berhasil hapus barang out broadcast ');
         return $this->parentAlatOb->delete($idBarangInv);
     }
 }
