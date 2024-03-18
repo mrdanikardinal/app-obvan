@@ -15,6 +15,7 @@
                 <h5 class="mt-4">
 
                 </h5>
+                <a href="<?= base_url("peminjaman-alat") ?>" class="btn btn-warning my-2">Kembali</a>
 
                 <div class="card mb-4">
                     <div class="card-header">

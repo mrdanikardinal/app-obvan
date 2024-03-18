@@ -1098,21 +1098,7 @@ function renumberRowsBarangForOBUpdate() {
     });
 }
 
-$(document).ready(function () {
 
-    $('#dinallTable').DataTable({
-
-        scrollX: true,
-
-        scrollCollapse: true,
-        scrollY: '70vh'
-
-
-    },
-
-    );
-
-});
 
 
 
