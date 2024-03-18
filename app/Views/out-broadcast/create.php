@@ -119,23 +119,28 @@
                                             <th class="text-center">Search</th>
                                             <th class="text-center">Nama</th>
                                             <th class="text-center">NIP</th>
+                                            <th class="text-center">NPWP</th>
+                                            <th class="text-center"></th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                         <tr>
-                                            <td class="rownumberob">
+                                            <td class="rownumberob text-center">
                                                 1
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
-
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
                                             </td>
-                                            <td><input type="hidden" name="id_user[]"></td>
-                                            <td>
+                                            <td class="text-center">
+                                                <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+                                            </td>
+                                            <td class="text-center"><input type="hidden" name="id_user[]"></td>
+                                            <td class="text-center">
                                                 <button type="button" required class="btn btn-primary btnAddFormOB"><i class="fa-solid fa-plus"></i></button>
                                             </td>
 
@@ -157,35 +162,36 @@
                                         <table class="table formTambahBarangOB">
                                             <tr>
                                                 <th class="text-center">No</th>
-                                                <th>Search</th>
+                                                <th class="text-center">Search</th>
                                                 <th class="text-center">Nama Barang</th>
                                                 <th class="text-center">Merk</th>
                                                 <th class="text-center">S.N</th>
                                                 <th class="text-center">Jumlah</th>
+                                                <th class="text-center"></th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                             <tr>
-                                                <td class="rownumberBarangForOB">
+                                                <td class="rownumberBarangForOB text-center">
                                                     1
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
 
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="naBar[]" placeholder="Nama Barang">
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="merk[]" placeholder="merk">
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
                                                 </td>
-                                                <td><input type="hidden" name="id_peralatan[]"></td>
-                                                <td>
+                                                <td class="text-center"><input type="hidden" name="id_peralatan[]"></td>
+                                                <td class="text-center">
                                                     <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
                                                     <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
                                                 </td>
@@ -223,6 +229,7 @@
                                     <th>Nama Crew</th>
                                     <th>Golongan</th>
                                     <th>Jabatan Fungsional</th>
+                                    <th>NIP</th>
                                     <th>NPWP</th>
                                     <th>Pilih</th>
                                 </tr>
@@ -235,9 +242,10 @@
                                         <td><?= $valueDataUsers['fullname']; ?></td>
                                         <td><?= $valueDataUsers['golongan']; ?></td>
                                         <td><?= $valueDataUsers['jab_fung']; ?></td>
+                                        <td><?= $valueDataUsers['nip']; ?></td>
                                         <td><?= $valueDataUsers['npwp']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectCrewOB" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                            <button type="button" required class="btn btn-success selectCrewOB" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-nip="<?= $valueDataUsers['nip']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 

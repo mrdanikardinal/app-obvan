@@ -569,12 +569,14 @@ $(document).ready(function () {
             let idCrew = $(this).data('id_crew');
             let fullname = $(this).data('fullname');
             let jabfung = $(this).data('jab_fung');
+            let nip = $(this).data('nip');
             let npwp = $(this).data('npwp');
 
             // Mengisi nilai input pada elemen .searchBarang
             $currentSearchBarang.parent().next().children().val(fullname);
-            $currentSearchBarang.parent().next().next().children().val(npwp);
-            $currentSearchBarang.parent().next().next().next().children().val(idCrew);
+            $currentSearchBarang.parent().next().next().children().val(nip);
+            $currentSearchBarang.parent().next().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().next().children().val(idCrew);
             let currentIndex = allSearchBarang.index($currentSearchBarang);
             let isLastElement = currentIndex === allSearchBarang.length - 1;
 
@@ -588,6 +590,8 @@ $(document).ready(function () {
         });
     });
 });
+
+
 
 $(document).ready(function () {
     $('#tableOBShow').DataTable({
@@ -617,19 +621,22 @@ $(function () {
 
 function addnewrowOB() {
     let tr = `<tr>
-        <td class="rownumberob">
+        <td class="rownumberob text-center">
         </td>
-        <td>
+        <td class="text-center">
         <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
         </td>
-        <td>
+        <td class="text-center">
         <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
         </td>
-        <td>
+        <td class="text-center">
         <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
         </td>
-        <td><input type="hidden" name="id_user[]"></td>
-        <td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+        </td>
+        <td class="text-center"><input type="hidden" name="id_user[]"></td>
+        <td class="text-center">
             <button type="button" required class="btn btn-danger btnHapusFormOB"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
@@ -708,25 +715,25 @@ $(function () {
 
 function addnewrowBarangForOB() {
     let tr = `<tr>
-        <td class="rownumberBarangForOB">
+        <td class="rownumberBarangForOB text-center">
         </td>
-        <td>
+        <td class="text-center">
         <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required id="dinall-js-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
         </td>
-        <td>
+        <td class="text-center">
             <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
         </td>
-        <td><input type="hidden" name="id_peralatan[]"></td>
-        <td>
+        <td class="text-center"><input type="hidden" name="id_peralatan[]"></td>
+        <td class="text-center">
             <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
@@ -813,7 +820,7 @@ $(function () {
                         });
                         $(this).parent().parent().remove();
                         renumberRowsEditCrewOb();
-                        // window.location.reload(true);
+                        window.location.reload(true);
                     }
                 })
     
@@ -843,6 +850,9 @@ function addnewrowCrewOBEdit() {
         </td>
         <td class="text-center">
         <input type="text" required class="form-control" name="nipEditUpdate[]" placeholder="NIP">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="npwpEditUpdate[]" placeholder="NPWP">
         </td>
         <td><input type="hidden" name="idUserFromSelectModalUpdate[]"></td>
         <td class="text-center">
@@ -876,12 +886,14 @@ $(document).ready(function () {
             let idCrew = $(this).data('id_crew');
             let fullname = $(this).data('fullname');
             let jabfung = $(this).data('jab_fung');
+            let nip = $(this).data('nip');
             let npwp = $(this).data('npwp');
 
             // Mengisi nilai input pada elemen .searchBarang
             $currentSearchBarang.parent().next().children().val(fullname);
-            $currentSearchBarang.parent().next().next().children().val(npwp);
-            $currentSearchBarang.parent().next().next().next().children().val(idCrew);
+            $currentSearchBarang.parent().next().next().children().val(nip);
+            $currentSearchBarang.parent().next().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().next().children().val(idCrew);
             let currentIndex = allSearchBarang.index($currentSearchBarang);
             let isLastElement = currentIndex === allSearchBarang.length - 1;
 
@@ -895,6 +907,12 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+
+
+
 
 $(document).ready(function () {
     $('#tableOBShowEdit').DataTable({
@@ -994,7 +1012,7 @@ $(function () {
                     });
                     $(this).parent().parent().remove();
                     renumberRowsBarangForOBUpdate();
-                    // window.location.reload(true);
+                    window.location.reload(true);
                 }
             })
 

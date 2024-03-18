@@ -44,11 +44,8 @@ class PeminjamanAlat extends BaseController
 
     public function create()
     {
-
-        // dd($dataInv = $this->pinjamAlatModel->procedureGetItemsReady());
         $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
         $generator = new BarcodeGeneratorPNG();
-        // dd($dataInv);
         session();
         $data = [
             'title' => 'Form Tambah Data Peminjaman Alat',

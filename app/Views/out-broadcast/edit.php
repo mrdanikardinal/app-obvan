@@ -15,7 +15,7 @@
                 <h5 class="mt-4">
 
                 </h5>
-
+                <a href="<?= base_url("out-broadcast") ?>" class="btn btn-warning my-2">Kembali</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -131,6 +131,7 @@
                                             <th class="text-center">Search</th>
                                             <th class="text-center">Nama</th>
                                             <th class="text-center">NIP</th>
+                                            <th class="text-center">NPWP</th>
                                             <th class="text-center"></th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -149,7 +150,10 @@
                                                         <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>">
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td><input type="hidden" name="idUserFromSelectModal[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">
@@ -170,6 +174,9 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td class="text-center">
                                                         <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
@@ -304,6 +311,7 @@
                                     <th>Nama Crew</th>
                                     <th>Golongan</th>
                                     <th>Jabatan Fungsional</th>
+                                    <th>NIP</th>
                                     <th>NPWP</th>
                                     <th>Pilih</th>
                                 </tr>
@@ -316,9 +324,10 @@
                                         <td><?= $valueDataUsers['fullname']; ?></td>
                                         <td><?= $valueDataUsers['golongan']; ?></td>
                                         <td><?= $valueDataUsers['jab_fung']; ?></td>
+                                        <td><?= $valueDataUsers['nip']; ?></td>
                                         <td><?= $valueDataUsers['npwp']; ?></td>
                                         <td>
-                                            <button type="button" required class="btn btn-success selectCrewOBEdit" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
+                                            <button type="button" required class="btn btn-success selectCrewOBEdit" data-id_crew="<?= $valueDataUsers['id']; ?>" data-fullname="<?= $valueDataUsers['fullname']; ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-nip="<?=$valueDataUsers["nip"]?>" data-jab_fung="<?= $valueDataUsers['jab_fung'] ?>" data-golongan="<?= $valueDataUsers['golongan']; ?>" data-npwp="<?= $valueDataUsers['npwp'] ?>">
                                                 <i class="fa-solid fa-check"></i></button>
                                         </td>
 

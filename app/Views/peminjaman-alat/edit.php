@@ -12,7 +12,10 @@
         <?php $testConlose = "ini adalah test"; ?>
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4"> Form update peminjaman alat</h1>
+                <h5 class="mt-4">
+
+                </h5>
+                <a href="<?= base_url("peminjaman-alat") ?>" class="btn btn-warning my-2">Kembali</a>
 
                 <div class="card mb-4">
                     <div class="card-header">
@@ -74,7 +77,7 @@
 
                                                     </td>
                                                     <td>
-                                                       
+
                                                         <input type="text" class="form-control" name="naBarEdit[]" value="<?= $j['nama_barang']; ?>">
 
                                                     </td class="text-center">
