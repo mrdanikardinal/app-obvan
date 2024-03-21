@@ -44,21 +44,54 @@
             <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
                 <br>
                 <?php foreach ($showAllJoinsOBKategori as $key => $valueShowBroadcast) : ?>
-                    <?php $convert = $valueShowBroadcast['tanggal'];
-                    $date = str_replace('/', '-', $convert);
-                    $tanggalconvert = date('d/m/Y', strtotime($date));
+                    <?php
+                    date_default_timezone_set('Asia/Jakarta');
+                    $tanggal = date('d', strtotime($valueShowBroadcast['tanggal']));
+                    $bulan = date('F', strtotime($valueShowBroadcast['tanggal']));
+                    $tahun = date('Y', strtotime($valueShowBroadcast['tanggal']));
+
+                    $tanggalSampaiDengan = date('d', strtotime($valueShowBroadcast['sampai_dengan']));
+                    $bulanSampaiDengan = date('F', strtotime($valueShowBroadcast['sampai_dengan']));
+                    $tahunSampaiDengan = date('Y', strtotime($valueShowBroadcast['sampai_dengan']));
+
+                    // Array untuk mapping nama bulan dengan huruf
+                    $bulan_huruf = array(
+                        'January' => 'Januari',
+                        'February' => 'Februari',
+                        'March' => 'Maret',
+                        'April' => 'April',
+                        'May' => 'Mei',
+                        'June' => 'Juni',
+                        'July' => 'Juli',
+                        'August' => 'Agustus',
+                        'September' => 'September',
+                        'October' => 'Oktober',
+                        'November' => 'November',
+                        'December' => 'Desember'
+                    );
+
+                    // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
+                    $bulan_indonesia = $bulan_huruf[$bulan];
+                    $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
                     ?>
-                    <?php if ($valueShowBroadcast['sampai_dengan'] !== null) : ?>
-                        <?php $convert2 = $valueShowBroadcast['sampai_dengan'];
-                        $date = str_replace('/', '-', $convert2);
-                        $convert_sampai_dengan = date('d/m/Y', strtotime($date));
-                        ?>
-                    <?php elseif ($valueShowBroadcast['sampai_dengan'] == null) : ?>
-                        <?php $convert_sampai_dengan = '-' ?>
-                    <?php endif; ?>
+
                     <span>Acara </span><span> : <?= $valueShowBroadcast['acara']; ?></span><br>
                     <span>Tempat</span><span> : <?= $valueShowBroadcast['lokasi']; ?></span><br>
-                    <span>Tanggal</span><span> : <?= $tanggalconvert; ?></span>
+                    <span>Tanggal</span>
+                    <span> :
+                        <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?>
+                            <?= $tanggal; ?>
+                            <?= $bulan_indonesia; ?>
+                            <?= $tahun; ?> S.D
+                            <?= $tanggalSampaiDengan; ?>
+                            <?= $bulan_indonesia_sampai_dengan; ?>
+                            <?= $tahunSampaiDengan; ?>
+                        <?php else : ?>
+                            <?= $tanggal; ?>
+                            <?= $bulan_indonesia; ?>
+                            <?= $tahun; ?>
+                        <?php endif; ?>
+                    </span>
                 <?php endforeach; ?>
 
                 <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas kerabat kerja sebagai berikut:</h6>
@@ -114,39 +147,27 @@
         </table>
     </section>
     <?php
-    function tgl_indo($tanggal)
-    {
-        $bulan = array(
-            1 =>   'Januari',
-            'Februari',
-            'Maret',
-            'April',
-            'Mei',
-            'Juni',
-            'Juli',
-            'Agustus',
-            'September',
-            'Oktober',
-            'November',
-            'Desember'
-        );
-        $pecahkan = explode('-', $tanggal);
 
-        // variabel pecahkan 0 = tanggal
-        // variabel pecahkan 1 = bulan
-        // variabel pecahkan 2 = tahun
-
-        return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
-    }
 
     ?>
     <footer>
-        <h5>Jakarta, <?= tgl_indo(date('Y-m-d')) ?></h5>
+        <h5>Jakarta,
+            <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?>
+                <?= $tanggal-2; ?>
+                <?= $bulan_indonesia; ?>
+                <?= $tahun; ?>
+            <?php else : ?>
+                <?= $tanggal-2; ?>
+                <?= $bulan_indonesia; ?>
+                <?= $tahun; ?>
+            <?php endif; ?>
+
+        </h5>
         <h5>KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h5>
 
 
 
-        
+
         <h5>JANSEN STEPPEN JOU SINAGA</h5>
         <h5>198809232022211006</h5>
 
