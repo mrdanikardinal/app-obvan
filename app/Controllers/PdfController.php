@@ -4,20 +4,28 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\PeminjamanAlatModel;
-use CodeIgniter\Controller;
+use App\Models\OutBroadcastModel;
+use App\Models\CrewObModel;
 
+use CodeIgniter\Controller;
 use TCPDF;
 
 class PdfController extends Controller
 {
 
     protected $peminjamanAlatModel;
-    protected $users;
+    protected $outBroadcast;
+    protected $allUser;
+    protected $crewOb;
+
+
 
     public function __construct()
     {
+        $this->outBroadcast = new OutBroadcastModel();
         $this->peminjamanAlatModel = new PeminjamanAlatModel();
-        $this->users = new UsersModel();
+        $this->allUser = new UsersModel();
+        $this->crewOb = new CrewObModel();
     }
     public function index()
     {
@@ -425,8 +433,8 @@ class PdfController extends Controller
     {
         // dd($this->users->proceduregetParentMerkFromIdPjm(200));
         $data = [
-            'testing' => $this->users->proceduregetPrintIdPJMNamaPenerima($idPjm),
-            'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
+            'testing' => $this->allUser->proceduregetPrintIdPJMNamaPenerima($idPjm),
+            'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
         ];
 
         $test = view('user/penerima_pinjam', $data);
@@ -444,8 +452,8 @@ class PdfController extends Controller
         // $test=0001;
         // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
         $data = [
-            'testing' => $this->users->proceduregetPrintIdPJMNamaPemberi($idPjm),
-            'dataBarangDipinjam'=>$this->users->proceduregetParentMerkFromIdPjm($idPjm)
+            'testing' => $this->allUser->proceduregetPrintIdPJMNamaPemberi($idPjm),
+            'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
         ];
 
         $test = view('user/pemberi_pinjam', $data);
@@ -458,14 +466,157 @@ class PdfController extends Controller
         $this->response->setContentType('application/pdf');
         return $pdf->Output('sample.pdf', 'I');
     }
-
-
-    // public function print($idPjm)
+    // public function out_broadcast()
     // {
-    //     // $test='PJM-0001';
-    //     // return view('user/credit_note_sample');
-    //     // dd($idPjm);
-    //     dd($this->users->proceduregetPrintIdPJM($idPjm));
+    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
+
+    //     // $test=0001;
+    //     // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
+    //     // $data = [
+    //     //     'testing' => $this->users->proceduregetPrintIdPJMNamaPemberi($idPjm),
+    //     //     'dataBarangDipinjam' => $this->users->proceduregetParentMerkFromIdPjm($idPjm)
+    //     // ];
+
+    //     // $test = view('user/pemberi_pinjam', $data);
+
+    //     $test = view('user/out_broadcast');
+    //     // $test = view('user/credit_note_sample');
+    //     // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
+    //     $pdf->AddPage();
+    //     $pdf->writeHTML($test);
+    //     $pdf->setPrintHeader(false);
+    //     $pdf->setPrintFooter(false);
+    //     // $pdf->writeHTML($test, true, false, false, false, '');
+    //     // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+    //     $this->response->setContentType('application/pdf');
+    //     return $pdf->Output('sample.pdf', 'I');
     // }
+    //dibawah adalah function OK no Header
+    // public function out_broadcast()
+    // {
+    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    //     $pdf->setPrintHeader(false);
+    //     $pdf->setPrintFooter(false);
+
+    //     $pdf->AddPage();
+    //     $test = view('user/out_broadcast');
+    //     $pdf->writeHTML($test);
+    //     $this->response->setContentType('application/pdf');
+    //     return $pdf->Output('example_002.pdf', 'I');
+    // }
+    //diatas adalah function OK no Header
+    //sample ini juga OK
+    public function out_broadcast()
+    {
+        $data = [
+            // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
+            'showAllJoinsOBKategori' => $this->outBroadcast->getOBJointKategori(),
+            'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
+            'allUsers' => $this->allUser->getUsers()
+           
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+
+        // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        $pdf->AddPage();
+        $test = view('user/out_broadcast',$data);
+        // $pdf->writeHTML($test);
+        $pdf->writeHTML($test, true, 0, true, true);
+        // $pdf->Write(0, 'Example of HTML Justification', '', 0, 'L', true, 0, false, false, 0);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('example_002.pdf', 'I');
+    }
+
+    function tgl_indo($tanggal){
+        $bulan = array (
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        $pecahkan = explode(' ', $tanggal);
+        
+        // variabel pecahkan 0 = tanggal
+        // variabel pecahkan 1 = bulan
+        // variabel pecahkan 2 = tahun
+     
+        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+    }
+    //end sample ini juga OK
+
+//     public function out_broadcast()
+//     {
+//         // Initialize TCPDF object
+//         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+//         // Set document information
+//         $pdf->SetCreator(PDF_CREATOR);
+//         $pdf->SetAuthor('Your Name');
+//         $pdf->SetTitle('Two Tables in One Page PDF');
+//         $pdf->SetSubject('Rendering two tables in one page PDF');
+//         $pdf->SetKeywords('HTML, PDF, TCPDF');
+
+//         // Set default header data
+//         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 003', PDF_HEADER_STRING);
+
+//         // Set header and footer fonts
+//         $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+//         $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
+
+//         // Set default monospaced font
+//         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+//         // Set margins
+//         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+//         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+//         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+//         // Set auto page breaks
+//         $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+
+//         // Set image scale factor
+//         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+//         // Add a page
+//         $pdf->AddPage();
+
+//         // Create first table (50% width)
+//         $html1 = '';
+
+//         // Create second table (remaining width)
+//         $html2 = '
+//   <table border="1" style="width: calc(100% - 50%)">
+//       <tr>
+//           <th colspan="2">Remaining Width Table</th>
+//       </tr>
+//       <tr>
+//           <td>Row 1, Column 1</td>
+//           <td>Row 1, Column 2</td>
+//       </tr>
+//       <tr>
+//           <td>Row 2, Column 1</td>
+//           <td>Row 2, Column 2</td>
+//       </tr>
+//   </table>';
+
+//         // Write both tables to PDF
+//         $pdf->writeHTML($html2 . $html1, true, false, true, false, '');
+
+//         $this->response->setContentType('application/pdf');
+//         return $pdf->Output('example_002.pdf', 'I');
+//     }
 }

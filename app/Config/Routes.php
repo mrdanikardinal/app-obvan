@@ -37,12 +37,15 @@ $routes->post('admin/inventaris/update/(:any)', 'Inventaris::update/$1',['filter
 //start user
 $routes->get('surat-tugas', 'User::index');
 $routes->get('surat-tugas/index', 'User::index');
-$routes->get('surat-tugas/penerima_pinjam', 'User::penerima_pinjam');
-$routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
+// $routes->get('surat-tugas/penerima_pinjam', 'User::penerima_pinjam');
+// $routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
+// $routes->get('surat-tugas/out_broadcast', 'User::out_broadcast');
 // $routes->get('user/print_penerima_pinjam/(:any)','PdfController::print_penerima_pinjam/$1');
 // $routes->get('user/print_pemberi_pinjam/(:any)','PdfController::print_pemberi_pinjam/$1');
 $routes->PUT('user/print_pemberi_pinjam/(:any)', 'PdfController::print_pemberi_pinjam/$1');
 $routes->PUT('user/print_penerima_pinjam/(:any)', 'PdfController::print_penerima_pinjam/$1');
+// $routes->PUT('user/out_broadcast/(:any)', 'PdfController::out_broadcast/$1');
+$routes->PUT('user/out_broadcast', 'PdfController::out_broadcast');
 // $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
 
