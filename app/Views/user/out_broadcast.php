@@ -41,7 +41,7 @@
     </header>
     <nav>
         <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-        <h5>No: 88898/SPO/1.4.3/2024</h5>
+        <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5>
         <h5>Hal: Daftar Nama Petugas</h5>
         <div class="container px-4">
             <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
@@ -78,10 +78,12 @@
                     $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
                     ?>
 
-                    <span>Acara </span><span> : <?= $valueShowBroadcast['acara']; ?></span><br>
-                    <span>Tempat</span><span> : <?= $valueShowBroadcast['lokasi']; ?></span><br>
-                    <span>Tanggal</span>
-                    <span> :
+                  <span>ACARA</span> <span style="text-indent: 200px;"> : <?= $valueShowBroadcast['acara']; ?></span> <br>
+                    TEMPAT<span> : <?= $valueShowBroadcast['lokasi']; ?></span>
+                    <h6>HUNTING/SURVAY/TGL</h6> 
+                    <h6>CHECKING/SETTING/TGL</h6>
+                    <h6>OB/LIVE/TGL</h6> 
+                    <h6> :
                         <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?>
                             <?= $tanggal; ?>
                             <?= $bulan_indonesia; ?>
@@ -214,7 +216,7 @@
             </tbody>
         </table> -->
         <h5 style="text-indent: 200px;">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h5>
-        <img src="img/tvri.png" alt="logo-tvri" width="100px" height="50px" style="text-align: center;">
+        <img src="img/ttdJansen.png" alt="logo-tvri" width="300px" height="100px" style="text-align: center;">
         <h5 style="text-indent: 200px;">JANSEN STEPPEN JOU SINAGA</h5>
         <h5 style="text-indent: 200px;">198809232022211006</h5>
         <!-- <h5 style="text-align: right">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h5>
