@@ -181,10 +181,10 @@
                                                         <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td><input type="hidden" name="idUserFromSelectModal[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">

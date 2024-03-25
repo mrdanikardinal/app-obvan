@@ -11,25 +11,18 @@
         table,
         th,
         td {
-            width: 100%;
+            /* width: 100%; */
 
             /* Set lebar tabel menjadi 50% dari lebar halaman */
             border-collapse: collapse;
             /* table-layout: auto; */
             /* Set lebar kolom mengikuti konten */
         }
-
         th,
         td {
             border: 1px solid black;
             padding: 10px;
             text-align: left;
-            /* height: 20px;
-            line-height:10px; */
-        }
-
-        span {
-            word-spacing: 10px;
         }
     </style>
 </head>
@@ -45,7 +38,6 @@
         <h5>Hal: Daftar Nama Petugas</h5>
         <div class="container px-4">
             <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
-                <br>
                 <?php foreach ($showAllJoinsOBKategori as $key => $valueShowBroadcast) : ?>
                     <?php
                     date_default_timezone_set('Asia/Jakarta');
@@ -77,42 +69,28 @@
                     $bulan_indonesia = $bulan_huruf[$bulan];
                     $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
                     ?>
-
-                  <span>ACARA</span> <span style="text-indent: 200px;"> : <?= $valueShowBroadcast['acara']; ?></span> <br>
-                    TEMPAT<span> : <?= $valueShowBroadcast['lokasi']; ?></span>
-                    <h6>HUNTING/SURVAY/TGL</h6> 
-                    <h6>CHECKING/SETTING/TGL</h6>
-                    <h6>OB/LIVE/TGL</h6> 
-                    <h6> :
-                        <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?>
-                            <?= $tanggal; ?>
-                            <?= $bulan_indonesia; ?>
-                            <?= $tahun; ?> S.D
-                            <?= $tanggalSampaiDengan; ?>
-                            <?= $bulan_indonesia_sampai_dengan; ?>
-                            <?= $tahunSampaiDengan; ?>
-                        <?php else : ?>
-                            <?= $tanggal; ?>
-                            <?= $bulan_indonesia; ?>
-                            <?= $tahun; ?>
-                        <?php endif; ?>
-                    </span>
+<pre>
+<span> ACARA       : <?= $valueShowBroadcast["acara"]; ?></span> 
+<span> TEMPAT      : <?= $valueShowBroadcast["lokasi"]; ?></span>
+<span> KATEGORI    : <?= $valueShowBroadcast["nama_kategori"]; ?></span> 
+<span> TANGGAL     : <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> S.D <?= $tanggalSampaiDengan; ?> <?= $bulan_indonesia_sampai_dengan; ?> <?= $tahunSampaiDengan; ?><?php else : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?><?php endif; ?>
+</pre>
                 <?php endforeach; ?>
-
-                <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas kerabat kerja sebagai berikut:</h6>
+                <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas kerabat kerja sebagai berikut:
+                    <h6>
         </div>
     </nav>
     <section>
         <table>
             <!-- <table cellpadding="5"> -->
-            <table cellpadding="5" style="border-collapse: collapse;">
+            <table cellpadding="5" style="border-collapse: collapse; width:500px">
                 <thead>
                     <tr>
-                        <th style="width:7%">NO</th>
-                        <th>NAMA</th>
-                        <th>NIP</th>
-                        <th>GOLONGAN</th>
-                        <th>NPWP</th>
+                        <th style="width:30px">NO</th>
+                        <th style="width:130px">NAMA</th>
+                        <th style="width:140px">NIP</th>
+                        <th style="width:60px">GOLONGAN</th>
+                        <th style="width:150px">NPWP</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,15 +99,15 @@
                         <?php foreach ($allDataOutBroadcast as $j) : ?>
                             <?php if ($valueShowBroadcast['id_ob'] == $j['id_ob']) : ?>
                                 <tr>
-                                    <th class="text-center" style="width:7%"><?= $number++; ?></th>
-                                    <td class="text-center">
+                                    <th style="width:30px"><?= $number++; ?></th>
+                                    <td style="width:130px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['fullname']; ?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </td>
-                                    <td>
+                                    <td style="width:140px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['nip']; ?>
@@ -137,7 +115,7 @@
                                         <?php endforeach; ?>
 
                                     </td>
-                                    <td>
+                                    <td style="width:60px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['golongan']; ?>
@@ -145,7 +123,7 @@
                                         <?php endforeach; ?>
 
                                     </td>
-                                    <td>
+                                    <td style="width:150px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['npwp']; ?>
@@ -216,7 +194,7 @@
             </tbody>
         </table> -->
         <h5 style="text-indent: 200px;">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h5>
-        <img src="img/ttdJansen.png" alt="logo-tvri" width="300px" height="100px" style="text-align: center;">
+        <img src="img/ttdJansenWeb.png" alt="logo-tvri" width="100px" height="60px" style="text-align: center;">
         <h5 style="text-indent: 200px;">JANSEN STEPPEN JOU SINAGA</h5>
         <h5 style="text-indent: 200px;">198809232022211006</h5>
         <!-- <h5 style="text-align: right">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h5>
