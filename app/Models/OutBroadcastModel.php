@@ -10,7 +10,7 @@ class OutBroadcastModel extends Model
     protected $primaryKey = 'id_ob';
     // protected $useAutoIncrement = true;
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_ob', 'id_kategori', 'tanggal', 'sampai_dengan', 'acara', 'lokasi','durasi', 'tp', 'td', 'ass_td', 'um'];
+    protected $allowedFields = ['id_ob', 'id_kategori', 'tanggal', 'sampai_dengan', 'acara', 'lokasi','durasi', 'tp', 'td', 'ass_td', 'um','nomor_surat'];
     // protected $allowedFields = ['kategori', 'tanggal', 'sampai_dengan', 'acara', 'lokasi', 'tp', 'td', 'ass_td', 'um'];
 
     public function procedureGetAllShowOutBroadcast()
@@ -27,6 +27,12 @@ class OutBroadcastModel extends Model
     public function procedureGetShowAlatJoinInv($idOb)
     {
         $query = $this->db->query("CALL getShowAlatObJoinInv"."($idOb)");
+
+        return $query->getResultArray();
+    }
+    public function procedureGetShowObJoinKategoriCariById($idOb)
+    {
+        $query = $this->db->query("CALL getShowOBJoinKategoriCariByIDOb"."($idOb)");
 
         return $query->getResultArray();
     }
@@ -60,6 +66,7 @@ class OutBroadcastModel extends Model
         
         return $query->getResultArray(); //return array
     }
+
 //mengambil data peralatan ob
     public function getData($id)
     {

@@ -34,11 +34,13 @@
     </header>
     <nav>
         <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-        <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5>
+        <?php foreach ($showAllJoinsOBKategoriByIDOB as $key => $valueShowBroadcast) : ?>
+        <!-- <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5> -->
+        <h5>No: <?= ($valueShowBroadcast['nomor_surat']==NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat'] ;?>/ TK.02.02/1.4.3.2/II/2024</h5>
         <h5>Hal: Daftar Nama Petugas</h5>
         <div class="container px-4">
             <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
-                <?php foreach ($showAllJoinsOBKategori as $key => $valueShowBroadcast) : ?>
+               
                     <?php
                     date_default_timezone_set('Asia/Jakarta');
                     $tanggal = date('d', strtotime($valueShowBroadcast['tanggal']));
@@ -95,7 +97,7 @@
                 </thead>
                 <tbody>
                     <?php $number = 1; ?>
-                    <?php foreach ($showAllJoinsOBKategori as $key => $valueShowBroadcast) : ?>
+                    <?php foreach ($showAllJoinsOBKategoriByIDOB as $key => $valueShowBroadcast) : ?>
                         <?php foreach ($allDataOutBroadcast as $j) : ?>
                             <?php if ($valueShowBroadcast['id_ob'] == $j['id_ob']) : ?>
                                 <tr>

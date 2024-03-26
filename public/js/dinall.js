@@ -3,12 +3,15 @@ $(document).ready(function () {
 
     $('#dinallTable').DataTable({
 
+        // scrollX: true,
+
+        // scrollCollapse: true,
+        // scrollY: '70vh'
+
+        responsive: true,
         scrollX: true,
-
-        scrollCollapse: true,
-        scrollY: '70vh'
-
-
+        scrollY: '500px',
+        scrollCollapse: true
     },
 
     );
@@ -424,10 +427,14 @@ $(document).ready(function () {
 
     $('#inventarisTable').DataTable({
 
-        scrollX: true,
+        // scrollX: true,
 
-        scrollCollapse: true,
-        scrollY: '70vh'
+        // scrollCollapse: true,
+        // scrollY: '70vh'
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
 
     },
     );
@@ -461,10 +468,14 @@ $(document).ready(function () {
 
     $('#dinallTableOB').DataTable({
 
-        scrollX: true,
+        // scrollX: true,
 
-        scrollCollapse: true,
-        scrollY: '70vh'
+        // scrollCollapse: true,
+        // scrollY: '70vh'
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
 
     },
     );
@@ -1150,20 +1161,20 @@ $(document).ready(function () {
     let ob = $('#dinallTableCrewDinasByID').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '200px',
+        scrollY: '500px',
         scrollCollapse: true
     });
 
     let pemberiPinjam = $('#dinallTablePemberiPinjam').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '200px',
+        scrollY: '500px',
         scrollCollapse: true
     });
     let penerimaPinjam = $('#dinallTablePenerimaPinjam').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '200px',
+        scrollY: '500px',
         scrollCollapse: true
     });
 

@@ -71,10 +71,16 @@
                 <div class="collapse" id="collapsePagesPeralatanKeluar" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                         <a class="nav-link" href="<?= base_url() ?>out-broadcast">
-                            Crew Out Broadcast(OB)
+                            Dinas Out Broadcast-(OB)
+                        </a>
+                        <a class="nav-link" href="<?= base_url() ?>dinas-shifting">
+                            Dinas Shifting
+                        </a>
+                        <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
+                            Dinas Lembur
                         </a>
                         <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
-                            Peminjaman-Alat
+                            Peminjaman Alat
                         </a>
                     </nav>
                 </div>

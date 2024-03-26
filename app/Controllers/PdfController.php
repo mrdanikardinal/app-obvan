@@ -5,9 +5,10 @@ namespace App\Controllers;
 use App\Models\UsersModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\OutBroadcastModel;
+use App\Models\NomorSuratTugasModel;
 use App\Models\CrewObModel;
-
 use CodeIgniter\Controller;
+
 use TCPDF;
 
 class PdfController extends Controller
@@ -17,6 +18,7 @@ class PdfController extends Controller
     protected $outBroadcast;
     protected $allUser;
     protected $crewOb;
+    protected $nomorSuratTugasModel;
 
 
 
@@ -26,6 +28,7 @@ class PdfController extends Controller
         $this->peminjamanAlatModel = new PeminjamanAlatModel();
         $this->allUser = new UsersModel();
         $this->crewOb = new CrewObModel();
+        $this->nomorSuratTugasModel = new NomorSuratTugasModel();
     }
     public function index()
     {
@@ -507,94 +510,161 @@ class PdfController extends Controller
     // }
     //diatas adalah function OK no Header
     //sample ini juga OK
-    public function out_broadcast()
+    public function out_broadcast_preview($idOb)
     {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->outBroadcast->save([
+                    'id_ob' => $idOb,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+
+        }
         $data = [
-            // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
-            'showAllJoinsOBKategori' => $this->outBroadcast->getOBJointKategori(),
+            'showAllJoinsOBKategoriByIDOB' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
-            'allUsers' => $this->allUser->getUsers()
-           
+            'allUsers' => $this->allUser->getUsers(),
+            'autoNomorSurat' => $varNomorSuratAuto
+
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $test = view('user/out_broadcast', $data);
+        $pdf->writeHTML($test, true, 0, true, true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('out broadcast.pdf','I');
+    }
+    public function out_broadcast_download($idOb)
+    {
+        // dd($this->nomorSuratTugasModel->autoNomorSurat());
+        // dd($this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb));
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
 
+        // if ($varNomorSuratAuto == null) {
+        //     $this->outBroadcast->save([
+        //         'id_ob' => $idOb,
+        //         'nomor_surat' => $varNomorSuratAuto
+        //     ]);
+        // }
+        $acara= null;
+        $lokasi= null;
+        $nomorSuratPdf= null;
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->outBroadcast->save([
+                    'id_ob' => $idOb,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
 
+            $acara= $valueOb['acara'];
+            $lokasi= $valueOb['lokasi'];
+            $nomorSuratPdf=$valueOb['nomor_surat'];
+        }
+
+        $data = [
+            // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
+            'showAllJoinsOBKategoriByIDOB' => $varprocedureGetShowJoinKategoriByIdOb,
+            'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
+            'allUsers' => $this->allUser->getUsers(),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $userLogin = user();
+        // $filename = 'testing';
         // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
         // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
         $pdf->AddPage();
-        $test = view('user/out_broadcast',$data);
+        $test = view('user/out_broadcast', $data);
         // $pdf->writeHTML($test);
         $pdf->writeHTML($test, true, 0, true, true);
+        // output the HTML content
+        // $pdf->writeHTML($test, true, false, true, false, '');
+        // $pdf->lastPage();
         // $pdf->Write(0, 'Example of HTML Justification', '', 0, 'L', true, 0, false, false, 0);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('example_002.pdf', 'I');
+        // return file_put_contents($filename . '.pdf', $pdf->Output('I'));
+        return $pdf->Output($acara.'_lokasi_'.$lokasi.'_out broadcast.pdf','D');
     }
 
 
     //end sample ini juga OK
 
-//     public function out_broadcast()
-//     {
-//         // Initialize TCPDF object
-//         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    //     public function out_broadcast()
+    //     {
+    //         // Initialize TCPDF object
+    //         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-//         // Set document information
-//         $pdf->SetCreator(PDF_CREATOR);
-//         $pdf->SetAuthor('Your Name');
-//         $pdf->SetTitle('Two Tables in One Page PDF');
-//         $pdf->SetSubject('Rendering two tables in one page PDF');
-//         $pdf->SetKeywords('HTML, PDF, TCPDF');
+    //         // Set document information
+    //         $pdf->SetCreator(PDF_CREATOR);
+    //         $pdf->SetAuthor('Your Name');
+    //         $pdf->SetTitle('Two Tables in One Page PDF');
+    //         $pdf->SetSubject('Rendering two tables in one page PDF');
+    //         $pdf->SetKeywords('HTML, PDF, TCPDF');
 
-//         // Set default header data
-//         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 003', PDF_HEADER_STRING);
+    //         // Set default header data
+    //         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 003', PDF_HEADER_STRING);
 
-//         // Set header and footer fonts
-//         $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
-//         $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
+    //         // Set header and footer fonts
+    //         $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+    //         $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 
-//         // Set default monospaced font
-//         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    //         // Set default monospaced font
+    //         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-//         // Set margins
-//         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-//         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-//         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+    //         // Set margins
+    //         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    //         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    //         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-//         // Set auto page breaks
-//         $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+    //         // Set auto page breaks
+    //         $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
-//         // Set image scale factor
-//         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+    //         // Set image scale factor
+    //         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-//         // Add a page
-//         $pdf->AddPage();
+    //         // Add a page
+    //         $pdf->AddPage();
 
-//         // Create first table (50% width)
-//         $html1 = '';
+    //         // Create first table (50% width)
+    //         $html1 = '';
 
-//         // Create second table (remaining width)
-//         $html2 = '
-//   <table border="1" style="width: calc(100% - 50%)">
-//       <tr>
-//           <th colspan="2">Remaining Width Table</th>
-//       </tr>
-//       <tr>
-//           <td>Row 1, Column 1</td>
-//           <td>Row 1, Column 2</td>
-//       </tr>
-//       <tr>
-//           <td>Row 2, Column 1</td>
-//           <td>Row 2, Column 2</td>
-//       </tr>
-//   </table>';
+    //         // Create second table (remaining width)
+    //         $html2 = '
+    //   <table border="1" style="width: calc(100% - 50%)">
+    //       <tr>
+    //           <th colspan="2">Remaining Width Table</th>
+    //       </tr>
+    //       <tr>
+    //           <td>Row 1, Column 1</td>
+    //           <td>Row 1, Column 2</td>
+    //       </tr>
+    //       <tr>
+    //           <td>Row 2, Column 1</td>
+    //           <td>Row 2, Column 2</td>
+    //       </tr>
+    //   </table>';
 
-//         // Write both tables to PDF
-//         $pdf->writeHTML($html2 . $html1, true, false, true, false, '');
+    //         // Write both tables to PDF
+    //         $pdf->writeHTML($html2 . $html1, true, false, true, false, '');
 
-//         $this->response->setContentType('application/pdf');
-//         return $pdf->Output('example_002.pdf', 'I');
-//     }
+    //         $this->response->setContentType('application/pdf');
+    //         return $pdf->Output('example_002.pdf', 'I');
+    //     }
 }

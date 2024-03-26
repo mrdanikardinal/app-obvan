@@ -48,7 +48,8 @@
                                             <th>Technical Director (TD)</th>
                                             <th>Assistant.TD</th>
                                             <th>Unit Manager</th>
-                                            <th>Print</th>
+                                            <th>Preview</th>
+                                            <th>Download</th>
 
                                         </tr>
                                     </thead>
@@ -110,10 +111,20 @@
                                                 <td>
                                                     <!-- <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button> -->
                                                     <!-- <form action="<?= base_url() ?>user/out_broadcast/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post"> -->
-                                                    <form action="<?= base_url() ?>user/out_broadcast" method="post">
+                                                    <form action="<?= base_url() ?>user/out_broadcast/preview/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
                                                         <?= csrf_field(); ?>
                                                         <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
+                                                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Preview</button>
+                                                    </form>
+
+                                                </td>
+                                                <td>
+                                                    <!-- <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button> -->
+                                                    <!-- <form action="<?= base_url() ?>user/out_broadcast/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post"> -->
+                                                    <form action="<?= base_url() ?>user/out_broadcast/download/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
+                                                        <?= csrf_field(); ?>
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-download"></i>Download</button>
                                                     </form>
 
                                                 </td>

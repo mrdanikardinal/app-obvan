@@ -45,7 +45,8 @@ $routes->get('surat-tugas/index', 'User::index');
 $routes->PUT('user/print_pemberi_pinjam/(:any)', 'PdfController::print_pemberi_pinjam/$1');
 $routes->PUT('user/print_penerima_pinjam/(:any)', 'PdfController::print_penerima_pinjam/$1');
 // $routes->PUT('user/out_broadcast/(:any)', 'PdfController::out_broadcast/$1');
-$routes->PUT('user/out_broadcast', 'PdfController::out_broadcast');
+$routes->PUT('user/out_broadcast/download/(:segment)', 'PdfController::out_broadcast_download/$1');
+$routes->PUT('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadcast_preview/$1');
 // $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
 
@@ -59,10 +60,17 @@ $routes->post('out-broadcast/save', 'OutBroadcast::save');
 $routes->post('out-broadcast/update/(:any)', 'OutBroadcast::update/$1');
 $routes->post('out-broadcast/edit/(:segment)/(:segment)', 'OutBroadcast::hapus/$2');
 $routes->put('out-broadcast/edit/(:segment)/(:segment)', 'OutBroadcast::hapusinv/$2');
-
-
 //end-outbroadcast
 
+//start dinas lembur
+$routes->get('dinas-lembur', 'DinasLembur::index');
+
+//end dinas lembur
+
+//start dinas shifting
+$routes->get('dinas-shifting', 'DinasShifting::index');
+
+//end dinas shifting
 
 
 
