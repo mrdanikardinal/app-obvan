@@ -1197,6 +1197,117 @@ $(document).ready(function () {
 //End table surat tugas ====================================================================
 
 
+//start Dinas Shifting
+
+$(document).ready(function () {
+
+    $('#dinallTableDinasShift').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(function () {
+        $("#tanggalDinas").datepicker({
+            dateFormat: 'dd/mm/yy',
+            timespicker: false
+
+        });
+    });
+    $( "#tanggalDinas" ).datepicker({dateFormat:"dd/mm/yy"}).datepicker("setDate",new Date());
+
+});
+
+$(document).ready(function () {
+    $('#dinallModalDinasShif').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowAllCrewForDinasShif', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowAllCrewForDinasShif');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectCrewDinasShif').on('click', '.selectCrewDinasShif', function () {
+            let idCrew = $(this).data('id_crew');
+            let fullname = $(this).data('fullname');
+            let jabfung = $(this).data('jab_fung');
+            let nip = $(this).data('nip');
+            let npwp = $(this).data('npwp');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(fullname);
+            $currentSearchBarang.parent().next().next().children().val(nip);
+            $currentSearchBarang.parent().next().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().next().children().val(idCrew);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalDinasShif').modal('hide');
+
+        });
+    });
+});
+
+
+$(".btnAddForDinasShif").click(function () {
+    addnewrowDinasShif();
+    renumberDinasShif();
+});
+    // Remove Row
+    $("body").delegate('.btnHapusForDinasShif', 'click', function () {
+        $(this).parent().parent().remove();
+        renumberDinasShif();
+        // $(this).parents('tr').remove();
+    });
+
+function addnewrowDinasShif() {
+    let tr = `<tr>
+        <td class="rownumberDinasShif text-center">
+        </td>
+        <td class="text-center">
+        <button type="button" class="btn btn-primary clickShowAllCrewForDinasShif" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShif"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+        </td>
+        <td class="text-center"><input type="hidden" name="id_user[]"></td>
+        <td class="text-center">
+            <button type="button" required class="btn btn-danger btnHapusForDinasShif"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.formTambahDinasShif').append(tr);
+};
+
+function renumberDinasShif() {
+    $(".formTambahDinasShif").children().children().each(function (i, v) {
+
+        $(this).find(".rownumberDinasShif").text(i);
+        //   $(this).find(".rownumber").val(i + 1); index i dimulai dari 0
+        // console.log(i);
+    });
+}
+
+$('#dinallTableDinasShift').DataTable({
+    scrollX: true,
+    scrollCollapse: true,
+    scrollY: '70vh',
+    "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, 200]]
+
+},
+);
+
+
+//End Dinas Shifting
+
 
 
 

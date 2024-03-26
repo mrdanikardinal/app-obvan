@@ -69,6 +69,9 @@ $routes->get('dinas-lembur', 'DinasLembur::index');
 
 //start dinas shifting
 $routes->get('dinas-shifting', 'DinasShifting::index');
+$routes->get('dinas-shifting/create', 'DinasShifting::create');
+$routes->post('dinas-shifting/save', 'DinasShifting::save');
+
 
 //end dinas shifting
 
