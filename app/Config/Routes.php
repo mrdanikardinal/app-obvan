@@ -71,8 +71,10 @@ $routes->get('dinas-lembur', 'DinasLembur::index');
 $routes->get('dinas-shifting', 'DinasShifting::index');
 $routes->get('dinas-shifting/create', 'DinasShifting::create');
 $routes->post('dinas-shifting/save', 'DinasShifting::save');
-
-
+$routes->delete('dinas-shifting/(:segment)', 'DinasShifting::delete/$1');
+$routes->PUT('dinas-shifting/edit/(:segment)', 'DinasShifting::edit/$1');
+$routes->POST('dinas-shifting/edit/(:segment)/(:segment)', 'DinasShifting::hapusdinasshift/$2');
+$routes->post('dinas-shifting/update/(:any)', 'DinasShifting::update/$1');
 //end dinas shifting
 
 

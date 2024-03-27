@@ -606,7 +606,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#tableOBShow').DataTable({
-
+   
+        "lengthMenu": [[5, 20, 80, -1], [5, 20, 80, 200]]
+ 
     });
 });
 
@@ -919,15 +921,10 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
-
-
 $(document).ready(function () {
     $('#tableOBShowEdit').DataTable({
-
+        "lengthMenu": [[5, 20, 80, -1], [5, 20, 80, 200]]
+ 
     });
 });
 
@@ -1305,6 +1302,141 @@ $('#dinallTableDinasShift').DataTable({
 },
 );
 
+$('.hapusDinasShifting').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+$(function () {
+    $("#tanggalDinasEdit").datepicker({
+        dateFormat: 'dd/mm/yy',
+        timespicker: false
+
+    });
+});
+
+$(document).ready(function () {
+    $('#dinallModalDinasShifEdit').on('shown.bs.modal', function () {
+        $('.dataTables_filter input').focus();
+    });
+    $(document).on('click', '.clickShowAllCrewForDinasShifEdit', function (event) {
+        // Menyimpan elemen yang diklik untuk digunakan nanti
+        let $currentSearchBarang = $(event.currentTarget);
+        let allSearchBarang = $('.clickShowAllCrewForDinasShifEdit');
+
+        // Mengatur event handler untuk elemen .select menggunakan event delegation
+        $(document).off('click', '.selectCrewDinasShifEdit').on('click', '.selectCrewDinasShifEdit', function () {
+            let idCrew = $(this).data('id_crew');
+            let fullname = $(this).data('fullname');
+            let jabfung = $(this).data('jab_fung');
+            let nip = $(this).data('nip');
+            let npwp = $(this).data('npwp');
+
+            // Mengisi nilai input pada elemen .searchBarang
+            $currentSearchBarang.parent().next().children().val(fullname);
+            $currentSearchBarang.parent().next().next().children().val(nip);
+            $currentSearchBarang.parent().next().next().next().children().val(npwp);
+            $currentSearchBarang.parent().next().next().next().next().children().val(idCrew);
+            let currentIndex = allSearchBarang.index($currentSearchBarang);
+            let isLastElement = currentIndex === allSearchBarang.length - 1;
+
+            if (isLastElement) {
+                // Jika iya, tambahkan baris baru dan nomori ulang
+                // addnewrow();
+                renumberRows();
+            }
+            $('#dinallModalDinasShifEdit').modal('hide');
+
+        });
+    });
+});
+
+$(".btnAddForDinasShifEdit").click(function () {
+    addnewrowDinasShifEdit();
+    renumberDinasShifEdit();
+});
+
+$("body").delegate('.btnHapusForDinasShifEdit', 'click', function (e) {
+    e.preventDefault();
+    let idCrewDinasShif = $("#idObGerForJs").val();
+    let idCrewShif = $(this).val();
+    if (idCrewShif !== '') {
+        Swal.fire({
+            title: 'Yakin hapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    // url: "/peminjaman_alat/edit/22/"+id,
+                       // url: `${idOb}/${idCrewDinas}`,
+                    url: `/dinas-shifting/edit/${idCrewDinasShif}/${idCrewShif}`,
+                    type: "POST",
+                    success: function (response) {
+                        Swal.fire(
+                            'Berhasil!',
+                            'Data sudah dihapus.',
+                            'success'
+                        );
+
+                    }
+                });
+                $(this).parent().parent().remove();
+                renumberDinasShifEdit();
+                window.location.reload(true);
+            }
+        })
+
+    }
+    else {
+        $(this).parent().parent().remove();
+        renumberDinasShifEdit();
+
+    }
+
+});
+
+function addnewrowDinasShifEdit() {
+    let tr = `<tr>
+        <td class="rownumberDinasShifEdit text-center">
+        </td>
+        <td class="text-center">
+        <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="namaUpdate[]" placeholder="Nama">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="nipUpdate[]" placeholder="NIP">
+        </td>
+        <td class="text-center">
+        <input type="text" required class="form-control" name="npwpUpdate[]" placeholder="NPWP">
+        </td>
+        <td class="text-center"><input type="hidden" name="id_userUpdate[]"></td>
+        <td class="text-center">
+            <button type="button" required class="btn btn-danger btnHapusForDinasShifEdit"><i class="fa-solid fa-trash"></i></button>
+        </td>
+    </tr>`;
+    $('.formTambahDinasShifEdit').append(tr);
+};
+
+function renumberDinasShifEdit() {
+    $(".formTambahDinasShifEdit").children().children().each(function (i, v) {
+
+        $(this).find(".rownumberDinasShifEdit").text(i);
+        //   $(this).find(".rownumber").val(i + 1); index i dimulai dari 0
+        // console.log(i);
+    });
+}
 
 //End Dinas Shifting
 

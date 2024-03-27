@@ -178,8 +178,8 @@ class OutBroadcast extends BaseController
         $namaEditUpdate = $this->request->getVar('namaEditUpdate');
         //update data lama crew dinas ob
         if (!isset($namaEditUpdate)) {
-            $jumlahData = count($namaEdit);
-            for ($i = 0; $i < $jumlahData; $i++) {
+            $jumlahDataPertama = count($namaEdit);
+            for ($i = 0; $i < $jumlahDataPertama; $i++) {
                 $this->crewOb->save([
                     'id_crew_ob' => $idDinasCrewObOld[$i],
                     'id_users' => $idUserSelectModal[$i]
@@ -197,8 +197,8 @@ class OutBroadcast extends BaseController
             }
             //fungsi untuk update data yang sudah ada
             if (isset($namaEdit)) {
-                $jumlahData = count($namaEdit);
-                for ($k = 0; $k < $jumlahData; $k++) {
+                $jumlahDataKedua = count($namaEdit);
+                for ($k = 0; $k < $jumlahDataKedua; $k++) {
 
                     $this->crewOb->save([
                         'id_crew_ob' => $idDinasCrewObOld[$k],

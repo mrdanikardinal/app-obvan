@@ -212,7 +212,6 @@ class PeminjamanAlat extends BaseController
             for ($i = 0; $i < $jumlahData; $i++) {
                 $this->parentMerkModel->save([
                     'id' => $idParent[$i],
-                    // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
                     'nama_barang' => $namaBarang[$i],
                     'merk' => $merk[$i],
                     'serial_number' => $serialNumber[$i],
@@ -245,7 +244,6 @@ class PeminjamanAlat extends BaseController
 
                     $this->parentMerkModel->save([
                         'id' => $idParent[$i],
-                        // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
                         'nama_barang' => $namaBarang[$i],
                         'merk' => $merk[$i],
                         'serial_number' => $serialNumber[$i],

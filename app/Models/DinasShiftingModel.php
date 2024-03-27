@@ -42,6 +42,13 @@ class DinasShiftingModel extends Model
         
         return $query->getResultArray(); //return array
     }
+
+    public function procedureGetShowCrewDinasShifting($idDinasShift)
+    {
+        $query = $this->db->query("CALL getShowCrewDinasShifting"."($idDinasShift)");
+
+        return $query->getResultArray();
+    }
    
 
 }

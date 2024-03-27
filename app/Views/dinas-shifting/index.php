@@ -12,6 +12,11 @@
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('pesanHapus')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapus'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
                 <a href="<?= base_url("dinas-shifting/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
@@ -26,9 +31,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>ID</th>
-                                    <th>Crew Dinas</th>
                                     <th>Tanggal</th>
                                     <th>Acara</th>
+                                    <th>Crew Dinas</th>
+                                    <th>Shift</th>
                                     <th>lokasi</th>
                                     <th>Edit</th>
                                     <?php if (in_groups('admin')) : ?>
@@ -46,6 +52,7 @@
                                     <tr>
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueDinasShift['id_dinas_shifting']; ?></td>
+                                        <td><?= $tanggalconvert; ?></td>
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td>
                                             <table class="table table-bordered">
@@ -70,7 +77,7 @@
                                                 <?php endforeach; ?>
                                             </table>
                                         </td>
-                                        <td><?= $tanggalconvert; ?></td>
+                                        <td><?= $valueDinasShift['nama_kategori_shif']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
                                             <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
@@ -84,7 +91,7 @@
                                                 <form id="hapus" action="<?= base_url() ?>dinas-shifting/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-danger hapusOB"><i class="fa-solid fa-trash"></i>Hapus</button>
+                                                    <button type="submit" class="btn btn-danger hapusDinasShifting"><i class="fa-solid fa-trash"></i>Hapus</button>
                                                 </form>
                                             </td>
                                         <?php endif;  ?>

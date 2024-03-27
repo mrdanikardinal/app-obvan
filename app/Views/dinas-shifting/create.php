@@ -32,7 +32,7 @@
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
-                                <label for="kategoriDinasShif" class="col-sm-2 col-form-label">Jenis Shift</label>
+                                <label for="kategoriDinasShif" class="col-sm-2 col-form-label">Shift</label>
                                 <div class="col-sm-10">
                                   
                                     <select name="kategoriDinasShif" id="kategoriDinasShif" class="form-select form-select-sm" aria-label="Small select example">
@@ -124,7 +124,7 @@
                     </div>
                     <div class="modal-body">
                         <!--  -->
-                        <table id="tableOBShow" class="table table-bordered table-hover text-center align-middle">
+                        <table id="tableOBShow" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
