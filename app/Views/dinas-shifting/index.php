@@ -31,10 +31,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>ID</th>
+                                    <th>Kategori</th>
                                     <th>Tanggal</th>
-                                    <th>Acara</th>
-                                    <th>Crew Dinas</th>
                                     <th>Shift</th>
+                                    <th>Crew Dinas</th>
+                                    <th>Acara</th>
                                     <th>lokasi</th>
                                     <th>Edit</th>
                                     <?php if (in_groups('admin')) : ?>
@@ -52,8 +53,9 @@
                                     <tr>
                                         <th><?= $number++; ?></th>
                                         <td><?= $valueDinasShift['id_dinas_shifting']; ?></td>
+                                        <td><?= $valueDinasShift['nama_kategori_dinas_crew']; ?></td>
                                         <td><?= $tanggalconvert; ?></td>
-                                        <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
+                                        <td><?= $valueDinasShift['nama_kategori_shif']; ?></td>
                                         <td>
                                             <table class="table table-bordered">
                                                 <tr>
@@ -77,7 +79,8 @@
                                                 <?php endforeach; ?>
                                             </table>
                                         </td>
-                                        <td><?= $valueDinasShift['nama_kategori_shif']; ?></td>
+                                      
+                                        <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
                                             <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">

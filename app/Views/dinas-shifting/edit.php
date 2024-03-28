@@ -29,10 +29,23 @@
                         <?php
                         $nomor = 1;
                         $nomor2 = 1;
+                        $nomor3 = 1;
                         ?>
                         <form id="formAddDinasShifting" method="post" action="<?= base_url();?>dinas-shifting/update/<?= $AllReadGetIdDinasShift['id_dinas_shifting']; ?>">
                             <?= csrf_field(); ?>
                             <input type="hidden" class="form-control" id="idObGerForJs" value="<?= $AllReadGetIdDinasShift['id_dinas_shifting']; ?>">
+                            <div class="row mb-3">
+                                <label for="kategoriDinasShifLemburEdit" class="col-sm-2 col-form-label">Kategori</label>
+                                <div class="col-sm-10">
+
+                                    <select name="kategoriDinasShifLemburEdit" id="kategoriDinasShifLemburEdit" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allNamaDinasShitfLembur as $key => $valueKategori) : ?>
+                                            <option value="<?= $valueKategori['id_kategori_dinas_crew'] ?>" <?= $valueKategori['id_kategori_dinas_crew'] == $AllReadGetIdDinasShift['id_kategori_dinas_crew'] ? 'selected' : null ?>><?= $nomor3++ . '. ' . $valueKategori['nama_kategori_dinas_crew'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <label for="kategoriDinasShifEdit" class="col-sm-2 col-form-label">Shift</label>
                                 <div class="col-sm-10">

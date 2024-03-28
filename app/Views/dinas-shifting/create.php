@@ -25,12 +25,24 @@
                         <?php
                         $nomor = 1;
                         $nomor2 = 1;
+                        $nomor3 = 1;
                         
                         ?>
                         <form id="formAddDinasShifting" method="post" action="<?= base_url("/dinas-shifting/save"); ?>">
 
                             <?= csrf_field(); ?>
 
+                            <div class="row mb-3">
+                                <label for="kategoriDinasCrewDinas" class="col-sm-2 col-form-label">Kategori</label>
+                                <div class="col-sm-10">
+                                  
+                                    <select name="kategoriDinasCrewDinas" id="kategoriDinasCrewDinas" class="form-select form-select-sm" aria-label="Small select example">
+                                        <?php foreach ($allKategoriDinasShifLembur as $key => $valueKategoriShifLembur) : ?>
+                                            <option value="<?= $valueKategoriShifLembur['id_kategori_dinas_crew'] ?>"><?= $nomor3++ . '. ' . $valueKategoriShifLembur['nama_kategori_dinas_crew'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <label for="kategoriDinasShif" class="col-sm-2 col-form-label">Shift</label>
                                 <div class="col-sm-10">

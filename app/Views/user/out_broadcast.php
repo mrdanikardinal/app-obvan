@@ -18,29 +18,35 @@
             /* table-layout: auto; */
             /* Set lebar kolom mengikuti konten */
         }
+
         th,
         td {
             border: 1px solid black;
             padding: 10px;
             text-align: left;
         }
+
+        h5 {
+            font-family: Arial, sans-serif;
+        }
+      
     </style>
 </head>
 
 <body>
 
     <header>
-        <img src="img/tvri.png" alt="logo-tvri" width="100px" height="50px">
+        <img src="img/tvri.png" alt="logo-tvri" width="100px" height="56px">
     </header>
     <nav>
         <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
         <?php foreach ($showAllJoinsOBKategoriByIDOB as $key => $valueShowBroadcast) : ?>
-        <!-- <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5> -->
-        <h5>No: <?= ($valueShowBroadcast['nomor_surat']==NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat'] ;?>/ TK.02.02/1.4.3.2/II/2024</h5>
-        <h5>Hal: Daftar Nama Petugas</h5>
-        <div class="container px-4">
-            <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
-               
+            <!-- <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5> -->
+            <h5>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ TK.02.02/1.4.3.2/II/2024</h5>
+            <h5>Hal: Daftar Nama Petugas</h5>
+            <div class="container px-4">
+                <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h6>
+
                     <?php
                     date_default_timezone_set('Asia/Jakarta');
                     $tanggal = date('d', strtotime($valueShowBroadcast['tanggal']));
@@ -71,7 +77,7 @@
                     $bulan_indonesia = $bulan_huruf[$bulan];
                     $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
                     ?>
-<pre>
+                    <pre>
 <span> ACARA       : <?= $valueShowBroadcast["acara"]; ?></span> 
 <span> TEMPAT      : <?= $valueShowBroadcast["lokasi"]; ?></span>
 <span> KATEGORI    : <?= $valueShowBroadcast["nama_kategori"]; ?></span> 
@@ -80,7 +86,7 @@
                 <?php endforeach; ?>
                 <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas kerabat kerja sebagai berikut:
                     <h6>
-        </div>
+            </div>
     </nav>
     <section>
         <table>
@@ -89,9 +95,9 @@
                 <thead>
                     <tr>
                         <th style="width:30px">NO</th>
-                        <th style="width:130px">NAMA</th>
+                        <th style="width:140px">NAMA</th>
                         <th style="width:140px">NIP</th>
-                        <th style="width:60px">GOLONGAN</th>
+                        <th style="width:65px">GOLONGAN</th>
                         <th style="width:150px">NPWP</th>
                     </tr>
                 </thead>
@@ -102,7 +108,7 @@
                             <?php if ($valueShowBroadcast['id_ob'] == $j['id_ob']) : ?>
                                 <tr>
                                     <th style="width:30px"><?= $number++; ?></th>
-                                    <td style="width:130px">
+                                    <td style="width:140px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['fullname']; ?>
@@ -117,7 +123,7 @@
                                         <?php endforeach; ?>
 
                                     </td>
-                                    <td style="width:60px">
+                                    <td style="width:65px">
                                         <?php foreach ($allUsers as $k) : ?>
                                             <?php if ($j['id_users'] == $k['id']) : ?>
                                                 <?= $k['golongan']; ?>

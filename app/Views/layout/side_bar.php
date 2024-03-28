@@ -74,11 +74,11 @@
                             Dinas Out Broadcast-(OB)
                         </a>
                         <a class="nav-link" href="<?= base_url() ?>dinas-shifting">
-                            Dinas Shifting
+                            Dinas Shifting & Lembur
                         </a>
-                        <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
+                        <!-- <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
                             Dinas Lembur
-                        </a>
+                        </a> -->
                         <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
                             Peminjaman Alat
                         </a>

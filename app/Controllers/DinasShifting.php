@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\AcaraDinasShiftingModel;
 use App\Models\CrewDinasShiftingModel;
 use App\Models\DinasShiftingModel;
+use App\Models\KategoriCrewDinasShiftLemburModel;
 use App\Models\UsersModel;
 use App\Models\KategoriShiftingModel;
 
@@ -16,6 +17,7 @@ class DinasShifting extends BaseController
     protected $allNamaAcaraShif;
     protected $dinasShifting;
     protected $crewDinasShif;
+    protected $allKategoriDinasLembur;
     public function __construct()
     {
         $this->allUser = new UsersModel();
@@ -23,10 +25,11 @@ class DinasShifting extends BaseController
         $this->allNamaAcaraShif = new AcaraDinasShiftingModel();
         $this->dinasShifting = new DinasShiftingModel();
         $this->crewDinasShif = new CrewDinasShiftingModel();
+        $this->allKategoriDinasLembur = new KategoriCrewDinasShiftLemburModel();
     }
     public function index()
     {
-        // dd($this->crewDinasShif->getIdCrewDinasShifting());
+        // dd($this->dinasShifting->getDinasShifJoinJenisShifJoinNamaAcara());
         $data = [
             'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->getDinasShifJoinJenisShifJoinNamaAcara(),
             'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
@@ -41,6 +44,7 @@ class DinasShifting extends BaseController
 
         $data = [
             'allKategoriDinasShif' => $this->allKategoriDinasShif->getIdKategoriShifting(),
+            'allKategoriDinasShifLembur' => $this->allKategoriDinasLembur->getIdKategoriShiftLembur(),
             'allDataUsers' => $this->allUser->getUsers(),
             'allNamaAcaraShif' => $this->allNamaAcaraShif->getIdNamaAcaraShif(),
             'title' => 'Input Data Dinas Shifting'
@@ -60,6 +64,7 @@ class DinasShifting extends BaseController
 
         $this->dinasShifting->save([
             'id_dinas_shifting' => $idAutoDinasShif,
+            'id_kategori_dinas_crew' => $this->request->getVar('kategoriDinasCrewDinas'),
             'id_kategori_dinas_shif' => $this->request->getVar('kategoriDinasShif'),
             'tanggal' => $tanggalconvert,
             'id_acara' => $this->request->getVar('namaAcaraDinasShif'),
@@ -104,6 +109,7 @@ class DinasShifting extends BaseController
 
         $this->dinasShifting->save([
             'id_dinas_shifting' => $idDinasShifting,
+            'id_kategori_dinas_crew' => $this->request->getVar('kategoriDinasShifLemburEdit'),
             'id_kategori_dinas_shif' => $this->request->getVar('kategoriDinasShifEdit'),
             'tanggal' => $tanggalconvert,
             'id_acara' => $this->request->getVar('namaAcaraDinasShifEdit'),
@@ -178,6 +184,7 @@ class DinasShifting extends BaseController
             'showDataCrewDinasShiftJoinUsers' => $this->dinasShifting->procedureGetShowCrewDinasShifting($idDinasShift),
             'allDataUsers' => $this->allUser->getUsers(),
             'allNamaAcaraShif' => $this->allNamaAcaraShif->getIdNamaAcaraShif(),
+            'allNamaDinasShitfLembur' => $this->allKategoriDinasLembur->getIdKategoriShiftLembur(),
             'title' => 'Tabel update Dinas Shifting',
             'allKategoriDinasShif' => $this->allKategoriDinasShif->getIdKategoriShifting()
         ];

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class DinasShiftingModel extends Model
 {
     protected $table = 'dinas_shifting ';
-    protected $allowedFields = ['id_kategori_dinas_shif', 'tanggal','id_acara','lokasi'];
+    protected $allowedFields = ['id_kategori_dinas_crew','id_kategori_dinas_shif', 'tanggal','id_acara','lokasi'];
     protected $primaryKey = 'id_dinas_shifting';
     protected $useAutoIncrement = false;
 
@@ -38,6 +38,7 @@ class DinasShiftingModel extends Model
         $builder = $this->db->table($this->table);
         $builder->join('kategori_shifting','dinas_shifting.id_kategori_dinas_shif=kategori_shifting.id_kategori_shif ');
         $builder->join(' acara_shifting','dinas_shifting.id_acara =acara_shifting.id_acara_shift');
+        $builder->join(' kategori_dinas_crew','dinas_shifting.id_kategori_dinas_crew =kategori_dinas_crew.id_kategori_dinas_crew');
         $query=$builder->get();
         
         return $query->getResultArray(); //return array
