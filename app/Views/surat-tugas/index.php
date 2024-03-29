@@ -153,7 +153,8 @@
                                             <th>Tanggal Kembali</th>
                                             <th>Nama Penerima Pinjam</th>
                                             <th>Catatan</th>
-                                            <th>Print</th>
+                                            <th>Preview</th>
+                                            <th>Download</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -210,10 +211,17 @@
 
                             </td>
                             <td>
-                                <form action="<?= base_url() ?>user/print_pemberi_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                <form action="<?= base_url() ?>user/print_pemberi_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="PUT">
-                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Preview</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="<?= base_url() ?>user/print_pemberi_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                    <?= csrf_field(); ?>
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-download"></i>Download</button>
                                 </form>
                             </td>
                             </tr>
@@ -239,7 +247,8 @@
                                         <th>Tanggal Kembali</th>
                                         <th>Nama Penerima Pinjam</th>
                                         <th>Catatan</th>
-                                        <th>Print</th>
+                                        <th>Preview</th>
+                                        <th>Download</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -298,10 +307,18 @@
 
                                             </td>
                                             <td>
-                                                <form action="<?= base_url() ?>user/print_penerima_pinjam/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                                <form action="<?= base_url() ?>user/print_penerima_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="PUT">
-                                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
+                                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-eye"></i>Preview</button>
+                                                </form>
+
+                                            </td>
+                                            <td>
+                                                <form action="<?= base_url() ?>user/print_penerima_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
+                                                    <?= csrf_field(); ?>
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-download"></i>Download</button>
                                                 </form>
 
                                             </td>

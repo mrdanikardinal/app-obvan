@@ -123,6 +123,7 @@ class PeminjamanAlat extends BaseController
 
     public function edit($id_pinjam)
     {
+        // dd($this->parentMerkModel->getParentViews($id_pinjam));
         session();
         $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
         $generator = new BarcodeGeneratorPNG();
