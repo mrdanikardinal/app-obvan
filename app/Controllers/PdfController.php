@@ -40,6 +40,25 @@ class PdfController extends Controller
     }
 
 
+    // public function print_penerima_pinjam($idPjm)
+    // {
+    //     // dd($this->users->proceduregetParentMerkFromIdPjm(200));
+    //     $data = [
+    //         'testing' => $this->allUser->proceduregetPrintIdPJMNamaPenerima($idPjm),
+    //         'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
+    //     ];
+
+    //     $test = view('user/penerima_pinjam', $data);
+    //     // $test = view('user/index');
+    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
+
+    //     $pdf->AddPage();
+    //     $pdf->writeHTML($test);
+    //     // $pdf->writeHTML($test, true, false, false, false, '');
+    //     // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+    //     $this->response->setContentType('application/pdf');
+    //     return $pdf->Output('sample.pdf', 'I');
+    // }
     public function print_penerima_pinjam($idPjm)
     {
         // dd($this->users->proceduregetParentMerkFromIdPjm(200));
@@ -59,24 +78,76 @@ class PdfController extends Controller
         $this->response->setContentType('application/pdf');
         return $pdf->Output('sample.pdf', 'I');
     }
-    public function print_pemberi_pinjam($idPjm)
+    // public function print_pemberi_pinjam($idPjm)
+    // {
+    //     // $test=0001;
+    //     // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
+    //     $data = [
+    //         'testing' => $this->allUser->proceduregetPrintIdPJMNamaPemberi($idPjm),
+    //         'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
+    //     ];
+
+    //     $test = view('user/pemberi_pinjam', $data);
+    //     // $test = view('user/index');
+    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
+    //     $pdf->AddPage();
+    //     $pdf->writeHTML($test);
+    //     // $pdf->writeHTML($test, true, false, false, false, '');
+    //     // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+    //     $this->response->setContentType('application/pdf');
+    //     return $pdf->Output('sample.pdf', 'I');
+    // }
+    public function print_pemberi_pinjam($idPeminjamanAlat)
     {
-        // $test=0001;
-        // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
+        // dd($this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPenerima($idOb));
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPenerima($idPeminjamanAlat);
+        foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->peminjamanAlatModel->save([
+                    'id_pinjam' => $idPeminjamanAlat,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+        }
+            // $data = [
+            //     'testing' => $this->allUser->proceduregetPrintIdPJMNamaPemberi($idPjm),
+            //     'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
+            // ];
+
+
         $data = [
-            'testing' => $this->allUser->proceduregetPrintIdPJMNamaPemberi($idPjm),
-            'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
+            'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
+            // 'allUsers' => $this->allUser->getUsers(),
+            'autoNomorSurat' => $varNomorSuratAuto
+
         ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 11);
+
+        // $pdf->SetFont('verdana_bold', 'B', 12);
+        // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
+        // $pdf->SetFont('times new roman', null, 12,'assets/font/times new roman.ttf');
+        // set default monospaced font
+        // $pdf->setDefaultMonospacedFont($fontname);
+        // set default font subsetting mode
+        // $pdf->setFontSubsetting(false);
+        // Set font
+
+        // $pdf->SetFont('times new roman', '', 12,'assets/font/times new roman.ttf');
+
 
         $test = view('user/pemberi_pinjam', $data);
-        // $test = view('user/index');
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
-        $pdf->AddPage();
-        $pdf->writeHTML($test);
-        // $pdf->writeHTML($test, true, false, false, false, '');
-        // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('sample.pdf', 'I');
+        return $pdf->Output('pemberi pinjam.pdf', 'I');
     }
     // public function out_broadcast()
     // {
@@ -231,6 +302,6 @@ class PdfController extends Controller
 
     //end sample ini juga OK
 
-   
+
 
 }

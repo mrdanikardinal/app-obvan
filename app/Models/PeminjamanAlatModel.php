@@ -10,7 +10,7 @@ class PeminjamanAlatModel extends Model
     protected $primaryKey = 'id_pinjam';
     // protected $retunType='object';
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_pinjam', 'tanggal', 'sampai_dengan', 'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam', 'nama_pemberi', 'tanggal_kembali', 'nama_penerima', 'catatan'];
+    protected $allowedFields = ['id_pinjam', 'tanggal', 'sampai_dengan', 'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam', 'nama_pemberi', 'tanggal_kembali', 'nama_penerima', 'catatan','nomor_surat'];
 
 
 
@@ -75,6 +75,18 @@ class PeminjamanAlatModel extends Model
         $query = $this->db->query("CALL getItemsReady()");
         return $query->getResultArray();
     }
+
+    public function getOBJoinNamaPemberiJoinNamaPenerima($idPinjam)
+    {
+        $builder = $this->db->table($this->table);
+        $builder->join('users','peminjaman_alat.nama_pemberi=users.id');
+        // $builder->join(' peminjaman_alat','peminjaman_alat.nama =acara_shifting.id_acara_shift');
+        $builder->join(' users AS users2','peminjaman_alat.nama_penerima =users2.id');
+        $builder->where(['id_pinjam' => $idPinjam]);
+        $query=$builder->get();
+        return $query->getResultArray(); //return array
+    }
+    
 
 
     // public function procedureGetDataPrintToIDPJMNamaPenerima($id_pinjam)

@@ -76,6 +76,7 @@ class OutBroadcastModel extends Model
                         ->get()
                         ->getRow();
     }
+
     
 
 }
