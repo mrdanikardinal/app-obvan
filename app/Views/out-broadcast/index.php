@@ -87,12 +87,7 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </table>
-                                            <form action="<?= base_url() ?>out-broadcast/peralatan-crew-ob/<?=$valueShowBroadcast['id_ob']; ?>" method="post">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>View Alat</button>
-                                            </form>
-                                            
+                                            <a href="<?= base_url(); ?>out-broadcast/peralatan-crew-ob/<?= $valueShowBroadcast['id_ob']; ?>" class="btn btn-primary my-2"><i class="fa-solid fa-eye"></i>View Alat</a>
                                         </td>
                                         <td><?= $tanggalconvert; ?></td>
                                         <td><?= $convert_sampai_dengan; ?></td>
@@ -149,12 +144,12 @@
                                 <th class="text-center">Serial Number</th>
                                 <th class="text-center">Jumlah</th>
                             </tr>
-                            <?php 
+                            <?php
                             $number2 = 1;
-                            $IdOB=21;
-                            
+                            $IdOB = 21;
 
-                             ?>
+
+                            ?>
                             <input type="hidden" class="test" value="">
                             <?php foreach ($allAlatOB as $l) : ?>
 

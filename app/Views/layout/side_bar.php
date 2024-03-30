@@ -8,7 +8,7 @@
                     DASHBOARD
                 </a>
                 <!-- only keuangan and admin -->
-                <?php if (in_groups('keuangan')||in_groups('admin')) : ?>
+                <?php if (in_groups('keuangan') || in_groups('admin')) : ?>
                     <div class="sb-sidenav-menu-heading">Keuangan</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesKasObvan" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -43,53 +43,59 @@
                 <?php endif; ?>
                 <!-- end only keuangan -->
                 <!-- only user and admin and keuangan -->
-                <?php if (in_groups('user')||in_groups('admin')||in_groups('keuangan')) : ?>
-                <!-- show surat tugas -->
-                <div class="sb-sidenav-menu-heading">User</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesUser" aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    PERSONAL
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePagesUser" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link" href="<?= base_url() ?>surat-tugas">
-                            Surat Tugas
-                        </a>
-                        <a class="nav-link" href="<?= base_url() ?>surat-tugas/shifting/<?= user_id();?>">
-                            Surat Tugas Shifting
-                        </a>
-                        <a class="nav-link" href="<?= base_url() ?>surat-tugas/lembur/<?= user_id();?>">
-                            Surat Tugas Lembur
-                        </a>
-                        <a class="nav-link" href="<?= base_url() ?>surat-tugas">
-                            Password
-                        </a>
-                    </nav>
-                </div>
-                <!-- end surat tugas -->
-                <div class="sb-sidenav-menu-heading">SERVICES</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesPeralatanKeluar" aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    LAYANAN
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePagesPeralatanKeluar" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link" href="<?= base_url() ?>out-broadcast">
-                            Dinas Out Broadcast-(OB)
-                        </a>
-                        <a class="nav-link" href="<?= base_url() ?>dinas-shifting">
-                            Dinas Shifting & Lembur
-                        </a>
-                        <!-- <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
+                <?php if (in_groups('user') || in_groups('admin') || in_groups('keuangan')) : ?>
+                    <!-- show surat tugas -->
+                    <div class="sb-sidenav-menu-heading">User</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesUser" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        PERSONAL
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePagesUser" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="<?= base_url() ?>surat-tugas">
+                                Surat Tugas
+                            </a>
+                            <!-- <form action="<?= base_url() ?>surat-tugas/shifting/<?= user_id(); ?>" method="post" class="d-none">
+                                <?= csrf_field(); ?>
+                                <input type="hidden" name="_method" value="PUT">
+                                <button type="submit" class="btn"><i class="fa-regular"></i> Surat Tugas Shifting</button>
+                            </form> -->
+                         
+                            <a class="nav-link" href="<?= base_url() ?>surat-tugas/shifting/<?= user_id(); ?>">
+                                Surat Tugas Shifting
+                            </a>
+                            <a class="nav-link" href="<?= base_url() ?>surat-tugas/lembur/<?= user_id(); ?>">
+                                Surat Tugas Lembur
+                            </a>
+                            <a class="nav-link" href="<?= base_url() ?>surat-tugas">
+                                Password
+                            </a>
+                        </nav>
+                    </div>
+                    <!-- end surat tugas -->
+                    <div class="sb-sidenav-menu-heading">SERVICES</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesPeralatanKeluar" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        LAYANAN
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePagesPeralatanKeluar" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link" href="<?= base_url() ?>out-broadcast">
+                                Dinas Out Broadcast-(OB)
+                            </a>
+                            <a class="nav-link" href="<?= base_url() ?>dinas-shifting">
+                                Dinas Shifting & Lembur
+                            </a>
+                            <!-- <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
                             Dinas Lembur
                         </a> -->
-                        <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
-                            Peminjaman Alat
-                        </a>
-                    </nav>
-                </div>
+                            <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
+                                Peminjaman Alat
+                            </a>
+                        </nav>
+                    </div>
                 <?php endif; ?>
                 <!-- end only user and admin and keuangan-->
 

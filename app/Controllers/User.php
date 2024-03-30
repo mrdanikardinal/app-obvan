@@ -19,7 +19,7 @@ class User extends BaseController
     protected $crewOb;
     protected $dinasShifting;
     protected $crewDinasShif;
-  
+
 
 
     public function __construct()
@@ -30,7 +30,6 @@ class User extends BaseController
         $this->crewOb = new CrewObModel();
         $this->dinasShifting = new DinasShiftingModel();
         $this->crewDinasShif = new CrewDinasShiftingModel();
-
     }
     public function index()
 
@@ -53,23 +52,28 @@ class User extends BaseController
         return view('surat-tugas/index', $data);
     }
     public function shifting($idUser)
-    {
-        $data = [
-            'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->procedureShowAllDinasShifting($idUser),
-            'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
-            'allUsers' => $this->users->getUsers()
-        ];
-        return view('surat-tugas/shifting',$data);
 
+    {
+        if (user_id() === $idUser) {
+            $data = [
+                'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->procedureShowAllDinasShifting($idUser),
+                'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
+                'allUsers' => $this->users->getUsers()
+            ];
+            return view('surat-tugas/shifting', $data);
+        }
+        return redirect()->to('surat-tugas');
     }
     public function lembur($idUsers)
     {
-        $data = [
-            'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->procedureShowAllDinasLembur($idUsers),
-            'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
-            'allUsers' => $this->users->getUsers()
-        ];
-        return view('surat-tugas/lembur',$data);
-
+        if (user_id() === $idUsers) {
+            $data = [
+                'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->procedureShowAllDinasLembur($idUsers),
+                'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
+                'allUsers' => $this->users->getUsers()
+            ];
+            return view('surat-tugas/lembur', $data);
+        }
+        return redirect()->to('surat-tugas');
     }
 }

@@ -97,7 +97,7 @@
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>
                                                     </table>
-
+                                                    <a href="<?= base_url(); ?>out-broadcast/peralatan-crew-ob/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-primary my-2"><i class="fa-solid fa-eye"></i>View Alat</a>
                                                 </td>
 
                                                 <td><?= $tanggalconvert; ?></td>

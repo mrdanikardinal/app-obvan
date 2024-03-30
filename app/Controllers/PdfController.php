@@ -200,31 +200,72 @@ class PdfController extends Controller
     public function peralatan_out_outbroadcast_preview($idOb)
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
-        // $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
-        // foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
-        //     if ($valueOb['nomor_surat'] == null) {
-        //         $this->outBroadcast->save([
-        //             'id_ob' => $idOb,
-        //             'nomor_surat' => $varNomorSuratAuto
-        //         ]);
-        //         $this->nomorSuratTugasModel->save([
-        //             'nomor_surat' => $varNomorSuratAuto
-        //         ]);
-        //     }
-        // }
-
+        $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        // dd($this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb));
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->outBroadcast->save([
+                    'id_ob' => $idOb,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+        }
         $data = [
             'showAllJoinsOBKategoriByIDOB' => $this->parentPeralatanOB->getJoinOBAndAlatINV($idOb),
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             // 'allUsers' => $this->allUser->getUsers(),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getShowObByIdOB'=> $this->outBroadcast->getShowOutBroadcast($idOb)
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->SetFont('times', 'B', 12);
+        $test = view('user/peralatan_out_broadcast', $data);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('peralatan_out_broadcast.pdf', 'I');
+    }
+    public function peralatan_out_outbroadcast_download($idOb)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        $acara = null;
+        $lokasi = null;
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->outBroadcast->save([
+                    'id_ob' => $idOb,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+            $acara=$valueOb['acara'];
+            $lokasi=$valueOb['lokasi'];
+        }
+        // dd($this->outBroadcast->getShowOutBroadcast($idOb));
+        // dd($this->parentPeralatanOB->getJoinOBAndAlatINV($idOb));
+
+        $data = [
+            'showAllJoinsOBKategoriByIDOB' => $this->parentPeralatanOB->getJoinOBAndAlatINV($idOb),
+            'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
+            // 'allUsers' => $this->allUser->getUsers(),
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getShowObByIdOB'=> $this->outBroadcast->getShowOutBroadcast($idOb)
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 12);
 
         // $pdf->SetFont('verdana_bold', 'B', 12);
         // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
@@ -242,17 +283,10 @@ class PdfController extends Controller
         // $pdf->writeHTML($test, true, 0, true, true);
         $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('out broadcast.pdf', 'I');
+        // return $pdf->Output('peralatan_out_broadcast.pdf', 'D');
+        return $pdf->Output('ID_'.$idOb.'_'.$acara . '_lokasi_' . $lokasi . '_pemakaian_peralatan_out_broadcast.pdf', 'D');
+
     }
-
-
-
-
-
-
-    
-
-   
 
     public function out_broadcast_preview($idOb)
     {

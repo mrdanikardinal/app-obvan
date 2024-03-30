@@ -6,13 +6,28 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <a href="<?= base_url("out-broadcast") ?>" class="btn btn-warning my-2">Kembali</a>
-            
-                <a href="<?= base_url();?>user/peralatan_out_outbroadcast_preview/<?=$getIDOB;?>" class="btn btn-primary my-2">Preview</a>
-          
-          
-                <a href="<?= base_url();?>user/peralatan_out_outbroadcast_download/<?=$getIDOB;?>" class="btn btn-success my-2">Download</a>
-           
+                <?php 
+                $befofePageOn=$_SERVER['HTTP_REFERER'];
+                //valueref:http://localhost:8080/out-broadcast
+                
+                $targetOutBroadcast= base_url().'out-broadcast';
+                ?>
+                <a href="<?=($befofePageOn===$targetOutBroadcast) ? base_url("out-broadcast") : base_url("surat-tugas") ?>" class="btn btn-warning my-2">Kembali</a>
+
+                <form action="<?= base_url() ?>user/peralatan_out_broadcast/preview/<?= $getIDOB; ?>" method="post" class="d-inline">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Preview</button>
+                </form>
+
+                <form action="<?= base_url() ?>user/peralatan_out_broadcast/download/<?= $getIDOB; ?>" method="post" class="d-inline">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-download"></i>Download</button>
+                </form>
+
+
+
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
