@@ -25,8 +25,10 @@ class ParentAlatObModel extends Model
     {
         $builder = $this->db->table($this->table);
         $builder->join('inventaris','parent_alat_ob.id_inv=inventaris.id_inv');
+        // $builder->join('out_broadcast AS ob','parent_alat_ob.id_ob=ob.id_ob');
         // $query=$builder->get();
-        $query = $builder->getWhere(['id_ob' => $idOB]);
+        $query = $builder->getWhere(['parent_alat_ob.id_ob' => $idOB]);
+        // $query=$builder->get();
         return $query->getResultArray(); //return array
     }
     public function getCountAlatOB($idOB)

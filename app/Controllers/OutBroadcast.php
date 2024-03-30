@@ -395,7 +395,8 @@ class OutBroadcast extends BaseController
 
         $data = [
             'allDataCrewOB' => $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
-            'countDataCrewOB' => $this->parentAlatOb->getCountAlatOB($idOB)
+            'countDataCrewOB' => $this->parentAlatOb->getCountAlatOB($idOB),
+            'getIDOB'=>$idOB
         ];
         return view('peralatan-crew-ob/index', $data);
     }

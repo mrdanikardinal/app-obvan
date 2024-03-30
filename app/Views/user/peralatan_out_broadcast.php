@@ -79,7 +79,7 @@
                     <pre>
 <span> ACARA       : <?= $valueShowBroadcast["acara"]; ?></span> 
 <span> TEMPAT      : <?= $valueShowBroadcast["lokasi"]; ?></span>
-<span> KATEGORI    : <?= $valueShowBroadcast["nama_kategori"]; ?></span> 
+
 <span> TANGGAL     : <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> S.D <?= $tanggalSampaiDengan; ?> <?= $bulan_indonesia_sampai_dengan; ?> <?= $tahunSampaiDengan; ?><?php else : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?><?php endif; ?>
 </pre>
                 <?php endforeach; ?>
@@ -102,47 +102,7 @@
                     </thead>
                     <tbody>
                         <?php $number = 1; ?>
-                        <?php foreach ($showAllJoinsOBKategoriByIDOB as $key => $valueShowBroadcast) : ?>
-                            <?php foreach ($allDataOutBroadcast as $j) : ?>
-                                <?php if ($valueShowBroadcast['id_ob'] == $j['id_ob']) : ?>
-                                    <tr>
-                                        <th style="width:30px"><?= $number++; ?></th>
-                                        <td style="width:140px">
-                                            <?php foreach ($allUsers as $k) : ?>
-                                                <?php if ($j['id_users'] == $k['id']) : ?>
-                                                    <?= $k['fullname']; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </td>
-                                        <td style="width:140px">
-                                            <?php foreach ($allUsers as $k) : ?>
-                                                <?php if ($j['id_users'] == $k['id']) : ?>
-                                                    <?= $k['nip']; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-
-                                        </td>
-                                        <td style="width:65px">
-                                            <?php foreach ($allUsers as $k) : ?>
-                                                <?php if ($j['id_users'] == $k['id']) : ?>
-                                                    <?= $k['golongan']; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-
-                                        </td>
-                                        <td style="width:150px">
-                                            <?php foreach ($allUsers as $k) : ?>
-                                                <?php if ($j['id_users'] == $k['id']) : ?>
-                                                    <?= $k['npwp']; ?>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-
-                                        </td>
-
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endforeach; ?>
+                     
                     </tbody>
                     <!-- <tfoot>
                     <tr>

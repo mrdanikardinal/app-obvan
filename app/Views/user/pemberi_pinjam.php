@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Docoment Pdf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         #judul,
@@ -72,9 +72,9 @@
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
             <!-- <h5>No: 44/TK.02.02 /1.4.3.2/II/2024</h5> -->
             <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_pemberi'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_pemberi']; ?>/ TK.02.02/1.4.3.2/II/2024</h5>
-            <h5>Hal: Daftar Petugas & Peminjaman Peralatan</h5>
+            <h5>Hal: Daftar Petugas & Penyerahan Peralatan</h5>
 
-            <h5>Dengan ini kami sampaikan bahwa berdasarkan surat dari TVRI World perihal permintaan bantuan peralatan produksi dari, Teknologi peralatan luar studio sebagai berikut:</h5>
+            <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara'];?> perihal permintaan bantuan peralatan produksi dari, Teknologi peralatan luar studio sebagai berikut:</h5>
             <pre>
 <span> ACARA       : <?= $valueShowPeminjamanAlat["acara"]; ?></span> 
 <span> TEMPAT      : <?= $valueShowPeminjamanAlat["tempat"]; ?></span>

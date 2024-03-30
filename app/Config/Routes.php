@@ -37,6 +37,9 @@ $routes->post('admin/inventaris/update/(:any)', 'Inventaris::update/$1',['filter
 //start user
 $routes->get('surat-tugas', 'User::index');
 $routes->get('surat-tugas/index', 'User::index');
+$routes->get('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
+$routes->get('surat-tugas/lembur/(:segment)', 'User::lembur/$1');
+// $routes->get('surat-tugas/lembur', 'User::lembur');
 // $routes->get('surat-tugas/penerima_pinjam', 'User::penerima_pinjam');
 // $routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
 // $routes->get('surat-tugas/out_broadcast', 'User::out_broadcast');
@@ -49,6 +52,10 @@ $routes->PUT('user/print_penerima_pinjam_download/(:any)', 'PdfController::print
 // $routes->PUT('user/out_broadcast/(:any)', 'PdfController::out_broadcast/$1');
 $routes->PUT('user/out_broadcast/download/(:segment)', 'PdfController::out_broadcast_download/$1');
 $routes->PUT('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadcast_preview/$1');
+
+// $routes->PUT('user/peralatan_out_outbroadcast_download/(:segment)', 'PdfController::out_broadcast_download/$1');
+$routes->get('user/peralatan_out_outbroadcast_preview/(:segment)', 'PdfController::peralatan_out_outbroadcast_preview/$1');
+
 // $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
 

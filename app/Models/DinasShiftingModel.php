@@ -50,6 +50,27 @@ class DinasShiftingModel extends Model
 
         return $query->getResultArray();
     }
+
+    public function getOBJoinNamaPemberiJoinNamaPenerima($idPinjam)
+    {
+   
+        $builder = $this->db->table($this->table);
+        $builder->join('kategori_shifting','dinas_shifting.id_kategori_dinas_shif=kategori_shifting.id_kategori_shif ');
+        $builder->join(' acara_shifting','dinas_shifting.id_acara =acara_shifting.id_acara_shift');
+        $builder->join(' kategori_dinas_crew','dinas_shifting.id_kategori_dinas_crew =kategori_dinas_crew.id_kategori_dinas_crew');
+        $builder->where(['id_pinjam' => $idPinjam]);
+        $query=$builder->get();
+        
+        return $query->getResultArray(); //return array
+    }
+    public function procedureShowAllDinasShifting($idUsers){
+        $query = $this->db->query("CALL getShowAllDinasShiftingByIDUserAndIDKategoriDinas"."($idUsers)");
+        return $query->getResultArray();
+    }
+    public function procedureShowAllDinasLembur($idUsers){
+        $query = $this->db->query("CALL getShowAllDinasLemburByIDUserAndIDKategoriDinas"."($idUsers)");
+        return $query->getResultArray();
+    }
    
 
 }

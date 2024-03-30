@@ -48,13 +48,19 @@
                 <div class="sb-sidenav-menu-heading">User</div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesUser" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Personal
+                    PERSONAL
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsePagesUser" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                         <a class="nav-link" href="<?= base_url() ?>surat-tugas">
                             Surat Tugas
+                        </a>
+                        <a class="nav-link" href="<?= base_url() ?>surat-tugas/shifting/<?= user_id();?>">
+                            Surat Tugas Shifting
+                        </a>
+                        <a class="nav-link" href="<?= base_url() ?>surat-tugas/lembur/<?= user_id();?>">
+                            Surat Tugas Lembur
                         </a>
                         <a class="nav-link" href="<?= base_url() ?>surat-tugas">
                             Password

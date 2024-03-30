@@ -7,7 +7,12 @@
         <main>
             <div class="container-fluid px-4">
                 <a href="<?= base_url("out-broadcast") ?>" class="btn btn-warning my-2">Kembali</a>
-                <a href="<?= base_url("admin/inventaris/create") ?>" class="btn btn-primary my-2">Print</a>
+            
+                <a href="<?= base_url();?>user/peralatan_out_outbroadcast_preview/<?=$getIDOB;?>" class="btn btn-primary my-2">Preview</a>
+          
+          
+                <a href="<?= base_url();?>user/peralatan_out_outbroadcast_download/<?=$getIDOB;?>" class="btn btn-success my-2">Download</a>
+           
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>

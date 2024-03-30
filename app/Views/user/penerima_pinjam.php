@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Docoment Pdf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         #judul,
@@ -73,7 +73,7 @@
             <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun ?></h5>
             <h5>Hal: Daftar Petugas & Penerimaan Peralatan</h5>
 
-            <h5>Dengan ini kami sampaikan bahwa berdasarkan surat peminjaman dari TVRI World , Teknologi peralatan luar studio memeriksa kembali peralatan sebagai berikut:</h5>
+            <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara'];?> , Teknologi peralatan luar studio memeriksa peralatan yang diserahkan sebagai berikut:</h5>
 
 
             <pre>
@@ -84,7 +84,7 @@
 <span> KONTAK      : <?= $valueShowPeminjamanAlat["no_hp_peminjam"]; ?></span> 
 <span> TANGGAL     : <?php if ($valueShowPeminjamanAlat['tanggal'] != $valueShowPeminjamanAlat['sampai_dengan']) : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> S.D <?= $tanggalSampaiDengan; ?> <?= $bulan_indonesia_sampai_dengan; ?> <?= $tahunSampaiDengan; ?><?php else : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?><?php endif; ?>
 </pre>
-            <h5>Peralatan dari bidang teknologi peralatan luar studio yang dipinjam sebagai berikut:</h5>
+            <h5>Peralatan yang diserahkan ke bidang teknologi peralatan luar studio sebagai berikut:</h5>
             <table cellpadding="5" style="border-collapse: collapse; width:500px">
                 <thead>
                     <tr>
@@ -109,7 +109,7 @@
                 </tbody>
             </table>
         <?php endforeach; ?>
-        <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio menugaskan petugas ,memeriksa peralatan yang dikembalikan sebagai berikut:</h5>
+        <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio menugaskan petugas ,memeriksa peralatan yang diserahkan sebagai berikut:</h5>
     </nav>
 
     <main>

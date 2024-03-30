@@ -109,8 +109,6 @@
                                                 <td><?= $valueCrewDinasOBByIDUser['ass_td']; ?></td>
                                                 <td><?= $valueCrewDinasOBByIDUser['um']; ?> </td>
                                                 <td>
-                                                    <!-- <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button> -->
-                                                    <!-- <form action="<?= base_url() ?>user/out_broadcast/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post"> -->
                                                     <form action="<?= base_url() ?>user/out_broadcast/preview/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
                                                         <?= csrf_field(); ?>
                                                         <input type="hidden" name="_method" value="PUT">
@@ -119,12 +117,10 @@
 
                                                 </td>
                                                 <td>
-                                                    <!-- <button type="submit" class="btn btn-primary"><i class="fa-solid fa-print"></i>Print</button> -->
-                                                    <!-- <form action="<?= base_url() ?>user/out_broadcast/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post"> -->
                                                     <form action="<?= base_url() ?>user/out_broadcast/download/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
                                                         <?= csrf_field(); ?>
                                                         <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-download"></i>Download</button>
+                                                        <button type="submit" class="btn btn-success"> <i class="fa-solid fa-download"></i>Download</button>
                                                     </form>
 
                                                 </td>
@@ -221,7 +217,7 @@
                                 <form action="<?= base_url() ?>user/print_pemberi_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="_method" value="PUT">
-                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-download"></i>Download</button>
+                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-download"></i>Download</button>
                                 </form>
                             </td>
                             </tr>
@@ -318,7 +314,7 @@
                                                 <form action="<?= base_url() ?>user/print_penerima_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="PUT">
-                                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-download"></i>Download</button>
+                                                    <button type="submit" class="btn btn-success"> <i class="fa-solid fa-download"></i>Download</button>
                                                 </form>
 
                                             </td>

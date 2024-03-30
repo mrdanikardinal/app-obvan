@@ -7,6 +7,7 @@ use App\Models\PeminjamanAlatModel;
 use App\Models\OutBroadcastModel;
 use App\Models\NomorSuratTugasModel;
 use App\Models\CrewObModel;
+use App\Models\ParentAlatObModel;
 use App\Models\ParentMerkModel;
 use CodeIgniter\Controller;
 use TCPDF;
@@ -22,6 +23,7 @@ class PdfController extends Controller
     protected $nomorSuratTugasModel;
     protected $varFontPDF;
     protected $parenMerkPeminjaman;
+    protected $parentPeralatanOB;
 
 
 
@@ -34,6 +36,7 @@ class PdfController extends Controller
         $this->nomorSuratTugasModel = new NomorSuratTugasModel();
         $this->varFontPDF = new TCPDF_FONTS();
         $this->parenMerkPeminjaman = new ParentMerkModel();
+        $this->parentPeralatanOB= new ParentAlatObModel();
     }
     public function index()
     {
@@ -193,6 +196,61 @@ class PdfController extends Controller
         return $pdf->Output('ID_'.$idPeminjamanAlat.'_'.$acara . '_' . $tempat .'_'.$PenerimaPinjam .'_penerima pinjam.pdf', 'D');
 
     }
+
+    public function peralatan_out_outbroadcast_preview($idOb)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        // $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        // foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+        //     if ($valueOb['nomor_surat'] == null) {
+        //         $this->outBroadcast->save([
+        //             'id_ob' => $idOb,
+        //             'nomor_surat' => $varNomorSuratAuto
+        //         ]);
+        //         $this->nomorSuratTugasModel->save([
+        //             'nomor_surat' => $varNomorSuratAuto
+        //         ]);
+        //     }
+        // }
+
+        $data = [
+            'showAllJoinsOBKategoriByIDOB' => $this->parentPeralatanOB->getJoinOBAndAlatINV($idOb),
+            'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
+            // 'allUsers' => $this->allUser->getUsers(),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 11);
+
+        // $pdf->SetFont('verdana_bold', 'B', 12);
+        // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
+        // $pdf->SetFont('times new roman', null, 12,'assets/font/times new roman.ttf');
+        // set default monospaced font
+        // $pdf->setDefaultMonospacedFont($fontname);
+        // set default font subsetting mode
+        // $pdf->setFontSubsetting(false);
+        // Set font
+
+        // $pdf->SetFont('times new roman', '', 12,'assets/font/times new roman.ttf');
+
+
+        $test = view('user/peralatan_out_broadcast', $data);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('out broadcast.pdf', 'I');
+    }
+
+
+
+
+
+
+    
 
    
 
