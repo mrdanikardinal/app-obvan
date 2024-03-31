@@ -7,6 +7,7 @@ use App\Models\PeminjamanAlatModel;
 use App\Models\OutBroadcastModel;
 use App\Models\NomorSuratTugasModel;
 use App\Models\CrewObModel;
+use App\Models\DinasShiftingModel;
 use App\Models\ParentAlatObModel;
 use App\Models\ParentMerkModel;
 use CodeIgniter\Controller;
@@ -24,6 +25,7 @@ class PdfController extends Controller
     protected $varFontPDF;
     protected $parenMerkPeminjaman;
     protected $parentPeralatanOB;
+    protected $dinasShiftingModel;
 
 
 
@@ -37,6 +39,7 @@ class PdfController extends Controller
         $this->varFontPDF = new TCPDF_FONTS();
         $this->parenMerkPeminjaman = new ParentMerkModel();
         $this->parentPeralatanOB= new ParentAlatObModel();
+        $this->dinasShiftingModel= new DinasShiftingModel();
     }
     public function index()
     {
@@ -44,6 +47,7 @@ class PdfController extends Controller
         // $this->generatePdf();
 
     }
+    // ================================================= Start Permberi Pinjam
     public function print_pemberi_pinjam_preview($idPeminjamanAlat)
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
@@ -120,6 +124,7 @@ class PdfController extends Controller
         return $pdf->Output('ID_'.$idPeminjamanAlat.'_'.$acara . '_' . $tempat .'_'.$pemberiPinjam .'_pemberi pinjam.pdf', 'D');
 
     }
+    // =================================================End Permberi Pinjam
 
     public function print_penerima_pinjam_preview($idPeminjamanAlat)
     {
@@ -463,6 +468,169 @@ class PdfController extends Controller
     //=============================================================
 
     //end sample ini juga OK
+    //=======================================================Start Dinas Shifting
+
+    public function dinas_shifting_preview($idDinasShitf)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->dinasShiftingModel->save([
+                    'id_dinas_shifting' => $idDinasShitf,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+        }
+
+        $data = [
+            'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
+            'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 12);
+
+        $test = view('user/shifting', $data);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('dinas Shifting.pdf', 'I');
+    }
+    public function dinas_shifting_download($idDinasShitf)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+
+        $tanggal= null;
+        $shif = null;
+
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat'] == null) {
+                $this->dinasShiftingModel->save([
+                    'id_dinas_shifting' => $idDinasShitf,
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+         
+            $tanggal= $valueOb['tanggal'];
+            $shif = $valueOb['nama_acara_shift'];
+        }
+
+      
+
+        $data = [
+            'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
+            'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 12);
+
+        $test = view('user/shifting', $data);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('ID_'.$idDinasShitf.'_Tanggal_' . $tanggal.'_'.$shif. '_dinas Shifting.pdf', 'D');
+
+        // return $pdf->Output('dinas Shifting.pdf', 'D');
+    }
+    //=======================================================End Dinas Shifting
+    public function dinas_lembur_preview($idDinasShitf)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat_lembur'] == null) {
+                $this->dinasShiftingModel->save([
+                    'id_dinas_shifting' => $idDinasShitf,
+                    'nomor_surat_lembur' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+        }
+
+        $data = [
+            'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
+            'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 12);
+
+        $test = view('user/lembur', $data);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('dinas Lembur.pdf', 'I');
+    }
+    public function dinas_lembur_download($idDinasShitf)
+    {
+        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+
+        $tanggal= null;
+        $shif = null;
+
+        foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
+            if ($valueOb['nomor_surat_lembur'] == null) {
+                $this->dinasShiftingModel->save([
+                    'id_dinas_shifting' => $idDinasShitf,
+                    'nomor_surat_lembur' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
+            }
+         
+            $tanggal= $valueOb['tanggal'];
+            $shif = $valueOb['nama_acara_shift'];
+        }
+
+      
+
+        $data = [
+            'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
+            'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
+            'autoNomorSurat' => $varNomorSuratAuto
+
+        ];
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage();
+        $pdf->SetFont('times', 'B', 12);
+
+        $test = view('user/lembur', $data);
+        // $pdf->writeHTML($test, true, 0, true, true);
+        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $this->response->setContentType('application/pdf');
+        return $pdf->Output('ID_'.$idDinasShitf.'_Tanggal_' . $tanggal.'_'.$shif. '_dinas Lembur.pdf', 'D');
+
+        // return $pdf->Output('dinas Shifting.pdf', 'D');
+    }
 
 
 

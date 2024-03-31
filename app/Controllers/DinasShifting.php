@@ -29,7 +29,7 @@ class DinasShifting extends BaseController
     }
     public function index()
     {
-        // dd($this->dinasShifting->getDinasShifJoinJenisShifJoinNamaAcara());
+        
         $data = [
             'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->getDinasShifJoinJenisShifJoinNamaAcara(),
             'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),
@@ -176,6 +176,7 @@ class DinasShifting extends BaseController
     public function edit($idDinasShift)
     {
         // dd($this->dinasShifting->getIdDinasShifting($idDinasShift));
+        // dd($this->dinasShifting->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShift));
         $data = [
             // 'allDataJoinShiftDanJoinNamaAcara' => $this->dinasShifting->getDinasShifJoinJenisShifJoinNamaAcara(),
             // 'allDataDinasShifting' => $this->crewDinasShif->getIdCrewDinasShifting(),

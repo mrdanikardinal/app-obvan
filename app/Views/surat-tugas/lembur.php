@@ -82,7 +82,7 @@
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
-                                            <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
+                                            <form action="<?= base_url() ?>user/lembur/preview/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <button type="submit" class="btn btn-primary"><i class="fa-regular fa-eye"></i>Preview</button>
@@ -90,7 +90,7 @@
                                         </td>
 
                                         <td>
-                                            <form action="<?= base_url() ?>dinas-shifting/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
+                                            <form action="<?= base_url() ?>user/lembur/download/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="PUT">
                                                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-download"></i>Download</button>

@@ -59,6 +59,17 @@ $routes->PUT('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadc
 $routes->PUT('user/peralatan_out_broadcast/preview/(:segment)', 'PdfController::peralatan_out_outbroadcast_preview/$1');
 $routes->PUT('user/peralatan_out_broadcast/download/(:segment)', 'PdfController::peralatan_out_outbroadcast_download/$1');
 
+//shifting
+$routes->PUT('user/shifting/preview/(:segment)', 'PdfController::dinas_shifting_preview/$1');
+$routes->PUT('user/shifting/download/(:segment)', 'PdfController::dinas_shifting_download/$1');
+//endshifting
+//lembur
+$routes->PUT('user/lembur/preview/(:segment)', 'PdfController::dinas_lembur_preview/$1');
+$routes->PUT('user/lembur/download/(:segment)', 'PdfController::dinas_lembur_download/$1');
+//end lembur
+
+
+
 // $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
 
