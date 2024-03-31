@@ -226,13 +226,19 @@ class PdfController extends Controller
             'getShowObByIdOB'=> $this->outBroadcast->getShowOutBroadcast($idOb)
 
         ];
+
+
+        
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
-        $test = view('user/peralatan_out_broadcast', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $pdf->AddPage();                 
+        $pdf->SetFont('times', 'B', 11);
+        $html = view('user/peralatan_out_broadcast', $data);
+        // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $pdf->writeHTML($html, true, false, false, false, '');
+        // $pdf->writeHTML($tbl, true, false, false, false, '');
+
         $this->response->setContentType('application/pdf');
         return $pdf->Output('peralatan_out_broadcast.pdf', 'I');
     }
@@ -270,7 +276,7 @@ class PdfController extends Controller
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
+        $pdf->SetFont('times', 'B', 11);
 
         // $pdf->SetFont('verdana_bold', 'B', 12);
         // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
@@ -319,24 +325,10 @@ class PdfController extends Controller
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->AddPage();
         $pdf->SetFont('times', 'B', 11);
-
-        // $pdf->SetFont('verdana_bold', 'B', 12);
-        // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
-        // $pdf->SetFont('times new roman', null, 12,'assets/font/times new roman.ttf');
-        // set default monospaced font
-        // $pdf->setDefaultMonospacedFont($fontname);
-        // set default font subsetting mode
-        // $pdf->setFontSubsetting(false);
-        // Set font
-
-        // $pdf->SetFont('times new roman', '', 12,'assets/font/times new roman.ttf');
-
-
-        $test = view('user/out_broadcast', $data);
-        // $pdf->writeHTML($test, true, 0, true, true);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $html = view('user/out_broadcast', $data);
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         return $pdf->Output('out broadcast.pdf', 'I');
     }
@@ -384,21 +376,11 @@ class PdfController extends Controller
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $userLogin = user();
-        // $filename = 'testing';
-        // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        $pdf->SetFont('times', 'B', 11);
         $pdf->AddPage();
-        $test = view('user/out_broadcast', $data);
-        // $pdf->writeHTML($test);
-        $pdf->writeHTML($test, true, 0, true, true);
-        // output the HTML content
-        // $pdf->writeHTML($test, true, false, true, false, '');
-        // $pdf->lastPage();
-        // $pdf->Write(0, 'Example of HTML Justification', '', 0, 'L', true, 0, false, false, 0);
+        $htlm = view('user/out_broadcast', $data);
+        $pdf->writeHTML($htlm, true, 0, true, true);
         $this->response->setContentType('application/pdf');
-        // return file_put_contents($filename . '.pdf', $pdf->Output('I'));
         return $pdf->Output($acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
     }
 
@@ -496,12 +478,10 @@ class PdfController extends Controller
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
+        $pdf->SetFont('times', 'B', 11);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
-
-        $test = view('user/shifting', $data);
-        // $pdf->writeHTML($test, true, 0, true, true);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $html = view('user/shifting', $data);
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         return $pdf->Output('dinas Shifting.pdf', 'I');
     }
@@ -540,7 +520,7 @@ class PdfController extends Controller
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
+        $pdf->SetFont('times', 'B', 11);
 
         $test = view('user/shifting', $data);
         // $pdf->writeHTML($test, true, 0, true, true);
@@ -577,12 +557,10 @@ class PdfController extends Controller
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
+        $pdf->SetFont('times', 'B', 11);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
-
-        $test = view('user/lembur', $data);
-        // $pdf->writeHTML($test, true, 0, true, true);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $html = view('user/lembur', $data);
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         return $pdf->Output('dinas Lembur.pdf', 'I');
     }
@@ -621,15 +599,12 @@ class PdfController extends Controller
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 12);
+        $pdf->SetFont('times', 'B', 11);
 
-        $test = view('user/lembur', $data);
-        // $pdf->writeHTML($test, true, 0, true, true);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        $htlm = view('user/lembur', $data);
+        $pdf->writeHTMLCell(0, 0, '', '', $htlm, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         return $pdf->Output('ID_'.$idDinasShitf.'_Tanggal_' . $tanggal.'_'.$shif. '_dinas Lembur.pdf', 'D');
-
-        // return $pdf->Output('dinas Shifting.pdf', 'D');
     }
 
 

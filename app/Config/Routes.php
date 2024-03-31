@@ -40,6 +40,7 @@ $routes->get('surat-tugas/index', 'User::index');
 $routes->get('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
 // $routes->PUT('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
 $routes->get('surat-tugas/lembur/(:segment)', 'User::lembur/$1');
+// $routes->get('surat-tugas/setting_user/(:segment)', 'User::setting_user/$1');
 // $routes->get('surat-tugas/lembur', 'User::lembur');
 // $routes->get('surat-tugas/penerima_pinjam', 'User::penerima_pinjam');
 // $routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
@@ -67,6 +68,8 @@ $routes->PUT('user/shifting/download/(:segment)', 'PdfController::dinas_shifting
 $routes->PUT('user/lembur/preview/(:segment)', 'PdfController::dinas_lembur_preview/$1');
 $routes->PUT('user/lembur/download/(:segment)', 'PdfController::dinas_lembur_download/$1');
 //end lembur
+$routes->get('user/setting_user/(:segment)', 'User::setting_user/$1');
+
 
 
 

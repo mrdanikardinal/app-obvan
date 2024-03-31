@@ -69,11 +69,12 @@
 
                                         <td><?= $valueInventaris['merk']; ?></td>
                                         <td>
-                                            <?php if ($valueInventaris['serial_number'] != NULL) : ?>
+                                        <?= $valueInventaris['serial_number']; ?>
+                                            <!-- <?php if ($valueInventaris['serial_number'] != NULL) : ?>
                                                 <?= $valueInventaris['serial_number']; ?>
                                             <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
                                                 <h4><?= '-'; ?></h4>
-                                            <?php endif; ?>
+                                            <?php endif; ?> -->
                                         </td>
                                         <td><?= $valueInventaris['nama_lokasi'] ?></td>
                                         <td><?= $valueInventaris['nama_kondisi'] ?></td>

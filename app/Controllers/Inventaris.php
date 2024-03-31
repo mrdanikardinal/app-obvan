@@ -105,26 +105,45 @@ class Inventaris extends BaseController
         $idAutoInventaris = $this->inventarisModel->autoNumberId();
         $namaBarang = $this->request->getVar('nama_barang');
         $jenisBarang = $this->request->getVar('jenis_barang');
+        $varSerialNumber=$this->request->getVar('serial_number');
         $timeForBarcode = time();
 
         if (!$this->validate($rules)) {
 
             return redirect()->back()->withInput();
         }
+        if($varSerialNumber==NULL){
+            $this->inventarisModel->save([
+                'id_inv' => $idAutoInventaris,
+                'id_jns_barang' => $jenisBarang,
+                'kode_barcode' => $timeForBarcode,
+                'nama_barang' => $namaBarang,
+                'merk' => $this->request->getVar('merk'),
+                'serial_number' =>$timeForBarcode,
+                'id_lokasi' => $this->request->getVar('lokasi'),
+                'id_kondisi' => $this->request->getVar('kondisi'),
+                'id_status' => $this->request->getVar('status'),
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+    
+            ]);
+        }else if($varSerialNumber!=NULL){
+            $this->inventarisModel->save([
+                'id_inv' => $idAutoInventaris,
+                'id_jns_barang' => $jenisBarang,
+                'kode_barcode' => $timeForBarcode,
+                'nama_barang' => $namaBarang,
+                'merk' => $this->request->getVar('merk'),
+                'serial_number' =>$varSerialNumber,
+                'id_lokasi' => $this->request->getVar('lokasi'),
+                'id_kondisi' => $this->request->getVar('kondisi'),
+                'id_status' => $this->request->getVar('status'),
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+    
+            ]);
 
-        $this->inventarisModel->save([
-            'id_inv' => $idAutoInventaris,
-            'id_jns_barang' => $jenisBarang,
-            'kode_barcode' => $timeForBarcode,
-            'nama_barang' => $namaBarang,
-            'merk' => $this->request->getVar('merk'),
-            'serial_number' => $this->request->getVar('serial_number'),
-            'id_lokasi' => $this->request->getVar('lokasi'),
-            'id_kondisi' => $this->request->getVar('kondisi'),
-            'id_status' => $this->request->getVar('status'),
-            'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+        }
 
-        ]);
+    
 
 
         session()->setFlashdata('pesan', 'Berhasil,input inventaris ' . $namaBarang);

@@ -76,4 +76,22 @@ class User extends BaseController
         }
         return redirect()->to('surat-tugas');
     }
+    public function setting_user($idUser)
+    {
+        // $entity = new User();
+        // $newPassword = $this->request->getPost('new_password');
+        // $entity->setPassword($newPassword);
+        // $hash  = $entity->password_hash;
+        // $users->update($id,['password_hash' => $hash]);
+
+
+
+        if (user_id() === $idUser) {
+            $idUserReset = $this->users->getUsers($idUser);
+            // dd($idUserReset);
+            // return redirect()->to('surat-tugas');
+            return view('user/settings_user');
+        }
+        return redirect()->to('surat-tugas');
+    }
 }
