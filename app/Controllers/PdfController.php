@@ -38,8 +38,8 @@ class PdfController extends Controller
         $this->nomorSuratTugasModel = new NomorSuratTugasModel();
         $this->varFontPDF = new TCPDF_FONTS();
         $this->parenMerkPeminjaman = new ParentMerkModel();
-        $this->parentPeralatanOB= new ParentAlatObModel();
-        $this->dinasShiftingModel= new DinasShiftingModel();
+        $this->parentPeralatanOB = new ParentAlatObModel();
+        $this->dinasShiftingModel = new DinasShiftingModel();
     }
     public function index()
     {
@@ -121,8 +121,7 @@ class PdfController extends Controller
         $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         // return $pdf->Output('pemberi pinjam.pdf', 'I');
-        return $pdf->Output('ID_'.$idPeminjamanAlat.'_'.$acara . '_' . $tempat .'_'.$pemberiPinjam .'_pemberi pinjam.pdf', 'D');
-
+        return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $pemberiPinjam . '_pemberi pinjam.pdf', 'D');
     }
     // =================================================End Permberi Pinjam
 
@@ -176,10 +175,9 @@ class PdfController extends Controller
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
-            $acara=$valueOb['acara'];
-            $tempat=$valueOb['tempat'];
-            $PenerimaPinjam=$valueOb['fullname'];
-      
+            $acara = $valueOb['acara'];
+            $tempat = $valueOb['tempat'];
+            $PenerimaPinjam = $valueOb['fullname'];
         }
 
         $data = [
@@ -198,8 +196,7 @@ class PdfController extends Controller
         $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         // return $pdf->Output('Penerima pinjam.pdf', 'I');
-        return $pdf->Output('ID_'.$idPeminjamanAlat.'_'.$acara . '_' . $tempat .'_'.$PenerimaPinjam .'_penerima pinjam.pdf', 'D');
-
+        return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $PenerimaPinjam . '_penerima pinjam.pdf', 'D');
     }
 
     public function peralatan_out_outbroadcast_preview($idOb)
@@ -223,16 +220,16 @@ class PdfController extends Controller
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             // 'allUsers' => $this->allUser->getUsers(),
             'autoNomorSurat' => $varNomorSuratAuto,
-            'getShowObByIdOB'=> $this->outBroadcast->getShowOutBroadcast($idOb)
+            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb)
 
         ];
 
 
-        
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->AddPage();                 
+        $pdf->AddPage();
         $pdf->SetFont('times', 'B', 11);
         $html = view('user/peralatan_out_broadcast', $data);
         // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
@@ -258,8 +255,8 @@ class PdfController extends Controller
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
-            $acara=$valueOb['acara'];
-            $lokasi=$valueOb['lokasi'];
+            $acara = $valueOb['acara'];
+            $lokasi = $valueOb['lokasi'];
         }
         // dd($this->outBroadcast->getShowOutBroadcast($idOb));
         // dd($this->parentPeralatanOB->getJoinOBAndAlatINV($idOb));
@@ -269,7 +266,7 @@ class PdfController extends Controller
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             // 'allUsers' => $this->allUser->getUsers(),
             'autoNomorSurat' => $varNomorSuratAuto,
-            'getShowObByIdOB'=> $this->outBroadcast->getShowOutBroadcast($idOb)
+            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb)
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -295,8 +292,7 @@ class PdfController extends Controller
         $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
         // return $pdf->Output('peralatan_out_broadcast.pdf', 'D');
-        return $pdf->Output('ID_'.$idOb.'_'.$acara . '_lokasi_' . $lokasi . '_pemakaian_peralatan_out_broadcast.pdf', 'D');
-
+        return $pdf->Output('ID_' . $idOb . '_' . $acara . '_lokasi_' . $lokasi . '_pemakaian_peralatan_out_broadcast.pdf', 'D');
     }
 
     public function out_broadcast_preview($idOb)
@@ -381,7 +377,7 @@ class PdfController extends Controller
         $htlm = view('user/out_broadcast', $data);
         $pdf->writeHTML($htlm, true, 0, true, true);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output($acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
+        return $pdf->Output('ID_'.$idOb.'_'.$acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
     }
 
 
@@ -490,7 +486,7 @@ class PdfController extends Controller
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
 
-        $tanggal= null;
+        $tanggal = null;
         $shif = null;
 
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
@@ -503,12 +499,12 @@ class PdfController extends Controller
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
-         
-            $tanggal= $valueOb['tanggal'];
+
+            $tanggal = $valueOb['tanggal'];
             $shif = $valueOb['nama_acara_shift'];
         }
 
-      
+
 
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
@@ -526,7 +522,7 @@ class PdfController extends Controller
         // $pdf->writeHTML($test, true, 0, true, true);
         $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('ID_'.$idDinasShitf.'_Tanggal_' . $tanggal.'_'.$shif. '_dinas Shifting.pdf', 'D');
+        return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' . $shif . '_dinas Shifting.pdf', 'D');
 
         // return $pdf->Output('dinas Shifting.pdf', 'D');
     }
@@ -554,13 +550,49 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $pdf->writeHTML($html, true, false, true, false, '');
+        // $jumlah_halaman = $pdf->getNumPages();
+
+
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->SetFont('times', 'B', 11);
-        $pdf->AddPage();
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
+
         $html = view('user/lembur', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
         return $pdf->Output('dinas Lembur.pdf', 'I');
     }
@@ -568,10 +600,9 @@ class PdfController extends Controller
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
-
-        $tanggal= null;
+        // dd($varprocedureGetShowJoinKategoriByIdOb['tanggal']);
+        $tanggal = null;
         $shif = null;
-
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
             if ($valueOb['nomor_surat_lembur'] == null) {
                 $this->dinasShiftingModel->save([
@@ -581,13 +612,11 @@ class PdfController extends Controller
                 $this->nomorSuratTugasModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
+              
             }
-         
-            $tanggal= $valueOb['tanggal'];
+            $tanggal = $valueOb['tanggal'];
             $shif = $valueOb['nama_acara_shift'];
         }
-
-      
 
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
@@ -595,18 +624,48 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $pdf->writeHTML($html, true, false, true, false, '');
+        // $jumlah_halaman = $pdf->getNumPages();
+
+
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
+
+        $html = view('user/lembur', $data);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        $pdf->setTextColor(0, 0, 108); // Warna biru tua
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
 
-        $htlm = view('user/lembur', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $htlm, 0, 1, 0, true, '', true);
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('ID_'.$idDinasShitf.'_Tanggal_' . $tanggal.'_'.$shif. '_dinas Lembur.pdf', 'D');
+        return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' .$shif.'_dinas Lembur.pdf', 'D');
     }
-
-
-
 }

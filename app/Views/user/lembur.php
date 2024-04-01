@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dinas Lembur</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* agar konten tetap di atas footer */
+            position: relative;
+            /* memberi posisi relatif untuk footer */
+        }
+
+        footer {
+            position: absolute;
+            /* membuat footer posisi tetap */
+            bottom: 0;
+            /* meletakkan footer di bagian bawah */
+            width: 100%;
+            /* agar footer mengisi lebar layar */
+            background-color: #333;
+            /* warna latar belakang footer */
+            color: #fff;
+            /* warna teks footer */
+            padding: 20px;
+            /* jarak padding untuk konten footer */
+            box-sizing: border-box;
+            /* agar padding tidak menambah ukuran total */
+        }
+
         table,
         th,
         td {
@@ -25,6 +51,23 @@
             /* font-family: "Lucida Console", "Courier New", monospace; */
             /* font-family: "Lucida Console", "Courier New", sans-serif; */
             font-size: 11px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -108,8 +151,9 @@
             <img src="img/ttdJansenWeb.png" alt="logo-tvri" width="100px" height="60px" style="text-align: center;">
             <h4 style="text-indent: 200px;">JANSEN STEPPEN JOU SINAGA</h4>
             <h4 style="text-indent: 200px;">198809232022211006</h4>
-
         </footer>
+
+
 </body>
 
 </html>
