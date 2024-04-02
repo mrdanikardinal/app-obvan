@@ -69,6 +69,7 @@ $routes->PUT('user/lembur/preview/(:segment)', 'PdfController::dinas_lembur_prev
 $routes->PUT('user/lembur/download/(:segment)', 'PdfController::dinas_lembur_download/$1');
 //end lembur
 $routes->get('user/setting_user/(:segment)', 'User::setting_user/$1');
+$routes->post('change-password/(:segment)', 'User::update_password/$1');
 
 
 
