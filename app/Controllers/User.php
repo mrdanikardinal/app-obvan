@@ -81,107 +81,53 @@ class User extends BaseController
     public function setting_user($idUser)
     {
 
-        // $entity = new User();
-        // $newPassword = $this->request->getPost('new_password');
-        // $entity->setPassword($newPassword);
-        // $hash  = $entity->password_hash;
-        // $users->update($idUser,['password_hash' => $hash]);
-
-
-        if (user_id() === $idUser) {
-            $idUserReset = $this->users->getUsers($idUser);
-
-            return view('user/settings_user');
+        // 'validation' => \Config\Services::validation(),
+        if ($idUser === user_id()) {
+            session();
+            $data = [
+                'validation' => \Config\Services::validation()
+            ];
+            return view('user/settings_user', $data);
         }
-        return redirect()->to('surat-tugas');
+        return redirect()->back()->withInput();
     }
     public function update_password($idUser)
-
     {
 
-        // Ambil hash password dari database
-        $hashed_password_from_database = '$2y$10$g/IR8wj9ULqfF8..AVFk3.Nmc9y2OeqQ9rJm2sBcdiPT5HlM.JJTO';
-        $hashed_password_from_database = '$2y$10$g/IR8wj9ULqfF8..AVFk3.Nmc9y2OeqQ9rJm2sBcdiPT5HlM.JJTO';
-        
+        session();
 
-        // Verifikasi password saat pengguna mencoba masuk
-        $login_password = "password_pengguna"; // Password yang diinputkan oleh pengguna pada form login
-
-        // Debugging: Tampilkan nilai hash password dan sandi yang dimasukkan oleh pengguna
-        echo "Hash password dari database: " . $hashed_password_from_database . "<br>";
-        echo "Sandi yang dimasukkan oleh pengguna: " . $login_password . "<br>";
-
-        if (password_verify($login_password, $hashed_password_from_database)) {
-            // Password cocok, izinkan pengguna untuk masuk
-            echo "Selamat datang!";
-        } else {
-            // Password tidak cocok
-            echo "Username atau password salah.";
-        }
-
-        dd();
-
-
-
-
-
-
-
-
-        // $validation->setRules([
-        //     'username' => 'required',
-        //     'password' => 'required|strong_password'
-        // ]);
-
-
-        // $hashed = '$2y$10$nbWWdduwmxJBhj12LeTg3.wvH9tIPMvDsaZVsRUpLxzMZhzEszzMW';
-
-        // $hashed = password_hash($hashed, PASSWORD_BCRYPT);
-        // $password = 'n3ngg4l4';
-
-        // if (password_verify($password, $hashed)) {
-        //     echo 'success';
-        // } else {
-        //     echo 'fail';
-        // }
-        // dd();
-
-
-
-
-        $idUserReset = $this->users->getUsers($idUser);
-        // $hashed = $idUserReset['password_hash'];
-        $hashed = '$2y$10$nbWWdduwmxJBhj12LeTg3.wvH9tIPMvDsaZVsRUpLxzMZhzEszzMW';
-        $passwordLama = $this->request->getVar('password');
-        $passwordBaru = $this->request->getVar('Bpassword');
-        dd(password_verify('n3ngg4l4', $hashed));
-
+        //========================benar
 
         if (user_id() === $idUser) {
+            $passwordLama = $this->request->getVar('password_lama');
+            $passwordBaru = $this->request->getVar('password_baru');
+            $passwordKonfirmasi = $this->request->getVar('password_konfirmasi');
 
-            // $rules = [
-            //     'password' => 'required',
-            //     'Bpassword' => 'required|strong_password',
-            //     'KBpassword' => 'required|matches[Bpassword]',
-
-            // ];
-            // if (!$this->validate($rules)) {
-
-            //     return redirect()->back()->withInput();
-            // }
-
-
-            if (password_verify($passwordBaru, $hashed)) {
-                $this->users->save([
-                    'id' => $idUserReset,
-                    'password_hash' => Password::hash($this->request->getVar($passwordBaru))
-                ]);
-                session()->setFlashdata('pesan', 'Berhasil,Update Password');
-                return redirect()->to(base_url('logout'));
+            if($passwordLama||$passwordBaru||$passwordKonfirmasi==''){
+                dd("text field ada yang kosong");
             }
 
+       
+            $passwordLama = $this->request->getVar('password_lama');
+            $passwordBaru = $this->request->getVar('password_baru');
+            $varHash = $this->users->getUsers($idUser);
 
-            // return view('user/settings_user');
+            if (Password::verify($passwordLama, $varHash['password_hash'])) {
+                $this->users->save([
+                    'id' => $idUser,
+                    'password_hash' => Password::hash($passwordBaru)
+                ]);
+                session()->setFlashdata('pesan', 'Berhasil,Update Password');
+                redirect()->back()->withInput();
+                // return redirect()->to(base_url('logout'));
+            }else if(!Password::verify($passwordLama, $varHash['password_hash'])){
+                session()->setFlashdata('passwordLamaSalah', 'Gagal!, password lama anda salah, periksalah kembali');
+                return redirect()->back()->withInput();
+            }
+            return redirect()->back()->withInput();
         }
+
+        // ============================EndBenar
+
     }
 }
