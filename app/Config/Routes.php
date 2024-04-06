@@ -77,7 +77,20 @@ $routes->post('user/setting-data-user/(:num)', 'User::update_user/$1');
 
 // $routes->post('change-password', 'User::update_password');
 
-
+//kategori dinas lembur/shifting
+// status-dinas-lembur-shifting
+$routes->get('admin/status-dinas-lembur-shifting', 'StatusDinasLemburShifting::index');
+$routes->get('admin/status-dinas-lembur-shifting/kategori/create', 'StatusDinasLemburShifting::kategori_create');
+$routes->get('admin/status-dinas-lembur-shifting/acara/create', 'StatusDinasLemburShifting::acara_create');
+$routes->post('admin/status-dinas-lembur-shifting/acara/save', 'StatusDinasLemburShifting::acara_save');
+$routes->post('admin/status-dinas-lembur-shifting/kategori/save', 'StatusDinasLemburShifting::kategori_save');
+$routes->post('admin/status-dinas-lembur-shifting/edit-kategori/(:segment)', 'StatusDinasLemburShifting::edit_kategori/$1');
+$routes->post('admin/status-dinas-lembur-shifting/edit-acara/(:segment)', 'StatusDinasLemburShifting::edit_acara/$1');
+$routes->post('admin/status-dinas-lembur-shifting/acara_update/(:segment)', 'StatusDinasLemburShifting::acara_update/$1');
+$routes->post('admin/status-dinas-lembur-shifting/kategori_update/(:segment)', 'StatusDinasLemburShifting::kategori_update/$1');
+$routes->post('admin/status-dinas-lembur-shifting/delete-acara/(:segment)', 'StatusDinasLemburShifting::delete_acara/$1');
+$routes->post('admin/status-dinas-lembur-shifting/delete-kategori/(:segment)', 'StatusDinasLemburShifting::delete_kategori/$1');
+//end kategori dinas lembur /shifting
 
 
 // $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');

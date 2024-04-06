@@ -1192,6 +1192,57 @@ $(document).ready(function () {
 
 
 //End table surat tugas ====================================================================
+//start table KategoriDinasLembur/Shifting =================================================
+$(document).ready(function () {
+
+    let kategoriDinasLemburShifting = $('#dinallTablekategoriDinas').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+
+    let kategoriAcaraLemburShifting = $('#tableDinallAcaraDinas').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
+        let tabID = $(event.target).attr('data-bs-target');
+        if (tabID === '#acaraDinas') {
+            kategoriAcaraLemburShifting.columns.adjust();
+        }else if(tabID === '#kategoriDinasLemburShifting'){
+            kategoriDinasLemburShifting.columns.adjust();
+        }
+    });
+
+});
+
+
+$('.hapusKategoriDinas').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+$('.hapusAcaraDinas').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+//End table KategoriDinasLembur/Shifting ===================================================
+
 
 
 //start Dinas Shifting

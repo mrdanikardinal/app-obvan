@@ -107,7 +107,7 @@
                     <div class="sb-sidenav-menu-heading">MASTER DATA</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePagesMasterData" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        DATABASE
+                        MASTER DATA
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
                     <div class="collapse" id="collapsePagesMasterData" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -115,8 +115,8 @@
                             <a class="nav-link collapsed" href="<?= base_url() ?>admin/inventaris">
                                 Data-Inventaris
                             </a>
-                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/inventaris">
-                                Data-Status
+                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-dinas-lembur-shifting">
+                                Status Dinas Shifting/Lembur
                             </a>
                         </nav>
                     </div>
