@@ -68,8 +68,11 @@
                             <a class="nav-link" href="<?= base_url() ?>surat-tugas/lembur/<?= user_id(); ?>">
                                 Surat Tugas Lembur
                             </a>
-                            <a class="nav-link" href="<?= base_url() ?>user/setting_user/<?= user_id(); ?>">
-                                Setting User
+                            <a class="nav-link" href="<?= base_url() ?>user/setting-data-user">
+                                Setting Data User
+                            </a>
+                            <a class="nav-link" href="<?= base_url() ?>user/change-password/<?= user_id(); ?>">
+                                Change Password
                             </a>
                         </nav>
                     </div>

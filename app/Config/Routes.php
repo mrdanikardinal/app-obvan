@@ -71,6 +71,10 @@ $routes->PUT('user/lembur/download/(:segment)', 'PdfController::dinas_lembur_dow
 $routes->get('user/setting_user/(:segment)', 'User::setting_user/$1');
 // $routes->get('user/setting_user', 'User::setting_user');
 $routes->post('change-password/(:segment)', 'User::update_password/$1');
+$routes->get('user/change-password/(:segment)', 'User::change_password/$1');
+$routes->get('user/setting-data-user', 'User::data_user');
+$routes->post('user/setting-data-user/(:num)', 'User::update_user/$1');
+
 // $routes->post('change-password', 'User::update_password');
 
 

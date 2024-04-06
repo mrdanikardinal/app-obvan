@@ -7,25 +7,20 @@
         <main>
             <div class="container-fluid px-4">
                 <h5 class="mt-4">
-                    <?php if (session()->getFlashdata('pesan')) : ?>
-                        <div class="alert alert-success" role="alert">
-                            <?= session()->getFlashdata('pesan'); ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (session()->getFlashdata('passwordLamaSalah')) : ?>
+                    <?php if (session()->getFlashdata('pesanGagal')) : ?>
                         <div class="alert alert-danger" role="alert">
-                            <?= session()->getFlashdata('passwordLamaSalah'); ?>
+                            <?= session()->getFlashdata('pesanGagal'); ?>
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="<?= base_url() ?>user/setting_user/<?= user_id(); ?>" class="btn btn-primary my-2">
+                <!-- <a href="<?= base_url() ?>user/setting_user/<?= user_id(); ?>" class="btn btn-primary my-2">
                     <i class="fa-solid fa-arrows-rotate"></i> Refresh
-                </a>
+                </a> -->
                 <div class="card mb-4">
 
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Data Pengguna
+                        Change Password
                     </div>
                     <div class="card-body">
 
