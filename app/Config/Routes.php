@@ -92,9 +92,16 @@ $routes->post('admin/status-dinas-lembur-shifting/delete-acara/(:segment)', 'Sta
 $routes->post('admin/status-dinas-lembur-shifting/delete-kategori/(:segment)', 'StatusDinasLemburShifting::delete_kategori/$1');
 //end kategori dinas lembur /shifting
 
-
-// $routes->PUT('user/index/(:segment)', 'PdfController::print/$1');
 //end user
+
+//start status out broadcast
+
+$routes->get('admin/status-kategori-out-broadcast', 'StatusOutBroadcast::index');
+$routes->delete('admin/status-kategori-out-broadcast/(:segment)', 'StatusOutBroadcast::delete/$1');
+
+
+
+//end status out broadcast
 
 //out-broadcast
 $routes->get('out-broadcast', 'OutBroadcast::index');

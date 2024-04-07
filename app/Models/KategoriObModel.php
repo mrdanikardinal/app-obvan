@@ -9,7 +9,7 @@ class KategoriObModel extends Model
 {
 
     protected $table = 'kategori_ob';
-    protected $primaryKey = 'id_kategori';
+    protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = ['nama_kategori'];
 
@@ -18,7 +18,7 @@ class KategoriObModel extends Model
         if ($id == false) {
             return $this->findAll();
         }
-        return $this->where(['id_kategori' => $id])->first();
+        return $this->where(['id' => $id])->first();
     }
 
 

@@ -1208,6 +1208,7 @@ $(document).ready(function () {
         scrollY: '500px',
         scrollCollapse: true
     });
+ 
 
     $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
         let tabID = $(event.target).attr('data-bs-target');
@@ -1492,5 +1493,25 @@ function renumberDinasShifEdit() {
 //End Dinas Shifting
 
 
+//Start Dinas Out Broadcast
+$('#dinallTableStatusKategoriOB').DataTable({
+    responsive: true,
+    scrollX: true,
+    scrollY: '500px',
+    scrollCollapse: true
+});
+
+$('.hapusStatusKatOB').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+
+//End Dinas Out Broadcast
 
 

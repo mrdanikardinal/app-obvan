@@ -118,6 +118,9 @@
                             <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-dinas-lembur-shifting">
                                 Status Dinas Shifting/Lembur
                             </a>
+                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-kategori-out-broadcast">
+                                Status Out Broadcast
+                            </a>
                         </nav>
                     </div>
                 <?php endif; ?>

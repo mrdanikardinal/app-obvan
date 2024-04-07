@@ -60,6 +60,7 @@ class OutBroadcast extends BaseController
     public function create()
     {
         $allKategori = $this->kategoriOb->getKategori();
+        dd($allKategori);
         $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
         $generator = new BarcodeGeneratorPNG();
         $data = [
