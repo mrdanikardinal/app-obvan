@@ -70,16 +70,63 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        // $pdf->setPrintHeader(false);
+        // $pdf->setPrintFooter(false);
+        // $pdf->AddPage();
+        // $pdf->SetFont('times', 'B', 11);
+
+        // $html = view('user/pemberi_pinjam', $data);
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $this->response->setContentType('application/pdf');
+        // return $pdf->Output('pemberi pinjam.pdf', 'I');
+
+
+
+
+
+
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
 
         $html = view('user/pemberi_pinjam', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
+        // return $pdf->Output('Penerima pinjam.pdf', 'I');
         return $pdf->Output('pemberi pinjam.pdf', 'I');
+       
     }
     public function print_pemberi_pinjam_download($idPeminjamanAlat)
     {
@@ -111,17 +158,57 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        // $pdf->setPrintHeader(false);
+        // $pdf->setPrintFooter(false);
+        // $pdf->AddPage();
+        // $pdf->SetFont('times', 'B', 11);
+
+        // $html = view('user/pemberi_pinjam', $data);
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $this->response->setContentType('application/pdf');
+        // // return $pdf->Output('pemberi pinjam.pdf', 'I');
+        // return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $pemberiPinjam . '_pemberi pinjam.pdf', 'D');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
 
         $html = view('user/pemberi_pinjam', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
-        // return $pdf->Output('pemberi pinjam.pdf', 'I');
+        // return $pdf->Output('Penerima pinjam.pdf', 'I');
         return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $pemberiPinjam . '_pemberi pinjam.pdf', 'D');
+
     }
     // =================================================End Permberi Pinjam
 
@@ -147,16 +234,46 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
 
         $html = view('user/penerima_pinjam', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
         return $pdf->Output('Penerima pinjam.pdf', 'I');
+
     }
     public function print_penerima_pinjam_download($idPeminjamanAlat)
     {
@@ -186,16 +303,57 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        // $pdf->setPrintHeader(false);
+        // $pdf->setPrintFooter(false);
+        // $pdf->AddPage();
+        // $pdf->SetFont('times', 'B', 11);
+
+        // $html = view('user/penerima_pinjam', $data);
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $this->response->setContentType('application/pdf');
+        // // return $pdf->Output('Penerima pinjam.pdf', 'I');
+        // return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $PenerimaPinjam . '_penerima pinjam.pdf', 'D');
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
 
         $html = view('user/penerima_pinjam', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
-        // return $pdf->Output('Penerima pinjam.pdf', 'I');
+        // return $pdf->Output('dinas Shifting.pdf', 'I');
+        // return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' . $shif . '_dinas Shifting.pdf', 'D');
         return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $PenerimaPinjam . '_penerima pinjam.pdf', 'D');
     }
 
@@ -377,76 +535,9 @@ class PdfController extends Controller
         $htlm = view('user/out_broadcast', $data);
         $pdf->writeHTML($htlm, true, 0, true, true);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('ID_'.$idOb.'_'.$acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
+        return $pdf->Output('ID_' . $idOb . '_' . $acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
     }
 
-
-
-    // public function print_penerima_pinjam($idPjm)
-    // {
-    //     // dd($this->users->proceduregetParentMerkFromIdPjm(200));
-    //     $data = [
-    //         'testing' => $this->allUser->proceduregetPrintIdPJMNamaPenerima($idPjm),
-    //         'dataBarangDipinjam' => $this->allUser->proceduregetParentMerkFromIdPjm($idPjm)
-    //     ];
-
-    //     $test = view('user/penerima_pinjam', $data);
-    //     // $test = view('user/index');
-    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
-
-    //     $pdf->AddPage();
-    //     $pdf->writeHTML($test);
-    //     // $pdf->writeHTML($test, true, false, false, false, '');
-    //     // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
-    //     $this->response->setContentType('application/pdf');
-    //     return $pdf->Output('sample.pdf', 'I');
-    // }
-
-    // public function out_broadcast()
-    // {
-    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-
-    //     // $test=0001;
-    //     // dd($this->users->proceduregetPrintIdPJMNamaPemberi('pjs'.'-'.$test));
-    //     // $data = [
-    //     //     'testing' => $this->users->proceduregetPrintIdPJMNamaPemberi($idPjm),
-    //     //     'dataBarangDipinjam' => $this->users->proceduregetParentMerkFromIdPjm($idPjm)
-    //     // ];
-
-    //     // $test = view('user/pemberi_pinjam', $data);
-
-    //     $test = view('user/out_broadcast');
-    //     // $test = view('user/credit_note_sample');
-    //     // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'A4', true, 'UTF-8', false);
-    //     $pdf->AddPage();
-    //     $pdf->writeHTML($test);
-    //     $pdf->setPrintHeader(false);
-    //     $pdf->setPrintFooter(false);
-    //     // $pdf->writeHTML($test, true, false, false, false, '');
-    //     // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
-    //     $this->response->setContentType('application/pdf');
-    //     return $pdf->Output('sample.pdf', 'I');
-    // }
-    //dibawah adalah function OK no Header
-    // public function out_broadcast()
-    // {
-    //     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    //     $pdf->setPrintHeader(false);
-    //     $pdf->setPrintFooter(false);
-
-    //     $pdf->AddPage();
-    //     $test = view('user/out_broadcast');
-    //     $pdf->writeHTML($test);
-    //     $this->response->setContentType('application/pdf');
-    //     return $pdf->Output('example_002.pdf', 'I');
-    // }
-    //diatas adalah function OK no Header
-    //sample ini juga OK
-    //=============================================================
-
-    //end sample ini juga OK
-    //=======================================================Start Dinas Shifting
 
     public function dinas_shifting_preview($idDinasShitf)
     {
@@ -472,12 +563,47 @@ class PdfController extends Controller
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        // $pdf->writeHTML($html, true, false, true, false, '');
+        // $jumlah_halaman = $pdf->getNumPages();
+
+
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->SetFont('times', 'B', 11);
-        $pdf->AddPage();
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
+
         $html = view('user/shifting', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
         return $pdf->Output('dinas Shifting.pdf', 'I');
     }
@@ -512,19 +638,47 @@ class PdfController extends Controller
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
+
+
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
+        $pdf->SetFont('helvetica', 'B', 11);
+
+        $html = view('user/shifting', $data);
         $pdf->AddPage();
-        $pdf->SetFont('times', 'B', 11);
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
 
-        $test = view('user/shifting', $data);
-        // $pdf->writeHTML($test, true, 0, true, true);
-        $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
         $this->response->setContentType('application/pdf');
+        // return $pdf->Output('dinas Shifting.pdf', 'I');
         return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' . $shif . '_dinas Shifting.pdf', 'D');
-
-        // return $pdf->Output('dinas Shifting.pdf', 'D');
     }
     //=======================================================End Dinas Shifting
     public function dinas_lembur_preview($idDinasShitf)
@@ -612,7 +766,6 @@ www.tvri.go.id
                 $this->nomorSuratTugasModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
-              
             }
             $tanggal = $valueOb['tanggal'];
             $shif = $valueOb['nama_acara_shift'];
@@ -666,6 +819,6 @@ F 021-573 3122
 www.tvri.go.id
 ', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
         $this->response->setContentType('application/pdf');
-        return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' .$shif.'_dinas Lembur.pdf', 'D');
+        return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' . $shif . '_dinas Lembur.pdf', 'D');
     }
 }

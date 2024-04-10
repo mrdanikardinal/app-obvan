@@ -13,7 +13,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="<?= base_url("admin/status-kategori-out-broadcast") ?>" class="btn btn-primary my-2">Tambah</a>
+                <a href="<?= base_url("admin/status-kategori-out-broadcast/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -39,9 +39,9 @@
                                             <td><?= $valueDataKategoriOB['id']; ?></td>
                                             <td><?= $valueDataKategoriOB['nama_kategori']; ?></td>
                                             <td>
-                                                <form action="<?= base_url() ?>admin/inventaris/edit/<?= $valueDataKategoriOB['id']; ?>" method="post">
+                                                <form action="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" method="post">
                                                     <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <input type="hidden" name="_method" value="POST">
                                                     <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
                                                 </form>
 
@@ -61,7 +61,7 @@
                                             <td><?= $valueDataKategoriOB['id']; ?></td>
                                             <td><?= $valueDataKategoriOB['nama_kategori']; ?></td>
                                             <td>
-                                                <form action="<?= base_url() ?>admin/status-kategori-out-broadcast/<?= $valueDataKategoriOB['id']; ?>" method="post">
+                                                <form action="<?= base_url(); ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" method="post">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="POST">
                                                     <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
@@ -69,7 +69,7 @@
 
                                             </td>
                                             <td>
-                                                <form id="hapus" action="<?= base_url() ?>admin/status-kategori-out-broadcast/<?= $valueDataKategoriOB['id']; ?>" method="post">
+                                                <form id="hapus" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/<?= $valueDataKategoriOB['id']; ?>" method="post">
                                                     <?= csrf_field(); ?>
                                                     <input type="hidden" name="_method" value="delete">
                                                     <button type="submit" class="btn btn-danger hapusStatusKatOB"><i class="fa-solid fa-trash"></i>Hapus</button>

@@ -97,6 +97,10 @@ $routes->post('admin/status-dinas-lembur-shifting/delete-kategori/(:segment)', '
 //start status out broadcast
 
 $routes->get('admin/status-kategori-out-broadcast', 'StatusOutBroadcast::index');
+$routes->post('admin/status-kategori-out-broadcast/edit/(:segment)', 'StatusOutBroadcast::edit/$1');
+$routes->get('admin/status-kategori-out-broadcast/create', 'StatusOutBroadcast::create');
+$routes->post('admin/status-kategori-out-broadcast/save', 'StatusOutBroadcast::save');
+$routes->post('admin/status-kategori-out-broadcast/update/(:segment)', 'StatusOutBroadcast::update/$1');
 $routes->delete('admin/status-kategori-out-broadcast/(:segment)', 'StatusOutBroadcast::delete/$1');
 
 
