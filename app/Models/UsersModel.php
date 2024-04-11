@@ -18,6 +18,12 @@ class UsersModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
+    public function getCountUsers()
+    {
+        $builder = $this->db->table($this->table);
+        $query   = $builder->get()->getNumRows();
+        return $query;
+    }
     public function procedureGetNamaPemberi($idUser=null)
     {
         $query = $this->db->query("CALL getNamaPemberiPinjaman"."($idUser)");

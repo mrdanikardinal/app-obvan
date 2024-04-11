@@ -13,6 +13,10 @@ class OutBroadcastModel extends Model
     protected $allowedFields = ['id_ob', 'id_kategori', 'tanggal', 'sampai_dengan', 'acara', 'lokasi','durasi', 'tp', 'td', 'ass_td', 'um','nomor_surat'];
     // protected $allowedFields = ['kategori', 'tanggal', 'sampai_dengan', 'acara', 'lokasi', 'tp', 'td', 'ass_td', 'um'];
 
+
+
+
+
     public function procedureGetAllShowOutBroadcast()
     {
         $query = $this->db->query("CALL getAllShowOutBroadcast()");

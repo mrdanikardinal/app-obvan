@@ -113,6 +113,20 @@ class PeminjamanAlatModel extends Model
     // FROM ((inventaris
     // INNER JOIN jenis_barang ON jenis_barang.id_jns_barang = inventaris.id_jns_barang)
     // INNER JOIN lokasi ON lokasi.id_lokasi = inventaris.id_lokasi)  WHERE id_status=1 && id_kondisi=1
+    public function getCountPemberiPinjam()
+    {
+        $idUser=user_id();
+        $builder = $this->db->table($this->table)->where('nama_pemberi', $idUser);
+        $query   = $builder->get()->getNumRows();
+        return $query;
+    }
+    public function getCountPenerimaPinjam()
+    {
+        $idUser=user_id();
+        $builder = $this->db->table($this->table)->where('nama_penerima', $idUser);
+        $query   = $builder->get()->getNumRows();
+        return $query;
+    }
 
 
 }

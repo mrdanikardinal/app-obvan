@@ -159,8 +159,8 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            This Users OBVAN
+            <div class="small">Login Sebagai:</div>
+            <?= user()->username; ?>
         </div>
     </nav>
 </div>

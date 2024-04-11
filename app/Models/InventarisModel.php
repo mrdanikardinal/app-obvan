@@ -31,6 +31,12 @@ class InventarisModel extends Model
     //     }
     //     return 'INV-' . $code;
     // }
+    public function getCountInventaris()
+    {
+        $builder = $this->db->table($this->table);
+        $query   = $builder->get()->getNumRows();
+        return $query;
+    }
     public function autoNumberId()
     {
         $builder = $this->db->table($this->table);

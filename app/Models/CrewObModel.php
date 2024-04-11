@@ -19,7 +19,13 @@ class CrewObModel extends Model
         }
         return $this->where(['id' => $id])->first();
     }
-
+    public function getCountOutBroadcastByUser()
+    {
+        $idUser=user_id();
+        $builder = $this->db->table($this->table)->where('id_users', $idUser);
+        $query   = $builder->get()->getNumRows();
+        return $query;
+    }
 
    
 
