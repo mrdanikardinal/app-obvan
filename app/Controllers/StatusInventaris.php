@@ -52,7 +52,7 @@ class StatusInventaris extends BaseController
     }
     public function create_jenis_barang()
     {
-        return view('admin/status-inventaris/create_jenis_barang');
+        return view('admin/status-inventaris/create-jenis-barang');
     }
     public function save_jenis_barang()
     {
@@ -83,4 +83,136 @@ class StatusInventaris extends BaseController
         return redirect()->to('admin/status-inventaris');
     }
     // end jenis barang
+    // start lokas
+    public function edit_nama_lokasi($idLokasi)
+    {
+        $getIdLokasi = $this->lokasiModel->getLokasi($idLokasi);
+        $data = [
+            'getDataIdNamaLokasi' => $getIdLokasi
+        ];
+        return view('admin/status-inventaris/edit-lokasi', $data);
+    }
+    
+    public function delete_nama_lokasi($idNamaLokasi)
+    {
+        $this->lokasiModel->delete($idNamaLokasi);
+        session()->setFlashdata('pesanHapus', 'Berhasil,hapus nama lokasi ID ' . $idNamaLokasi);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function create_nama_lokasi()
+    {
+        return view('admin/status-inventaris/create-lokasi');
+    }
+    public function save_nama_lokasi()
+    {
+        $namaNamaLokasi = $this->request->getVar('nama_lokasi');
+
+        $this->lokasiModel->save([
+            'nama_lokasi' => $namaNamaLokasi,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,input Nama Lokasi ' . $namaNamaLokasi);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function update_nama_lokasi($idNamaLokasi)
+    {
+
+        $namaLokasi = $this->request->getVar('nama_lokasi');
+
+        $this->lokasiModel->save([
+            'id_lokasi' => $idNamaLokasi,
+            'nama_lokasi' => $namaLokasi,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,update Nama Lokasi ' . $namaLokasi);
+        return redirect()->to('admin/status-inventaris');
+    }
+   
+    // end lokasi
+    // start kondisi
+
+    public function edit_nama_kondisi($IdKondisi)
+    {
+        $getIdKondisi = $this->kondisiModel->getKondisi($IdKondisi);
+        $data = [
+            'getDataIdNamaKondisi' => $getIdKondisi
+        ];
+        return view('admin/status-inventaris/edit-kondisi', $data);
+    }
+    
+    public function delete_nama_kondisi($idKondisi)
+    {
+        $this->kondisiModel->delete($idKondisi);
+        session()->setFlashdata('pesanHapus', 'Berhasil,hapus nama kondisi ID ' . $idKondisi);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function create_nama_kondisi()
+    {
+        return view('admin/status-inventaris/create-kondisi');
+    }
+    public function save_nama_kondisi()
+    {
+        $namaNamaKondisi = $this->request->getVar('nama_kondisi');
+
+        $this->kondisiModel->save([
+            'nama_kondisi' => $namaNamaKondisi,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,input nama kondisi ' . $namaNamaKondisi);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function update_nama_kondisi($idNamaKondisi)
+    {
+
+        $namaKondisi = $this->request->getVar('nama_kondisi');
+
+        $this->kondisiModel->save([
+            'id_kondisi' => $idNamaKondisi,
+            'nama_kondisi' => $namaKondisi,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,update Nama Kondisi ' . $namaKondisi);
+        return redirect()->to('admin/status-inventaris');
+    }
+    // end kondisi
+
+    // start status
+    public function edit_nama_status($IdStatus)
+    {
+        $getIdStatus = $this->statusModel->getStatus($IdStatus);
+        $data = [
+            'getDataIdNamaStatus' => $getIdStatus
+        ];
+        return view('admin/status-inventaris/edit-status', $data);
+    }
+    
+    public function delete_nama_status($idStatus)
+    {
+        $this->statusModel->delete($idStatus);
+        session()->setFlashdata('pesanHapus', 'Berhasil,hapus nama status ID ' . $idStatus);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function create_nama_status()
+    {
+        return view('admin/status-inventaris/create-status');
+    }
+    public function save_nama_status()
+    {
+        $namaNamaStatus = $this->request->getVar('nama_status');
+
+        $this->statusModel->save([
+            'nama_status' => $namaNamaStatus,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,input nama status ' . $namaNamaStatus);
+        return redirect()->to('admin/status-inventaris');
+    }
+    public function update_nama_status($idNamaStatus)
+    {
+
+        $getNamaStatus = $this->request->getVar('nama_status');
+
+        $this->statusModel->save([
+            'id_status' => $idNamaStatus,
+            'nama_status' => $getNamaStatus,
+        ]);
+        session()->setFlashdata('pesan', 'Berhasil,update nama status ' . $idNamaStatus);
+        return redirect()->to('admin/status-inventaris');
+    }
+    // end status
 }

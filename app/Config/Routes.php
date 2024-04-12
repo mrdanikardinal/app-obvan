@@ -136,12 +136,35 @@ $routes->post('dinas-shifting/update/(:any)', 'DinasShifting::update/$1');
 //end dinas shifting
 
 // start status inventaris
+//jenis barang
 $routes->get('admin/status-inventaris','StatusInventaris::index');
 $routes->post('admin/status-inventaris/edit-jenis-barang/(:segment)','StatusInventaris::edit_jenis_barang/$1');
 $routes->post('admin/status-inventaris/update_jenis_barang/(:segment)','StatusInventaris::update_jenis_barang/$1');
 $routes->post('admin/status-inventaris/save_jenis_barang','StatusInventaris::save_jenis_barang');
 $routes->post('admin/status-inventaris/create_jenis_barang','StatusInventaris::create_jenis_barang');
 $routes->delete('admin/status-inventaris/hapus_jenis_barang/(:segment)','StatusInventaris::delete_jenis_barang/$1');
+//jenis barang
+//start lokasi
+$routes->post('admin/status-inventaris/edit-nama-lokasi/(:segment)','StatusInventaris::edit_nama_lokasi/$1');
+$routes->post('admin/status-inventaris/update-nama-lokasi/(:segment)','StatusInventaris::update_nama_lokasi/$1');
+$routes->post('admin/status-inventaris/save_nama_lokasi','StatusInventaris::save_nama_lokasi');
+$routes->post('admin/status-inventaris/create-nama-lokasi','StatusInventaris::create_nama_lokasi');
+$routes->delete('admin/status-inventaris/hapus-nama-lokasi/(:segment)','StatusInventaris::delete_nama_lokasi/$1');
+//end lokasi
+//start kondisi
+$routes->post('admin/status-inventaris/edit-nama-kondisi/(:segment)','StatusInventaris::edit_nama_kondisi/$1');
+$routes->post('admin/status-inventaris/update-nama-kondisi/(:segment)','StatusInventaris::update_nama_kondisi/$1');
+$routes->post('admin/status-inventaris/save-nama-kondisi','StatusInventaris::save_nama_kondisi');
+$routes->post('admin/status-inventaris/create-nama-kondisi','StatusInventaris::create_nama_kondisi');
+$routes->delete('admin/status-inventaris/hapus-nama-kondisi/(:segment)','StatusInventaris::delete_nama_kondisi/$1');
+//end kondisi
+// start status
+$routes->post('admin/status-inventaris/edit-nama-status/(:segment)','StatusInventaris::edit_nama_status/$1');
+$routes->post('admin/status-inventaris/update-nama-status/(:segment)','StatusInventaris::update_nama_status/$1');
+$routes->post('admin/status-inventaris/save-nama-status','StatusInventaris::save_nama_status');
+$routes->post('admin/status-inventaris/create-nama-status','StatusInventaris::create_nama_status');
+$routes->delete('admin/status-inventaris/hapus-nama-status/(:segment)','StatusInventaris::delete_nama_status/$1');
+// end status
 // end status inventaris
 
 // multiuser

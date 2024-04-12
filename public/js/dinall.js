@@ -1280,6 +1280,34 @@ $('.hapusStatusJenisBarang').click(function () {
     return true;
 });
 
+$('.hapusNamaLokasi').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+$('.hapusNamaKondisi').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+$('.hapusNamaStatus').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
 
 
 //End Status inventaris ====================================================================
