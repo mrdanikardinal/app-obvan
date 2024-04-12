@@ -1221,6 +1221,69 @@ $(document).ready(function () {
 
 });
 
+//Start statu inventaris ===================================================================
+
+
+$(document).ready(function () {
+
+
+    let jenisBarang = $('#dinallTableJenisBarang').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+    let lokasi = $('#dinallTableLokasi').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+    let kondisi = $('#dinallTableKondisi').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+    let status = $('#dinallTableStatus').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
+        let tabID = $(event.target).attr('data-bs-target');
+        if (tabID === '#jenisBarang') {
+            jenisBarang.columns.adjust();
+        }else if(tabID === '#lokasi'){
+            lokasi.columns.adjust();
+        }else if(tabID === '#kondisi'){
+            kondisi.columns.adjust();
+        }else if(tabID === '#status'){
+            status.columns.adjust();
+
+        }
+    });
+
+});
+
+
+
+$('.hapusStatusJenisBarang').click(function () {
+    // escape here if the confirm is false;
+    if (!confirm('Yakin anda akan menghapus data ini?')) return false;
+
+    let btn = this;
+    setTimeout(function () { $(btn).attr('disabled', 'disabled'); }, 1);
+
+    return true;
+});
+
+
+
+//End Status inventaris ====================================================================
+
 
 $('.hapusKategoriDinas').click(function () {
     // escape here if the confirm is false;

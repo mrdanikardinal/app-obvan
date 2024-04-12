@@ -17,8 +17,6 @@
                             <div class="card-body"><h5>Jumlah Akun User</h5></div>
                             <h3 class="text-center"><?=$countAllUsers?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
@@ -37,7 +35,7 @@
                             <div class="card-body"><h5>Jumlah Out Broadcast</h5></div>
                             <h3 class="text-center"><?=$countAllCrewObById?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="<?=base_url('surat-tugas');?>">View Details</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -47,7 +45,7 @@
                             <div class="card-body"><h5>Jumlah Peminjaman Alat</h5></div>
                             <h3 class="text-center"><?=$countAllPeminjamanAlat?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="<?=base_url('surat-tugas');?>">View Details</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -57,7 +55,7 @@
                             <div class="card-body"><h5>Jumlah Dinas Shifting</h5></div>
                             <h3 class="text-center"><?=$countAllDinasShifting?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="<?=base_url()?>surat-tugas/shifting/<?=user_id();?>">View Details</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -67,7 +65,7 @@
                             <div class="card-body"><h5>Jumlah Dinas Lembur</h5></div>
                             <h3 class="text-center"><?=$countAllDinasLembur?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="<?=base_url()?>surat-tugas/lembur/<?=user_id();?>">View Details</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>

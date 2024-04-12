@@ -135,7 +135,14 @@ $routes->POST('dinas-shifting/edit/(:segment)/(:segment)', 'DinasShifting::hapus
 $routes->post('dinas-shifting/update/(:any)', 'DinasShifting::update/$1');
 //end dinas shifting
 
-
+// start status inventaris
+$routes->get('admin/status-inventaris','StatusInventaris::index');
+$routes->post('admin/status-inventaris/edit-jenis-barang/(:segment)','StatusInventaris::edit_jenis_barang/$1');
+$routes->post('admin/status-inventaris/update_jenis_barang/(:segment)','StatusInventaris::update_jenis_barang/$1');
+$routes->post('admin/status-inventaris/save_jenis_barang','StatusInventaris::save_jenis_barang');
+$routes->post('admin/status-inventaris/create_jenis_barang','StatusInventaris::create_jenis_barang');
+$routes->delete('admin/status-inventaris/hapus_jenis_barang/(:segment)','StatusInventaris::delete_jenis_barang/$1');
+// end status inventaris
 
 // multiuser
 
