@@ -26,16 +26,16 @@
                         $nomor = 1;
                         $nomor2 = 1;
                         $nomor3 = 1;
-                        
+
                         ?>
-                        <form id="formAddDinasShifting" method="post" action="<?= base_url("/dinas-shifting/save"); ?>">
+                        <form id="formAddDinasShifting" method="post" action="<?= base_url("/dinas-shifting/save"); ?>" class="needs-dinall">
 
                             <?= csrf_field(); ?>
 
                             <div class="row mb-3">
                                 <label for="kategoriDinasCrewDinas" class="col-sm-2 col-form-label">Kategori</label>
                                 <div class="col-sm-10">
-                                  
+
                                     <select name="kategoriDinasCrewDinas" id="kategoriDinasCrewDinas" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allKategoriDinasShifLembur as $key => $valueKategoriShifLembur) : ?>
                                             <option value="<?= $valueKategoriShifLembur['id_kategori_dinas_crew'] ?>"><?= $nomor3++ . '. ' . $valueKategoriShifLembur['nama_kategori_dinas_crew'] ?></option>
@@ -46,7 +46,7 @@
                             <div class="row mb-3">
                                 <label for="kategoriDinasShif" class="col-sm-2 col-form-label">Shift</label>
                                 <div class="col-sm-10">
-                                  
+
                                     <select name="kategoriDinasShif" id="kategoriDinasShif" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allKategoriDinasShif as $key => $valueKategori) : ?>
                                             <option value="<?= $valueKategori['id_kategori_shif'] ?>"><?= $nomor++ . '. ' . $valueKategori['nama_kategori_shif'] ?></option>
@@ -64,7 +64,7 @@
                             <div class="row mb-3">
                                 <label for="namaAcaraDinasShif" class="col-sm-2 col-form-label">Acara</label>
                                 <div class="col-sm-10">
-                                <select name="namaAcaraDinasShif" id="namaAcaraDinasShif" class="form-select form-select-sm" aria-label="Small select example">
+                                    <select name="namaAcaraDinasShif" id="namaAcaraDinasShif" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allNamaAcaraShif as $key => $valueNamaAcara) : ?>
                                             <option value="<?= $valueNamaAcara['id_acara_shift'] ?>"><?= $nomor2++ . '. ' . $valueNamaAcara['nama_acara_shift'] ?></option>
                                         <?php endforeach; ?>
@@ -73,13 +73,16 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="lokasiDinasShif" class="col-sm-2 col-form-label">Lokasi</label>
+                                <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Lokasi" id="lokasiDinasShif" name="lokasiDinasShif" value="<?= old('lokasiDinasShif'); ?>">
+                                    <input type="text" class="form-control" placeholder="Lokasi" id="lokasi" name="lokasi" value="<?= old('lokasi'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('lokasi'); ?>
+                                    </div>
                                 </div>
                             </div>
-                            
-           
+
+
                             <div class="row mb-3">
 
                                 <div class="col-sm-10 offset-sm-2">
@@ -101,17 +104,17 @@
                                                 <button type="button" class="btn btn-primary clickShowAllCrewForDinasShif" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShif"><i class="fa-solid fa-search"></i></button>
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+                                                <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama di isi dari search">
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+                                                <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP di isi dari search">
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+                                                <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP di isi dari search">
                                             </td>
                                             <td class="text-center"><input type="hidden" name="id_user[]"></td>
                                             <td class="text-center">
-                                                <button type="button" required class="btn btn-primary btnAddForDinasShif"><i class="fa-solid fa-plus"></i></button>
+                                                <button type="button" class="btn btn-primary btnAddForDinasShif"><i class="fa-solid fa-plus"></i></button>
                                             </td>
 
                                         </tr>
@@ -185,7 +188,7 @@
                 'use strict'
 
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
+                const forms = document.querySelectorAll('.needs-dinall')
 
                 // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
@@ -201,42 +204,34 @@
             })()
 
             //validation ok javascript
-            $("#formAdd").validate({
+            $("#formAddDinasShifting").validate({
                 errorPlacement: function($error, $element) {
-                    // $error.appendTo($element.closest("td").css({"color": "red"}));
                     $error.appendTo($element.closest("td"));
                 },
                 rules: {
-                    'naBar[]': {
+                    'nama[]': {
                         required: true
                     },
-                    'merk[]': {
+                    'nip[]': {
                         required: true
                     },
-                    'sN[]': {
+                    'npwp[]': {
                         required: true
-                    },
-                    'jumlah[]': {
-                        required: true,
-                        digits: true
                     }
+
 
                 },
                 messages: {
-                    'naBar[]': {
-                        required: "nama harus di isi !"
+                    'nama[]': {
+                        required: "nama di isi dari search !"
                     },
-                    'merk[]': {
-                        required: "jika merk kosong beri tanda - !"
+                    'nip[]': {
+                        required: "nip di isi dari search !"
                     },
-                    'sN[]': {
-                        required: "jika serial number kosong beri tanda - !"
-                    },
-                    'jumlah[]': {
-                        required: "jumlah harus di isi !",
-                        digits: "isi dengan angka !"
-
+                    'npwp[]': {
+                        required: "npwp di isi dari search !"
                     }
+
 
 
                 },

@@ -22,7 +22,7 @@
                     $nomor2=1;
                     $nomor3=1;
                     ?>
-                        <form method="post" action="<?= base_url() ?>admin/inventaris/update/<?= $inventaris['id_inv']; ?>">
+                        <form method="post" action="<?= base_url() ?>admin/inventaris/update/<?= $inventaris['id_inv']; ?>" class="needs-dinall">
 
                             <?= csrf_field(); ?>
 
@@ -44,14 +44,16 @@
                             <div class="row mb-3">
                                 <label for="nama_barang" class="col-sm-2 col-form-label">Nama Barang</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= $inventaris['nama_barang'] ?>">
-
+                                    <input type="text" class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= $inventaris['nama_barang'] ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('nama_barang'); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="merk" class="col-sm-2 col-form-label">Merk</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= $inventaris['merk'] ?>">
+                                    <input type="text" class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= $inventaris['merk'] ?>">
 
                                 </div>
                             </div>
@@ -102,8 +104,10 @@
                             <div class="row mb-3">
                                 <label for="tahun_pengadaan" class="col-sm-2 col-form-label">Tahun Pengadaan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Tahun Pengadaan" id="tahun_pengadaan" name="tahun_pengadaan" value="<?= $inventaris['thn_pengadaan']; ?>">
-
+                                    <input type="text" class="form-control" placeholder="Tahun Pengadaan" id="tahun_pengadaan" name="tahun_pengadaan" value="<?= $inventaris['thn_pengadaan']; ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('tahun_pengadaan'); ?>
+                                    </div>
                                 </div>
                             </div>
 
@@ -115,7 +119,24 @@
             </div>
 
         </main>
+        <script type="text/javascript">
+                (() => {
+                'use strict'
 
+                const forms = document.querySelectorAll('.needs-dinall')
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        //check validation green and red
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })();
+        </script>
         <?= $this->include('layout/footer'); ?>
     </div>
 </div>

@@ -23,7 +23,7 @@
                         $nomor2 = 1;
                         $nomor3 = 1;
                         ?>
-                        <form method="post" action="<?= base_url("admin/inventaris/save"); ?>">
+                        <form method="post" action="<?= base_url("admin/inventaris/save"); ?>" class="needs-dinall">
 
                             <?= csrf_field(); ?>
 
@@ -33,7 +33,7 @@
 
                                     <select id="jenis_barang" name="jenis_barang" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($jenisBarang as $key => $valueJenisBarang) : ?>
-                                            <option value="<?= $valueJenisBarang['id_jns_barang'] ?>"><?=$nomor++.'. '. $valueJenisBarang['nama_jns_barang'] ?></option>
+                                            <option value="<?= $valueJenisBarang['id_jns_barang'] ?>"><?= $nomor++ . '. ' . $valueJenisBarang['nama_jns_barang'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -42,14 +42,16 @@
                             <div class="row mb-3">
                                 <label for="nama_barang" class="col-sm-2 col-form-label">Nama Barang</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= old('nama_barang'); ?>">
-
+                                    <input type="text" class="form-control" placeholder="Nama Barang" id="nama_barang" name="nama_barang" value="<?= old('nama_barang'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('nama_barang'); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="merk" class="col-sm-2 col-form-label">Merk</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= old('merk'); ?>">
+                                    <input type="text" class="form-control" placeholder="Merk" id="merk" name="merk" value="<?= old('merk'); ?>">
 
                                 </div>
                             </div>
@@ -68,7 +70,7 @@
 
                                     <select name="lokasi" id="lokasi" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allLokasi as $key => $valueLokasi) : ?>
-                                            <option value="<?= $valueLokasi['id_lokasi'] ?>"><?=$nomor1++.'. '. $valueLokasi['nama_lokasi'] ?></option>
+                                            <option value="<?= $valueLokasi['id_lokasi'] ?>"><?= $nomor1++ . '. ' . $valueLokasi['nama_lokasi'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -79,7 +81,7 @@
 
                                     <select name="kondisi" id="kondisi" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allKondisi as $key => $valueKondisi) : ?>
-                                            <option value="<?= $valueKondisi['id_kondisi'] ?>"><?=$nomor2++.'. '. $valueKondisi['nama_kondisi'] ?></option>
+                                            <option value="<?= $valueKondisi['id_kondisi'] ?>"><?= $nomor2++ . '. ' . $valueKondisi['nama_kondisi'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -90,7 +92,7 @@
 
                                     <select name="status" id="status" class="form-select form-select-sm" aria-label="Small select example">
                                         <?php foreach ($allStatus as $key => $valueStatus) : ?>
-                                            <option value="<?= $valueStatus['id_status'] ?>"><?=$nomor3++.'. '. $valueStatus['nama_status'] ?></option>
+                                            <option value="<?= $valueStatus['id_status'] ?>"><?= $nomor3++ . '. ' . $valueStatus['nama_status'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -98,8 +100,10 @@
                             <div class="row mb-3">
                                 <label for="tahun_pengadaan" class="col-sm-2 col-form-label">Tahun Pengadaan</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Tahun Pengadaan" id="tahun_pengadaan" name="tahun_pengadaan" value="<?= old('tahun_pengadaan'); ?>">
-
+                                    <input type="text" class="form-control" placeholder="Tahun Pengadaan" id="tahun_pengadaan" name="tahun_pengadaan" value="<?= old('tahun_pengadaan'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('tahun_pengadaan'); ?>
+                                    </div>
                                 </div>
                             </div>
 
@@ -111,7 +115,24 @@
             </div>
 
         </main>
+        <script type="text/javascript">
+                (() => {
+                'use strict'
 
+                const forms = document.querySelectorAll('.needs-dinall')
+
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        //check validation green and red
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })();
+        </script>
         <?= $this->include('layout/footer'); ?>
     </div>
 </div>

@@ -17,6 +17,11 @@
                             <?= session()->getFlashdata('pesanHapus'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('pesanGagal')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanGagal'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
                 <a href="<?= base_url("dinas-shifting/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
@@ -83,9 +88,9 @@
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
-                                            <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
+                                            <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="get">
                                                 <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
+                                                <input type="hidden" name="_method" value="GET">
                                                 <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
                                             </form>
                                         </td>

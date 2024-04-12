@@ -12,6 +12,11 @@
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('pesanHapus')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapus'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
                 <a href="<?= base_url("admin/inventaris/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
@@ -82,12 +87,11 @@
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
 
                                         <td>
-                                            <form action="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="post">
+                                            <form action="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="get">
                                                 <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
+                                                <input type="hidden" name="_method" value="GET">
                                                 <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
                                             </form>
-
                                         </td>
                                         <td>
                                             <form id="hapus" action="<?= base_url() ?>admin/inventaris/<?= $valueInventaris['id_inv']; ?>" method="post">

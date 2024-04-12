@@ -91,9 +91,6 @@
                             <a class="nav-link" href="<?= base_url() ?>dinas-shifting">
                                 Dinas Shifting & Lembur
                             </a>
-                            <!-- <a class="nav-link" href="<?= base_url() ?>dinas-lembur">
-                            Dinas Lembur
-                        </a> -->
                             <a class="nav-link" href="<?= base_url() ?>peminjaman-alat">
                                 Peminjaman Alat
                             </a>

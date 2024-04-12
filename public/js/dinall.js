@@ -1374,6 +1374,7 @@ $(document).ready(function () {
 
             // Mengisi nilai input pada elemen .searchBarang
             $currentSearchBarang.parent().next().children().val(fullname);
+            // $currentSearchBarang.parent().next().children().append(fullname);
             $currentSearchBarang.parent().next().next().children().val(nip);
             $currentSearchBarang.parent().next().next().next().children().val(npwp);
             $currentSearchBarang.parent().next().next().next().next().children().val(idCrew);
@@ -1411,13 +1412,13 @@ function addnewrowDinasShif() {
         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShif" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShif"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+        <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP di isi dari search">
         </td>
         <td class="text-center"><input type="hidden" name="id_user[]"></td>
         <td class="text-center">
@@ -1556,13 +1557,13 @@ function addnewrowDinasShifEdit() {
         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="namaUpdate[]" placeholder="Nama">
+        <input type="text" readonly="true" class="form-control" name="namaUpdate[]" placeholder="Nama">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nipUpdate[]" placeholder="NIP">
+        <input type="text" readonly="true" class="form-control" name="nipUpdate[]" placeholder="NIP">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="npwpUpdate[]" placeholder="NPWP">
+        <input type="text" readonly="true" class="form-control" name="npwpUpdate[]" placeholder="NPWP">
         </td>
         <td class="text-center"><input type="hidden" name="id_userUpdate[]"></td>
         <td class="text-center">

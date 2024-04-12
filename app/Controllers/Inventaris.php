@@ -12,6 +12,7 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Inventaris extends BaseController
 {
+    protected $helpers = (['form']);
     protected $inventarisModel;
     protected $jnsBarang;
     protected $status;
@@ -67,6 +68,7 @@ class Inventaris extends BaseController
 
     public function create()
     {
+
         session();
         $dataJenisBarang = $this->jnsBarang->getJenisBarang();
         $allStatus = $this->status->getStatus();
@@ -96,8 +98,17 @@ class Inventaris extends BaseController
 
                 ]
             ],
+            'tahun_pengadaan' => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'tahun harus di isi',
+                    'numeric' => 'isi harus angka',
+                ]
+            ]
 
         ];
+
+
 
 
         $idAutoInventaris = $this->inventarisModel->autoNumberId();
@@ -157,8 +168,16 @@ class Inventaris extends BaseController
 
                 ]
             ],
+            'tahun_pengadaan' => [
+                'rules'  => 'required|numeric',
+                'errors' => [
+                    'required' => 'tahun harus di isi',
+                    'numeric' => 'isi harus angka',
+                ]
+            ]
 
         ];
+
         $dataInventaris = $this->inventarisModel->getInventaris($idInv);
         $checkSerialNumber = $this->request->getVar('serial_number');
         $namaBarang = $this->request->getVar('nama_barang');
@@ -182,7 +201,7 @@ class Inventaris extends BaseController
                 'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
 
             ]);
-        } else if(!$checkSerialNumber == '') {
+        } else if (!$checkSerialNumber == '') {
             $this->inventarisModel->save([
                 'id_inv' => $idInv,
                 'id_jns_barang' => $jenisBarang,
@@ -207,6 +226,7 @@ class Inventaris extends BaseController
     public function delete($id)
     {
         $this->inventarisModel->delete($id);
+        session()->setFlashdata('pesanHapus', 'Berhasil,hapus inventaris ID ' . $id);
         return redirect()->to('admin/inventaris');
     }
 }

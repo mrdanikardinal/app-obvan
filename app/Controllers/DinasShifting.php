@@ -12,6 +12,7 @@ use App\Models\KategoriShiftingModel;
 
 class DinasShifting extends BaseController
 {
+    protected $helpers = (['form']);
     protected $allUser;
     protected $allKategoriDinasShif;
     protected $allNamaAcaraShif;
@@ -47,13 +48,28 @@ class DinasShifting extends BaseController
             'allKategoriDinasShifLembur' => $this->allKategoriDinasLembur->getIdKategoriShiftLembur(),
             'allDataUsers' => $this->allUser->getUsers(),
             'allNamaAcaraShif' => $this->allNamaAcaraShif->getIdNamaAcaraShif(),
-            'title' => 'Input Data Dinas Shifting'
+            'title' => 'Input Data Dinas Shifting',
+            'validation' => \Config\Services::validation()
         ];
 
         return view("dinas-shifting/create", $data);
     }
     public function save()
     {
+
+
+        
+        $rules = [
+            'lokasi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'lokasi harus di isi.'
+
+                ]
+            ]
+       
+        ];
+
 
         $idAutoDinasShif = $this->dinasShifting->autoNumberId();
 
@@ -62,13 +78,18 @@ class DinasShifting extends BaseController
         $tanggalconvert = date('Y-m-d', strtotime($date));
         // dd($this->request->getVar('kategoriDinasShif'));
 
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
+   
         $this->dinasShifting->save([
             'id_dinas_shifting' => $idAutoDinasShif,
             'id_kategori_dinas_crew' => $this->request->getVar('kategoriDinasCrewDinas'),
             'id_kategori_dinas_shif' => $this->request->getVar('kategoriDinasShif'),
             'tanggal' => $tanggalconvert,
             'id_acara' => $this->request->getVar('namaAcaraDinasShif'),
-            'lokasi' => $this->request->getVar('lokasiDinasShif')
+            'lokasi' => $this->request->getVar('lokasi')
         ]);
 
         $idUser = $this->request->getVar('id_user');
@@ -102,6 +123,22 @@ class DinasShifting extends BaseController
 
     public function update($idDinasShifting)
     {
+        $rules = [
+            'lokasi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'lokasi harus di isi.'
+
+                ]
+            ]
+       
+        ];
+
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
+
         $converttgl = $this->request->getVar('tanggalDinasEdit');
         $date = str_replace('/', '-', $converttgl);
         $tanggalconvert = date('Y-m-d', strtotime($date));
@@ -113,7 +150,7 @@ class DinasShifting extends BaseController
             'id_kategori_dinas_shif' => $this->request->getVar('kategoriDinasShifEdit'),
             'tanggal' => $tanggalconvert,
             'id_acara' => $this->request->getVar('namaAcaraDinasShifEdit'),
-            'lokasi' => $this->request->getVar('lokasiDinasShifEdit')
+            'lokasi' => $this->request->getVar('lokasi')
         ]);
 
 
@@ -187,7 +224,8 @@ class DinasShifting extends BaseController
             'allNamaAcaraShif' => $this->allNamaAcaraShif->getIdNamaAcaraShif(),
             'allNamaDinasShitfLembur' => $this->allKategoriDinasLembur->getIdKategoriShiftLembur(),
             'title' => 'Tabel update Dinas Shifting',
-            'allKategoriDinasShif' => $this->allKategoriDinasShif->getIdKategoriShifting()
+            'allKategoriDinasShif' => $this->allKategoriDinasShif->getIdKategoriShifting(),
+            'validation' => \Config\Services::validation()
         ];
         return view('dinas-shifting/edit', $data);
     }

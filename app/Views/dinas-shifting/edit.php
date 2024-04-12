@@ -31,7 +31,7 @@
                         $nomor2 = 1;
                         $nomor3 = 1;
                         ?>
-                        <form id="formAddDinasShifting" method="post" action="<?= base_url();?>dinas-shifting/update/<?= $AllReadGetIdDinasShift['id_dinas_shifting']; ?>">
+                        <form id="formAddDinasShifting" method="post" action="<?= base_url();?>dinas-shifting/update/<?= $AllReadGetIdDinasShift['id_dinas_shifting']; ?>" class="needs-dinall">
                             <?= csrf_field(); ?>
                             <input type="hidden" class="form-control" id="idObGerForJs" value="<?= $AllReadGetIdDinasShift['id_dinas_shifting']; ?>">
                             <div class="row mb-3">
@@ -81,9 +81,12 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="lokasiDinasShifEdit" class="col-sm-2 col-form-label">Lokasi</label>
+                                <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Lokasi" id="lokasiDinasShifEdit" name="lokasiDinasShifEdit" value="<?= $AllReadGetIdDinasShift['lokasi']; ?>">
+                                    <input type="text" required class="form-control" placeholder="Lokasi" id="lokasi" name="lokasi" value="<?= $AllReadGetIdDinasShift['lokasi']; ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('lokasi'); ?>
+                                    </div>
                                 </div>
                             </div>
 
@@ -113,17 +116,17 @@
                                                         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nama[]" placeholder="Nama" value="<?= $valueJoinUser['fullname']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama" value="<?= $valueJoinUser['fullname']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nip[]" placeholder="NIP" value="<?= $valueJoinUser['nip']; ?>">
+                                                        <input type="text" readonly="true"class="form-control" name="nip[]" placeholder="NIP" value="<?= $valueJoinUser['nip']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td class="text-center"><input type="hidden" name="id_userSelectEdit[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">
-                                                        <button type="button" required class="btn btn-primary btnAddForDinasShifEdit"><i class="fa-solid fa-plus"></i></button>
+                                                        <button type="button" class="btn btn-primary btnAddForDinasShifEdit"><i class="fa-solid fa-plus"></i></button>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
@@ -139,17 +142,17 @@
                                                         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nama[]" placeholder="Nama" value="<?= $valueJoinUser['fullname']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama" value="<?= $valueJoinUser['fullname']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nip[]" placeholder="NIP" value="<?= $valueJoinUser['nip']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP" value="<?= $valueJoinUser['nip']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td class="text-center"><input type="hidden" name="id_userSelectEdit[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">
-                                                        <button type="button" required class="btn btn-danger btnHapusForDinasShifEdit" value="<?= $valueJoinUser['id_crew_shifting']; ?>"><i class="fa-solid fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-danger btnHapusForDinasShifEdit" value="<?= $valueJoinUser['id_crew_shifting']; ?>"><i class="fa-solid fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
@@ -224,7 +227,7 @@
                 'use strict'
 
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
+                const forms = document.querySelectorAll('.needs-dinall')
 
                 // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
@@ -240,42 +243,52 @@
             })()
 
             //validation ok javascript
-            $("#formAdd").validate({
+            $("#formAddDinasShifting").validate({
                 errorPlacement: function($error, $element) {
-                    // $error.appendTo($element.closest("td").css({"color": "red"}));
                     $error.appendTo($element.closest("td"));
                 },
                 rules: {
-                    'naBar[]': {
+                    'nama[]': {
                         required: true
                     },
-                    'merk[]': {
+                    'nip[]': {
                         required: true
                     },
-                    'sN[]': {
+                    'npwp[]': {
                         required: true
                     },
-                    'jumlah[]': {
-                        required: true,
-                        digits: true
+                    'namaUpdate[]': {
+                        required: true
+                    },
+                    'nipUpdate[]': {
+                        required: true
+                    },
+                    'npwpUpdate[]': {
+                        required: true
                     }
+
 
                 },
                 messages: {
-                    'naBar[]': {
-                        required: "nama harus di isi !"
+                    'nama[]': {
+                        required: "nama di isi dari search !"
                     },
-                    'merk[]': {
-                        required: "jika merk kosong beri tanda - !"
+                    'nip[]': {
+                        required: "nip di isi dari search !"
                     },
-                    'sN[]': {
-                        required: "jika serial number kosong beri tanda - !"
+                    'npwp[]': {
+                        required: "npwp di isi dari search !"
                     },
-                    'jumlah[]': {
-                        required: "jumlah harus di isi !",
-                        digits: "isi dengan angka !"
-
+                    'namaUpdate[]': {
+                        required: "nama di isi dari search !"
+                    },
+                    'nipUpdate[]': {
+                        required: "nip di isi dari search !"
+                    },
+                    'npwpUpdate[]': {
+                        required: "npwp di isi dari search !"
                     }
+
 
 
                 },
