@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-inventaris/save_nama_lokasi">
                             <div class="mb-3">
                                 <label for="nama_lokasi" class="form-label">Nama Lokasi</label>
-                                <input type="tesx" class="form-control" id="nama_lokasi" name="nama_lokasi">
+                                <input type="tesx" class="form-control" id="nama_lokasi" name="nama_lokasi" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_lokasi'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

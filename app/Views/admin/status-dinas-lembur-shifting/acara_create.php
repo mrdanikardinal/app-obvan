@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-dinas-lembur-shifting/acara/save">
                             <div class="mb-3">
                                 <label for="nama_acara" class="form-label">Nama Acara</label>
-                                <input type="tesx" class="form-control" id="nama_acara" name="nama_acara">
+                                <input type="tesx" class="form-control" id="nama_acara" name="nama_acara" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_acara'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

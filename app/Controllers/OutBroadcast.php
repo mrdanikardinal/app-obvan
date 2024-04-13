@@ -24,6 +24,7 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class OutBroadcast extends BaseController
 {
+    protected $helpers = (['form']);
     protected $outBroadcast;
     protected $allUser;
     protected $pinjamAlatModel;
@@ -45,7 +46,6 @@ class OutBroadcast extends BaseController
 
     public function index()
     {
-        // dd($this->outBroadcast->getOBJointKategori());
 
         $data = [
             // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
@@ -59,8 +59,9 @@ class OutBroadcast extends BaseController
     }
     public function create()
     {
+
         $allKategori = $this->kategoriOb->getKategori();
- 
+
         $dataInv = $this->pinjamAlatModel->procedureGetItemsReady();
         $generator = new BarcodeGeneratorPNG();
         $data = [
@@ -68,7 +69,8 @@ class OutBroadcast extends BaseController
             'allDataUsers' => $this->allUser->proceduregetAllShowUser(),
             'allDataInv' => $dataInv,
             'generator' => $generator,
-            'allKategori' => $allKategori
+            'allKategori' => $allKategori,
+            'validation' => \Config\Services::validation()
 
         ];
 
@@ -76,6 +78,33 @@ class OutBroadcast extends BaseController
     }
     public function save()
     {
+
+        $rules = [
+            'acara_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'acara ob harus di isi.'
+
+                ]
+            ],
+            'lokasi_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'lokasi ob harus di isi.'
+
+                ]
+            ],
+            'durasi_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'durasi kosong.'
+
+                ]
+            ]
+
+
+        ];
+
 
 
         $idAutoOutBroadcast = $this->outBroadcast->autoNumberIdOb();
@@ -85,6 +114,12 @@ class OutBroadcast extends BaseController
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
+
+
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->outBroadcast->save([
             'id_ob' => $idAutoOutBroadcast,
             'id_kategori' => $this->request->getVar('kategori'),
@@ -242,8 +277,8 @@ class OutBroadcast extends BaseController
                 ]);
             }
 
-              //fungsi untuk update data yang sudah ada
-              if (isset($namaBarangEdit)) {
+            //fungsi untuk update data yang sudah ada
+            if (isset($namaBarangEdit)) {
                 $jumlahData = count($namaBarangEdit);
                 for ($k = 0; $k < $jumlahData; $k++) {
 
@@ -256,128 +291,8 @@ class OutBroadcast extends BaseController
             }
         }
 
-        //End update Alat OB
-
-
-
-
-
         session()->setFlashdata('pesan', 'Berhasil,Update out broadcast ID ' . $idOb);
         return redirect()->to('out-broadcast');
-
-
-
-
-
-
-
-
-
-
-        // $converttglEdit = $this->request->getVar('tanggal');
-        // $convertSampaiDenganEdit = $this->request->getVar('sampai_dengan');
-        // $convertTanggalKembali = $this->request->getVar('tanggal_kembali');
-        // $varTesting = null;
-        // if ($convertTanggalKembali != NULL) {
-        //     $dateTanggalKembali = str_replace('/', '-', $convertTanggalKembali);
-        //     $tanggalconvertTanggalKembali = date('Y-m-d', strtotime($dateTanggalKembali));
-        //     $varTesting = $tanggalconvertTanggalKembali;
-        // }
-
-        // $dateEdit = str_replace('/', '-', $converttglEdit);
-        // $dateSampaiDenganEdit = str_replace('/', '-', $convertSampaiDenganEdit);
-
-        // $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
-        // $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
-
-        // $this->pinjamAlatModel->save([
-        //     'id_pinjam' => $id_pinjam,
-        //     'tanggal' => $tanggalconvertEdit,
-        //     'sampai_dengan' => $tanggalconvertSampaiDenganEdit,
-        //     'acara' => $this->request->getVar('acara'),
-        //     'tempat' => $this->request->getVar('tempat'),
-        //     'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
-        //     'nama_peminjam' => $this->request->getVar('nama_peminjam'),
-        //     'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
-        //     'nama_pemberi' => $this->request->getVar('nama_pemberi'),
-        //     'tanggal_kembali' => $varTesting,
-        //     'nama_penerima' => $this->request->getVar('nama_penerima'),
-        //     'catatan' => $this->request->getVar('catatan')
-        // ]);
-
-        // $idParent = $this->request->getVar('idParentMerk');
-        // $namaBarang = $this->request->getVar('naBarEdit');
-        // $merk = $this->request->getVar('merkEdit');
-        // $serialNumber = $this->request->getVar('sNEdit');
-        // $jumlah = $this->request->getVar('jumlahEdit');
-        // $checkAlat = $this->request->getVar('checkAlat');
-
-        // //    dd($checkAlat);
-
-        // //updateAdd
-        // $namaBarangUpdate = $this->request->getVar('naBarEditUpdate');
-        // $merkUpdate = $this->request->getVar('merkEditUpdate');
-        // $serialNumberUpdate = $this->request->getVar('sNEditUpdate');
-        // $jumlahUpdate = $this->request->getVar('jumlahEditUpdate');
-
-
-        // //update data lama parent merk
-        // if (!isset($namaBarangUpdate)) {
-        //     $jumlahData = count($namaBarang);
-
-        //     for ($i = 0; $i < $jumlahData; $i++) {
-        //         $this->parentMerkModel->save([
-        //             'id' => $idParent[$i],
-        //             // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
-        //             'nama_barang' => $namaBarang[$i],
-        //             'merk' => $merk[$i],
-        //             'serial_number' => $serialNumber[$i],
-        //             'jumlah' => $jumlah[$i],
-        //             'status' => $checkAlat[$i]
-        //         ]);
-        //     }
-
-        //     // session()->setFlashdata('pesan',$jumlahData.' Data '.$id_pinjam.', Berhasil Diupdate.');
-
-        //     // insert data baru parent merk
-        // } else if (isset($namaBarangUpdate)) {
-        //     $jumlahDataUpdate = count($namaBarangUpdate);
-        //     for ($j = 0; $j < $jumlahDataUpdate; $j++) {
-
-        //         $this->parentMerkModel->save([
-        //             'id_pinjaman_alat' => $id_pinjam,
-        //             'nama_barang' => $namaBarangUpdate[$j],
-        //             'merk' => $merkUpdate[$j],
-        //             'serial_number' => $serialNumberUpdate[$j],
-        //             'jumlah' => $jumlahUpdate[$j]
-
-        //         ]);
-        //     }
-        //     //fungsi untuk update data yang sudah ada
-        //     if (isset($namaBarang)) {
-        //         $jumlahData = count($namaBarang);
-        //         for ($i = 0; $i < $jumlahData; $i++) {
-
-
-        //             $this->parentMerkModel->save([
-        //                 'id' => $idParent[$i],
-        //                 // 'id_pinjaman_alat' => $idAutoPeminjamanAlat,
-        //                 'nama_barang' => $namaBarang[$i],
-        //                 'merk' => $merk[$i],
-        //                 'serial_number' => $serialNumber[$i],
-        //                 'jumlah' => $jumlah[$i],
-        //                 'status' => $checkAlat[$i]
-
-
-
-        //             ]);
-        //         }
-        //     }
-        // }
-        // session()->setFlashdata('pesan', 'Berhasil,update peminjaman ID ' . $id_pinjam);
-        // return redirect()->to('peminjaman-alat');
-
-
     }
     public function delete($id)
     {
@@ -390,14 +305,11 @@ class OutBroadcast extends BaseController
 
     public function peralatancrewob($idOB)
     {
-        // $data =$this->parentAlatOb->getJoinOBAndAlatINV($idOB);
-        // $data =$this->parentAlatOb->getCountAlatOB($idOB);
-        // dd($data);
-
+      
         $data = [
             'allDataCrewOB' => $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
             'countDataCrewOB' => $this->parentAlatOb->getCountAlatOB($idOB),
-            'getIDOB'=>$idOB
+            'getIDOB' => $idOB
         ];
         return view('peralatan-crew-ob/index', $data);
     }

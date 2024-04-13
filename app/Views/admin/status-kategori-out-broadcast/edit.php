@@ -15,10 +15,13 @@
                         <i class="fas fa-table me-1"></i>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/update/<?=$getDataStatusKategori['id'];?>">
+                        <form method="post" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/update/<?= $getDataStatusKategori['id']; ?>">
                             <div class="mb-3">
                                 <label for="nama_status_kategori_ob" class="form-label">Nama Kategori</label>
-                                <input type="tesx" class="form-control" id="nama_status_kategori_ob" name="nama_status_kategori_ob" value="<?=$getDataStatusKategori['nama_kategori'];?>">
+                                <input type="tesx" class="form-control" id="nama_status_kategori_ob" name="nama_status_kategori_ob" value="<?= $getDataStatusKategori['nama_kategori']; ?>" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_status_kategori_ob'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

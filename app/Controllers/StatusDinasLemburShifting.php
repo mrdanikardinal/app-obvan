@@ -8,6 +8,7 @@ use App\Models\KategoriCrewDinasShiftLemburModel;
 
 class StatusDinasLemburShifting extends BaseController
 {
+    protected $helpers = (['form']);
     protected $modelKategoriLemburShif;
     protected $modelAcaraDinasLemburShif;
 
@@ -30,18 +31,36 @@ class StatusDinasLemburShifting extends BaseController
     }
     public function kategori_create()
     {
-        return view('admin/status-dinas-lembur-shifting/kategori_create');
+        $data=[
+            'validation' => \Config\Services::validation()
+        ];
+        return view('admin/status-dinas-lembur-shifting/kategori_create',$data);
     }
     public function acara_create()
     {
-
-        return view('admin/status-dinas-lembur-shifting/acara_create');
+        $data=[
+            'validation' => \Config\Services::validation()
+        ];
+        return view('admin/status-dinas-lembur-shifting/acara_create',$data);
     }
     public function acara_save()
     {
+        $rules = [
+            'nama_acara' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama acara harus di isi.'
+
+                ]
+            ]
+
+        ];
 
         $namaAcara = $this->request->getVar('nama_acara');
-        // dd($namaAcara);
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
 
         $this->modelAcaraDinasLemburShif->save([
             'nama_acara_shift' => $namaAcara
@@ -52,9 +71,22 @@ class StatusDinasLemburShifting extends BaseController
     public function kategori_save()
     {
 
-        $namaKategori = $this->request->getVar('nama_kategori');
-        // dd($namaAcara);
+        $rules = [
+            'nama_kategori' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama kategori harus di isi.'
 
+                ]
+            ]
+
+        ];
+
+        $namaKategori = $this->request->getVar('nama_kategori');
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->modelKategoriLemburShif->save([
             'nama_kategori_dinas_crew' => $namaKategori
         ]);
@@ -69,17 +101,35 @@ class StatusDinasLemburShifting extends BaseController
     {
 
         $data['getIdKategori'] = $this->modelKategoriLemburShif->getIdKategoriShiftLembur($idKategori);
+        $data['validation']= \Config\Services::validation();
         return view('admin/status-dinas-lembur-shifting/kategori_edit', $data);
     }
     public function edit_acara($idAcara)
     {
         $data['getIdAcara'] = $this->modelAcaraDinasLemburShif->getIdNamaAcaraShif($idAcara);
+        $data['validation']= \Config\Services::validation();
+        
 
         return view('admin/status-dinas-lembur-shifting/acara_edit', $data);
     }
 
     public function acara_update($idAcara)
     {
+
+        $rules = [
+            'nama_acara_edit' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama acara harus di isi.'
+
+                ]
+            ]
+
+        ];
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
 
         $namaAcaraEdit = $this->request->getVar('nama_acara_edit');
 
@@ -93,8 +143,24 @@ class StatusDinasLemburShifting extends BaseController
     public function kategori_update($idKategori)
     {
 
+        
+        $rules = [
+            'nama_kategori_edit' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama kategori harus di isi.'
+
+                ]
+            ]
+
+        ];
+
         $namaKategoriEdit = $this->request->getVar('nama_kategori_edit');
 
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->modelKategoriLemburShif->save([
             'id_kategori_dinas_crew' => $idKategori,
             'nama_kategori_dinas_crew' => $namaKategoriEdit,

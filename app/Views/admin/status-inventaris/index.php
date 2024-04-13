@@ -64,13 +64,8 @@
                                                     <th><?= $number++; ?></th>
                                                     <td><?= $valueJenisBarang['id_jns_barang']; ?></td>
                                                     <td><?= $valueJenisBarang['nama_jns_barang']; ?></td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                    <td> 
+                                                    <a href="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
@@ -87,12 +82,7 @@
                                                     <td><?= $valueJenisBarang['id_jns_barang']; ?></td>
                                                     <td><?= $valueJenisBarang['nama_jns_barang']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <form action="<?= base_url() ?>admin/status-inventaris/hapus_jenis_barang/<?= $valueJenisBarang['id_jns_barang']; ?>" method="post">
@@ -106,11 +96,7 @@
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <form action="<?= base_url('admin/status-inventaris/create_jenis_barang'); ?>" method="post">
-                                    <?= csrf_field(); ?>
-                                    <input type="hidden" name="_method" value="POST">
-                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-plus"></i>Tambah</button>
-                                </form>
+                                <a href="<?= base_url('admin/status-inventaris/create_jenis_barang'); ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah</a>
                             </div>
                             <div class="tab-pane fade" id="lokasi">
                                 <h3>Lokasi</h3>
@@ -133,12 +119,7 @@
                                                     <td><?= $valueLokasi['id_lokasi']; ?></td>
                                                     <td><?= $valueLokasi['nama_lokasi']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
@@ -155,12 +136,7 @@
                                                     <td><?= $valueLokasi['id_lokasi']; ?></td>
                                                     <td><?= $valueLokasi['nama_lokasi']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" method="post">
@@ -174,11 +150,7 @@
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <form action="<?= base_url('admin/status-inventaris/create-nama-lokasi'); ?>" method="post">
-                                    <?= csrf_field(); ?>
-                                    <input type="hidden" name="_method" value="POST">
-                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-plus"></i>Tambah</button>
-                                </form>
+                                <a href="<?= base_url('admin/status-inventaris/create-nama-lokasi'); ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah</a>
                             </div>
                             <div class="tab-pane fade" id="kondisi">
                                 <h3>Kondisi</h3>
@@ -201,11 +173,7 @@
                                                     <td><?= $valueKondisi['id_kondisi']; ?></td>
                                                     <td><?= $valueKondisi['nama_kondisi']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
                                                     <td>
@@ -223,12 +191,7 @@
                                                     <td><?= $valueKondisi['id_kondisi']; ?></td>
                                                     <td><?= $valueKondisi['nama_kondisi']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" method="post">
@@ -242,11 +205,7 @@
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <form action="<?= base_url() ?>admin/status-inventaris/create-nama-kondisi" method="post">
-                                    <?= csrf_field(); ?>
-                                    <input type="hidden" name="_method" value="POST">
-                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-plus"></i>Tambah</button>
-                                </form>
+                                <a href="<?= base_url() ?>admin/status-inventaris/create-nama-kondisi" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah</a>
 
                             </div>
                             <div class="tab-pane fade" id="status">
@@ -270,12 +229,7 @@
                                                     <td><?= $valueStatus['id_status']; ?></td>
                                                     <td><?= $valueStatus['nama_status']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
@@ -292,12 +246,7 @@
                                                     <td><?= $valueStatus['id_status']; ?></td>
                                                     <td><?= $valueStatus['nama_status']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
-
+                                                        <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
                                                     <td>
                                                         <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-status/<?= $valueStatus['id_status']; ?>" method="post">
@@ -311,11 +260,7 @@
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <form action="<?= base_url() ?>admin/status-inventaris/create-nama-status" method="post">
-                                    <?= csrf_field(); ?>
-                                    <input type="hidden" name="_method" value="POST">
-                                    <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-plus"></i>Tambah</button>
-                                </form>
+                                <a href="<?= base_url() ?>admin/status-inventaris/create-nama-status" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Tambah</a>
                             </div>
                         </div>
                     </div>

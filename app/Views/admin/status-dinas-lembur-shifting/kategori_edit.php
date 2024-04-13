@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-dinas-lembur-shifting/kategori_update/<?=$getIdKategori['id_kategori_dinas_crew'];?>">
                             <div class="mb-3">
                                 <label for="nama_kategori_edit" class="form-label">Nama Kategori</label>
-                                <input type="tesx" class="form-control" id="nama_kategori_edit" name="nama_kategori_edit" value="<?=$getIdKategori['nama_kategori_dinas_crew'];?>">
+                                <input type="tesx" class="form-control" id="nama_kategori_edit" name="nama_kategori_edit" value="<?=$getIdKategori['nama_kategori_dinas_crew'];?>" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_kategori_edit'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

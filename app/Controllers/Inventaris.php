@@ -47,22 +47,15 @@ class Inventaris extends BaseController
     }
     public function edit($idInv)
     {
-        // $dataJoins= $this->inventarisModel->getJoinsInvID($idInv);
-        // $jenisBarang=$this->jnsBarang->getJenisBarang();
-        // $data = [
-        //     'dataJoins'=> $dataJoins,
-        //     'jenisBarang'=>$jenisBarang,
-        //     'title'=> 'Tabel Update Inventaris'
-        // ];
-        // return view('inventaris/edit', $data);
+   
         $data['inventaris'] = $this->inventarisModel->getInventaris($idInv);
         $data['jenisBarang'] = $this->jnsBarang->getJenisBarang();
         $data['allLokasi'] = $this->lokasi->getLokasi();
         $data['allKondisi'] = $this->kondisi->getKondisi();
         $data['allStatus'] = $this->status->getStatus();
         $data['title'] = 'Tabel Update Inventaris';
-        // dd($data['title']);
-
+        $data['validation'] = \Config\Services::validation();
+      
         return view('admin/inventaris/edit', $data);
     }
 

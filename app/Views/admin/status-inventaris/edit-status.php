@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-inventaris/update-nama-status/<?=$getDataIdNamaStatus['id_status'];?>">
                             <div class="mb-3">
                                 <label for="nama_status" class="form-label">Nama Status</label>
-                                <input type="tesx" class="form-control" id="nama_status" name="nama_status" value="<?=$getDataIdNamaStatus['nama_status'];?>">
+                                <input type="tesx" class="form-control" id="nama_status" name="nama_status" value="<?=$getDataIdNamaStatus['nama_status'];?>" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_status'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

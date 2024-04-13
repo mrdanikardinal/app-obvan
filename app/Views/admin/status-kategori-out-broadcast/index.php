@@ -12,6 +12,11 @@
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('pesanHapus')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanHapus'); ?>
+                        </div>
+                    <?php endif; ?>
                 </h5>
                 <a href="<?= base_url("admin/status-kategori-out-broadcast/create") ?>" class="btn btn-primary my-2">Tambah</a>
                 <div class="card mb-4">
@@ -39,12 +44,7 @@
                                             <td><?= $valueDataKategoriOB['id']; ?></td>
                                             <td><?= $valueDataKategoriOB['nama_kategori']; ?></td>
                                             <td>
-                                                <form action="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" method="post">
-                                                    <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="POST">
-                                                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                                </form>
-
+                                                <a href="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                             </td>
                                             <td>
                                                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
@@ -61,12 +61,7 @@
                                             <td><?= $valueDataKategoriOB['id']; ?></td>
                                             <td><?= $valueDataKategoriOB['nama_kategori']; ?></td>
                                             <td>
-                                                <form action="<?= base_url(); ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" method="post">
-                                                    <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="POST">
-                                                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                                </form>
-
+                                            <a href="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                             </td>
                                             <td>
                                                 <form id="hapus" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/<?= $valueDataKategoriOB['id']; ?>" method="post">

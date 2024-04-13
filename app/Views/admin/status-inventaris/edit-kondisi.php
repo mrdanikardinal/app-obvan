@@ -15,10 +15,14 @@
                         <i class="fas fa-table me-1"></i>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="<?= base_url(); ?>admin/status-inventaris/update-nama-kondisi/<?=$getDataIdNamaKondisi['id_kondisi'];?>">
+                        <form method="post" action="<?= base_url(); ?>admin/status-inventaris/update-nama-kondisi/<?= $getDataIdNamaKondisi['id_kondisi']; ?>">
                             <div class="mb-3">
                                 <label for="nama_kondisi" class="form-label">Nama Kondisi</label>
-                                <input type="tesx" class="form-control" id="nama_kondisi" name="nama_kondisi" value="<?=$getDataIdNamaKondisi['nama_kondisi'];?>">
+                                <input type="tesx" class="form-control" id="nama_kondisi" name="nama_kondisi" value="<?= $getDataIdNamaKondisi['nama_kondisi']; ?>" placeholder="tidak boleh kosong">
+
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_kondisi'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

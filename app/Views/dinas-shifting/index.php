@@ -88,11 +88,7 @@
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
-                                            <form action="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="get">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="GET">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                            </form>
+                                            <a href="<?= base_url() ?>dinas-shifting/edit/<?= $valueDinasShift['id_dinas_shifting']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                         </td>
                                         <?php if (in_groups('admin')) : ?>
                                             <td>

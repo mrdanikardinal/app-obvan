@@ -640,17 +640,17 @@ function addnewrowOB() {
         <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+        <input type="text"readonly="true" class="form-control" name="nip[]" placeholder="NIP di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP di isi dari search">
         </td>
         <td class="text-center"><input type="hidden" name="id_user[]"></td>
         <td class="text-center">
-            <button type="button" required class="btn btn-danger btnHapusFormOB"><i class="fa-solid fa-trash"></i></button>
+            <button type="button" class="btn btn-danger btnHapusFormOB"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
     $('.formTambahOB').append(tr);
@@ -734,20 +734,20 @@ function addnewrowBarangForOB() {
         <button type="button" class="btn btn-primary clickShowBarangInv" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInv"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang">
+            <input type="text" readonly="true" id="dinall-js-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="naBar[]" placeholder="Nama Barang di isi dari search">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="merk[]" placeholder="Merk">
+            <input type="text" readonly="true" class="form-control" name="merk[]" placeholder="Merk di isi dari search">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+            <input type="text" readonly="true" class="form-control" name="sN[]" placeholder="Serial Number di isi dari search">
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
+            <input type="text" id="dinall-js-jumlah-${$('.rownumberBarangForOB').last().text()}" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
         </td>
         <td class="text-center"><input type="hidden" name="id_peralatan[]"></td>
         <td class="text-center">
-            <button type="button" required class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
+            <button type="button" class="btn btn-danger btnHapusFormBarangForOB"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
     $('.formTambahBarangOB').append(tr);
@@ -859,17 +859,17 @@ function addnewrowCrewOBEdit() {
         <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="namaEditUpdate[]" placeholder="Nama">
+        <input type="text" readonly="true" class="form-control" name="namaEditUpdate[]" placeholder="Nama di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="nipEditUpdate[]" placeholder="NIP">
+        <input type="text" readonly="true" class="form-control" name="nipEditUpdate[]" placeholder="NIP di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" required class="form-control" name="npwpEditUpdate[]" placeholder="NPWP">
+        <input type="text" readonly="true" class="form-control" name="npwpEditUpdate[]" placeholder="NPWP di isi dari search">
         </td>
         <td><input type="hidden" name="idUserFromSelectModalUpdate[]"></td>
         <td class="text-center">
-            <button type="button" required class="btn btn-danger btnEditHpusCrewDinasOb"><i class="fa-solid fa-trash"></i></button>
+            <button type="button"  class="btn btn-danger btnEditHpusCrewDinasOb"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
     $('.tableCrewDinasOb').append(tr);
@@ -1092,22 +1092,22 @@ function addnewrowBarangForOBUpdate() {
         <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInvEditUpdate"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="naBarUpdate[]" placeholder="Nama Barang">
+            <input type="text" readonly="true" id="dinall-js-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="naBarUpdate[]" placeholder="Nama Barang di isi dari search">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="merkUpdate[]" placeholder="Merk">
+            <input type="text" readonly="true" class="form-control" name="merkUpdate[]" placeholder="Merk di isi dari search">
         </td>
         <td class="text-center">
-            <input type="text" required class="form-control" name="sNUpdate[]" placeholder="Serial Number">
+            <input type="text" readonly="true" class="form-control" name="sNUpdate[]" placeholder="SN di isi dari search">
         </td>
         <td class="text_center"> 
             <input type="hidden" class="form-control" name="idBarangFromSelectModalUpdate[]" value="<?= $valueJoinInv['id_inv']; ?>">
         </td>
         <td class="text-center">
-            <input type="text" required id="dinall-js-jumlah-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="jumlahAlatOBUpdate[]" placeholder="Jumlah" value="1">
+            <input type="text" id="dinall-js-jumlah-${$('.rownumberBarangForOBUpdate').last().text()}" class="form-control" name="jumlahAlatOBUpdate[]" placeholder="Jumlah" value="1">
         </td>
         <td class="text-center">
-            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate"><i class="fa-solid fa-trash"></i></button>
+            <button type="button"  class="btn btn-danger btnHapusFormBarangForOBUpdate"><i class="fa-solid fa-trash"></i></button>
         </td>
     </tr>`;
     $('.formTambahBarangOBUpdate').append(tr);
@@ -1557,13 +1557,13 @@ function addnewrowDinasShifEdit() {
         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
         </td>
         <td class="text-center">
-        <input type="text" readonly="true" class="form-control" name="namaUpdate[]" placeholder="Nama">
+        <input type="text" readonly="true" class="form-control" name="namaUpdate[]" placeholder="Nama di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" readonly="true" class="form-control" name="nipUpdate[]" placeholder="NIP">
+        <input type="text" readonly="true" class="form-control" name="nipUpdate[]" placeholder="Nip di isi dari search">
         </td>
         <td class="text-center">
-        <input type="text" readonly="true" class="form-control" name="npwpUpdate[]" placeholder="NPWP">
+        <input type="text" readonly="true" class="form-control" name="npwpUpdate[]" placeholder="NPWP di isi dari search">
         </td>
         <td class="text-center"><input type="hidden" name="id_userUpdate[]"></td>
         <td class="text-center">

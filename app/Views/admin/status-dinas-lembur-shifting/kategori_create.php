@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-dinas-lembur-shifting/kategori/save">
                             <div class="mb-3">
                                 <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                <input type="tesx" class="form-control" id="nama_kategori" name="nama_kategori">
+                                <input type="tesx" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_kategori'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

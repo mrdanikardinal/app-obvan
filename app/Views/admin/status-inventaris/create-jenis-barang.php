@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-inventaris/save_jenis_barang">
                             <div class="mb-3">
                                 <label for="nama_jenis_barang" class="form-label">Nama Jenis Barang</label>
-                                <input type="tesx" class="form-control" id="nama_jenis_barang" name="nama_jenis_barang">
+                                <input type="tesx" class="form-control" id="nama_jenis_barang" name="nama_jenis_barang" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_jenis_barang'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

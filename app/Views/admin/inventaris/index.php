@@ -87,11 +87,7 @@
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
 
                                         <td>
-                                            <form action="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" method="get">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="GET">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
-                                            </form>
+                                            <a href="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                         </td>
                                         <td>
                                             <form id="hapus" action="<?= base_url() ?>admin/inventaris/<?= $valueInventaris['id_inv']; ?>" method="post">

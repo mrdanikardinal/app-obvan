@@ -9,7 +9,7 @@ use App\Models\StatusModel;
 
 class StatusInventaris extends BaseController
 {
-
+    protected $helpers = (['form']);
     protected $jenisBarangModel;
     protected $lokasiModel;
     protected $kondisiModel;
@@ -56,8 +56,22 @@ class StatusInventaris extends BaseController
     }
     public function save_jenis_barang()
     {
-        $namaJenisBarang = $this->request->getVar('nama_jenis_barang');
 
+        $rules = [
+            'nama_jenis_barang' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'jenis barang harus di isi.'
+
+                ]
+            ]
+
+        ];
+        $namaJenisBarang = $this->request->getVar('nama_jenis_barang');
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->jenisBarangModel->save([
             'nama_jns_barang' => $namaJenisBarang,
         ]);
@@ -73,8 +87,22 @@ class StatusInventaris extends BaseController
     public function update_jenis_barang($idJenisBarang)
     {
 
-        $namaJenisBarang = $this->request->getVar('nama_jenis_barang');
+        $rules = [
+            'nama_jenis_barang' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'jenis barang harus di isi.'
 
+                ]
+            ]
+
+        ];
+
+        $namaJenisBarang = $this->request->getVar('nama_jenis_barang');
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->jenisBarangModel->save([
             'id_jns_barang' => $idJenisBarang,
             'nama_jns_barang' => $namaJenisBarang,
@@ -83,7 +111,7 @@ class StatusInventaris extends BaseController
         return redirect()->to('admin/status-inventaris');
     }
     // end jenis barang
-    // start lokas
+    // start lokasi
     public function edit_nama_lokasi($idLokasi)
     {
         $getIdLokasi = $this->lokasiModel->getLokasi($idLokasi);
@@ -92,7 +120,7 @@ class StatusInventaris extends BaseController
         ];
         return view('admin/status-inventaris/edit-lokasi', $data);
     }
-    
+
     public function delete_nama_lokasi($idNamaLokasi)
     {
         $this->lokasiModel->delete($idNamaLokasi);
@@ -105,7 +133,23 @@ class StatusInventaris extends BaseController
     }
     public function save_nama_lokasi()
     {
+
+        $rules = [
+            'nama_lokasi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama lokasi harus di isi.'
+
+                ]
+            ]
+
+        ];
+
         $namaNamaLokasi = $this->request->getVar('nama_lokasi');
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
 
         $this->lokasiModel->save([
             'nama_lokasi' => $namaNamaLokasi,
@@ -115,9 +159,22 @@ class StatusInventaris extends BaseController
     }
     public function update_nama_lokasi($idNamaLokasi)
     {
+        $rules = [
+            'nama_lokasi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama lokasi harus di isi.'
+
+                ]
+            ]
+
+        ];
 
         $namaLokasi = $this->request->getVar('nama_lokasi');
+        if (!$this->validate($rules)) {
 
+            return redirect()->back()->withInput();
+        }
         $this->lokasiModel->save([
             'id_lokasi' => $idNamaLokasi,
             'nama_lokasi' => $namaLokasi,
@@ -125,7 +182,7 @@ class StatusInventaris extends BaseController
         session()->setFlashdata('pesan', 'Berhasil,update Nama Lokasi ' . $namaLokasi);
         return redirect()->to('admin/status-inventaris');
     }
-   
+
     // end lokasi
     // start kondisi
 
@@ -137,7 +194,7 @@ class StatusInventaris extends BaseController
         ];
         return view('admin/status-inventaris/edit-kondisi', $data);
     }
-    
+
     public function delete_nama_kondisi($idKondisi)
     {
         $this->kondisiModel->delete($idKondisi);
@@ -150,8 +207,24 @@ class StatusInventaris extends BaseController
     }
     public function save_nama_kondisi()
     {
+
+        $rules = [
+            'nama_kondisi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama kondisi harus di isi.'
+
+                ]
+            ]
+
+        ];
         $namaNamaKondisi = $this->request->getVar('nama_kondisi');
 
+
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->kondisiModel->save([
             'nama_kondisi' => $namaNamaKondisi,
         ]);
@@ -160,9 +233,23 @@ class StatusInventaris extends BaseController
     }
     public function update_nama_kondisi($idNamaKondisi)
     {
+        $rules = [
+            'nama_kondisi' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama kondisi harus di isi.'
+
+                ]
+            ]
+
+        ];
 
         $namaKondisi = $this->request->getVar('nama_kondisi');
 
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->kondisiModel->save([
             'id_kondisi' => $idNamaKondisi,
             'nama_kondisi' => $namaKondisi,
@@ -181,7 +268,7 @@ class StatusInventaris extends BaseController
         ];
         return view('admin/status-inventaris/edit-status', $data);
     }
-    
+
     public function delete_nama_status($idStatus)
     {
         $this->statusModel->delete($idStatus);
@@ -194,8 +281,23 @@ class StatusInventaris extends BaseController
     }
     public function save_nama_status()
     {
-        $namaNamaStatus = $this->request->getVar('nama_status');
 
+
+        $rules = [
+            'nama_status' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama status harus di isi.'
+
+                ]
+            ]
+
+        ];
+        $namaNamaStatus = $this->request->getVar('nama_status');
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->statusModel->save([
             'nama_status' => $namaNamaStatus,
         ]);
@@ -204,9 +306,22 @@ class StatusInventaris extends BaseController
     }
     public function update_nama_status($idNamaStatus)
     {
+        $rules = [
+            'nama_status' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'nama status harus di isi.'
+
+                ]
+            ]
+
+        ];
 
         $getNamaStatus = $this->request->getVar('nama_status');
+        if (!$this->validate($rules)) {
 
+            return redirect()->back()->withInput();
+        }
         $this->statusModel->save([
             'id_status' => $idNamaStatus,
             'nama_status' => $getNamaStatus,

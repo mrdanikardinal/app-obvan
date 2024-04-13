@@ -18,7 +18,10 @@
                         <form method="post" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/save">
                             <div class="mb-3">
                                 <label for="nama_status_kategori_create" class="form-label">Nama Kategori</label>
-                                <input type="tesx" class="form-control" id="nama_status_kategori_create" name="nama_status_kategori_create">
+                                <input type="tesx" class="form-control" id="nama_status_kategori_create" name="nama_status_kategori_create" placeholder="tidak boleh kosong">
+                                <div class="text-danger">
+                                    <?= validation_show_error('nama_status_kategori_create'); ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>

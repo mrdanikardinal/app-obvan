@@ -25,7 +25,7 @@
                         <?php
                         $nomor = 1;
                         ?>
-                        <form id="formAddOutBroadcast" method="post" action="<?= base_url("/out-broadcast/save"); ?>">
+                        <form id="formAddOutBroadcast" method="post" action="<?= base_url("/out-broadcast/save"); ?>" class="needs-dinall">
 
                             <?= csrf_field(); ?>
 
@@ -59,20 +59,28 @@
                             <div class="row mb-3">
                                 <label for="acara_ob" class="col-sm-2 col-form-label">Acara</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Acara" id="acara_ob" name="acara_ob" value="<?= old('acara_ob'); ?>">
-
+                                    <input type="text" class="form-control" placeholder="Acara" id="acara_ob" name="acara_ob" value="<?= old('acara_ob'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('acara_ob'); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="lokasi_ob" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Lokasi" id="lokasi_ob" name="lokasi_ob" value="<?= old('lokasi_ob'); ?>">
+                                    <input type="text" class="form-control" placeholder="Lokasi" id="lokasi_ob" name="lokasi_ob" value="<?= old('lokasi_ob'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('lokasi_ob'); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="durasi_ob" class="col-sm-2 col-form-label">Durasi OB(ADM Hari)</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Durasi OB(Hari)" id="durasi_ob" name="durasi_ob" value="<?= old('durasi_ob'); ?>">
+                                    <input type="text" class="form-control" placeholder="Durasi OB(Hari)" id="durasi_ob" name="durasi_ob" value="<?= old('durasi_ob'); ?>">
+                                    <div class="text-danger">
+                                        <?= validation_show_error('durasi_ob'); ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -109,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-           
+
                             <div class="row mb-3">
 
                                 <div class="col-sm-10 offset-sm-2">
@@ -131,17 +139,17 @@
                                                 <button type="button" class="btn btn-primary clickShowAllCrew" data-bs-toggle="modal" data-bs-target="#dinallModalOB"><i class="fa-solid fa-search"></i></button>
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="nama[]" placeholder="Nama">
+                                                <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama di isi dari search">
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="nip[]" placeholder="NIP">
+                                                <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP di isi dari search">
                                             </td>
                                             <td class="text-center">
-                                                <input type="text" required class="form-control" name="npwp[]" placeholder="NPWP">
+                                                <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP di isi dari search">
                                             </td>
                                             <td class="text-center"><input type="hidden" name="id_user[]"></td>
                                             <td class="text-center">
-                                                <button type="button" required class="btn btn-primary btnAddFormOB"><i class="fa-solid fa-plus"></i></button>
+                                                <button type="button"  class="btn btn-primary btnAddFormOB"><i class="fa-solid fa-plus"></i></button>
                                             </td>
 
                                         </tr>
@@ -179,21 +187,21 @@
 
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="text" required class="form-control" name="naBar[]" placeholder="Nama Barang">
+                                                    <input type="text" readonly="true" class="form-control" name="naBar[]" placeholder="Nama Barang di isi dari search">
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="text" required class="form-control" name="merk[]" placeholder="merk">
+                                                    <input type="text" readonly="true" class="form-control" name="merk[]" placeholder="Merk di isi dari search">
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="text" required class="form-control" name="sN[]" placeholder="Serial Number">
+                                                    <input type="text" readonly="true" class="form-control" name="sN[]" placeholder="Serial Number di isi dari search">
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
+                                                    <input type="text" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="1">
                                                 </td>
                                                 <td class="text-center"><input type="hidden" name="id_peralatan[]"></td>
                                                 <td class="text-center">
-                                                    <!-- <button type="button" required class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></button> -->
-                                                    <button type="button" required class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
+                                    
+                                                    <button type="button"  class="btn btn-primary btnAddFormForBarangOB"><i class="fa-solid fa-plus"></i></button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -349,7 +357,7 @@
                 'use strict'
 
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
+                const forms = document.querySelectorAll('.needs-dinall')
 
                 // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
@@ -365,12 +373,22 @@
             })()
 
             //validation ok javascript
-            $("#formAdd").validate({
+            $("#formAddOutBroadcast").validate({
                 errorPlacement: function($error, $element) {
                     // $error.appendTo($element.closest("td").css({"color": "red"}));
                     $error.appendTo($element.closest("td"));
                 },
                 rules: {
+                    'nama[]': {
+                        required: true
+                    },
+                    'nip[]': {
+                        required: true,
+                        digits: true
+                    },
+                    'npwp[]': {
+                        required: true
+                    },
                     'naBar[]': {
                         required: true
                     },
@@ -380,26 +398,36 @@
                     'sN[]': {
                         required: true
                     },
-                    'jumlah[]': {
+                    'jumlahAlatOB[]': {
                         required: true,
                         digits: true
                     }
 
                 },
                 messages: {
+                    'nama[]': {
+                        required: "nama di isi dari search !"
+                    },
+                    'nip[]': {
+                        required: "nip di isi dari search !",
+                        digits: "isi dengan angka !"
+                    },
+                    'npwp[]': {
+                        required: "npwp di isi dari search !"
+                    },
                     'naBar[]': {
-                        required: "nama harus di isi !"
+                        required: "nama barang di isi dari search !",
+                        
                     },
                     'merk[]': {
-                        required: "jika merk kosong beri tanda - !"
+                        required: "merk di isi dari search !"
                     },
                     'sN[]': {
-                        required: "jika serial number kosong beri tanda - !"
+                        required: "SN di isi dari search !"
                     },
-                    'jumlah[]': {
-                        required: "jumlah harus di isi !",
+                    'jumlahAlatOB[]': {
+                        required: "jumlah di isi dari search !",
                         digits: "isi dengan angka !"
-
                     }
 
 
@@ -410,10 +438,6 @@
 
 
             });
-
-            // jQuery.validator.addMethod("validDate", function(value, element) {
-            //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
-            //     }, "Please enter a valid date in the format DD/MM/YYYY");
         </script>
         <?= $this->include('layout/footer'); ?>
     </div>

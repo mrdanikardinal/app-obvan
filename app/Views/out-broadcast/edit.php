@@ -30,7 +30,7 @@
                         <?php
                         $nomor = 1;
                         ?>
-                        <form id="formUpdateOutBroadcast" method="post" action="<?= base_url(); ?>out-broadcast/update/<?= $showObByid['id_ob']; ?>">
+                        <form id="formUpdateOutBroadcast" method="post" action="<?= base_url(); ?>out-broadcast/update/<?= $showObByid['id_ob']; ?>" class="needs-dinall">
 
                             <?= csrf_field(); ?>
                             <input type="hidden" class="form-control" id="idObGerForJs" placeholder="Nama Barang" value="<?= $showObByid['id_ob']; ?>">
@@ -152,17 +152,17 @@
                                                         <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>" placeholder="Nama di isi dari search">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>" placeholder="NIP di isi dari search">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>" placeholder="NPWP di isi dari search">
                                                     </td>
                                                     <td><input type="hidden" name="idUserFromSelectModal[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">
-                                                        <button type="button" required class="btn btn-primary btnAddEditCrewDinasOb"><i class="fa-solid fa-plus"></i></button>
+                                                        <button type="button"  class="btn btn-primary btnAddEditCrewDinasOb"><i class="fa-solid fa-plus"></i></button>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>
@@ -178,17 +178,17 @@
                                                         <button type="button" class="btn btn-primary clickShowAllCrewEdit" data-bs-toggle="modal" data-bs-target="#dinallModalOBEdit"><i class="fa-solid fa-search"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="namaEdit[]" value="<?= $valueJoinUser['fullname']; ?>" placeholder="Nama di isi dari search">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nipEdit[]" value="<?= $valueJoinUser['nip']; ?>" placeholder="NIP di isi dari search">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" required class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="npwpEdit[]" value="<?= $valueJoinUser['npwp']; ?>" placeholder="NIP di isi dari search">
                                                     </td>
                                                     <td><input type="hidden" name="idUserFromSelectModal[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">
-                                                        <button type="button" required class="btn btn-danger btnEditHpusCrewDinasOb" value="<?= $valueJoinUser['id_crew_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
+                                                        <button type="button"  class="btn btn-danger btnEditHpusCrewDinasOb" value="<?= $valueJoinUser['id_crew_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
                                                     </td>
 
                                                 </tr>
@@ -228,23 +228,23 @@
                                                             <button type="button" class="btn btn-primary clickShowBarangInvEditUpdate" data-bs-toggle="modal" data-bs-target="#dinallModalBarangInvEditUpdate"><i class="fa-solid fa-search"></i></button>
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>" placeholder="Nama Barang di isi dari search">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>" placeholder="Merk di isi dari search">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>" placeholder="SN di isi dari search">
                                                         </td>
                                                         <td class="text_center">
                                                             <input type="hidden" class="form-control" name="idBarangFromSelectModal[]" value="<?= $valueJoinInv['id_inv']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
+                                                            <input type="text" class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
                                                         </td>
                                                         <td class="text-center">
 
-                                                            <button type="button" required class="btn btn-primary btnAddFormForBarangOBUpdate"><i class="fa-solid fa-plus"></i></button>
+                                                            <button type="button"  class="btn btn-primary btnAddFormForBarangOBUpdate"><i class="fa-solid fa-plus"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>
@@ -264,24 +264,24 @@
 
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="naBar[]" value="<?= $valueJoinInv['nama_barang']; ?>" placeholder="Nama Barang di isi dari search">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="merk[]" value="<?= $valueJoinInv['merk']; ?>" placeholder="Merk di isi dari search">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>">
+                                                            <input type="text" readonly="true" class="form-control" name="sN[]" value="<?= $valueJoinInv['serial_number']; ?>" placeholder="SN di isi dari search">
                                                         </td>
                                                         <td class="text_center">
                                                             <input type="hidden" class="form-control" name="idBarangFromSelectModal[]" value="<?= $valueJoinInv['id_inv']; ?>">
                                                         </td>
                                                         <td class="text-center">
-                                                            <input type="text" required class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
+                                                            <input type="text"  class="form-control" name="jumlahAlatOB[]" placeholder="Jumlah" value="<?= $valueJoinInv['jumlah']; ?>">
                                                         </td>
 
                                                         <td class="text-center">
 
-                                                            <button type="button" required class="btn btn-danger btnHapusFormBarangForOBUpdate" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
+                                                            <button type="button"  class="btn btn-danger btnHapusFormBarangForOBUpdate" value="<?= $valueJoinInv['id_parent_alat_ob']; ?>"><i class="fa-solid fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>
@@ -436,7 +436,7 @@
                 'use strict'
 
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
+                const forms = document.querySelectorAll('.needs-dinall')
 
                 // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
@@ -452,12 +452,21 @@
             })()
 
             //validation ok javascript
-            $("#formAdd").validate({
+            $("#formUpdateOutBroadcast").validate({
                 errorPlacement: function($error, $element) {
-                    // $error.appendTo($element.closest("td").css({"color": "red"}));
                     $error.appendTo($element.closest("td"));
                 },
                 rules: {
+                    'namaEdit[]': {
+                        required: true
+                    },
+                    'nipEdit[]': {
+                        required: true,
+                        digits: true
+                    },
+                    'npwpEdit[]': {
+                        required: true
+                    },
                     'naBar[]': {
                         required: true
                     },
@@ -470,23 +479,80 @@
                     'jumlah[]': {
                         required: true,
                         digits: true
+                    },
+                    'namaEditUpdate[]': {
+                        required: true
+                    },
+                    'nipEditUpdate[]': {
+                        required: true
+                    },
+                    'npwpEditUpdate[]': {
+                        required: true,
+                        digits: true
+                    },
+                    'naBarUpdate[]': {
+                        required: true
+                    },
+                    'merkUpdate[]': {
+                        required: true
+                    },
+                    'sNUpdate[]': {
+                        required: true
+                    },
+                    'jumlahAlatOBUpdate[]': {
+                        required: true,
+                        digits: true
                     }
 
                 },
                 messages: {
+                    'namaEdit[]': {
+                        required: "nama di isi dari search !"
+                    },
+                    'nipEdit[]': {
+                        required: "nip di isi dari search !",
+                        digits: "isi dengan angka !"
+                    },
+                    'npwpEdit[]': {
+                        required: "npwp di isi dari search !"
+                    },
                     'naBar[]': {
-                        required: "nama harus di isi !"
+                        required: "nama barang di isi dari search !",
+                        
                     },
                     'merk[]': {
-                        required: "jika merk kosong beri tanda - !"
+                        required: "merk di isi dari search !"
                     },
                     'sN[]': {
-                        required: "jika serial number kosong beri tanda - !"
+                        required: "SN di isi dari search !"
                     },
                     'jumlah[]': {
-                        required: "jumlah harus di isi !",
+                        required: "jumlah tidak boleh kosong !",
                         digits: "isi dengan angka !"
-
+                    },
+                    'namaEditUpdate[]': {
+                        required: "nama di isi dari search !"
+                    },
+                    'nipEditUpdate[]': {
+                        required: "nip di isi dari search !",
+                        digits: "isi dengan angka !"
+                    },
+                    'npwpEditUpdate[]': {
+                        required: "npwp di isi dari search !"
+                    },
+                    'naBarUpdate[]': {
+                        required: "nama barang di isi dari search !",
+                        
+                    },
+                    'merkUpdate[]': {
+                        required: "merk di isi dari search !"
+                    },
+                    'sNUpdate[]': {
+                        required: "SN di isi dari search !"
+                    },
+                    'jumlahAlatOBUpdate[]': {
+                        required: "jumlah tidak boleh kosong !",
+                        digits: "isi dengan angka !"
                     }
 
 
@@ -497,10 +563,6 @@
 
 
             });
-
-            // jQuery.validator.addMethod("validDate", function(value, element) {
-            //         return this.optional(element) || moment(value, "DD/MM/YYYY").isValid();
-            //     }, "Please enter a valid date in the format DD/MM/YYYY");
         </script>
         <?= $this->include('layout/footer'); ?>
     </div>

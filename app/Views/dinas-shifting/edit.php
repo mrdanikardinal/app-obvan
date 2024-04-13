@@ -142,13 +142,13 @@
                                                         <button type="button" class="btn btn-primary clickShowAllCrewForDinasShifEdit" data-bs-toggle="modal" data-bs-target="#dinallModalDinasShifEdit"><i class="fa-solid fa-search"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama" value="<?= $valueJoinUser['fullname']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nama[]" placeholder="Nama di isi dari search" value="<?= $valueJoinUser['fullname']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP" value="<?= $valueJoinUser['nip']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="nip[]" placeholder="NIP di isi dari search" value="<?= $valueJoinUser['nip']; ?>">
                                                     </td>
                                                     <td class="text-center">
-                                                        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP" value="<?= $valueJoinUser['npwp']; ?>">
+                                                        <input type="text" readonly="true" class="form-control" name="npwp[]" placeholder="NPWP di isi dari search" value="<?= $valueJoinUser['npwp']; ?>">
                                                     </td>
                                                     <td class="text-center"><input type="hidden" name="id_userSelectEdit[]" value="<?= $valueJoinUser['id_users']; ?>"></td>
                                                     <td class="text-center">

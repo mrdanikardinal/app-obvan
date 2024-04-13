@@ -54,11 +54,7 @@
                                                     <td><?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?></td>
                                                     <td><?= $valueKategoriLemburShifting['nama_kategori_dinas_crew']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
+                                                    <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
                                                     <td>
@@ -76,11 +72,8 @@
                                                     <td><?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?></td>
                                                     <td><?= $valueKategoriLemburShifting['nama_kategori_dinas_crew']; ?></td>
                                                     <td>
-                                                        <form action="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
+                                                      
+                                                        <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
                                                     <td>
@@ -120,11 +113,8 @@
                                                     <td><?= $valueAcara['id_acara_shift']; ?></td>
                                                     <td><?= $valueAcara['nama_acara_shift']; ?></td>
                                                     <td>
-                                                        <form action=" <?= base_url() ?>admin/status-dinas-lembur-shifting/edit-acara/<?= $valueAcara['id_acara_shift']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
+                                                    <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-acara/<?= $valueAcara['id_acara_shift']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                                                        
 
                                                     </td>
                                                     <td>
@@ -140,11 +130,8 @@
                                                     <td><?= $valueAcara['id_acara_shift']; ?></td>
                                                     <td><?= $valueAcara['nama_acara_shift']; ?></td>
                                                     <td>
-                                                        <form action=" <?= base_url() ?>admin/status-dinas-lembur-shifting/edit-acara/<?= $valueAcara['id_acara_shift']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
-                                                        </form>
+                                                   
+                                                        <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-acara/<?= $valueAcara['id_acara_shift']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
                                                     <td>
