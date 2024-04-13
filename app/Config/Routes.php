@@ -96,6 +96,20 @@ $routes->post('admin/status-kategori-out-broadcast/save', 'StatusOutBroadcast::s
 $routes->post('admin/status-kategori-out-broadcast/update/(:segment)', 'StatusOutBroadcast::update/$1',['filter'=>'role:admin']);
 $routes->delete('admin/status-kategori-out-broadcast/(:segment)', 'StatusOutBroadcast::delete/$1',['filter'=>'role:admin']);
 
+// start kelola pengguna
+// start aktivasi
+$routes->get('admin/kelola-pengguna', 'KelolaPengguna::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-pengguna/index', 'KelolaPengguna::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-pengguna/setting/(:segment)', 'KelolaPengguna::setting/$1',['filter'=>'role:admin']);
+$routes->post('admin/kelola-pengguna/update/(:segment)', 'KelolaPengguna::update/$1',['filter'=>'role:admin']);
+//end aktivasi
+//reset password
+$routes->get('admin/kelola-pengguna/reset-password/(:segment)', 'KelolaPengguna::reset_password/$1',['filter'=>'role:admin']);
+$routes->get('admin/kelola-pengguna/reset-password/update/(:segment)', 'KelolaPengguna::update_password/$1',['filter'=>'role:admin']);
+
+//end reset password
+// end kelola pengguna
+
 //end status out broadcast
 // end status
 // end status inventaris

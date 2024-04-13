@@ -121,6 +121,9 @@
                             <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-inventaris">
                                 Status Inventaris
                             </a>
+                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/kelola-pengguna">
+                                Kelola Pengguna
+                            </a>
                         </nav>
                     </div>
                 <?php endif; ?>

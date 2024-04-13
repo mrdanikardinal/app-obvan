@@ -9,7 +9,7 @@ class UsersModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['email','username','fullname','nip','golongan','jab_fung','npwp','password_hash','divisi'];
+    protected $allowedFields = ['email','username','fullname','nip','golongan','jab_fung','npwp','password_hash','divisi','active'];
     
     public function getUsers($id = false)
     {

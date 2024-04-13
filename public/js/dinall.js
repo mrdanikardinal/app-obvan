@@ -1147,6 +1147,15 @@ $(document).ready(function () {
     },
     );
 
+    $('#dinallTableKelolaAkun').DataTable({
+        scrollX: true,
+        scrollCollapse: true,
+        scrollY: '70vh',
+        "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, 200]]
+
+    },
+    );
+
 });
 //End View Alat==================================================================================
 
@@ -1222,6 +1231,39 @@ $(document).ready(function () {
 });
 
 //Start statu inventaris ===================================================================
+
+// Start Kelola Pengguna
+
+$(document).ready(function () {
+
+    let aktivasi = $('#dinallTablekdinallTableKelolaAkunategoriDinas').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+
+    let resetPassword = $('#dinallTableResetPassword').DataTable({
+        responsive: true,
+        scrollX: true,
+        scrollY: '500px',
+        scrollCollapse: true
+    });
+ 
+
+    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
+        let tabID = $(event.target).attr('data-bs-target');
+        if (tabID === '#aktivasi') {
+            aktivasi.columns.adjust();
+        }else if(tabID === '#resetPassword'){
+            resetPassword.columns.adjust();
+        }
+    });
+
+});
+
+
+// end Kelola Pengguna
 
 
 $(document).ready(function () {
