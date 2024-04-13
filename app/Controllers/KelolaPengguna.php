@@ -8,6 +8,7 @@ use Myth\Auth\Password;
 class KelolaPengguna extends BaseController
 {
     protected $modelUsers;
+    protected $helpers = (['form']);
 
 
     public function __construct()
@@ -19,7 +20,6 @@ class KelolaPengguna extends BaseController
     public function index()
     {
         $getDataUser = $this->modelUsers->getUsers();
-        // dd($getDataUser);
         $data = [
             'allGetDataUsers' => $getDataUser
         ];
@@ -30,7 +30,6 @@ class KelolaPengguna extends BaseController
     {
 
         $getDataUser = $this->modelUsers->getUsers($idUser);
-        // dd($getDataUser);
         $data = [
             'getData' => $getDataUser
         ];
@@ -39,10 +38,6 @@ class KelolaPengguna extends BaseController
     }
     public function update($iduser)
     {
-
-        // dd($this->mod)
-        // $getDataUser= $this->modelUsers->getUsers($iduser);
-        // dd($this->request->getVar('setting'));
 
         $this->modelUsers->save([
             'id' => $iduser,
@@ -53,51 +48,67 @@ class KelolaPengguna extends BaseController
     }
 
 
-    public function reset_password()
+    public function reset_password($idUser)
     {
         session();
+        $getDataUser = $this->modelUsers->getUsers($idUser);
+
         $data = [
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'getIdUser' => $getDataUser
         ];
         return view('admin/kelola-pengguna/reset-password', $data);
-
-        return redirect()->back()->withInput();
     }
     public function update_password($idUser)
     {
         session();
-        $passwordLama = $this->request->getVar('token');
+        $passToken = $this->request->getVar('token');
         $passwordBaru = $this->request->getVar('password_baru');
-        $passwordKonfirmasi = $this->request->getVar('password_konfirmasi');
-        //========================benar
         $rules = [
-            'token' => 'required',
-            'password_baru' => 'required',
-            'password_konfirmasi' => 'required|matches[password_baru]'
+            'token' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'token harus di isi !'
+
+                ]
+            ],
+            'password_baru' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'password baru harus di isi !',
+
+                ]
+            ],
+            'password_konfirmasi' => [
+                'rules'  => 'required|matches[password_baru]',
+                'errors' => [
+                    'required' => 'konfirmasi password harus di isi !',
+                    'matches' => 'konfirmasi password tidak cocok !'
+
+                ]
+            ]
+
         ];
+
         if (!$this->validate($rules)) {
 
             return redirect()->back()->withInput();
         }
+        $tokenDinamis = "212021202120212021202120212";
+        $getDataUserName = $this->modelUsers->getUsers($idUser);
+        if ($tokenDinamis === $passToken) {
+            $this->modelUsers->save([
+                'id' => $idUser,
+                'password_hash' => Password::hash($passwordBaru)
+            ]);
+            session()->setFlashdata('pesan', 'Berhasil, reset password! '.$getDataUserName['fullname']);
+            return redirect()->to('admin/kelola-pengguna');
 
-            // $passwordLama = $this->request->getVar('password_lama');
-            // $passwordBaru = $this->request->getVar('password_baru');
-            // $passwordKonfirmasi = $this->request->getVar('password_konfirmasi');
-            $varHash = $this->modelUsers->getUsers($idUser);
+        }else {
+            session()->setFlashdata('pesanGagal', 'Gagal, reset password! '.$getDataUserName['fullname']);
+               return redirect()->back()->withInput();
 
-            if (Password::verify($passwordLama, $varHash['password_hash'])) {
-                $this->modelUsers->save([
-                    'id' => $idUser,
-                    'password_hash' => Password::hash($passwordBaru)
-                ]);
-                // session()->setFlashdata('pesan', 'Berhasil,Update Password');
-                // redirect()->back()->withInput();
-                return redirect()->to(base_url('logout'));
-            } else if (!Password::verify($passwordLama, $varHash['password_hash'])) {
-                // dd('password lama salah');
-                session()->setFlashdata('pesanGagal', 'Gagal, password lama salah!');
-            }
-            return redirect()->back()->withInput();
-        
+        }
+
     }
 }

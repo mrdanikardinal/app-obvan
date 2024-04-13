@@ -105,7 +105,7 @@ $routes->post('admin/kelola-pengguna/update/(:segment)', 'KelolaPengguna::update
 //end aktivasi
 //reset password
 $routes->get('admin/kelola-pengguna/reset-password/(:segment)', 'KelolaPengguna::reset_password/$1',['filter'=>'role:admin']);
-$routes->get('admin/kelola-pengguna/reset-password/update/(:segment)', 'KelolaPengguna::update_password/$1',['filter'=>'role:admin']);
+$routes->post('admin/kelola-pengguna/reset-password/update/(:segment)', 'KelolaPengguna::update_password/$1',['filter'=>'role:admin']);
 
 //end reset password
 // end kelola pengguna

@@ -20,31 +20,31 @@
 
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Change Password
+                        Change Password <?= $getIdUser['fullname']; ?>
                     </div>
                     <div class="card-body">
 
-                        <form method="post" action="<?= base_url(); ?>change-password/<?= user_id(); ?>">
-                            <!-- <form method="post" action="<?= base_url(); ?>change-password"> -->
-                            <!-- <div class="mb-3">
-                                <label for="InputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                            </div> -->
+                        <form method="post" action="<?= base_url(); ?>admin/kelola-pengguna/reset-password/update/<?= $getIdUser['id']; ?>">
                             <div class="mb-3">
-                                <label for="token" class="form-label">Password Lama</label>
+                                <label for="token" class="form-label">Token</label>
                                 <input type="text" class="form-control" id="token" name="token">
-                              
+                                <div class="text-danger">
+                                        <?= validation_show_error('token'); ?>
+                                    </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password_baru" class="form-label">Password Baru</label>
                                 <input type="password" class="form-control" id="password_baru" name="password_baru">
-                               
+                                <div class="text-danger">
+                                        <?= validation_show_error('password_baru'); ?>
+                                    </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password_konfirmasi" class="form-label">Konfirmasi Password Baru</label>
                                 <input type="password" class="form-control" id="password_konfirmasi" name="password_konfirmasi">
-                               
+                                <div class="text-danger">
+                                        <?= validation_show_error('password_konfirmasi'); ?>
+                                    </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Update</button>

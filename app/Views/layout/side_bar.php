@@ -162,8 +162,8 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Login Sebagai:</div>
-            <?= user()->username; ?>
+            <div class="small">LOGIN SEBAGAI:</div>
+            <?=  strtoupper(user()->username); ?>
         </div>
     </nav>
 </div>

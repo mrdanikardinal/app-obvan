@@ -1,4 +1,3 @@
-
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 <?= $this->include('layout/nav_bar'); ?>
@@ -10,12 +9,17 @@
                 <a href="<?= base_url("admin/kelola-pengguna") ?>" class="btn btn-primary my-2">
                     <i class="fa-solid fa-arrows-rotate"></i> Refresh
                 </a>
+                <?php if (session()->getFlashdata('pesan')) : ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= session()->getFlashdata('pesan'); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (session()->getFlashdata('pesanGagal')) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= session()->getFlashdata('pesanGagal'); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="card mb-4">
-                    <?php if (session()->getFlashdata('pesan')) : ?>
-                        <div class="alert alert-success" role="alert">
-                            <?= session()->getFlashdata('pesan'); ?>
-                        </div>
-                    <?php endif; ?>
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         Tabel Admin Kelola Pengguna
@@ -47,38 +51,40 @@
                                     </thead>
                                     <?php
                                     $number2 = 1;
-                                    $aktif = 'active';
-                                    $noAktif = 'not active';
+                                    $aktif = 'Active';
+                                    $noAktif = 'Not active';
                                     ?>
                                     <input type="hidden" class="test" value="">
                                     <tbody>
                                         <?php foreach ($allGetDataUsers as $key => $valueDataUsers) : ?>
-                                            <tr>
-                                                <th><?= $number2++; ?></th>
-                                                <td class="text-start"><?= $valueDataUsers['username']; ?></td>
-                                                <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
-                                                <td><?= $valueDataUsers['nip']; ?></td>
-                                                <?php if ($valueDataUsers['active'] == true) : ?>
+                                            <?php if ($valueDataUsers['nip'] != 199303172022211009) : ?>
+                                                <tr>
+                                                    <th><?= $number2++; ?></th>
+                                                    <td class="text-start"><?= $valueDataUsers['username']; ?></td>
+                                                    <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
+                                                    <td><?= $valueDataUsers['nip']; ?></td>
+                                                    <?php if ($valueDataUsers['active'] == true) : ?>
+                                                        <td>
+                                                            <div class="badge bg-success text-wrap" style="width: 8rem; height: 2rem">
+                                                                <h6>
+                                                                    <?= $aktif; ?>
+                                                                </h6>
+                                                            </div>
+                                                        </td>
+                                                    <?php elseif ($valueDataUsers['active']  == false) : ?>
+                                                        <td>
+                                                            <div class="badge bg-danger text-wrap" style="width: 8rem; height: 2rem">
+                                                                <h6>
+                                                                    <?= $noAktif; ?>
+                                                                </h6>
+                                                            </div>
+                                                        </td>
+                                                    <?php endif; ?>
                                                     <td>
-                                                        <div class="badge bg-success text-wrap" style="width: 8rem; height: 2rem">
-                                                            <h6>
-                                                                <?= $aktif; ?>
-                                                            </h6>
-                                                        </div>
+                                                        <a href="<?= base_url() ?>admin/kelola-pengguna/setting/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
                                                     </td>
-                                                <?php elseif ($valueDataUsers['active']  == false) : ?>
-                                                    <td>
-                                                        <div class="badge bg-danger text-wrap" style="width: 8rem; height: 2rem">
-                                                            <h6>
-                                                                <?= $noAktif; ?>
-                                                            </h6>
-                                                        </div>
-                                                    </td>
-                                                <?php endif; ?>
-                                                <td>
-                                                    <a href="<?= base_url() ?>admin/kelola-pengguna/setting/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
-                                                </td>
-                                            </tr>
+                                                </tr>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -94,23 +100,21 @@
                                         <th>NIP</th>
                                         <th>Reset Password</th>
                                     </thead>
-                                    <?php
-                                    $number2 = 1;
-                                    $aktif = 'active';
-                                    $noAktif = 'not active';
-                                    ?>
+                                    <?php $number3 = 1; ?>
                                     <input type="hidden" class="test" value="">
                                     <tbody>
                                         <?php foreach ($allGetDataUsers as $key => $valueDataUsers) : ?>
-                                            <tr>
-                                                <th><?= $number2++; ?></th>
-                                                <td class="text-start"><?= $valueDataUsers['username']; ?></td>
-                                                <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
-                                                <td><?= $valueDataUsers['nip']; ?></td>
-                                                <td>
-                                                    <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
-                                                </td>
-                                            </tr>
+                                            <?php if ($valueDataUsers['nip'] != 199303172022211009) : ?>
+                                                <tr>
+                                                    <th><?= $number3++; ?></th>
+                                                    <td class="text-start"><?= $valueDataUsers['username']; ?></td>
+                                                    <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
+                                                    <td><?= $valueDataUsers['nip']; ?></td>
+                                                    <td>
+                                                        <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
