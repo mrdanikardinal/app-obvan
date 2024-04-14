@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="<?= base_url(); ?>">APP-OBVAN</a>
+    <a class="navbar-brand ps-3" href="<?= base_url(); ?>">APPS-OBVAN</a>
     <!-- Sidebar Toggle-->
     <!-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> -->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href=""><i class="fas fa-bars"></i></button>
@@ -17,8 +17,8 @@
                 <?=  strtoupper(user()->username); ?>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><a class="dropdown-item" href="<?=base_url("user/setting-data-user");?>">Setting Data User</a></li>
+                <li><a class="dropdown-item" href="<?=base_url("/surat-tugas");?>">Surat Tugas</a></li>
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
