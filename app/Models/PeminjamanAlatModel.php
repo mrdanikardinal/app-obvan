@@ -10,7 +10,7 @@ class PeminjamanAlatModel extends Model
     protected $primaryKey = 'id_pinjam';
     // protected $retunType='object';
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_pinjam', 'tanggal', 'sampai_dengan', 'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam', 'nama_pemberi', 'tanggal_kembali', 'nama_penerima', 'catatan','nomor_surat_pemberi','nomor_surat_penerima'];
+    protected $allowedFields = ['id_pinjam', 'tanggal', 'sampai_dengan', 'acara', 'tempat', 'durasi_pinjam', 'nama_peminjam', 'no_hp_peminjam', 'nama_pemberi', 'tanggal_kembali', 'nama_penerima', 'catatan','nomor_surat_pemberi','nomor_surat_penerima','nomor_surat_pemberi_manual','nomor_surat_penerima_manual'];
 
 
 

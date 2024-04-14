@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Docoment</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         table,
@@ -35,9 +35,15 @@
 
         <?php
         date_default_timezone_set('Asia/Jakarta');
+   
+        $bulanForTandaTanganCount = date('m',strtotime(' - 2 day', strtotime($valueShowBroadcast['tanggal'])));
+        $yearForTandaTanganCount = date('Y',strtotime(' - 2 day', strtotime($valueShowBroadcast['tanggal'])));
+
         $tanggal = date('d', strtotime($valueShowBroadcast['tanggal']));
         $bulan = date('F', strtotime($valueShowBroadcast['tanggal']));
         $tahun = date('Y', strtotime($valueShowBroadcast['tanggal']));
+        
+        // echo $tanggalBeforeConvert;
 
         $tanggalSampaiDengan = date('d', strtotime($valueShowBroadcast['sampai_dengan']));
         $bulanSampaiDengan = date('F', strtotime($valueShowBroadcast['sampai_dengan']));
@@ -58,10 +64,26 @@
             'November' => 'November',
             'December' => 'Desember'
         );
+        $bulan_huruf_number = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember'
+        );
+  
 
         // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
         $bulan_indonesia = $bulan_huruf[$bulan];
         $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
+        $bulanForTTD= $bulan_huruf_number[$bulanForTandaTanganCount];
         ?>
         <header>
             <img src="img/tvri.png" alt="logo-tvri" width="100px" height="56px">
@@ -138,15 +160,17 @@
         <footer>
             <h4 style="text-indent: 200px;">Jakarta,
                 <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                    <?= date('d',strtotime(' - 2 day', strtotime($valueShowBroadcast['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
                 <?php else : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                    <?= date('d',strtotime(' - 2 day', strtotime($valueShowBroadcast['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
+               
                 <?php endif; ?>
             </h4>
+                
             <h4 style="text-indent: 200px;">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h4>
             <img src="img/ttdJansenWeb.png" alt="logo-tvri" width="100px" height="60px" style="text-align: center;">
             <h4 style="text-indent: 200px;">JANSEN STEPPEN JOU SINAGA</h4>

@@ -34,6 +34,12 @@
     <?php foreach ($showGetPeminjamanAlatJoinUsers as $key => $valueShowPeminjamanAlat) : ?>
         <?php
         date_default_timezone_set('Asia/Jakarta');
+
+        $bulanForTandaTanganCount = date('m',strtotime(' - 2 day', strtotime($valueShowPeminjamanAlat['tanggal'])));
+        $yearForTandaTanganCount = date('Y',strtotime(' - 2 day', strtotime($valueShowPeminjamanAlat['tanggal'])));
+
+
+
         $tanggal = date('d', strtotime($valueShowPeminjamanAlat['tanggal']));
         $bulan = date('F', strtotime($valueShowPeminjamanAlat['tanggal']));
         $tahun = date('Y', strtotime($valueShowPeminjamanAlat['tanggal']));
@@ -57,10 +63,27 @@
             'November' => 'November',
             'December' => 'Desember'
         );
+        $bulan_huruf_number = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember'
+        );
+   
 
         // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
         $bulan_indonesia = $bulan_huruf[$bulan];
         $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
+        $bulanForTTD= $bulan_huruf_number[$bulanForTandaTanganCount];
+
         ?>
 
         <header>
@@ -68,7 +91,8 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_pemberi'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_pemberi']; ?>/ TK.02.02/1.4.3.2/II/2024</h5>
+            <!-- <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_pemberi'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_pemberi']; ?>/ TK.02.02/1.4.3.2/II/2024</h5> -->
+            <h5>No: / TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/2024</h5>
             <h5>Hal: Daftar Petugas & Penyerahan Peralatan</h5> <br>
 
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara'];?> perihal permintaan bantuan peralatan produksi dari, Teknologi peralatan luar studio sebagai berikut:</h5>
@@ -136,13 +160,14 @@
         <footer>
             <h5 style="text-indent: 200px;">Jakarta,
                 <?php if ($valueShowPeminjamanAlat['tanggal'] != $valueShowPeminjamanAlat['sampai_dengan']) : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                    <?= date('d',strtotime(' - 2 day', strtotime($valueShowPeminjamanAlat['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
                 <?php else : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                    <?= date('d',strtotime(' - 2 day', strtotime($valueShowPeminjamanAlat['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
+               
                 <?php endif; ?>
 
             </h5>

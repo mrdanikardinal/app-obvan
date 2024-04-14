@@ -34,6 +34,11 @@
     <?php foreach ($showGetPeminjamanAlatJoinUsers as $key => $valueShowPeminjamanAlat) : ?>
         <?php
         date_default_timezone_set('Asia/Jakarta');
+
+        $bulanForTandaTanganCount = date('m', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+        $yearForTandaTanganCount = date('Y', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+
+
         $tanggal = date('d', strtotime($valueShowPeminjamanAlat['tanggal']));
         $bulan = date('F', strtotime($valueShowPeminjamanAlat['tanggal']));
         $tahun = date('Y', strtotime($valueShowPeminjamanAlat['tanggal']));
@@ -41,6 +46,10 @@
         $tanggalSampaiDengan = date('d', strtotime($valueShowPeminjamanAlat['sampai_dengan']));
         $bulanSampaiDengan = date('F', strtotime($valueShowPeminjamanAlat['sampai_dengan']));
         $tahunSampaiDengan = date('Y', strtotime($valueShowPeminjamanAlat['sampai_dengan']));
+
+        $tanggalPengembalian = date('d', strtotime($valueShowPeminjamanAlat['tanggal_kembali']));
+        $bulanPengembalian = date('F', strtotime($valueShowPeminjamanAlat['tanggal_kembali']));
+        $tahunPengembalian = date('Y', strtotime($valueShowPeminjamanAlat['tanggal_kembali']));
 
         // Array untuk mapping nama bulan dengan huruf
         $bulan_huruf = array(
@@ -58,16 +67,36 @@
             'December' => 'Desember'
         );
 
+        $bulan_huruf_number = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember'
+        );
+
         // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
         $bulan_indonesia = $bulan_huruf[$bulan];
         $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
+        $bulanForTTD = $bulan_huruf_number[$bulanForTandaTanganCount];
+
+        $bulanNamaPengembalian = $bulan_huruf[$bulanPengembalian];
+
         ?>
         <header>
             <img src="img/tvri.png" alt="logo-tvri" width="100px" height="56px">
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun ?></h5>
+            <!-- <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun ?></h5> -->
+            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $tahun ?></h5>
             <h5>Hal: Daftar Petugas & Penerimaan Peralatan</h5> <br>
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara']; ?> , Teknologi peralatan luar studio memeriksa peralatan yang diserahkan sebagai berikut:</h5>
             <pre>
@@ -76,14 +105,14 @@
 <span> DURASI      : <?= $valueShowPeminjamanAlat["durasi_pinjam"]; ?></span> 
 <span> PEMINJAM    : <?= $valueShowPeminjamanAlat["nama_peminjam"]; ?></span> 
 <span> KONTAK      : <?= $valueShowPeminjamanAlat["no_hp_peminjam"]; ?></span> 
-<span> TANGGAL     : <?php if ($valueShowPeminjamanAlat['tanggal'] != $valueShowPeminjamanAlat['sampai_dengan']) : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> S.D <?= $tanggalSampaiDengan; ?> <?= $bulan_indonesia_sampai_dengan; ?> <?= $tahunSampaiDengan; ?><?php else : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?><?php endif; ?></span>
+<span> TANGGAL     : <?php if (!is_null($valueShowPeminjamanAlat['tanggal_kembali']) ) : ?><?= $tanggalPengembalian.' '.$bulanNamaPengembalian.' '.$tahunPengembalian;?><?php else : ?><?= "Belum Dikembalikan"; ?><?php endif; ?></span>
 </pre>
             <h5>Peralatan yang diserahkan ke bidang teknologi peralatan luar studio sebagai berikut:</h5>
             <table cellpadding="5" style="border-collapse: collapse; width:500px">
                 <thead>
                     <tr>
-                        <th style="width:30px">NO</th>
-                        <th style="width:160px">NAMA</th>
+                        <th style="width:30px">NO</th> 
+                        <th style="width:160px">NAMA</th> 
                         <th style="width:140px">MERK</th>
                         <th style="width:90px">S/N</th>
                         <th style="width:65px">JUMLAH</th>
@@ -135,14 +164,12 @@
         <h5>Demikian kami sampaikan, atas bantuan dan kerjasamanya kami ucapkan terimakasih.</h5>
         <footer>
             <h5 style="text-indent: 200px;">Jakarta,
-                <?php if ($valueShowPeminjamanAlat['tanggal'] != $valueShowPeminjamanAlat['sampai_dengan']) : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                <?php if (!is_null($valueShowPeminjamanAlat['tanggal_kembali'])) : ?>
+                    <?= date('d', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
                 <?php else : ?>
-                    <?= $tanggal - 2; ?>
-                    <?= $bulan_indonesia; ?>
-                    <?= $tahun; ?>
+                    <?= "Belum Dikembalikan" ?>
                 <?php endif; ?>
 
             </h5>

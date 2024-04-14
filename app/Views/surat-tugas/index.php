@@ -9,6 +9,11 @@
                 <a href="<?= base_url("/surat-tugas") ?>" class="btn btn-primary my-2">
                     <i class="fa-solid fa-arrows-rotate"></i> Refresh
                 </a>
+                <?php if (session()->getFlashdata('pesanGagal')) : ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= session()->getFlashdata('pesanGagal'); ?>
+                        </div>
+                    <?php endif; ?>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>

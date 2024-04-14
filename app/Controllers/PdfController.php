@@ -52,15 +52,31 @@ class PdfController extends Controller
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPemberi($idPeminjamanAlat);
+        // strat function auto
+        // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
+        //     if ($valueOb['nomor_surat_pemberi'] == null) {
+        //         $this->peminjamanAlatModel->save([
+        //             'id_pinjam' => $idPeminjamanAlat,
+        //             'nomor_surat_pemberi' => $varNomorSuratAuto
+        //         ]);
+        //         $this->nomorSuratTugasModel->save([
+        //             'nomor_surat' => $varNomorSuratAuto
+        //         ]);
+        //     }
+        // }
+        // end function auto
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-            if ($valueOb['nomor_surat_pemberi'] == null) {
-                $this->peminjamanAlatModel->save([
-                    'id_pinjam' => $idPeminjamanAlat,
-                    'nomor_surat_pemberi' => $varNomorSuratAuto
-                ]);
-                $this->nomorSuratTugasModel->save([
-                    'nomor_surat' => $varNomorSuratAuto
-                ]);
+            if ($valueOb['nomor_surat_pemberi_manual'] == null) {
+                // $this->peminjamanAlatModel->save([
+                //     'id_pinjam' => $idPeminjamanAlat,
+                //     'nomor_surat_pemberi' => $varNomorSuratAuto
+                // ]);
+                // $this->nomorSuratTugasModel->save([
+                //     'nomor_surat' => $varNomorSuratAuto
+                // ]);
+                // dd('kosong');
+                session()->setFlashdata('pesanGagal', 'Gagal, nomor surat masih kosong!');
+                return redirect()->to('surat-tugas');
             }
         }
 
@@ -126,7 +142,6 @@ www.tvri.go.id
         $this->response->setContentType('application/pdf');
         // return $pdf->Output('Penerima pinjam.pdf', 'I');
         return $pdf->Output('pemberi pinjam.pdf', 'I');
-       
     }
     public function print_pemberi_pinjam_download($idPeminjamanAlat)
     {
@@ -208,7 +223,6 @@ www.tvri.go.id
         $this->response->setContentType('application/pdf');
         // return $pdf->Output('Penerima pinjam.pdf', 'I');
         return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $pemberiPinjam . '_pemberi pinjam.pdf', 'D');
-
     }
     // =================================================End Permberi Pinjam
 
@@ -273,7 +287,6 @@ www.tvri.go.id
 
         $this->response->setContentType('application/pdf');
         return $pdf->Output('Penerima pinjam.pdf', 'I');
-
     }
     public function print_penerima_pinjam_download($idPeminjamanAlat)
     {
