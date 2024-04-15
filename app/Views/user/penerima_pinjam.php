@@ -35,8 +35,8 @@
         <?php
         date_default_timezone_set('Asia/Jakarta');
 
-        $bulanForTandaTanganCount = date('m', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
-        $yearForTandaTanganCount = date('Y', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+        $bulanForTandaTanganCount = date('m', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+        $yearForTandaTanganCount = date('Y', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
 
 
         $tanggal = date('d', strtotime($valueShowPeminjamanAlat['tanggal']));
@@ -95,8 +95,7 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <!-- <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun ?></h5> -->
-            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $tahun ?></h5>
+            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $yearForTandaTanganCount ?></h5>
             <h5>Hal: Daftar Petugas & Penerimaan Peralatan</h5> <br>
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara']; ?> , Teknologi peralatan luar studio memeriksa peralatan yang diserahkan sebagai berikut:</h5>
             <pre>
@@ -165,7 +164,7 @@
         <footer>
             <h5 style="text-indent: 200px;">Jakarta,
                 <?php if (!is_null($valueShowPeminjamanAlat['tanggal_kembali'])) : ?>
-                    <?= date('d', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali']))); ?>
+                    <?= date('d', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali']))); ?>
                     <?= $bulanForTTD; ?>
                     <?= $yearForTandaTanganCount; ?>
                 <?php else : ?>

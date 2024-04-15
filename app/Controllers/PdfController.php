@@ -53,55 +53,26 @@ class PdfController extends Controller
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPemberi($idPeminjamanAlat);
         // strat function auto
-        // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-        //     if ($valueOb['nomor_surat_pemberi'] == null) {
-        //         $this->peminjamanAlatModel->save([
-        //             'id_pinjam' => $idPeminjamanAlat,
-        //             'nomor_surat_pemberi' => $varNomorSuratAuto
-        //         ]);
-        //         $this->nomorSuratTugasModel->save([
-        //             'nomor_surat' => $varNomorSuratAuto
-        //         ]);
-        //     }
-        // }
-        // end function auto
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-            if ($valueOb['nomor_surat_pemberi_manual'] == null) {
-                // $this->peminjamanAlatModel->save([
-                //     'id_pinjam' => $idPeminjamanAlat,
-                //     'nomor_surat_pemberi' => $varNomorSuratAuto
-                // ]);
-                // $this->nomorSuratTugasModel->save([
-                //     'nomor_surat' => $varNomorSuratAuto
-                // ]);
-                // dd('kosong');
-                session()->setFlashdata('pesanGagal', 'Gagal, nomor surat masih kosong!');
-                return redirect()->to('surat-tugas');
+            if ($valueOb['nomor_surat_pemberi'] == null) {
+                $this->peminjamanAlatModel->save([
+                    'id_pinjam' => $idPeminjamanAlat,
+                    'nomor_surat_pemberi' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
             }
         }
-
+        // end function auto
+   
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
-        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        // $pdf->setPrintHeader(false);
-        // $pdf->setPrintFooter(false);
-        // $pdf->AddPage();
-        // $pdf->SetFont('times', 'B', 11);
-
-        // $html = view('user/pemberi_pinjam', $data);
-        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-        // $this->response->setContentType('application/pdf');
-        // return $pdf->Output('pemberi pinjam.pdf', 'I');
-
-
-
-
-
-
+    
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
