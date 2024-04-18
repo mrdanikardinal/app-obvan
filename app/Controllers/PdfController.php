@@ -68,6 +68,7 @@ class PdfController extends Controller
             }
         }
         // end function auto
+<<<<<<< HEAD
         // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
         //     if ($valueOb['nomor_surat_pemberi_manual'] == null) {
         //         // $this->peminjamanAlatModel->save([
@@ -83,28 +84,16 @@ class PdfController extends Controller
         //     }
         // }
 
+=======
+   
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
-        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        // $pdf->setPrintHeader(false);
-        // $pdf->setPrintFooter(false);
-        // $pdf->AddPage();
-        // $pdf->SetFont('times', 'B', 11);
-
-        // $html = view('user/pemberi_pinjam', $data);
-        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-        // $this->response->setContentType('application/pdf');
-        // return $pdf->Output('pemberi pinjam.pdf', 'I');
-
-
-
-
-
-
+    
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);

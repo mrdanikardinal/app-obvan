@@ -35,9 +35,17 @@
         <?php
         date_default_timezone_set('Asia/Jakarta');
 
+<<<<<<< HEAD
         $tanggalForTandaTanganCount = date('d', strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
         $bulanForTandaTanganCount = date('m', strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
         $yearForTandaTanganCount = date('Y', strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
+=======
+        $tanggalForTandaTanganCount = date('d',strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
+        $bulanForTandaTanganCount = date('m',strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
+        $yearForTandaTanganCount = date('Y',strtotime(' - 2 day', strtotime($valueDinasShift['tanggal'])));
+
+
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
 
         $tanggal = date('d', strtotime($valueDinasShift['tanggal']));
         $bulan = date('F', strtotime($valueDinasShift['tanggal']));
@@ -75,18 +83,30 @@
             '12' => 'Desember'
         );
 
+<<<<<<< HEAD
         // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
         $bulan_indonesia = $bulan_huruf[$bulan];
         $bulanForTTD = $bulan_huruf_number[$bulanForTandaTanganCount];
+=======
+
+        // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
+        $bulan_indonesia = $bulan_huruf[$bulan];
+        $bulanForTTD= $bulan_huruf_number[$bulanForTandaTanganCount];
+
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
         ?>
         <header>
             <img src="img/tvri.png" alt="logo-tvri" width="100px" height="56px">
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
+<<<<<<< HEAD
             <!-- <h4>No: <?= ($valueDinasShift['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueDinasShift['nomor_surat']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun; ?></h4> -->
             <h4>No: <?= ($valueDinasShift['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueDinasShift['nomor_surat']; ?>/ TK.02.01/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $yearForTandaTanganCount ?></h4>
 
+=======
+            <h4>No: <?= ($valueDinasShift['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueDinasShift['nomor_surat']; ?>/ TK.02.01/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?=$yearForTandaTanganCount;?></h4>
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
             <h4>Hal: Daftar Nama Petugas Teknik Produksi Luar Studio</h4><br>
             <h4>Dengan ini kami sampaikan bahwa pelaksanaan :</h4>
             <pre>
@@ -125,7 +145,10 @@
             </table>
         </section>
         <footer>
+<<<<<<< HEAD
             <!-- <h4 style="text-indent: 200px;">Jakarta,<?= $tanggal - 2; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> -->
+=======
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
             <h4 style="text-indent: 200px;">Jakarta,<?= $tanggalForTandaTanganCount; ?> <?= $bulanForTTD; ?> <?= $yearForTandaTanganCount; ?>
             </h4>
             <h4 style="text-indent: 200px;">KETUA TIM TEKNOLOGI PERALATAN LUAR STUDIO</h4>

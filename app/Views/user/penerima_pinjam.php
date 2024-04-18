@@ -35,8 +35,8 @@
         <?php
         date_default_timezone_set('Asia/Jakarta');
 
-        $bulanForTandaTanganCount = date('m', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
-        $yearForTandaTanganCount = date('Y', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+        $bulanForTandaTanganCount = date('m', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
+        $yearForTandaTanganCount = date('Y', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali'])));
 
 
         $tanggal = date('d', strtotime($valueShowPeminjamanAlat['tanggal']));
@@ -164,7 +164,7 @@
         <footer>
             <h5 style="text-indent: 200px;">Jakarta,
                 <?php if (!is_null($valueShowPeminjamanAlat['tanggal_kembali'])) : ?>
-                    <?= date('d', strtotime(' + 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali']))); ?>
+                    <?= date('d', strtotime(' - 1 day', strtotime($valueShowPeminjamanAlat['tanggal_kembali']))); ?>
                     <?= $bulanForTTD; ?>
                     <?= $yearForTandaTanganCount; ?>
                 <?php else : ?>

@@ -90,7 +90,11 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
+<<<<<<< HEAD
             <h4>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ TK.02.02/1.4.3.2/<?= $bulanForTandaTanganCount; ?>/<?= $yearForTandaTanganCount; ?></h4>
+=======
+            <h4>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount?>/<?= $yearForTandaTanganCount; ?></h4>
+>>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
             <h4>Hal: Daftar Nama Petugas</h5><br>
                 <h4>Dengan ini kami sampaikan bahwa pelaksanaan :</h4>
                 <pre>
