@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AutoNomorSuratTugasShiftingLemburModel;
 use App\Models\UsersModel;
 use App\Models\PeminjamanAlatModel;
 use App\Models\OutBroadcastModel;
@@ -26,6 +27,7 @@ class PdfController extends Controller
     protected $parenMerkPeminjaman;
     protected $parentPeralatanOB;
     protected $dinasShiftingModel;
+    protected $autoNomorSuratShiftLemburModel;
 
 
 
@@ -40,6 +42,7 @@ class PdfController extends Controller
         $this->parenMerkPeminjaman = new ParentMerkModel();
         $this->parentPeralatanOB = new ParentAlatObModel();
         $this->dinasShiftingModel = new DinasShiftingModel();
+        $this->autoNomorSuratShiftLemburModel= new AutoNomorSuratTugasShiftingLemburModel();
     }
     public function index()
     {
@@ -53,32 +56,32 @@ class PdfController extends Controller
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPemberi($idPeminjamanAlat);
         // strat function auto
-        // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-        //     if ($valueOb['nomor_surat_pemberi'] == null) {
-        //         $this->peminjamanAlatModel->save([
-        //             'id_pinjam' => $idPeminjamanAlat,
-        //             'nomor_surat_pemberi' => $varNomorSuratAuto
-        //         ]);
-        //         $this->nomorSuratTugasModel->save([
-        //             'nomor_surat' => $varNomorSuratAuto
-        //         ]);
-        //     }
-        // }
-        // end function auto
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-            if ($valueOb['nomor_surat_pemberi_manual'] == null) {
-                // $this->peminjamanAlatModel->save([
-                //     'id_pinjam' => $idPeminjamanAlat,
-                //     'nomor_surat_pemberi' => $varNomorSuratAuto
-                // ]);
-                // $this->nomorSuratTugasModel->save([
-                //     'nomor_surat' => $varNomorSuratAuto
-                // ]);
-                // dd('kosong');
-                session()->setFlashdata('pesanGagal', 'Gagal, nomor surat masih kosong!');
-                return redirect()->to('surat-tugas');
+            if ($valueOb['nomor_surat_pemberi'] == null) {
+                $this->peminjamanAlatModel->save([
+                    'id_pinjam' => $idPeminjamanAlat,
+                    'nomor_surat_pemberi' => $varNomorSuratAuto
+                ]);
+                $this->nomorSuratTugasModel->save([
+                    'nomor_surat' => $varNomorSuratAuto
+                ]);
             }
         }
+        // end function auto
+        // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
+        //     if ($valueOb['nomor_surat_pemberi_manual'] == null) {
+        //         // $this->peminjamanAlatModel->save([
+        //         //     'id_pinjam' => $idPeminjamanAlat,
+        //         //     'nomor_surat_pemberi' => $varNomorSuratAuto
+        //         // ]);
+        //         // $this->nomorSuratTugasModel->save([
+        //         //     'nomor_surat' => $varNomorSuratAuto
+        //         // ]);
+        //         // dd('kosong');
+        //         session()->setFlashdata('pesanGagal', 'Gagal, nomor surat masih kosong!');
+        //         return redirect()->to('surat-tugas');
+        //     }
+        // }
 
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
@@ -316,17 +319,6 @@ www.tvri.go.id
             'autoNomorSurat' => $varNomorSuratAuto
 
         ];
-        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        // $pdf->setPrintHeader(false);
-        // $pdf->setPrintFooter(false);
-        // $pdf->AddPage();
-        // $pdf->SetFont('times', 'B', 11);
-
-        // $html = view('user/penerima_pinjam', $data);
-        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-        // $this->response->setContentType('application/pdf');
-        // // return $pdf->Output('Penerima pinjam.pdf', 'I');
-        // return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $PenerimaPinjam . '_penerima pinjam.pdf', 'D');
 
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
@@ -365,8 +357,7 @@ www.tvri.go.id
 ', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
 
         $this->response->setContentType('application/pdf');
-        // return $pdf->Output('dinas Shifting.pdf', 'I');
-        // return $pdf->Output('ID_' . $idDinasShitf . '_Tanggal_' . $tanggal . '_' . $shif . '_dinas Shifting.pdf', 'D');
+        
         return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $PenerimaPinjam . '_penerima pinjam.pdf', 'D');
     }
 
@@ -554,7 +545,7 @@ www.tvri.go.id
 
     public function dinas_shifting_preview($idDinasShitf)
     {
-        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varNomorSuratAuto = $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
 
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
@@ -563,7 +554,7 @@ www.tvri.go.id
                     'id_dinas_shifting' => $idDinasShitf,
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
-                $this->nomorSuratTugasModel->save([
+                $this->autoNomorSuratShiftLemburModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
@@ -622,7 +613,7 @@ www.tvri.go.id
     }
     public function dinas_shifting_download($idDinasShitf)
     {
-        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varNomorSuratAuto = $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
 
         $tanggal = null;
@@ -634,7 +625,7 @@ www.tvri.go.id
                     'id_dinas_shifting' => $idDinasShitf,
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
-                $this->nomorSuratTugasModel->save([
+                $this->autoNomorSuratShiftLemburModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
@@ -696,7 +687,7 @@ www.tvri.go.id
     //=======================================================End Dinas Shifting
     public function dinas_lembur_preview($idDinasShitf)
     {
-        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varNomorSuratAuto =  $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
 
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
@@ -705,7 +696,7 @@ www.tvri.go.id
                     'id_dinas_shifting' => $idDinasShitf,
                     'nomor_surat_lembur' => $varNomorSuratAuto
                 ]);
-                $this->nomorSuratTugasModel->save([
+                $this->autoNomorSuratShiftLemburModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }
@@ -765,7 +756,7 @@ www.tvri.go.id
     }
     public function dinas_lembur_download($idDinasShitf)
     {
-        $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+        $varNomorSuratAuto =  $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
         // dd($varprocedureGetShowJoinKategoriByIdOb['tanggal']);
         $tanggal = null;
@@ -776,7 +767,7 @@ www.tvri.go.id
                     'id_dinas_shifting' => $idDinasShitf,
                     'nomor_surat_lembur' => $varNomorSuratAuto
                 ]);
-                $this->nomorSuratTugasModel->save([
+                $this->autoNomorSuratShiftLemburModel->save([
                     'nomor_surat' => $varNomorSuratAuto
                 ]);
             }

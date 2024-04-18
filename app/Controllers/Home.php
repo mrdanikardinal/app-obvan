@@ -34,8 +34,35 @@ class Home extends BaseController
         $this->countPeminjamanAlatModel= new PeminjamanAlatModel();
         $this->countCrewDinasShiftingDanLembur= new CrewDinasShiftingModel();
     }
+    public function index(){
+        return view('home');
 
-    public function index(): string
+    }
+
+    // public function index(): string
+    // {
+   
+    //     $countUser= $this->countUserModel->getCountUsers();
+    //     $countInv= $this->countInventarisModel->getCountInventaris();
+    //     $countCrewObByIdUser= $this->crewObByIdUserModel->getCountOutBroadcastByUser();
+    //     $countPemberiPinjam= $this->countPeminjamanAlatModel->getCountPemberiPinjam();
+    //     $countPenerimaPinjam= $this->countPeminjamanAlatModel->getCountPenerimaPinjam();
+    //     $countAllPeminjamanAlat=$countPemberiPinjam+$countPenerimaPinjam;
+    //     $countDinasShifting=$this->countCrewDinasShiftingDanLembur->getCountDinasShifting(user_id());
+    //     $countDinasLembur=$this->countCrewDinasShiftingDanLembur->getCountDinasLembur(user_id());
+    //     $data = [
+    //         'countAllUsers'=>$countUser,
+    //         'countAllInv'=>$countInv,
+    //         'countAllCrewObById'=>$countCrewObByIdUser,
+    //         'countAllPeminjamanAlat'=>$countAllPeminjamanAlat,
+    //         'countAllDinasShifting'=>$countDinasShifting,
+    //         'countAllDinasLembur'=>$countDinasLembur,
+    //         // 'countAllPemberiPinjamByUser'=>$countPemberiPinjam,
+    //         // 'countAllPenerimaPinjamByUser'=>$countPenerimaPinjam,
+    //     ];
+    //     return view('dashboard',$data);
+    // }
+    public function dashboard()
     {
         $countUser= $this->countUserModel->getCountUsers();
         $countInv= $this->countInventarisModel->getCountInventaris();
@@ -57,4 +84,7 @@ class Home extends BaseController
         ];
         return view('dashboard',$data);
     }
+
+  
+  
 }

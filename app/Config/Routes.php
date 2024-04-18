@@ -6,6 +6,13 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->get('/dashboard', 'Home::dashboard');
+// $routes->get('/', 'Home::index');
+// $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
+//     $routes->match(['get', 'post'], 'login', 'AuthController::login', ['as' => 'login']);
+//     // Rute lainnya...
+// });
+
 // $routes->get('/print', 'PdfController::print');
 // $routes->get('/user/index', 'PdfController::print');
 // $routes->get('/print/(:segment)', 'PdfController::print/$1');
@@ -106,30 +113,55 @@ $routes->post('admin/kelola-pengguna/update/(:segment)', 'KelolaPengguna::update
 //reset password
 $routes->get('admin/kelola-pengguna/reset-password/(:segment)', 'KelolaPengguna::reset_password/$1',['filter'=>'role:admin']);
 $routes->post('admin/kelola-pengguna/reset-password/update/(:segment)', 'KelolaPengguna::update_password/$1',['filter'=>'role:admin']);
-
 //end reset password
 // end kelola pengguna
-
 //end status out broadcast
 // end status
 // end status inventaris
+// start Kelola Surat Tugas OB Peminjaman
+// start pemberi
+$routes->get('admin/kelola-surat-tugas-ob-dan-peminjaman', 'KelolaSuratTugasObPeminjaman::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-ob-dan-peminjaman/index', 'KelolaSuratTugasObPeminjaman::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-pemberi/(:segment)', 'KelolaSuratTugasObPeminjaman::edit_nomor_surat_tugas_pemberi_pinjam/$1',['filter'=>'role:admin']);
+$routes->POST('admin/kelola-surat-tugas-ob-dan-peminjaman/update-pemberi/(:segment)', 'KelolaSuratTugasObPeminjaman::update_nomor_surat_tugas_pemberi_pinjam/$1',['filter'=>'role:admin']);
+// end pemberi
+// start penerima
+$routes->get('admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-penerima/(:segment)', 'KelolaSuratTugasObPeminjaman::edit_nomor_surat_tugas_penerima_pinjam/$1',['filter'=>'role:admin']);
+$routes->POST('admin/kelola-surat-tugas-ob-dan-peminjaman/update-penerima/(:segment)', 'KelolaSuratTugasObPeminjaman::update_nomor_surat_tugas_penerima_pinjam/$1',['filter'=>'role:admin']);
+// end penerima
+// start out-broadcast
+$routes->get('admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-ob/(:segment)', 'KelolaSuratTugasObPeminjaman::edit_nomor_surat_tugas_ob/$1',['filter'=>'role:admin']);
+$routes->POST('admin/kelola-surat-tugas-ob-dan-peminjaman/update-ob/(:segment)', 'KelolaSuratTugasObPeminjaman::update_nomor_surat_tugas_ob/$1',['filter'=>'role:admin']);
+// end end out-broadcast
+// end Kelola Surat Tugas OB Peminjaman
+
+// star kelola surat tugas lembur
+$routes->get('admin/kelola-surat-tugas-lembur', 'KelolaSuratTugasLembur::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-lembur/index', 'KelolaSuratTugasLembur::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-lembur/edit-nomor-surat-lembur/(:segment)', 'KelolaSuratTugasLembur::edit_no_surat_lembur/$1',['filter'=>'role:admin']);
+$routes->POST('admin/kelola-surat-tugas-lembur/update-lembur/(:segment)', 'KelolaSuratTugasLembur::update_nomor_surat_lembur/$1',['filter'=>'role:admin']);
+// end kelola surat tugas lembur
+// star kelola surat tugas shifting
+$routes->get('admin/kelola-surat-tugas-shifting', 'KelolaSuratTugasShifting::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-shifting/index', 'KelolaSuratTugasShifting::index',['filter'=>'role:admin']);
+$routes->get('admin/kelola-surat-tugas-shifting/edit-nomor-surat-shifting/(:segment)', 'KelolaSuratTugasShifting::edit_no_surat_shifting/$1',['filter'=>'role:admin']);
+$routes->POST('admin/kelola-surat-tugas-shifting/update-shifting/(:segment)', 'KelolaSuratTugasShifting::update_nomor_surat_shifting/$1',['filter'=>'role:admin']);
+// end kelola surat tugas shifting
+
+
 //start user
 $routes->get('surat-tugas', 'User::index');
 $routes->get('surat-tugas/index', 'User::index');
 $routes->get('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
-// $routes->PUT('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
 $routes->get('surat-tugas/lembur/(:segment)', 'User::lembur/$1');
-// $routes->get('surat-tugas/setting_user/(:segment)', 'User::setting_user/$1');
-// $routes->get('surat-tugas/lembur', 'User::lembur');
-// $routes->get('surat-tugas/penerima_pinjam', 'User::penerima_pinjam');
-// $routes->get('surat-tugas/pemberi_pinjam', 'User::pemberi_pinjam');
-// $routes->get('surat-tugas/out_broadcast', 'User::out_broadcast');
-// $routes->get('user/print_penerima_pinjam/(:any)','PdfController::print_penerima_pinjam/$1');
-// $routes->get('user/print_pemberi_pinjam/(:any)','PdfController::print_pemberi_pinjam/$1');
+// $routes->get('surat-tugas/nomor-surat-pemberi-pinjam/(:segment)', 'User::edit_nomor_surat_tugas_pemberi_pinjam/$1');
+// $routes->POST('surat-tugas/nomor-surat-tugas-pemberi-pinjam/update/(:segment)', 'User::update_nomor_surat_tugas_pemberi_pinjam/$1');
 $routes->PUT('user/print_pemberi_pinjam_preview/(:any)', 'PdfController::print_pemberi_pinjam_preview/$1');
 $routes->PUT('user/print_pemberi_pinjam_download/(:any)', 'PdfController::print_pemberi_pinjam_download/$1');
 $routes->PUT('user/print_penerima_pinjam_preview/(:any)', 'PdfController::print_penerima_pinjam_preview/$1');
 $routes->PUT('user/print_penerima_pinjam_download/(:any)', 'PdfController::print_penerima_pinjam_download/$1');
+
+
 // $routes->PUT('user/out_broadcast/(:any)', 'PdfController::out_broadcast/$1');
 $routes->PUT('user/out_broadcast/download/(:segment)', 'PdfController::out_broadcast_download/$1');
 $routes->PUT('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadcast_preview/$1');
@@ -172,7 +204,7 @@ $routes->put('out-broadcast/edit/(:segment)/(:segment)', 'OutBroadcast::hapusinv
 //end-outbroadcast
 
 //start dinas lembur
-$routes->get('dinas-lembur', 'DinasLembur::index');
+// $routes->get('dinas-lembur', 'DinasLembur::index');
 
 //end dinas lembur
 

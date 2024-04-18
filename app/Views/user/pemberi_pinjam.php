@@ -91,8 +91,7 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <!-- <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_pemberi'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_pemberi']; ?>/ TK.02.02/1.4.3.2/II/2024</h5> -->
-            <h5>No: / TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/2024</h5>
+            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_pemberi'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_pemberi']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?=$yearForTandaTanganCount?></h5>
             <h5>Hal: Daftar Petugas & Penyerahan Peralatan</h5> <br>
 
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara'];?> perihal permintaan bantuan peralatan produksi dari, Teknologi peralatan luar studio sebagai berikut:</h5>

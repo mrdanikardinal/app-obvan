@@ -10,7 +10,7 @@ class InventarisModel extends Model
     protected $primaryKey = 'id_inv';
     // protected $retunType='object';
     protected $useAutoIncrement = false;
-    protected $allowedFields = ['id_inv', 'id_jns_barang', 'kode_barcode', 'nama_barang', 'merk', 'serial_number', 'id_lokasi', 'id_kondisi', 'id_status', 'thn_pengadaan'];
+    protected $allowedFields = ['id_inv', 'id_jns_barang', 'kode_barcode', 'nama_barang', 'merk','type', 'serial_number', 'id_lokasi', 'id_kondisi', 'id_status', 'thn_pengadaan','keterangan'];
 
 
     // public function autoNumberId()

@@ -21,6 +21,7 @@ use App\Models\PeminjamanAlatModel;
 use App\Models\UsersModel;
 use App\Models\InventarisModel;
 use Picqer\Barcode\BarcodeGeneratorPNG;
+use DateTime;
 
 class OutBroadcast extends BaseController
 {
@@ -79,6 +80,8 @@ class OutBroadcast extends BaseController
     public function save()
     {
 
+        date_default_timezone_set('Asia/Jakarta');
+
         $rules = [
             'acara_ob' => [
                 'rules'  => 'required',
@@ -115,6 +118,18 @@ class OutBroadcast extends BaseController
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
 
+        $date1=date_create($tanggalconvert);
+        $date2=date_create($tanggalconvertSampaiDengan);
+        $diff=date_diff($date1,$date2);
+        $valueForCountDate=$diff->days+1;
+        // dd($diff->days+1);
+
+
+
+
+
+
+
 
         if (!$this->validate($rules)) {
 
@@ -127,7 +142,7 @@ class OutBroadcast extends BaseController
             'sampai_dengan' => $tanggalconvertSampaiDengan,
             'acara' => $this->request->getVar('acara_ob'),
             'lokasi' => $this->request->getVar('lokasi_ob'),
-            'durasi' => $this->request->getVar('durasi_ob'),
+            'durasi' => $valueForCountDate,
             'tp' => $this->request->getVar('tp_ob'),
             'td' => $this->request->getVar('td_ob'),
             'ass_td' => $this->request->getVar('asst_td'),
@@ -186,6 +201,35 @@ class OutBroadcast extends BaseController
     public function update($idOb)
     {
 
+        date_default_timezone_set('Asia/Jakarta');
+
+
+        $rules = [
+            'acara_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'acara ob harus di isi.'
+
+                ]
+            ],
+            'lokasi_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'lokasi ob harus di isi.'
+
+                ]
+            ],
+            'durasi_ob' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'durasi kosong.'
+
+                ]
+            ]
+
+
+        ];
+
 
         $converttgl = $this->request->getVar('tanggalOB');
         $convertSampaiDengan = $this->request->getVar('sampai_denganOB');
@@ -193,6 +237,17 @@ class OutBroadcast extends BaseController
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
+
+        $date1=date_create($tanggalconvert);
+        $date2=date_create($tanggalconvertSampaiDengan);
+        $diff=date_diff($date1,$date2);
+        $valueForCountDate=$diff->days+1;
+
+        
+        if (!$this->validate($rules)) {
+
+            return redirect()->back()->withInput();
+        }
         $this->outBroadcast->save([
             'id_ob' => $idOb,
             'id_kategori' => $this->request->getVar('kategori'),
@@ -200,7 +255,7 @@ class OutBroadcast extends BaseController
             'sampai_dengan' => $tanggalconvertSampaiDengan,
             'acara' => $this->request->getVar('acara_ob'),
             'lokasi' => $this->request->getVar('lokasi_ob'),
-            'durasi' => $this->request->getVar('durasi_ob'),
+            'durasi' => $valueForCountDate,
             'tp' => $this->request->getVar('tp_ob'),
             'td' => $this->request->getVar('td_ob'),
             'ass_td' => $this->request->getVar('asst_td'),
@@ -305,7 +360,7 @@ class OutBroadcast extends BaseController
 
     public function peralatancrewob($idOB)
     {
-      
+
         $data = [
             'allDataCrewOB' => $this->parentAlatOb->getJoinOBAndAlatINV($idOB),
             'countDataCrewOB' => $this->parentAlatOb->getCountAlatOB($idOB),

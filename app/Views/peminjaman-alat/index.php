@@ -103,7 +103,7 @@
                                         </td>
                                         <td><?= $valuePeminjaman['acara']; ?></td>
                                         <td><?= $valuePeminjaman['tempat']; ?></td>
-                                        <td><?= $valuePeminjaman['durasi_pinjam']; ?></td>
+                                        <td><?= $valuePeminjaman['durasi_pinjam'].' '.'Hari'; ?></td>
                                         <td><?= $valuePeminjaman['nama_peminjam']; ?></td>
                                         <td><?= $valuePeminjaman['no_hp_peminjam']; ?></td>
                                         <!-- <td><?= $valuePeminjaman['nama_pemberi']; ?></td> -->

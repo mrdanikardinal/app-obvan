@@ -22,9 +22,12 @@
                         <i class="fas fa-table me-1"></i>
                         Change Password <?= $getIdUser['fullname']; ?>
                     </div>
+                  
+                    <?=($getIdUser['id']===in_groups('admin')? 'benar': 'salah')?>
                     <div class="card-body">
 
                         <form method="post" action="<?= base_url(); ?>admin/kelola-pengguna/reset-password/update/<?= $getIdUser['id']; ?>">
+
                             <div class="mb-3">
                                 <label for="token" class="form-label">Token</label>
                                 <input type="text" class="form-control" id="token" name="token">

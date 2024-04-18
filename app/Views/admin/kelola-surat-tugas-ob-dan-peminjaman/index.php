@@ -6,7 +6,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <a href="<?= base_url("/surat-tugas") ?>" class="btn btn-primary my-2">
+                <a href="<?= base_url("admin/kelola-surat-tugas-ob-dan-peminjaman") ?>" class="btn btn-primary my-2">
                     <i class="fa-solid fa-arrows-rotate"></i> Refresh
                 </a>
                 <?php if (session()->getFlashdata('pesan')) : ?>
@@ -22,7 +22,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Tabel Surat Tugas
+                        Tabel Kelola Surat Tugas OB & Peminjaman
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-tabs" role="tablist">
@@ -42,10 +42,9 @@
                         <div class="tab-content">
                             <div class="tab-pane show active" id="outBroadcast">
                                 <h3>OutBroadcast</h3>
-                                <div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem">
-                                    <h6><?= 'No.Surat ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
+                                <div class="badge bg-primary text-wrap my-1" style="width: 15rem; height: 2rem">
+                                    <h6><?= 'No.Surat Selanjutnya ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
                                 </div>
-
                                 <table id="dinallTableCrewDinasByID" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -61,6 +60,8 @@
                                             <th>Technical Director (TD)</th>
                                             <th>Assistant.TD</th>
                                             <th>Unit Manager</th>
+                                            <th>No.Surat OB</th>
+                                            <th>Set.No.Surat</th>
                                             <th>Preview</th>
                                             <th>Download</th>
 
@@ -70,7 +71,7 @@
 
                                         <?php $number = 1; ?>
 
-                                        <?php foreach ($getAcaraOBFromIDUser as $key => $valueCrewDinasOBByIDUser) : ?>
+                                        <?php foreach ($showAllJoinsOBKategori as $key => $valueCrewDinasOBByIDUser) : ?>
                                             <?php $convert = $valueCrewDinasOBByIDUser['tanggal'];
                                             $date = str_replace('/', '-', $convert);
                                             $tanggalconvert = date('d/m/Y', strtotime($date));
@@ -122,6 +123,12 @@
                                                 <td><?= $valueCrewDinasOBByIDUser['ass_td']; ?></td>
                                                 <td><?= $valueCrewDinasOBByIDUser['um']; ?> </td>
                                                 <td>
+                                                    <?= ($valueCrewDinasOBByIDUser['nomor_surat'] !== NULL) ? '<div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem"><h6>' . $valueCrewDinasOBByIDUser['nomor_surat'] . '</h6></div>' : '<div class="badge bg-danger text-wrap" style="width: 8rem; height: 2rem"><h6>Kosong</h6></div>'; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url() ?>admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-ob/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-primary my-2"><i class="fa-regular fa-pen-to-square"></i>Edit.No.Surat</a>
+                                                </td>
+                                                <td>
                                                     <form action="<?= base_url() ?>user/out_broadcast/preview/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
                                                         <?= csrf_field(); ?>
                                                         <input type="hidden" name="_method" value="PUT">
@@ -146,8 +153,8 @@
                             </div>
                             <div class="tab-pane fade" id="pemberiPinjam">
                                 <h3>Pemberi Pinjam</h3>
-                                <div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem">
-                                    <h6><?= 'No.Surat ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
+                                <div class="badge bg-primary text-wrap my-1" style="width: 15rem; height: 2rem">
+                                    <h6><?= 'No.Surat Selanjutnya ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
                                 </div>
                                 <table id="dinallTablePemberiPinjam" class="table table-bordered table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
@@ -165,6 +172,8 @@
                                             <th>Tanggal Kembali</th>
                                             <th>Nama Penerima Pinjam</th>
                                             <th>Catatan</th>
+                                            <th>No.Surat Pemberi</th>
+                                            <th>Set.No.Surat</th>
                                             <th>Preview</th>
                                             <th>Download</th>
                                         </tr>
@@ -222,6 +231,16 @@
                                                     <?= ($valuePDF['catatan'] !== NULL) ? $valuePDF['catatan'] : '-'; ?>
 
                                                 </td>
+
+
+
+
+                                                <td>
+                                                    <?= ($valuePDF['nomor_surat_pemberi'] !== NULL) ? '<div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem"><h6>' . $valuePDF['nomor_surat_pemberi'] . '</h6></div>' : '<div class="badge bg-danger text-wrap" style="width: 8rem; height: 2rem"><h6>Kosong</h6></div>'; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url() ?>admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-pemberi/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-primary my-2"><i class="fa-regular fa-pen-to-square"></i>Edit.No.Surat</a>
+                                                </td>
                                                 <td>
                                                     <form action="<?= base_url() ?>user/print_pemberi_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">
                                                         <?= csrf_field(); ?>
@@ -243,8 +262,8 @@
                             </div>
                             <div class="tab-pane fade" id="penerimaPinjam">
                                 <h3>Penerima Pinjam</h3>
-                                <div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem">
-                                    <h6><?= 'No.Surat ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
+                                <div class="badge bg-primary text-wrap my-1" style="width: 15rem; height: 2rem">
+                                    <h6><?= 'No.Surat Selanjutnya ' . ':' . ' ' . $contekanNomorSuratAuto; ?></h6>
                                 </div>
                                 <table id="dinallTablePenerimaPinjam" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
                                     <thead>
@@ -262,6 +281,8 @@
                                             <th>Tanggal Kembali</th>
                                             <th>Nama Penerima Pinjam</th>
                                             <th>Catatan</th>
+                                            <th>No.Surat Penerima</th>
+                                            <th>Set.No.Surat</th>
                                             <th>Preview</th>
                                             <th>Download</th>
                                         </tr>
@@ -320,6 +341,12 @@
 
                                                     <?= ($valuePDF['catatan'] === NULL) ? '-' : $valuePDF['catatan']; ?>
 
+                                                </td>
+                                                <td>
+                                                    <?= ($valuePDF['nomor_surat_pemberi'] !== NULL) ? '<div class="badge bg-primary text-wrap" style="width: 8rem; height: 2rem"><h6>' . $valuePDF['nomor_surat_penerima'] . '</h6></div>' : '<div class="badge bg-danger text-wrap" style="width: 8rem; height: 2rem"><h6>Kosong</h6></div>'; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url() ?>admin/kelola-surat-tugas-ob-dan-peminjaman/edit-nomor-surat-penerima/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-primary my-2"><i class="fa-regular fa-pen-to-square"></i>Edit.No.Surat</a>
                                                 </td>
                                                 <td>
                                                     <form action="<?= base_url() ?>user/print_penerima_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">

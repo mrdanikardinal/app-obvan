@@ -86,14 +86,14 @@
                             <div class="row mb-3">
                                 <label for="tp_ob" class="col-sm-2 col-form-label">Technical Producer</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control" placeholder="Technical Producer(TP)" id="tp_ob" name="tp_ob" value="<?= old('tp_ob'); ?>">
+                                    <input type="text" class="form-control" placeholder="Technical Producer(TP)/Kosongkan" id="tp_ob" name="tp_ob" value="<?= old('tp_ob'); ?>">
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="td_ob" class="col-sm-2 col-form-label">Technical Director</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="Technical Director(TD)" id="td_ob" name="td_ob" value="<?= old('td_ob'); ?>">
+                                    <input type="text" class="form-control " placeholder="Technical Director(TD)/Kosongkan" id="td_ob" name="td_ob" value="<?= old('td_ob'); ?>">
                                     <div class="text-danger">
 
                                     </div>
@@ -102,7 +102,7 @@
                             <div class="row mb-3">
                                 <label for="asst_td" class="col-sm-2 col-form-label">Assistant.TD</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="Assistant.TD" id="asst_td" name="asst_td" value="<?= old('asst_td'); ?>">
+                                    <input type="text" class="form-control " placeholder="Assistant.TD/Kosongkan" id="asst_td" name="asst_td" value="<?= old('asst_td'); ?>">
                                     <div class="text-danger">
 
                                     </div>
@@ -111,7 +111,7 @@
                             <div class="row mb-3">
                                 <label for="um_ob" class="col-sm-2 col-form-label">Um</label>
                                 <div class="col-sm-10">
-                                    <input type="text" required class="form-control " placeholder="Unit Manager" id="um_ob" name="um_ob" value="<?= old('um_ob'); ?>">
+                                    <input type="text" class="form-control " placeholder="Unit Manager/Kosongkan" id="um_ob" name="um_ob" value="<?= old('um_ob'); ?>">
                                     <div class="text-danger">
 
                                     </div>

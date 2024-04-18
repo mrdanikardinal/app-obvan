@@ -10,6 +10,7 @@ use App\Models\OutBroadcastModel;
 use App\Models\CrewObModel;
 use App\Models\DinasShiftingModel;
 use Myth\Auth\Password;
+use App\Models\NomorSuratTugasModel;
 
 class User extends BaseController
 {
@@ -20,6 +21,8 @@ class User extends BaseController
     protected $crewOb;
     protected $dinasShifting;
     protected $crewDinasShif;
+    // protected $contekanNomorSuratManualModel;
+    protected $nomorSuratTugasModel;
     protected $helpers = (['form']);
 
 
@@ -32,11 +35,13 @@ class User extends BaseController
         $this->crewOb = new CrewObModel();
         $this->dinasShifting = new DinasShiftingModel();
         $this->crewDinasShif = new CrewDinasShiftingModel();
+        // $this->contekanNomorSuratManualModel= new NomorSuratManualModel();
+        $this->nomorSuratTugasModel = new NomorSuratTugasModel();
     }
     public function index()
 
     {
-
+// dd($this->contekanNomorSuratManualModel->dataNomorSuratManual());
         $getInLogin = user_id();
         $data = [
             'AllShowNamaPemberi' => $this->users->procedureGetNamaPemberi($getInLogin),
@@ -48,6 +53,8 @@ class User extends BaseController
             'showAllJoinsOBKategori' => $this->outBroadcast->getOBJointKategori(),
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             'allUsers' => $this->users->getUsers(),
+            // 'contekanNomorSuratTerakhir'=> $this->contekanNomorSuratManualModel->dataNomorSuratManual(),
+            'contekanNomorSuratAuto'=> $this->nomorSuratTugasModel->autoNomorSurat()
 
         ];
 
@@ -97,10 +104,10 @@ class User extends BaseController
         $passwordBaru = $this->request->getVar('password_baru');
         $passwordKonfirmasi = $this->request->getVar('password_konfirmasi');
         //========================benar
-        $rules=[
-            'password_lama'=>'required',
-            'password_baru'=>'required',
-            'password_konfirmasi'=>'required|matches[password_baru]'
+        $rules = [
+            'password_lama' => 'required',
+            'password_baru' => 'required',
+            'password_konfirmasi' => 'required|matches[password_baru]'
         ];
         if (!$this->validate($rules)) {
 
@@ -121,10 +128,10 @@ class User extends BaseController
                 // session()->setFlashdata('pesan', 'Berhasil,Update Password');
                 // redirect()->back()->withInput();
                 return redirect()->to(base_url('logout'));
-            }else if(!Password::verify($passwordLama, $varHash['password_hash'])){
+            } else if (!Password::verify($passwordLama, $varHash['password_hash'])) {
                 // dd('password lama salah');
                 session()->setFlashdata('pesanGagal', 'Gagal, password lama salah!');
-            } 
+            }
             return redirect()->back()->withInput();
         }
 
@@ -183,4 +190,5 @@ class User extends BaseController
         }
         return view('surat-tugas');
     }
+
 }

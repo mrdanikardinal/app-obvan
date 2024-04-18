@@ -32,6 +32,12 @@
 <body>
     <?php
     date_default_timezone_set('Asia/Jakarta');
+   
+    $bulanForTandaTanganCount = date('m',strtotime(' - 2 day', strtotime($getShowObByIdOB['tanggal'])));
+    $yearForTandaTanganCount = date('Y',strtotime(' - 2 day', strtotime($getShowObByIdOB['tanggal'])));
+
+
+
     $tanggal = date('d', strtotime($getShowObByIdOB['tanggal']));
     $bulan = date('F', strtotime($getShowObByIdOB['tanggal']));
     $tahun = date('Y', strtotime($getShowObByIdOB['tanggal']));
@@ -55,19 +61,34 @@
         'November' => 'November',
         'December' => 'Desember'
     );
+    $bulan_huruf_number = array(
+        '01' => 'Januari',
+        '02' => 'Februari',
+        '03' => 'Maret',
+        '04' => 'April',
+        '05' => 'Mei',
+        '06' => 'Juni',
+        '07' => 'Juli',
+        '08' => 'Agustus',
+        '09' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Desember'
+    );
 
     // Mengganti nama bulan dalam bahasa Inggris dengan nama bulan dalam bahasa Indonesia
     $bulan_indonesia = $bulan_huruf[$bulan];
     $bulan_indonesia_sampai_dengan = $bulan_huruf[$bulanSampaiDengan];
+    $bulanForTTD= $bulan_huruf_number[$bulanForTandaTanganCount];
     ?>
     <header>
         <img src="img/tvri.png" alt="logo-tvri" width="100px" height="56px">
     </header>
     <nav>
         <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-        <h4>No: <?= ($getShowObByIdOB['nomor_surat'] == NULL) ? $autoNomorSurat  : $getShowObByIdOB['nomor_surat']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun; ?></h5>
-            <h4>Hal: Laporan Pemakaian Peralatan Produksi Luar Studio</h4> <br>
-            <h4>Dengan ini kami sampaikan bahwa pelaksanaan :</h4> <br>
+        <h4>No: <?= ($getShowObByIdOB['nomor_surat'] == NULL) ? $autoNomorSurat  : $getShowObByIdOB['nomor_surat']; ?>/ TK.02.02/1.4.3.2/<?= $bulanForTandaTanganCount; ?>/<?= $yearForTandaTanganCount; ?></h5>
+        <h4>Hal: Laporan Pemakaian Peralatan Produksi Luar Studio</h4> <br>
+        <h4>Dengan ini kami sampaikan bahwa pelaksanaan :</h4> <br>
             <pre>
 <span> ACARA       : <?= $getShowObByIdOB["acara"]; ?></span> 
 <span> TEMPAT      : <?= $getShowObByIdOB["lokasi"]; ?></span>
@@ -102,13 +123,13 @@
     <footer>
         <h4 style="text-indent: 200px;">Jakarta,
             <?php if ($getShowObByIdOB['tanggal'] != $getShowObByIdOB['sampai_dengan']) : ?>
-                <?= $tanggal - 2; ?>
-                <?= $bulan_indonesia; ?>
-                <?= $tahun; ?>
+                <?= date('d',strtotime(' - 2 day', strtotime($getShowObByIdOB['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
             <?php else : ?>
-                <?= $tanggal - 2; ?>
-                <?= $bulan_indonesia; ?>
-                <?= $tahun; ?>
+                <?= date('d',strtotime(' - 2 day', strtotime($getShowObByIdOB['tanggal']))); ?>
+                    <?= $bulanForTTD; ?>
+                    <?= $yearForTandaTanganCount; ?>
             <?php endif; ?>
         </h4>
 

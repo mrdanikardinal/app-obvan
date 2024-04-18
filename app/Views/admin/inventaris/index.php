@@ -33,11 +33,13 @@
                                     <th>Nama Barang</th>
                                     <th>Barcode</th>
                                     <th>Merk</th>
+                                    <th>Type</th>
                                     <th>Serial Number</th>
                                     <th>Lokasi</th>
                                     <th>Kondisi</th>
                                     <th>Status</th>
                                     <th>Tahun Pengadaan</th>
+                                    <th>Keterangan</th>
                                     <th>Edit</th>
                                     <th>Hapus</th>
                                 </tr>
@@ -55,9 +57,9 @@
                                                     <?= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($valueInventaris['serial_number'], $generator::TYPE_CODE_128)) . '">'; ?>
                                                 </div>
                                                 <span><?= $valueInventaris['serial_number']; ?></span>
-                                                <div>
+                                                <!-- <div>
                                                     <button type="button" class="btn btn-success btn-sm">Download</button>
-                                                </div>
+                                                </div> -->
                                             </td>
                                         <?php elseif ($valueInventaris['serial_number'] == NULL) : ?>
                                             <td class="text-center">
@@ -73,6 +75,7 @@
                                         <?php endif; ?>
 
                                         <td><?= $valueInventaris['merk']; ?></td>
+                                        <td><?= $valueInventaris['type']; ?></td>
                                         <td>
                                         <?= $valueInventaris['serial_number']; ?>
                                             <!-- <?php if ($valueInventaris['serial_number'] != NULL) : ?>
@@ -85,6 +88,7 @@
                                         <td><?= $valueInventaris['nama_kondisi'] ?></td>
                                         <td><?= $valueInventaris['nama_status'] ?></td>
                                         <td><?= $valueInventaris['thn_pengadaan']; ?></td>
+                                        <td><?= $valueInventaris['keterangan']; ?></td>
 
                                         <td>
                                             <a href="<?= base_url() ?>admin/inventaris/edit/<?= $valueInventaris['id_inv']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>

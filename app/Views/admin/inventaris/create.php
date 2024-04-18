@@ -56,6 +56,13 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <label for="type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Type" id="type" name="type" value="<?= old('type'); ?>">
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <label for="serial_number" class="col-sm-2 col-form-label">Serial Number</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control " placeholder="Serial Number" id="serial_number" name="serial_number" value="<?= old('serial_number'); ?>">
@@ -104,6 +111,12 @@
                                     <div class="text-danger">
                                         <?= validation_show_error('tahun_pengadaan'); ?>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Keterangan (Optional)" id="keterangan" name="keterangan" value="<?= old('keterangan'); ?>">
                                 </div>
                             </div>
 

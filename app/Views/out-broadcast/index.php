@@ -34,6 +34,7 @@
                                     <th>Crew Dinas</th>
                                     <th>Tanggal</th>
                                     <th>Sampai Dengan</th>
+                                    <th>Durasi</th>
                                     <th>Acara</th>
                                     <th>lokasi</th>
                                     <th>Technical Producer(TP)</th>
@@ -91,6 +92,7 @@
                                         </td>
                                         <td><?= $tanggalconvert; ?></td>
                                         <td><?= $convert_sampai_dengan; ?></td>
+                                        <td><?= $valueShowBroadcast['durasi'].' '.'Hari'; ?></td>
                                         <td><?= $valueShowBroadcast['acara']; ?></td>
                                         <td><?= $valueShowBroadcast['lokasi']; ?></td>
                                         <td><?= $valueShowBroadcast['tp']; ?></td>

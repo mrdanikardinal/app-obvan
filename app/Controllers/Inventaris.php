@@ -30,6 +30,7 @@ class Inventaris extends BaseController
     }
     public function index()
     {
+        // dd(in_groups('admin'));
 
         // $dataJoins2= $this->inventarisModel->getJoinsInvID('INV-000000002');
         // dd($dataJoins2);
@@ -92,9 +93,8 @@ class Inventaris extends BaseController
                 ]
             ],
             'tahun_pengadaan' => [
-                'rules'  => 'required|numeric',
+                'rules'  => 'permit_empty|numeric',
                 'errors' => [
-                    'required' => 'tahun harus di isi',
                     'numeric' => 'isi harus angka',
                 ]
             ]
@@ -121,11 +121,13 @@ class Inventaris extends BaseController
                 'kode_barcode' => $timeForBarcode,
                 'nama_barang' => $namaBarang,
                 'merk' => $this->request->getVar('merk'),
+                'type' => $this->request->getVar('type'),
                 'serial_number' => $timeForBarcode,
                 'id_lokasi' => $this->request->getVar('lokasi'),
                 'id_kondisi' => $this->request->getVar('kondisi'),
                 'id_status' => $this->request->getVar('status'),
-                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan'),
+                'keterangan' => $this->request->getVar('keterangan')
 
             ]);
         } else if ($varSerialNumber != NULL) {
@@ -135,11 +137,13 @@ class Inventaris extends BaseController
                 'kode_barcode' => $timeForBarcode,
                 'nama_barang' => $namaBarang,
                 'merk' => $this->request->getVar('merk'),
+                'type' => $this->request->getVar('type'),
                 'serial_number' => $varSerialNumber,
                 'id_lokasi' => $this->request->getVar('lokasi'),
                 'id_kondisi' => $this->request->getVar('kondisi'),
                 'id_status' => $this->request->getVar('status'),
-                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan'),
+                'keterangan' => $this->request->getVar('keterangan')
 
             ]);
         }
@@ -162,9 +166,8 @@ class Inventaris extends BaseController
                 ]
             ],
             'tahun_pengadaan' => [
-                'rules'  => 'required|numeric',
+                'rules'  => 'permit_empty|numeric',
                 'errors' => [
-                    'required' => 'tahun harus di isi',
                     'numeric' => 'isi harus angka',
                 ]
             ]
@@ -187,11 +190,13 @@ class Inventaris extends BaseController
                 'id_jns_barang' => $jenisBarang,
                 'nama_barang' => $namaBarang,
                 'merk' => $this->request->getVar('merk'),
+                'type' => $this->request->getVar('type'),
                 'serial_number' => $dataInventaris['serial_number'],
                 'id_lokasi' => $this->request->getVar('lokasi'),
                 'id_kondisi' => $this->request->getVar('kondisi'),
                 'id_status' => $this->request->getVar('status'),
-                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan'),
+                'keterangan' => $this->request->getVar('keterangan')
 
             ]);
         } else if (!$checkSerialNumber == '') {
@@ -200,11 +205,13 @@ class Inventaris extends BaseController
                 'id_jns_barang' => $jenisBarang,
                 'nama_barang' => $namaBarang,
                 'merk' => $this->request->getVar('merk'),
+                'type' => $this->request->getVar('type'),
                 'serial_number' => $this->request->getVar('serial_number'),
                 'id_lokasi' => $this->request->getVar('lokasi'),
                 'id_kondisi' => $this->request->getVar('kondisi'),
                 'id_status' => $this->request->getVar('status'),
-                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan')
+                'thn_pengadaan' => $this->request->getVar('tahun_pengadaan'),
+                'keterangan' => $this->request->getVar('keterangan')
 
             ]);
         }

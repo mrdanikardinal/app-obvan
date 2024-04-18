@@ -3,8 +3,8 @@
 <?= $this->include('layout/nav_bar') ?>
 <div id="layoutSidenav">
     <?= $this->include('layout/side_bar') ?>
-    <div id="layoutSidenav_content">
-        <main>
+    <div id="layoutSidenav_content" >
+        <main >
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Dashboard</h1>
                 <ol class="breadcrumb mb-4">
@@ -22,11 +22,9 @@
                     </div>
                     <div class="col-xl-6 col-md-6">
                         <div class="card bg-primary text-white mb-4">
-                            <div class="card-body"><h5>Jumlah Barang Inventasis</h5></div>
+                            <div class="card-body"><h5>Jumlah Barang Inventaris</h5></div>
                             <h3 class="text-center"><?=$countAllInv?></h3>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>

@@ -34,6 +34,10 @@
                                 <button class="nav-link" id="pemberi-tab" data-bs-toggle="tab" data-bs-target="#resetPassword" type="button" role="tab" aria-controls="resetPassword" aria-selected="true">Reset Password</button>
 
                             </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="user-level" data-bs-toggle="tab" data-bs-target="#userLevel" type="button" role="tab" aria-controls="userLevel" aria-selected="true">User Level</button>
+
+                            </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -110,6 +114,38 @@
                                                     <td class="text-start"><?= $valueDataUsers['username']; ?></td>
                                                     <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
                                                     <td><?= $valueDataUsers['nip']; ?></td>
+                                                    <td>
+                                                        <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="userLevel">
+                                <h3>User Level</h3>
+                                <!-- isi table dan tombol -->
+                                <table id="dinallTableUserLevel" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <th>No</th>
+                                        <th>Username</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>NIP</th>
+                                        <!-- <th>User Level</th> -->
+                                        <th>Reset Password</th>
+                                    </thead>
+                                    <?php $number3 = 1; ?>
+                                    <input type="hidden" class="test" value="">
+                                    <tbody>
+                                        <?php foreach ($allGetDataUsers as $key => $valueDataUsers) : ?>
+                                            <?php if ($valueDataUsers['nip'] != 199303172022211009) : ?>
+                                                <tr>
+                                                    <th><?= $number3++; ?></th>
+                                                    <td class="text-start"><?= $valueDataUsers['username']; ?></td>
+                                                    <td class="text-start"><?= $valueDataUsers['fullname']; ?></td>
+                                                    <td><?= $valueDataUsers['nip']; ?></td>
+                                                    <!-- <td><?=in_groups('user')?></td> -->
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
                                                     </td>

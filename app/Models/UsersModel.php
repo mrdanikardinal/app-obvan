@@ -103,5 +103,18 @@ class UsersModel extends Model
         $query = $this->db->query("CALL getAllShowUser()");
         return $query->getResultArray();
     }
+    //start for kelola admin
+    public function proceduregetALLNamaPemberiPinjamanForKelola(){
+        $query = $this->db->query("CALL getALLNamaPemberiPinjamanForKelola()");
+        return $query->getResultArray();
+    }
+    public function proceduregetAllNamaPenerimaPinjamanForKelola()
+    {
+        $query = $this->db->query("CALL getAllNamaPenerimaPinjamanForKelola");
+        return $query->getResultArray();
+        
+    }
+    
+    // end for kelola admin
    
 }

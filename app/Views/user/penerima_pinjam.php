@@ -95,8 +95,7 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <!-- <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/II/<?= $tahun ?></h5> -->
-            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $tahun ?></h5>
+            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $yearForTandaTanganCount ?></h5>
             <h5>Hal: Daftar Petugas & Penerimaan Peralatan</h5> <br>
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara']; ?> , Teknologi peralatan luar studio memeriksa peralatan yang diserahkan sebagai berikut:</h5>
             <pre>

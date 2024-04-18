@@ -80,6 +80,11 @@ class PeminjamanAlat extends BaseController
         $dateSampaiDengan = str_replace('/', '-', $convertSampaiDengan);
         $tanggalconvert = date('Y-m-d', strtotime($date));
         $tanggalconvertSampaiDengan = date('Y-m-d', strtotime($dateSampaiDengan));
+        $date1=date_create($tanggalconvert);
+        $date2=date_create($tanggalconvertSampaiDengan);
+        $diff=date_diff($date1,$date2);
+        $valueForCountDate=$diff->days+1;
+        // dd($diff->days+1);
 
         if (!$this->validate($rules)) {
 
@@ -92,7 +97,7 @@ class PeminjamanAlat extends BaseController
             'sampai_dengan' => $tanggalconvertSampaiDengan,
             'acara' => $this->request->getVar('acara'),
             'tempat' => $this->request->getVar('tempat'),
-            'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
+            'durasi_pinjam' => $valueForCountDate,
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
             'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
             'nama_pemberi' => $this->request->getVar('nama_pemberi')
@@ -175,13 +180,20 @@ class PeminjamanAlat extends BaseController
         $tanggalconvertEdit = date('Y-m-d', strtotime($dateEdit));
         $tanggalconvertSampaiDenganEdit = date('Y-m-d', strtotime($dateSampaiDenganEdit));
 
+        $date1=date_create($tanggalconvertEdit);
+        $date2=date_create($tanggalconvertSampaiDenganEdit);
+        $diff=date_diff($date1,$date2);
+        $valueForCountDate=$diff->days+1;
+        // dd($diff->days+1);
+
+
         $this->pinjamAlatModel->save([
             'id_pinjam' => $id_pinjam,
             'tanggal' => $tanggalconvertEdit,
             'sampai_dengan' => $tanggalconvertSampaiDenganEdit,
             'acara' => $this->request->getVar('acara'),
             'tempat' => $this->request->getVar('tempat'),
-            'durasi_pinjam' => $this->request->getVar('durasi_pinjam'),
+            'durasi_pinjam' => $valueForCountDate,
             'nama_peminjam' => $this->request->getVar('nama_peminjam'),
             'no_hp_peminjam' => $this->request->getVar('noHPPeminjam'),
             'nama_pemberi' => $this->request->getVar('nama_pemberi'),

@@ -19,10 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url(); ?>vendor/css/sb-admin-2.min.css" rel="stylesheet">
-
+   
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary-dinall">
 
     <?= $this->renderSection('content');?>
 

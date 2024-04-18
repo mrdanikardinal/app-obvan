@@ -1167,20 +1167,20 @@ $(document).ready(function () {
     let ob = $('#dinallTableCrewDinasByID').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '500px',
+        scrollY: '300px',
         scrollCollapse: true
     });
 
     let pemberiPinjam = $('#dinallTablePemberiPinjam').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '500px',
+        scrollY: '300px',
         scrollCollapse: true
     });
     let penerimaPinjam = $('#dinallTablePenerimaPinjam').DataTable({
         responsive: true,
         scrollX: true,
-        scrollY: '500px',
+        scrollY: '300px',
         scrollCollapse: true
     });
 
@@ -1487,6 +1487,22 @@ $('#dinallTableDinasShift').DataTable({
 
 },
 );
+// $('#dinallTableDinaLemburKelola').DataTable({
+//     scrollX: true,
+//     scrollCollapse: true,
+//     scrollY: '70vh',
+//     "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, 200]]
+
+// },
+
+// );
+
+$('#dinallTableDinaLemburKelola').DataTable({
+    responsive: true,
+    scrollX: true,
+    scrollY: '300px',
+    scrollCollapse: true
+});
 
 $('.hapusDinasShifting').click(function () {
     // escape here if the confirm is false;

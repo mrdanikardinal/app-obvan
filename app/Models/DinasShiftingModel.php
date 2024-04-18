@@ -71,6 +71,14 @@ class DinasShiftingModel extends Model
         $query = $this->db->query("CALL getShowAllDinasLemburByIDUserAndIDKategoriDinas"."($idUsers)");
         return $query->getResultArray();
     }
+    public function proceduregetShowAllDinasLemburForKelolaLembur(){
+        $query = $this->db->query("CALL getShowAllDinasLemburForKelolaLembur");
+        return $query->getResultArray();
+    }
+    public function proceduregetShowAllDinasShiftingForKelolaShifting(){
+        $query = $this->db->query("CALL getShowAllDinasLemburForKelolaShifting");
+        return $query->getResultArray();
+    }
 
 
     

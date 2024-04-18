@@ -26,7 +26,7 @@
                                 <input type="hidden" name="_method" value="PUT">
                                 <button type="submit" class="btn"><i class="fa-regular"></i> Surat Tugas Shifting</button>
                             </form> -->
-                         
+
                             <a class="nav-link" href="<?= base_url() ?>surat-tugas/shifting/<?= user_id(); ?>">
                                 Surat Tugas Shifting
                             </a>
@@ -77,27 +77,54 @@
                             <a class="nav-link collapsed" href="<?= base_url() ?>admin/inventaris">
                                 Data-Inventaris
                             </a>
-                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-dinas-lembur-shifting">
-                                Status Dinas Shifting/Lembur
-                            </a>
-                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-kategori-out-broadcast">
-                                Status Out Broadcast
-                            </a>
-                            <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-inventaris">
-                                Status Inventaris
-                            </a>
                             <a class="nav-link collapsed" href="<?= base_url() ?>admin/kelola-pengguna">
                                 Kelola Pengguna
                             </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Data Status
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-dinas-lembur-shifting">
+                                        Status Dinas Shifting/Lembur
+                                    </a>
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-kategori-out-broadcast">
+                                        Status Out Broadcast
+                                    </a>
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/status-inventaris">
+                                        Status Inventaris
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Kelola Surat Tugas
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/kelola-surat-tugas-ob-dan-peminjaman">
+                                        Kelola Surat Tugas OB&Peminjaman
+                                    </a>
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/kelola-surat-tugas-shifting">
+                                        Kelola Surat Tugas Shifting
+                                    </a>
+                                    <a class="nav-link collapsed" href="<?= base_url() ?>admin/kelola-surat-tugas-lembur">
+                                        Kelola Surat Tugas Lembur
+                                    </a>
+                                </nav>
+                            </div>
                         </nav>
                     </div>
                 <?php endif; ?>
                 <!-- end only admin -->
+              
+                
             </div>
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">LOGIN SEBAGAI:</div>
-            <?=  strtoupper(user()->username); ?>
+            <?= strtoupper(user()->username); ?>
         </div>
     </nav>
 </div>
