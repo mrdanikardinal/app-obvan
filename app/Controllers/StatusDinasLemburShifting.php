@@ -8,7 +8,7 @@ use App\Models\KategoriCrewDinasShiftLemburModel;
 
 class StatusDinasLemburShifting extends BaseController
 {
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
     protected $modelKategoriLemburShif;
     protected $modelAcaraDinasLemburShif;
 

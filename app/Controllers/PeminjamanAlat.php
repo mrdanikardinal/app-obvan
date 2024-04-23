@@ -13,7 +13,7 @@ class PeminjamanAlat extends BaseController
     // jquery link for multiple search https://demo.smarttutorials.net/jqueryui-autocomplete-with-multiple-input-fields/
     //https://www.youtube.com/watch?v=Yi6pKrN2L8o
 
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
     protected $pinjamAlatModel;
     protected $parentMerkModel;
     protected $inventarisModel;

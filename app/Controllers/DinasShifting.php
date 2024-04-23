@@ -12,7 +12,8 @@ use App\Models\KategoriShiftingModel;
 
 class DinasShifting extends BaseController
 {
-    protected $helpers = (['form']);
+ 
+    protected $helpers = (['form','auth']);
     protected $allUser;
     protected $allKategoriDinasShif;
     protected $allNamaAcaraShif;

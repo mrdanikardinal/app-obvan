@@ -9,7 +9,7 @@ use App\Models\KategoriObModel;
 class StatusOutBroadcast extends BaseController
 {
     protected $modelKategoriOB;
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
     public function __construct()
     {
         $this->modelKategoriOB = new KategoriObModel();

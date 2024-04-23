@@ -38,10 +38,10 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            'honeypot',
+            // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'login'
+            // 'login'
         ],
         'after' => [
             'toolbar',
@@ -70,8 +70,35 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    // public array $filters = [];
     // public array $filters = [
-    //     'login' => ['before' => ['admin/*','user/*','peminjaman-alat/*','surat-tugas/*','out-broadcast/*',]],
+    //     'login' => ['before' => [
+    //         '/dashboard',
+    //         '/peminjaman-alat',
+    //         '/admin/*',
+    //         '/surat-tugas/*',
+    //         '/user/*',
+    //         '/out-broadcast/*',
+    //         '/dinas-shifting/*'
+            
+    //         ]
+    //     ],
     // ];
+    public array $filters = [
+        'login' => ['before' => [
+            '/dashboard',
+            '/peminjaman-alat',
+            'peminjaman-alat/*',
+            '/surat-tugas',
+            'surat-tugas/*',
+            '/user',
+            'user/*',
+            '/out-broadcast',
+            'out-broadcast/*',
+            '/dinas-shifting',
+            'dinas-shifting/*',
+            '/admin',
+            'admin/*',
+            ]
+        ],
+    ];
 }

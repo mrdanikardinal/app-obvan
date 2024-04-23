@@ -5,24 +5,12 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
 $routes->get('/', 'Home::index');
-$routes->get('/dashboard', 'Home::dashboard');
-// $routes->get('/', 'Home::index');
-// $routes->group('', ['namespace' => 'Myth\Auth\Controllers'], function($routes) {
-//     $routes->match(['get', 'post'], 'login', 'AuthController::login', ['as' => 'login']);
-//     // Rute lainnya...
-// });
-
-// $routes->get('/print', 'PdfController::print');
-// $routes->get('/user/index', 'PdfController::print');
-// $routes->get('/print/(:segment)', 'PdfController::print/$1');
-// $routes->get('/print/(:segment)', 'PdfController::print/$1');
-// $routes->get('user', 'PdfController::index');
-
-
-// $routes->get('user/print/(:num)','PdfController::print/$1');
-
+$routes->get('/index', 'Home::index');
+$routes->get('/dashboard', 'Dashboard::index');
 // start peminjaman
+$routes->get('peminjaman-alat/index', 'PeminjamanAlat::index');
 $routes->get('peminjaman-alat', 'PeminjamanAlat::index');
 $routes->get('peminjaman-alat/create', 'PeminjamanAlat::create');
 $routes->post('peminjaman-alat/save', 'PeminjamanAlat::save');
@@ -156,27 +144,27 @@ $routes->get('surat-tugas/shifting/(:segment)', 'User::shifting/$1');
 $routes->get('surat-tugas/lembur/(:segment)', 'User::lembur/$1');
 // $routes->get('surat-tugas/nomor-surat-pemberi-pinjam/(:segment)', 'User::edit_nomor_surat_tugas_pemberi_pinjam/$1');
 // $routes->POST('surat-tugas/nomor-surat-tugas-pemberi-pinjam/update/(:segment)', 'User::update_nomor_surat_tugas_pemberi_pinjam/$1');
-$routes->PUT('user/print_pemberi_pinjam_preview/(:any)', 'PdfController::print_pemberi_pinjam_preview/$1');
-$routes->PUT('user/print_pemberi_pinjam_download/(:any)', 'PdfController::print_pemberi_pinjam_download/$1');
-$routes->PUT('user/print_penerima_pinjam_preview/(:any)', 'PdfController::print_penerima_pinjam_preview/$1');
-$routes->PUT('user/print_penerima_pinjam_download/(:any)', 'PdfController::print_penerima_pinjam_download/$1');
+$routes->get('user/print_pemberi_pinjam_preview/(:any)', 'PdfController::print_pemberi_pinjam_preview/$1');
+$routes->get('user/print_pemberi_pinjam_download/(:any)', 'PdfController::print_pemberi_pinjam_download/$1');
+$routes->get('user/print_penerima_pinjam_preview/(:any)', 'PdfController::print_penerima_pinjam_preview/$1');
+$routes->get('user/print_penerima_pinjam_download/(:any)', 'PdfController::print_penerima_pinjam_download/$1');
 
 
 // $routes->PUT('user/out_broadcast/(:any)', 'PdfController::out_broadcast/$1');
-$routes->PUT('user/out_broadcast/download/(:segment)', 'PdfController::out_broadcast_download/$1');
-$routes->PUT('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadcast_preview/$1');
+$routes->get('user/out_broadcast/download/(:segment)', 'PdfController::out_broadcast_download/$1');
+$routes->get('user/out_broadcast/preview/(:segment)', 'PdfController::out_broadcast_preview/$1');
 
 // $routes->PUT('user/peralatan_out_outbroadcast_download/(:segment)', 'PdfController::out_broadcast_download/$1');
 // $routes->get('user/peralatan_out_outbroadcast_preview/(:segment)', 'PdfController::peralatan_out_outbroadcast_preview/$1');
-$routes->PUT('user/peralatan_out_broadcast/preview/(:segment)', 'PdfController::peralatan_out_outbroadcast_preview/$1');
+$routes->get('user/peralatan_out_broadcast/preview/(:segment)', 'PdfController::peralatan_out_outbroadcast_preview/$1');
 $routes->PUT('user/peralatan_out_broadcast/download/(:segment)', 'PdfController::peralatan_out_outbroadcast_download/$1');
 
 //shifting
-$routes->PUT('user/shifting/preview/(:segment)', 'PdfController::dinas_shifting_preview/$1');
+$routes->get('user/shifting/preview/(:segment)', 'PdfController::dinas_shifting_preview/$1');
 $routes->PUT('user/shifting/download/(:segment)', 'PdfController::dinas_shifting_download/$1');
 //endshifting
 //lembur
-$routes->PUT('user/lembur/preview/(:segment)', 'PdfController::dinas_lembur_preview/$1');
+$routes->get('user/lembur/preview/(:segment)', 'PdfController::dinas_lembur_preview/$1');
 $routes->PUT('user/lembur/download/(:segment)', 'PdfController::dinas_lembur_download/$1');
 //end lembur
 $routes->get('user/setting_user/(:segment)', 'User::setting_user/$1');
@@ -192,6 +180,7 @@ $routes->post('user/setting-data-user/(:num)', 'User::update_user/$1');
 
 //out-broadcast
 $routes->get('out-broadcast', 'OutBroadcast::index');
+$routes->get('out-broadcast/index', 'OutBroadcast::index');
 // $routes->PUT('out-broadcast/peralatan-crew-ob/(:segment)', 'OutBroadcast::peralatancrewob/$1');
 $routes->get('out-broadcast/peralatan-crew-ob/(:segment)', 'OutBroadcast::peralatancrewob/$1');
 $routes->delete('out-broadcast/(:segment)', 'OutBroadcast::delete/$1');

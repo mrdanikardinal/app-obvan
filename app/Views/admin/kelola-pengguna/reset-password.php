@@ -13,9 +13,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <!-- <a href="<?= base_url() ?>user/setting_user/<?= user_id(); ?>" class="btn btn-primary my-2">
-                    <i class="fa-solid fa-arrows-rotate"></i> Refresh
-                </a> -->
+        
                 <div class="card mb-4">
 
                     <div class="card-header">
@@ -23,7 +21,7 @@
                         Change Password <?= $getIdUser['fullname']; ?>
                     </div>
                   
-                    <?=($getIdUser['id']===in_groups('admin')? 'benar': 'salah')?>
+                    
                     <div class="card-body">
 
                         <form method="post" action="<?= base_url(); ?>admin/kelola-pengguna/reset-password/update/<?= $getIdUser['id']; ?>">

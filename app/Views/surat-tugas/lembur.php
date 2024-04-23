@@ -82,11 +82,11 @@
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
-                                            <form action="<?= base_url() ?>user/lembur/preview/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-eye"></i>Preview</button>
-                                            </form>
+                                           
+                                            
+                                            <a href="<?= base_url() ?>user/lembur/preview/<?= $valueDinasShift['id_dinas_shifting']; ?>" class="btn btn-primary">
+                                                <i class="fa-solid fa-eye"></i>Preview
+                                            </a>
                                         </td>
 
                                         <td>

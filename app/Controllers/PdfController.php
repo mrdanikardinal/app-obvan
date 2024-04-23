@@ -12,6 +12,13 @@ use App\Models\DinasShiftingModel;
 use App\Models\ParentAlatObModel;
 use App\Models\ParentMerkModel;
 use CodeIgniter\Controller;
+use App\Models\KlasifikasiKodeSuratObvanModel;
+use App\Models\KlasifikasiSuratLemburModel;
+use App\Models\KlasifikasiSuratPemberiModel;
+use App\Models\KlasifikasiSuratPenerimaModel;
+use App\Models\KlasifikasiSuratShiftingModel;
+use App\Models\KlasifikasiSuratObModel;
+use App\Models\KlasifikasiSuratPeralatanObModel;
 use TCPDF;
 use TCPDF_FONTS;
 
@@ -28,6 +35,17 @@ class PdfController extends Controller
     protected $parentPeralatanOB;
     protected $dinasShiftingModel;
     protected $autoNomorSuratShiftLemburModel;
+    // start klasifikasi surat
+    protected $getKodeSuratOb;
+    protected $getKodeSuratPeralatanOb;
+    protected $getKodeSuratshifting;
+    protected $getKodeSuratLembur;
+    protected $getKodeSuratPenerima;
+    protected $getKodeSuratPemberi;
+    protected $getKodeSuratObvan;
+    protected $helpers = (['auth']);
+
+    // end klasifikasi surat
 
 
 
@@ -43,18 +61,25 @@ class PdfController extends Controller
         $this->parentPeralatanOB = new ParentAlatObModel();
         $this->dinasShiftingModel = new DinasShiftingModel();
         $this->autoNomorSuratShiftLemburModel= new AutoNomorSuratTugasShiftingLemburModel();
+        $this->getKodeSuratOb= new KlasifikasiSuratObModel();
+        $this->getKodeSuratPeralatanOb= new KlasifikasiSuratPeralatanObModel();
+        $this->getKodeSuratLembur= new KlasifikasiSuratLemburModel();
+        $this->getKodeSuratshifting= new KlasifikasiSuratShiftingModel();
+        $this->getKodeSuratPemberi= new KlasifikasiSuratPemberiModel();
+        $this->getKodeSuratPenerima= new KlasifikasiSuratPenerimaModel();
+        $this->getKodeSuratObvan= new KlasifikasiKodeSuratObvanModel();
     }
-    public function index()
-    {
-        // Panggil metode untuk membuat PDF
-        // $this->generatePdf();
-
-    }
+    
     // ================================================= Start Permberi Pinjam
     public function print_pemberi_pinjam_preview($idPeminjamanAlat)
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPemberi($idPeminjamanAlat);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeKlasifikasiSuratPemberi= $this->getKodeSuratPemberi->getSuratPemberiModel(1);
+  
+        // dd($getKodeKlasifikasiSuratPemberi);
+      
         // strat function auto
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
             if ($valueOb['nomor_surat_pemberi'] == null) {
@@ -67,30 +92,13 @@ class PdfController extends Controller
                 ]);
             }
         }
-        // end function auto
-<<<<<<< HEAD
-        // foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
-        //     if ($valueOb['nomor_surat_pemberi_manual'] == null) {
-        //         // $this->peminjamanAlatModel->save([
-        //         //     'id_pinjam' => $idPeminjamanAlat,
-        //         //     'nomor_surat_pemberi' => $varNomorSuratAuto
-        //         // ]);
-        //         // $this->nomorSuratTugasModel->save([
-        //         //     'nomor_surat' => $varNomorSuratAuto
-        //         // ]);
-        //         // dd('kosong');
-        //         session()->setFlashdata('pesanGagal', 'Gagal, nomor surat masih kosong!');
-        //         return redirect()->to('surat-tugas');
-        //     }
-        // }
 
-=======
-   
->>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKlasifikasiSuratPemberi'=>$getKodeKlasifikasiSuratPemberi
 
         ];
     
@@ -139,9 +147,12 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPemberi($idPeminjamanAlat);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeKlasifikasiSuratPemberi= $this->getKodeSuratPemberi->getSuratPemberiModel(1);
+
+ 
         $acara = null;
         $tempat = null;
-        // $id = null;
         $pemberiPinjam = null;
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
             if ($valueOb['nomor_surat_pemberi'] == null) {
@@ -162,20 +173,11 @@ www.tvri.go.id
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKlasifikasiSuratPemberi'=>$getKodeKlasifikasiSuratPemberi
 
         ];
-        // $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        // $pdf->setPrintHeader(false);
-        // $pdf->setPrintFooter(false);
-        // $pdf->AddPage();
-        // $pdf->SetFont('times', 'B', 11);
-
-        // $html = view('user/pemberi_pinjam', $data);
-        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-        // $this->response->setContentType('application/pdf');
-        // // return $pdf->Output('pemberi pinjam.pdf', 'I');
-        // return $pdf->Output('ID_' . $idPeminjamanAlat . '_' . $acara . '_' . $tempat . '_' . $pemberiPinjam . '_pemberi pinjam.pdf', 'D');
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
@@ -222,6 +224,11 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPenerima($idPeminjamanAlat);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratKlasifikasiPenerima=$this->getKodeSuratPenerima->getSuratPenerimaModel(1);
+
+    
+        
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
             if ($valueOb['nomor_surat_penerima'] == null) {
                 $this->peminjamanAlatModel->save([
@@ -237,7 +244,9 @@ www.tvri.go.id
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratPenerima'=>$getKodeSuratKlasifikasiPenerima
 
         ];
 
@@ -283,10 +292,13 @@ www.tvri.go.id
     public function print_penerima_pinjam_download($idPeminjamanAlat)
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
+       
+        $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPenerima($idPeminjamanAlat);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratKlasifikasiPenerima=$this->getKodeSuratPenerima->getSuratPenerimaModel(1);
         $acara = null;
         $tempat = null;
         $PenerimaPinjam = null;
-        $varprocedureGetShowJoinPeminjamanJoinUsers = $this->peminjamanAlatModel->getOBJoinNamaPemberiJoinNamaPenerima($idPeminjamanAlat);
         foreach ($varprocedureGetShowJoinPeminjamanJoinUsers as $valueOb) {
             if ($valueOb['nomor_surat_penerima'] == null) {
                 $this->peminjamanAlatModel->save([
@@ -305,7 +317,9 @@ www.tvri.go.id
         $data = [
             'showGetPeminjamanAlatJoinUsers' => $varprocedureGetShowJoinPeminjamanJoinUsers,
             'showAllDataPeminjamanAlat' => $this->parenMerkPeminjaman->getParentViews($idPeminjamanAlat),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratPenerima'=>$getKodeSuratKlasifikasiPenerima
 
         ];
 
@@ -354,7 +368,11 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
-        // dd($this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb));
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratPeralatanOb= $this->getKodeSuratPeralatanOb->getSuratPeralatanOBModel(1);
+     
+        
+       
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
             if ($valueOb['nomor_surat'] == null) {
                 $this->outBroadcast->save([
@@ -371,21 +389,47 @@ www.tvri.go.id
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             // 'allUsers' => $this->allUser->getUsers(),
             'autoNomorSurat' => $varNomorSuratAuto,
-            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb)
+            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb),
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratOb'=>$getKodeSuratPeralatanOb
 
         ];
-
-
-
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage();
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
         $pdf->SetFont('times', 'B', 11);
+
         $html = view('user/peralatan_out_broadcast', $data);
-        // $pdf->writeHTMLCell(0, 0, '', '', $test, 0, 1, 0, true, '', true);
-        $pdf->writeHTML($html, true, false, false, false, '');
-        // $pdf->writeHTML($tbl, true, false, false, false, '');
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
 
         $this->response->setContentType('application/pdf');
         return $pdf->Output('peralatan_out_broadcast.pdf', 'I');
@@ -394,6 +438,10 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratPeralatanOb= $this->getKodeSuratPeralatanOb->getSuratPeralatanOBModel(1);
+
+ 
         $acara = null;
         $lokasi = null;
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
@@ -409,15 +457,14 @@ www.tvri.go.id
             $acara = $valueOb['acara'];
             $lokasi = $valueOb['lokasi'];
         }
-        // dd($this->outBroadcast->getShowOutBroadcast($idOb));
-        // dd($this->parentPeralatanOB->getJoinOBAndAlatINV($idOb));
 
         $data = [
             'showAllJoinsOBKategoriByIDOB' => $this->parentPeralatanOB->getJoinOBAndAlatINV($idOb),
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
-            // 'allUsers' => $this->allUser->getUsers(),
             'autoNomorSurat' => $varNomorSuratAuto,
-            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb)
+            'getShowObByIdOB' => $this->outBroadcast->getShowOutBroadcast($idOb),
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratOb'=>$getKodeSuratPeralatanOb
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -425,17 +472,6 @@ www.tvri.go.id
         $pdf->setPrintFooter(false);
         $pdf->AddPage();
         $pdf->SetFont('times', 'B', 11);
-
-        // $pdf->SetFont('verdana_bold', 'B', 12);
-        // $fontname=$pdf->addTTFfont('ssets/font/times new roman.ttf/times new roman.ttf', '', '', 32);
-        // $pdf->SetFont('times new roman', null, 12,'assets/font/times new roman.ttf');
-        // set default monospaced font
-        // $pdf->setDefaultMonospacedFont($fontname);
-        // set default font subsetting mode
-        // $pdf->setFontSubsetting(false);
-        // Set font
-
-        // $pdf->SetFont('times new roman', '', 12,'assets/font/times new roman.ttf');
 
 
         $test = view('user/peralatan_out_broadcast', $data);
@@ -450,6 +486,10 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratOb= $this->getKodeSuratOb->getSuratOBModel(1);
+
+
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
             if ($valueOb['nomor_surat'] == null) {
                 $this->outBroadcast->save([
@@ -466,33 +506,63 @@ www.tvri.go.id
             'showAllJoinsOBKategoriByIDOB' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             'allUsers' => $this->allUser->getUsers(),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratOb'=>$getKodeSuratOb
 
         ];
+      
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
         $pdf->SetFont('times', 'B', 11);
-        $pdf->AddPage();
+
         $html = view('user/out_broadcast', $data);
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->AddPage();
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
+
+
+
         $this->response->setContentType('application/pdf');
         return $pdf->Output('out broadcast.pdf', 'I');
     }
     //==============================================================
     public function out_broadcast_download($idOb)
     {
-        // dd($this->nomorSuratTugasModel->autoNomorSurat());
-        // dd($this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb));
+
         $varNomorSuratAuto = $this->nomorSuratTugasModel->autoNomorSurat();
         $varprocedureGetShowJoinKategoriByIdOb = $this->outBroadcast->procedureGetShowObJoinKategoriCariById($idOb);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratOb= $this->getKodeSuratOb->getSuratOBModel(1);
+       
 
-        // if ($varNomorSuratAuto == null) {
-        //     $this->outBroadcast->save([
-        //         'id_ob' => $idOb,
-        //         'nomor_surat' => $varNomorSuratAuto
-        //     ]);
-        // }
         $acara = null;
         $lokasi = null;
         // $nomorSuratPdf = null;
@@ -509,24 +579,52 @@ www.tvri.go.id
 
             $acara = $valueOb['acara'];
             $lokasi = $valueOb['lokasi'];
-            // $nomorSuratPdf = $valueOb['nomor_surat'];
         }
 
         $data = [
-            // 'allShowOutBroadcast' => $this->outBroadcast->procedureGetAllShowOutBroadcast(),
             'showAllJoinsOBKategoriByIDOB' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataOutBroadcast' => $this->crewOb->getIdOutBroadcast(),
             'allUsers' => $this->allUser->getUsers(),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratOb'=>$getKodeSuratOb
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
+        $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
+        // Atur margin
+        $pdf->SetMargins(15, 15, 15); // Atur margin atas, kiri, dan kanan
+        $pdf->SetAutoPageBreak(true, 4); // Atur auto page break dan margin bawah
+        // Tambahkan halaman
         $pdf->SetFont('times', 'B', 11);
+
+        $html = view('user/out_broadcast', $data);
         $pdf->AddPage();
-        $htlm = view('user/out_broadcast', $data);
-        $pdf->writeHTML($htlm, true, 0, true, true);
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetY(-20); // Geser posisi ke atas agar ada ruang untuk footer
+        $pdf->SetFont('helvetica', 'B', 7);
+        // $pdf->setTextColor(51, 49, 112); // Warna biru tua
+        // $pdf->setTextColor(0, 0, 108); // biru navy
+        $pdf->setTextColor(12, 75, 146); // biru navy 
+        // Kolom 1
+        $pdf->MultiCell(60, 5, 'LEMBAGA PENYIARAN PUBLIK
+TELEVISI REPUBLIK INDONESIA
+', 0, 'L', false, 0, '', '', true, 0, false, true, 0);
+        // $pdf->setTextColor(255, 255, 255); // Mengembalikan warna fill ke default
+        // Kolom 2
+        $pdf->SetXY(112, -20); // Geser posisi ke kolom 2
+        $pdf->MultiCell(60, 5, 'Jl.Gerbang Pemuda,No. 8,
+Senayan, Jakarat 10270
+', 0, 'C', false, 0, '', '', true, 0, false, true, 0);
+
+        // Kolom 3
+        $pdf->SetXY(140, -20); // Geser posisi ke kolom 3
+        $pdf->MultiCell(60, 5, 'P 021-570 4720
+P 021-570 4740
+F 021-573 3122
+www.tvri.go.id
+', 0, 'R', false, 0, '', '', true, 0, false, true, 0);
         $this->response->setContentType('application/pdf');
         return $pdf->Output('ID_' . $idOb . '_' . $acara . '_lokasi_' . $lokasi . '_out broadcast.pdf', 'D');
     }
@@ -536,6 +634,11 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratDinasShif= $this->getKodeSuratshifting->getSuratShiftingModel(1);
+
+
+        // dd($getKodeSuratDinasShif);
 
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
             if ($valueOb['nomor_surat'] == null) {
@@ -552,16 +655,14 @@ www.tvri.go.id
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratShif'=>$getKodeSuratDinasShif
 
         ];
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-        // $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-        // $pdf->writeHTML($html, true, false, true, false, '');
-        // $jumlah_halaman = $pdf->getNumPages();
-
-
+  
         $pdf->setPrintHeader(false);
         $pdf->setFooterData(array(0, 0, 0), array(0, 0, 0));
         // Atur margin
@@ -604,7 +705,9 @@ www.tvri.go.id
     {
         $varNomorSuratAuto = $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
-
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratDinasShif= $this->getKodeSuratshifting->getSuratShiftingModel(1);
+        
         $tanggal = null;
         $shif = null;
 
@@ -628,7 +731,9 @@ www.tvri.go.id
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratShif'=>$getKodeSuratDinasShif
 
         ];
 
@@ -678,7 +783,11 @@ www.tvri.go.id
     {
         $varNomorSuratAuto =  $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratKlasifikasiLembur= $this->getKodeSuratLembur->getSuratLemburModel(1);
 
+
+ 
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
             if ($valueOb['nomor_surat_lembur'] == null) {
                 $this->dinasShiftingModel->save([
@@ -694,7 +803,9 @@ www.tvri.go.id
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratLembur'=>$getKodeSuratKlasifikasiLembur
 
         ];
 
@@ -747,7 +858,8 @@ www.tvri.go.id
     {
         $varNomorSuratAuto =  $this->autoNomorSuratShiftLemburModel->autoNomorSuratShiftingLembur();
         $varprocedureGetShowJoinKategoriByIdOb = $this->dinasShiftingModel->getDinasShiftDanLemburJoinCrewDinasShifAcara($idDinasShitf);
-        // dd($varprocedureGetShowJoinKategoriByIdOb['tanggal']);
+        $getKodeObvan= $this->getKodeSuratObvan->getKodeSuratObvanModel(1);
+        $getKodeSuratKlasifikasiLembur= $this->getKodeSuratLembur->getSuratLemburModel(1);
         $tanggal = null;
         $shif = null;
         foreach ($varprocedureGetShowJoinKategoriByIdOb as $valueOb) {
@@ -767,7 +879,10 @@ www.tvri.go.id
         $data = [
             'showAllDinasShiftingJoinIdDinasIdShifIdAcara' => $varprocedureGetShowJoinKategoriByIdOb,
             'allDataCrewShiftingJoinUsers' => $this->dinasShiftingModel->procedureGetShowCrewDinasShifting($idDinasShitf),
-            'autoNomorSurat' => $varNomorSuratAuto
+            'autoNomorSurat' => $varNomorSuratAuto,
+            'getKodeObvan'=>$getKodeObvan,
+            'getKodeSuratLembur'=>$getKodeSuratKlasifikasiLembur
+
 
         ];
 

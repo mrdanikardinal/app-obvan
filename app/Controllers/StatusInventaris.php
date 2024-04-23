@@ -9,7 +9,7 @@ use App\Models\StatusModel;
 
 class StatusInventaris extends BaseController
 {
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
     protected $jenisBarangModel;
     protected $lokasiModel;
     protected $kondisiModel;

@@ -110,7 +110,7 @@
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>
                                                     </table>
-                                                    <a href="<?= base_url(); ?>out-broadcast/peralatan-crew-ob/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-primary my-2"><i class="fa-solid fa-eye"></i>View Alat</a>
+                                                    <a href="<?= base_url(); ?>out-broadcast/peralatan-crew-ob/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-primary"><i class="fa-solid fa-eye"></i>View Alat</a>
                                                 </td>
 
                                                 <td><?= $tanggalconvert; ?></td>
@@ -122,19 +122,15 @@
                                                 <td><?= $valueCrewDinasOBByIDUser['ass_td']; ?></td>
                                                 <td><?= $valueCrewDinasOBByIDUser['um']; ?> </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/out_broadcast/preview/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Preview</button>
-                                                    </form>
-
+                                                    <a href="<?= base_url() ?>user/out_broadcast/preview/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-primary">
+                                                    <i class="fa-solid fa-eye"></i>Preview
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/out_broadcast/download/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-success"> <i class="fa-solid fa-download"></i>Download</button>
-                                                    </form>
+                                                  
+                                                    <a href="<?= base_url() ?>user/out_broadcast/download/<?= $valueCrewDinasOBByIDUser['id_ob']; ?>" class="btn btn-success">
+                                                    <i class="fa-solid fa-download"></i>Download
+                                                    </a>
 
                                                 </td>
 
@@ -223,18 +219,16 @@
 
                                                 </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/print_pemberi_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-eye"></i>Preview</button>
-                                                    </form>
+                                                    <a href="<?= base_url() ?>user/print_pemberi_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-primary">
+                                                    <i class="fa-solid fa-eye"></i>Preview
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/print_pemberi_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-download"></i>Download</button>
-                                                    </form>
+                                                  
+                                                    <a href="<?= base_url() ?>user/print_pemberi_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-success">
+                                                    <i class="fa-solid fa-download"></i>Download
+                                                    </a>
+
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -322,19 +316,16 @@
 
                                                 </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/print_penerima_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-eye"></i>Preview</button>
-                                                    </form>
+                                                  
+                                                    <a href="<?= base_url() ?>user/print_penerima_pinjam_preview/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-primary">
+                                                    <i class="fa-solid fa-eye"></i>Preview
+                                                    </a>
 
                                                 </td>
                                                 <td>
-                                                    <form action="<?= base_url() ?>user/print_penerima_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" method="post">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <button type="submit" class="btn btn-success"> <i class="fa-solid fa-download"></i>Download</button>
-                                                    </form>
+                                                    <a href="<?= base_url() ?>user/print_penerima_pinjam_download/<?= $valuePDF['id_pinjam']; ?>" class="btn btn-success">
+                                                    <i class="fa-solid fa-download"></i>Download
+                                                    </a>
 
                                                 </td>
                                             </tr>

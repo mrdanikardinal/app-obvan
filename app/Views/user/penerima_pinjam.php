@@ -7,6 +7,32 @@
     <title>Docoment Pdf</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+      body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* agar konten tetap di atas footer */
+            position: relative;
+            /* memberi posisi relatif untuk footer */
+        }
+
+        footer {
+            position: absolute;
+            /* membuat footer posisi tetap */
+            bottom: 0;
+            /* meletakkan footer di bagian bawah */
+            width: 100%;
+            /* agar footer mengisi lebar layar */
+            background-color: #333;
+            /* warna latar belakang footer */
+            color: #fff;
+            /* warna teks footer */
+            padding: 20px;
+            /* jarak padding untuk konten footer */
+            box-sizing: border-box;
+            /* agar padding tidak menambah ukuran total */
+        }
+
         table,
         th,
         td {
@@ -26,6 +52,23 @@
             /* font-family: "Lucida Console", "Courier New", monospace; */
             /* font-family: "Lucida Console", "Courier New", sans-serif; */
             font-size: 11px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -95,7 +138,7 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount;?>/<?= $yearForTandaTanganCount ?></h5>
+            <h5>No: <?= ($valueShowPeminjamanAlat['nomor_surat_penerima'] == NULL) ? $autoNomorSurat  : $valueShowPeminjamanAlat['nomor_surat_penerima']; ?>/ <?=$getKodeSuratPenerima['kode_klasifikasi'];?>/<?=$getKodeObvan['kode_klasifikasi_obvan'];?>/<?=$bulanForTandaTanganCount;?>/<?= $yearForTandaTanganCount ?></h5>
             <h5>Hal: Daftar Petugas & Penerimaan Peralatan</h5> <br>
             <h5>Dengan ini kami sampaikan bahwa berdasarkan surat tentang <?= $valueShowPeminjamanAlat['acara']; ?> , Teknologi peralatan luar studio memeriksa peralatan yang diserahkan sebagai berikut:</h5>
             <pre>

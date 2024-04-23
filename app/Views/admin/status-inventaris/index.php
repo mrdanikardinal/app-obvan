@@ -53,7 +53,7 @@
                                             <th>ID Kategori</th>
                                             <th>Nama Jenis Barang</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,9 +67,7 @@
                                                     <td> 
                                                     <a href="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                   
 
                                                 </tr>
                                             <?php endif; ?>
@@ -84,13 +82,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-jenis-barang/<?= $valueJenisBarang['id_jns_barang']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/hapus_jenis_barang/<?= $valueJenisBarang['id_jns_barang']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger hapusStatusJenisBarang"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-                                                    </td>
+                                               
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -107,7 +99,7 @@
                                             <th>ID Lokasi</th>
                                             <th>Nama Lokasi</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,9 +113,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                   
 
                                                 </tr>
                                             <?php endif; ?>
@@ -138,13 +128,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-lokasi/<?= $valueLokasi['id_lokasi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger hapusNamaLokasi"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-                                                    </td>
+                                              
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -161,7 +145,7 @@
                                             <th>ID Kondisi</th>
                                             <th>Nama Kondisi</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -176,9 +160,7 @@
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                   
 
                                                 </tr>
                                             <?php endif; ?>
@@ -193,13 +175,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-kondisi/<?= $valueKondisi['id_kondisi']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger hapusNamaKondisi"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-                                                    </td>
+                                                
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -217,7 +193,7 @@
                                             <th>ID Status</th>
                                             <th>Nama Status</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -231,9 +207,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                    
 
                                                 </tr>
                                             <?php endif; ?>
@@ -248,13 +222,7 @@
                                                     <td>
                                                         <a href="<?= base_url() ?>admin/status-inventaris/edit-nama-status/<?= $valueStatus['id_status']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-inventaris/hapus-nama-status/<?= $valueStatus['id_status']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <button type="submit" class="btn btn-danger hapusNamaStatus"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-                                                    </td>
+                                                  
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>

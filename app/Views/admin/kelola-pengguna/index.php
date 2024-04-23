@@ -35,7 +35,7 @@
 
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="user-level" data-bs-toggle="tab" data-bs-target="#userLevel" type="button" role="tab" aria-controls="userLevel" aria-selected="true">User Level</button>
+                                <button class="nav-link" id="user-level" data-bs-toggle="tab" data-bs-target="#userLevel" type="button" role="tab" aria-controls="userLevel" aria-selected="true">User Role</button>
 
                             </li>
                         </ul>
@@ -124,7 +124,7 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="userLevel">
-                                <h3>User Level</h3>
+                                <h3>User Role Next Fitur</h3>
                                 <!-- isi table dan tombol -->
                                 <table id="dinallTableUserLevel" class="table table-bordered table-hover text-center align-middle" cellspacing="0" width="100%">
                                     <thead>
@@ -133,7 +133,7 @@
                                         <th>Nama Lengkap</th>
                                         <th>NIP</th>
                                         <!-- <th>User Level</th> -->
-                                        <th>Reset Password</th>
+                                        <th>Role Next Fitur</th>
                                     </thead>
                                     <?php $number3 = 1; ?>
                                     <input type="hidden" class="test" value="">
@@ -147,7 +147,8 @@
                                                     <td><?= $valueDataUsers['nip']; ?></td>
                                                     <!-- <td><?=in_groups('user')?></td> -->
                                                     <td>
-                                                        <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Settings</a>
+                                                        <!-- <a href="<?= base_url() ?>admin/kelola-pengguna/reset-password/<?= $valueDataUsers['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Next Fitur</a> -->
+                                                        <a href="" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Next Fitur</a>
                                                     </td>
                                                 </tr>
                                             <?php endif; ?>

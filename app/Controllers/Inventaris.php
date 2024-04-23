@@ -12,7 +12,7 @@ use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Inventaris extends BaseController
 {
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
     protected $inventarisModel;
     protected $jnsBarang;
     protected $status;

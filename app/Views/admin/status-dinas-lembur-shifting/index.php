@@ -42,7 +42,7 @@
                                             <th>ID Kategori</th>
                                             <th>Nama Kategori</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                         
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,9 +57,7 @@
                                                     <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                
 
                                                 </tr>
                                             <?php endif; ?>
@@ -76,13 +74,7 @@
                                                         <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-dinas-lembur-shifting/delete-kategori/<?= $valueKategoriLemburShifting['id_kategori_dinas_crew']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-danger hapusKategoriDinas"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-                                                    </td>
+                                           
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -101,7 +93,7 @@
                                             <th>ID Acara</th>
                                             <th>Acara</th>
                                             <th>Edit</th>
-                                            <th>Hapus</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -117,9 +109,7 @@
                                                         
 
                                                     </td>
-                                                    <td>
-                                                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                                                    </td>
+                                                
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -134,14 +124,7 @@
                                                         <a href="<?= base_url() ?>admin/status-dinas-lembur-shifting/edit-acara/<?= $valueAcara['id_acara_shift']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
 
                                                     </td>
-                                                    <td>
-                                                        <form action="<?= base_url() ?>admin/status-dinas-lembur-shifting/delete-acara/<?= $valueAcara['id_acara_shift']; ?>" method="post">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="_method" value="POST">
-                                                            <button type="submit" class="btn btn-danger hapusAcaraDinas"> <i class="fa-solid fa-trash"></i>Hapus</button>
-                                                        </form>
-
-                                                    </td>
+                                              
                                                 </tr>
                                             <?php endif; ?>
                                         <?php endforeach; ?>

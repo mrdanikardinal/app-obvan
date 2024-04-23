@@ -7,6 +7,32 @@
     <title>Docoment</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+      body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* agar konten tetap di atas footer */
+            position: relative;
+            /* memberi posisi relatif untuk footer */
+        }
+
+        footer {
+            position: absolute;
+            /* membuat footer posisi tetap */
+            bottom: 0;
+            /* meletakkan footer di bagian bawah */
+            width: 100%;
+            /* agar footer mengisi lebar layar */
+            background-color: #333;
+            /* warna latar belakang footer */
+            color: #fff;
+            /* warna teks footer */
+            padding: 20px;
+            /* jarak padding untuk konten footer */
+            box-sizing: border-box;
+            /* agar padding tidak menambah ukuran total */
+        }
+
         table,
         th,
         td {
@@ -26,6 +52,23 @@
             /* font-family: "Lucida Console", "Courier New", monospace; */
             /* font-family: "Lucida Console", "Courier New", sans-serif; */
             font-size: 11px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -90,13 +133,9 @@
         </header>
         <nav>
             <h4>TEKNOLOGI PERALATAN LUAR STUDIO</h4>
-<<<<<<< HEAD
-            <h4>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ TK.02.02/1.4.3.2/<?= $bulanForTandaTanganCount; ?>/<?= $yearForTandaTanganCount; ?></h4>
-=======
-            <h4>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ TK.02.02/1.4.3.2/<?=$bulanForTandaTanganCount?>/<?= $yearForTandaTanganCount; ?></h4>
->>>>>>> 2f0b9b24bd5731193e1f3ed439c05169aa9eb8b9
-            <h4>Hal: Daftar Nama Petugas</h5><br>
-                <h4>Dengan ini kami sampaikan bahwa pelaksanaan :</h4>
+            <h5>No: <?= ($valueShowBroadcast['nomor_surat'] == NULL) ? $autoNomorSurat  : $valueShowBroadcast['nomor_surat']; ?>/ <?=$getKodeSuratOb['kode_klasifikasi'];?>/<?=$getKodeObvan['kode_klasifikasi_obvan'];?>/<?=$bulanForTandaTanganCount?>/<?= $yearForTandaTanganCount; ?></h5>
+            <h5>Hal: Daftar Nama Petugas</h5><br>
+            <h5>Dengan ini kami sampaikan bahwa pelaksanaan :</h5>
                 <pre>
 <span> ACARA       : <?= $valueShowBroadcast["acara"]; ?></span> 
 <span> TEMPAT      : <?= $valueShowBroadcast["lokasi"]; ?></span>
@@ -104,7 +143,7 @@
 <span> TANGGAL     : <?php if ($valueShowBroadcast['tanggal'] != $valueShowBroadcast['sampai_dengan']) : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?> S.D <?= $tanggalSampaiDengan; ?> <?= $bulan_indonesia_sampai_dengan; ?> <?= $tahunSampaiDengan; ?><?php else : ?><?= $tanggal; ?> <?= $bulan_indonesia; ?> <?= $tahun; ?><?php endif; ?></span>
 </pre>
             <?php endforeach; ?>
-            <h4>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas dinas out broadcast kepada crew sebagai berikut:</h4>
+            <h5>Satuan kerja Teknik Produksi Peralatan Luar Studio dengan ini memberi tugas dinas out broadcast kepada crew sebagai berikut:</h5>
         </nav>
         <section>
             <table cellpadding="5" style="border-collapse: collapse; width:500px">

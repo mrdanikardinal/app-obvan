@@ -21,9 +21,9 @@ class User extends BaseController
     protected $crewOb;
     protected $dinasShifting;
     protected $crewDinasShif;
-    // protected $contekanNomorSuratManualModel;
     protected $nomorSuratTugasModel;
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
+
 
 
 

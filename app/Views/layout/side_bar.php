@@ -2,8 +2,12 @@
     <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">HOME</div>
-                <a class="nav-link" href="/">
+                
+                <a class="nav-link" href="<?=base_url('/')?>">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
+                    HOME
+                </a>
+                <a class="nav-link" href="<?=base_url('/dashboard')?>">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     DASHBOARD
                 </a>

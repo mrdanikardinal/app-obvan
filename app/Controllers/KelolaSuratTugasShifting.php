@@ -15,7 +15,8 @@ class KelolaSuratTugasShifting extends BaseController
     protected $dinasShifting;
     protected $crewDinasShif;
     protected $autoNomorSuratShifLembur;
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
+
 
 
 

@@ -25,7 +25,8 @@ use DateTime;
 
 class OutBroadcast extends BaseController
 {
-    protected $helpers = (['form']);
+    protected $helpers = (['form','auth']);
+    // protected $helpers = (['form']);
     protected $outBroadcast;
     protected $allUser;
     protected $pinjamAlatModel;

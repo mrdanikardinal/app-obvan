@@ -32,7 +32,7 @@
                                     <th>ID Kategori OB</th>
                                     <th>Nama Kategori</th>
                                     <th>Edit</th>
-                                    <th>Hapus</th>
+                                      
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,10 +46,7 @@
                                             <td>
                                                 <a href="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                             </td>
-                                            <td>
-                                                <button type="submit" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-
-                                            </td>
+                                        
 
                                         </tr>
                                     <?php endif; ?>
@@ -63,13 +60,7 @@
                                             <td>
                                             <a href="<?= base_url() ?>admin/status-kategori-out-broadcast/edit/<?= $valueDataKategoriOB['id']; ?>" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                             </td>
-                                            <td>
-                                                <form id="hapus" action="<?= base_url(); ?>admin/status-kategori-out-broadcast/<?= $valueDataKategoriOB['id']; ?>" method="post">
-                                                    <?= csrf_field(); ?>
-                                                    <input type="hidden" name="_method" value="delete">
-                                                    <button type="submit" class="btn btn-danger hapusStatusKatOB"><i class="fa-solid fa-trash"></i>Hapus</button>
-                                                </form>
-                                            </td>
+                                        
 
                                         </tr>
                                     <?php endif; ?>

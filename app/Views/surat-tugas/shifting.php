@@ -18,7 +18,7 @@
                         </div>
                     <?php endif; ?>
                 </h5>
-                <a href="<?= base_url() ?>surat-tugas/shifting/<?= user_id();?>" class="btn btn-primary my-2">Refresh</a>
+                <a href="<?= base_url() ?>surat-tugas/shifting/<?= user_id(); ?>" class="btn btn-primary my-2">Refresh</a>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
@@ -82,11 +82,10 @@
                                         <td><?= $valueDinasShift['nama_acara_shift']; ?></td>
                                         <td><?= $valueDinasShift['lokasi']; ?></td>
                                         <td>
-                                            <form action="<?= base_url() ?>user/shifting/preview/<?= $valueDinasShift['id_dinas_shifting']; ?>" method="post">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-eye"></i>Preview</button>
-                                            </form>
+
+                                            <a href="<?= base_url() ?>user/shifting/preview/<?= $valueDinasShift['id_dinas_shifting']; ?>" class="btn btn-primary">
+                                                <i class="fa-solid fa-eye"></i>Preview
+                                            </a>
                                         </td>
 
                                         <td>
